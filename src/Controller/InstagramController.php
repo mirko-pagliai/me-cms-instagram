@@ -22,6 +22,7 @@
  */
 namespace MeInstagram\Controller;
 
+use Cake\Cache\Cache;
 use MeCms\Controller\AppController;
 use MeInstagram\Utility\Instagram;
 
@@ -34,8 +35,16 @@ class InstagramController extends AppController {
 	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
 	 */
 	public function index() {
-		//Gets the recent medias for the user
-		$photos = Instagram::getRecentUser();
+		//Tries to get data from the cache
+		$photos = Cache::read($cache = 'index', 'instagram');
+		
+		//If the data are not available from the cache
+		if(empty($photos)) {
+			//Gets the recent medias for the user
+			$photos = Instagram::getRecentUser();
+			
+			Cache::write($cache, $photos, 'instagram');
+		}
 		
 		$this->set(compact('photos'));
 	}
@@ -46,8 +55,16 @@ class InstagramController extends AppController {
 	 * @uses MeInstagram\Utility\Instagram::getMedia()
 	 */
 	public function view($id) {
-		//Gets the media
-		$photo = Instagram::getMedia($id);
+		//Tries to get data from the cache
+		$photo = Cache::read($cache = sprintf('view_%s', md5($id)), 'instagram');
+		
+		//If the data are not available from the cache
+		if(empty($photo)) {
+			//Gets the media
+			$photo = Instagram::getMedia($id);
+			
+			Cache::write($cache, $photo, 'instagram');
+		}
 		
 		$this->set(compact('photo'));
 	}

@@ -21,27 +21,12 @@
  * @link		http://git.novatlantis.it Nova Atlantis Ltd
  */
 
-use Cake\Cache\Cache;
-use Cake\Core\Configure;
+define('ME_INSTAGRAM_PATH', CACHE.'me_instagram'.DS);
 
-/**
- * Instagram keys 
- */
-//Loads the Instagram keys
-Configure::load('instagram_keys');
-
-//Loads the cache configuration from the plugin
-Configure::load('MeInstagram.cache');
-
-//Loads the cache from the application, if exists
-if(is_readable(CONFIG.'cache.php'))
-	Configure::load('cache', 'default', FALSE);
-
-//Adds all cache configurations
-foreach(Configure::consume('Cache') as $key => $config) {
-	//Drops the default cache
-	if($key === 'default')
-		Cache::drop('default');
-	
-	Cache::config($key, $config);
-}
+return ['Cache' => ['instagram' => [
+    'className' => 'File',
+	'duration'	=> '+999 days',
+	'path'		=> ME_INSTAGRAM_PATH,
+	'prefix'	=> '',
+	'mask'		=> 0777
+]]];
