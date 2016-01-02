@@ -30,6 +30,14 @@ Router::extensions('rss');
  * MeInstagram routes
  */
 Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
-
+	/**
+	 * Instagram controller
+	 */
+	$routes->connect('/instagram', ['controller' => 'Instagram', 'action' => 'index'], ['_name' => 'instagram']);
+//	$routes->connect('/videos/category/:slug',
+//		['controller' => 'VideosCategories', 'action' => 'view'],
+//		['_name' => 'videos_category', 'slug' => '[a-z0-9\-]+', 'pass' => ['slug']]
+//	);
+	
     $routes->fallbacks();
 });
