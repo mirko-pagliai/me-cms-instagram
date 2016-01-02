@@ -20,24 +20,8 @@
  * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link		http://git.novatlantis.it Nova Atlantis Ltd
  */
-use Cake\Routing\Router;
+?>
 
-Router::defaultRouteClass('InflectedRoute');
-
-Router::extensions('rss');
-
-/**
- * MeInstagram routes
- */
-Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
-	/**
-	 * Instagram controller
-	 */
-	$routes->connect('/instagram', ['controller' => 'Instagram', 'action' => 'index'], ['_name' => 'instagram']);
-	$routes->connect('/instagram//:id',
-		['controller' => 'Instagram', 'action' => 'view'],
-		['_name' => 'instagram_photo', 'id' => '\d+_\d+', 'pass' => ['id']]
-	);
-	
-    $routes->fallbacks();
-});
+<div class="photos view">
+	<?= $this->Thumb->img($photo->path, ['side' => 828]) ?>
+</div>

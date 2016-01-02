@@ -21,3 +21,10 @@
  * @link		http://git.novatlantis.it Nova Atlantis Ltd
  */
 
+use Cake\Core\Configure;
+
+/**
+ * Instagram keys 
+ */
+//Loads the Instagram keys
+Configure::load('instagram_keys');

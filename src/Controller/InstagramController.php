@@ -23,12 +23,32 @@
 namespace MeInstagram\Controller;
 
 use MeCms\Controller\AppController;
+use MeInstagram\Utility\Instagram;
 
 /**
  * Instagram controller
  */
 class InstagramController extends AppController {
+	/**
+	 * Lists photos from Istangram
+	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
+	 */
 	public function index() {
+		//Gets the recent medias for the user
+		$photos = Instagram::getRecentUser();
 		
+		$this->set(compact('photos'));
+	}
+	
+	/**
+	 * Views a photo
+	 * @param string $id Media ID
+	 * @uses MeInstagram\Utility\Instagram::getMedia()
+	 */
+	public function view($id) {
+		//Gets the media
+		$photo = Instagram::getMedia($id);
+		
+		$this->set(compact('photo'));
 	}
 }
