@@ -1,0 +1,9 @@
+accessLevels: [public, protected, private]
+destination: API
+download: false
+exclude: {*_old, *.old, *.old.*} 
+source: {src/Controller, src/Template, src/Utility}
+main: MeInstagram
+php: false
+title: MeInstagram API
+todo: true
