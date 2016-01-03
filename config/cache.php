@@ -23,10 +23,12 @@
 
 define('ME_INSTAGRAM_PATH', CACHE.'me_instagram'.DS);
 
-return ['Cache' => ['instagram' => [
-    'className' => 'File',
-	'duration'	=> '+999 days',
-	'path'		=> ME_INSTAGRAM_PATH,
-	'prefix'	=> '',
-	'mask'		=> 0777
-]]];
+return ['Cache' => [
+	'instagram' => [
+		'className' => 'File',
+		'duration'	=> '+1 hour',
+		'path'		=> ME_INSTAGRAM_PATH,
+		'prefix'	=> '',
+		'mask'		=> 0777
+	]
+]];
