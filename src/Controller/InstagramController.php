@@ -34,9 +34,9 @@ class InstagramController extends AppController {
 	 * Lists photos from Istangram
 	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
 	 */
-	public function index() {
+	public function index() {		
 		//Tries to get data from the cache
-		$photos = Cache::read($cache = 'index', 'instagram');
+		$photos = Cache::read($cache = sprintf('index_limit_%s', config('MeInstagram.photos.photos')), 'instagram');
 		
 		//If the data are not available from the cache
 		if(empty($photos)) {

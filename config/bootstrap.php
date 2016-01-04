@@ -25,6 +25,23 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 
 /**
+ * MeInstagram configuration
+ */
+//Loads the configuration from the plugin
+Configure::load('MeInstagram.me_instagram');
+
+$config = Configure::read('MeInstagram');
+
+//Loads the configuration from the application, if exists
+if(is_readable(CONFIG.'me_instagram.php')) {
+	Configure::load('me_instagram', 'default', FALSE);
+	
+	$config = \Cake\Utility\Hash::mergeDiff(Configure::consume('MeInstagram'), $config);
+}
+
+Configure::write('MeCms', \Cake\Utility\Hash::mergeDiff(Configure::read('MeCms'), $config));
+
+/**
  * Instagram keys 
  */
 //Loads the Instagram keys
