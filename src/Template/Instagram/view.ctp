@@ -22,7 +22,10 @@
  */
 ?>
 
-<?= $this->element('frontend/user') ?>
+<?php
+	if(config('MeInstagram.frontend.user_profile'))
+		echo $this->element('frontend/user')
+?>
 
 <div class="photos view">
 	<?= $this->Thumb->img($photo->path, ['side' => 828]) ?>

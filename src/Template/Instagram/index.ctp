@@ -29,7 +29,10 @@
 		$this->Library->fancybox();
 ?>
 
-<?= $this->element('frontend/user') ?>
+<?php
+	if(config('MeInstagram.frontend.user_profile'))
+		echo $this->element('frontend/user')
+?>
 
 <div class="photosAlbums index">
 	<div class="clearfix">
