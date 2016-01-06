@@ -71,7 +71,7 @@ class InstagramController extends AppController {
 	 */
 	public function index() {		
 		//Tries to get data from the cache
-		$photos = Cache::read($cache = sprintf('index_limit_%s', config('MeInstagram.photos.photos')), 'instagram');
+		$photos = Cache::read($cache = sprintf('index_limit_%s', config('MeInstagram.frontend.photos')), 'instagram');
 		
 		//If the data are not available from the cache
 		if(empty($photos)) {
