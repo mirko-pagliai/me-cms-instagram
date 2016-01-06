@@ -1,0 +1,43 @@
+/*!
+ * This file is part of MeInstagram.
+ * @author		Mirko Pagliai <mirko.pagliai@gmail.com>
+ * @copyright	Copyright (c) 2015, Mirko Pagliai for Nova Atlantis Ltd
+ * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
+ */
+
+/* Instangram user */
+#instagram-user {
+	background: #fafafa;
+	color: #4b4f54;
+	font-family: Helvetica;
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+/* Instangram user, picture */
+#instagram-user #picture {
+	border: 1px solid #cccfd0;
+    border-radius: 50%;
+	margin: auto;
+}
+
+/* Instangram user, username */
+#instagram-user #username {
+	font-size: 28px;
+}
+
+/* Instangram user, full name */
+#instagram-user #fullname {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+/* Instangram user, counters */
+#instagram-user #counts {
+	font-size: 17px;
+}
+
+/* Instangram user, counters, span children */
+#instagram-user #counts > span {
+	margin-right: 40px;
+}

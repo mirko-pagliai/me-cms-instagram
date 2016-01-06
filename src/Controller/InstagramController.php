@@ -31,6 +31,41 @@ use MeInstagram\Utility\Instagram;
  */
 class InstagramController extends AppController {
 	/**
+	 * Gets the user's profile
+	 * @return object
+	 * @uses MeInstagram\Utility\Instagram::getUser()
+	 */
+	protected function __getUser() {
+		//Tries to get data from the cache
+		$user = Cache::read($cache = 'user', 'instagram');
+		
+		//If the data are not available from the cache
+		if(empty($user)) {
+			//Gets the user
+			$user = Instagram::getUser();
+			
+			Cache::write($cache, $user, 'instagram');
+		}
+		
+		return $user;
+	}
+	
+	/**
+	 * Called after the controller action is run, but before the view is rendered.
+	 * You can use this method to perform logic or set view variables that are required on every request.
+	 * @param \Cake\Event\Event $event An Event instance
+	 * @see http://api.cakephp.org/3.1/class-Cake.Controller.Controller.html#_beforeRender
+	 * @uses MeCms\Controller\AppController::beforeRender()
+	 * @uses __getUser()
+	 */
+	public function beforeRender(\Cake\Event\Event $event) {
+		parent::beforeRender($event);
+			
+		//Gets and sets the user's profile
+		$this->set(['user' => $this->__getUser()]);
+	}
+	
+	/**
 	 * Lists photos from Istangram
 	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
 	 */

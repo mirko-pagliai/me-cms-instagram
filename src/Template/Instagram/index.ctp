@@ -29,8 +29,9 @@
 		$this->Library->fancybox();
 ?>
 
+<?= $this->element('frontend/user') ?>
+
 <div class="photosAlbums index">
-	<?= $this->Html->h2($title) ?>
 	<div class="clearfix">
 		<?php foreach($photos as $photo): ?>
 			<div class="col-sm-6 col-md-4">

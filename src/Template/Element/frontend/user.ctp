@@ -22,8 +22,22 @@
  */
 ?>
 
-<?= $this->element('frontend/user') ?>
+<?= $this->Html->css('MeInstagram.instagram', ['block' => 'css_bottom']) ?>
 
-<div class="photos view">
-	<?= $this->Thumb->img($photo->path, ['side' => 828]) ?>
-</div>
+<?php if(!empty($user)): ?>
+	<div id="instagram-user" class="row">
+		<div class="col-sm-5">
+			<?php echo $this->Thumb->img($user->profile_picture, ['id' => 'picture']); ?>
+		</div>
+		<div class="col-sm-7">
+			<p id="username"><?= $user->username ?></p>
+			<p id="fullname"><?= $user->full_name ?></p>
+			<p id="counts">
+				<span><?= __d('me_instagram', '{0} posts', $this->Html->strong($user->counts->media)) ?></span>
+				<span><?= __d('me_instagram', '{0} followers', $this->Html->strong($user->counts->followed_by)) ?></span>
+				<span><?= __d('me_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?></span>
+			</p>
+			<?= $this->Html->button(__d('me_instagram', 'Follow me on {0}', 'Instagram'), sprintf('//instagram.com/%s', $user->username), ['class' => 'btn-lg btn-success', 'icon' => 'instagram']) ?>
+		</div>
+	</div>
+<?php endif; ?>
