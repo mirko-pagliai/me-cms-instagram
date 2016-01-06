@@ -59,14 +59,16 @@ class Instagram {
 		//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
 		$url = 'https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s';
 		$photos = Xml::fromFile(sprintf($url, $limit, config('Instagram.key')));
-		
-		return array_map(function($photo) {
+				
+		$photos['data'] = array_map(function($photo) {
 			return (object) [
 				'id'			=> $photo['id'],
 				'description'	=> $photo['caption']['text'],
 				'path'			=> $photo['images']['standard_resolution']['url']
 			];
 		}, $photos['data']);
+		
+		return $photos;
 	}
 	
 	/**

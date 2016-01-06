@@ -36,7 +36,7 @@
 
 <div class="photosAlbums index">
 	<div class="clearfix">
-		<?php foreach($photos as $photo): ?>
+		<?php foreach($photos['data'] as $photo): ?>
 			<div class="col-sm-6 col-md-4">
 				<div class="photo-box">
 					<?php
