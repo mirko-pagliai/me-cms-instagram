@@ -33,16 +33,16 @@ class InstagramController extends AppController {
 	/**
 	 * Gets the user's profile
 	 * @return object
-	 * @uses MeInstagram\Utility\Instagram::getUser()
+	 * @uses MeInstagram\Utility\Instagram::getUserProfile()
 	 */
-	protected function __getUser() {
+	protected function __getUserProfile() {
 		//Tries to get data from the cache
 		$user = Cache::read($cache = 'user', 'instagram');
 		
 		//If the data are not available from the cache
 		if(empty($user)) {
 			//Gets the user
-			$user = Instagram::getUser();
+			$user = Instagram::getUserProfile();
 			
 			Cache::write($cache, $user, 'instagram');
 		}
@@ -56,13 +56,13 @@ class InstagramController extends AppController {
 	 * @param \Cake\Event\Event $event An Event instance
 	 * @see http://api.cakephp.org/3.1/class-Cake.Controller.Controller.html#_beforeRender
 	 * @uses MeCms\Controller\AppController::beforeRender()
-	 * @uses __getUser()
+	 * @uses __getUserProfile()
 	 */
 	public function beforeRender(\Cake\Event\Event $event) {
 		parent::beforeRender($event);
 			
 		//Gets and sets the user's profile
-		$this->set(['user' => $this->__getUser()]);
+		$this->set(['user' => $this->__getUserProfile()]);
 	}
 	
 	/**

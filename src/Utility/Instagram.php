@@ -74,7 +74,7 @@ class Instagram {
 	 * @return object
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
-	public static function getUser() {
+	public static function getUserProfile() {
 		//See https://www.instagram.com/developer/endpoints/users/#get_users_self
 		$url = 'https://api.instagram.com/v1/users/self/?access_token=%s';
 		$user = Xml::fromFile(sprintf($url, config('Instagram.key')));
