@@ -36,7 +36,7 @@ class Instagram {
 	/**
 	 * Gets a media from Instagram
 	 * @param string $id Media ID
-	 * @return array
+	 * @return object
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function getMedia($id) {
@@ -67,5 +67,20 @@ class Instagram {
 				'path'			=> $photo['images']['standard_resolution']['url']
 			];
 		}, $photos['data']);
+	}
+	
+	/**
+	 * Gets the user's profile
+	 * @return object
+	 * @uses MeTools\Utility\Xml::fromFile()
+	 */
+	public static function getUser() {
+		//See https://www.instagram.com/developer/endpoints/users/#get_users_self
+		$url = 'https://api.instagram.com/v1/users/self/?access_token=%s';
+		$user = Xml::fromFile(sprintf($url, config('Instagram.key')));
+		
+		return (object) array_map(function($v) {
+			return is_array($v) ? (object) $v : $v;
+		}, $user['data']);
 	}
 }
