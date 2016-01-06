@@ -37,7 +37,7 @@ class InstagramController extends AppController {
 	 */
 	protected function __getUserProfile() {
 		//Tries to get data from the cache
-		$user = Cache::read($cache = 'user', 'instagram');
+		$user = Cache::read($cache = 'user_profile', 'instagram');
 		
 		//If the data are not available from the cache
 		if(empty($user)) {
