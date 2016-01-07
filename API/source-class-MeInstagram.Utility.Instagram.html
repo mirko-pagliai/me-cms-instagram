@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="robots" content="noindex">
 
-	<title>File Instagram.php | MeInstagram API</title>
+	<title>File Utility/Instagram.php | MeInstagram API</title>
 
 	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
@@ -31,6 +31,11 @@
 
 						</li>
 				<li class="main">
+					<a href="namespace-MeInstagram.Shell.html">
+						Shell					</a>
+
+						</li>
+				<li class="main">
 					<a href="namespace-MeInstagram.Utility.html">
 						Utility					</a>
 
@@ -46,6 +51,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-MeInstagram.Controller.InstagramController.html">MeInstagram\Controller\InstagramController</a></li>
+				<li><a href="class-MeInstagram.Shell.InstallShell.html">MeInstagram\Shell\InstallShell</a></li>
 				<li><a href="class-MeInstagram.Utility.Instagram.html">MeInstagram\Utility\Instagram</a></li>
 			</ul>
 
@@ -126,7 +132,7 @@
 </span><span id="36" class="l"><a href="#36">36: </a>    <span class="php-comment">/**
 </span></span><span id="37" class="l"><a href="#37">37: </a><span class="php-comment">     * Gets a media from Instagram
 </span></span><span id="38" class="l"><a href="#38">38: </a><span class="php-comment">     * @param string $id Media ID
-</span></span><span id="39" class="l"><a href="#39">39: </a><span class="php-comment">     * @return array
+</span></span><span id="39" class="l"><a href="#39">39: </a><span class="php-comment">     * @return object
 </span></span><span id="40" class="l"><a href="#40">40: </a><span class="php-comment">     * @uses MeTools\Utility\Xml::fromFile()
 </span></span><span id="41" class="l"><a href="#41">41: </a><span class="php-comment">     */</span>
 </span><span id="42" class="l"><a href="#42">42: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getMedia(<span class="php-var">$id</span>) {
@@ -141,23 +147,48 @@
 </span><span id="51" class="l"><a href="#51">51: </a>
 </span><span id="52" class="l"><a href="#52">52: </a>    <span class="php-comment">/**
 </span></span><span id="53" class="l"><a href="#53">53: </a><span class="php-comment">     * Gets the recent media for an user from Instagram
-</span></span><span id="54" class="l"><a href="#54">54: </a><span class="php-comment">     * @return array
-</span></span><span id="55" class="l"><a href="#55">55: </a><span class="php-comment">     * @uses MeTools\Utility\Xml::fromFile()
-</span></span><span id="56" class="l"><a href="#56">56: </a><span class="php-comment">     */</span>
-</span><span id="57" class="l"><a href="#57">57: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getRecentUser() {
-</span><span id="58" class="l"><a href="#58">58: </a>        <span class="php-comment">//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self</span>
-</span><span id="59" class="l"><a href="#59">59: </a>        <span class="php-var">$url</span> = <span class="php-quote">'https://api.instagram.com/v1/users/self/media/recent/?access_token=%s'</span>;
-</span><span id="60" class="l"><a href="#60">60: </a>        <span class="php-var">$photos</span> = Xml::fromFile(<span class="php-keyword2">sprintf</span>(<span class="php-var">$url</span>, config(<span class="php-quote">'Instagram.key'</span>)));
-</span><span id="61" class="l"><a href="#61">61: </a>        
-</span><span id="62" class="l"><a href="#62">62: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_map</span>(<span class="php-keyword1">function</span>(<span class="php-var">$photo</span>) {
-</span><span id="63" class="l"><a href="#63">63: </a>            <span class="php-keyword1">return</span> (object) [
-</span><span id="64" class="l"><a href="#64">64: </a>                <span class="php-quote">'id'</span>            =&gt; <span class="php-var">$photo</span>[<span class="php-quote">'id'</span>],
-</span><span id="65" class="l"><a href="#65">65: </a>                <span class="php-quote">'description'</span>   =&gt; <span class="php-var">$photo</span>[<span class="php-quote">'caption'</span>][<span class="php-quote">'text'</span>],
-</span><span id="66" class="l"><a href="#66">66: </a>                <span class="php-quote">'path'</span>          =&gt; <span class="php-var">$photo</span>[<span class="php-quote">'images'</span>][<span class="php-quote">'standard_resolution'</span>][<span class="php-quote">'url'</span>]
-</span><span id="67" class="l"><a href="#67">67: </a>            ];
-</span><span id="68" class="l"><a href="#68">68: </a>        }, <span class="php-var">$photos</span>[<span class="php-quote">'data'</span>]);
-</span><span id="69" class="l"><a href="#69">69: </a>    }
-</span><span id="70" class="l"><a href="#70">70: </a>}</span></code></pre>
+</span></span><span id="54" class="l"><a href="#54">54: </a><span class="php-comment">     * @param string $id Request ID (&quot;Next ID&quot; for Istangram)
+</span></span><span id="55" class="l"><a href="#55">55: </a><span class="php-comment">     * @param int $limit Limit
+</span></span><span id="56" class="l"><a href="#56">56: </a><span class="php-comment">     * @return array
+</span></span><span id="57" class="l"><a href="#57">57: </a><span class="php-comment">     * @uses MeTools\Utility\Xml::fromFile()
+</span></span><span id="58" class="l"><a href="#58">58: </a><span class="php-comment">     */</span>
+</span><span id="59" class="l"><a href="#59">59: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getRecentUser(<span class="php-var">$id</span> = <span class="php-keyword1">NULL</span>, <span class="php-var">$limit</span> = <span class="php-num">15</span>) {
+</span><span id="60" class="l"><a href="#60">60: </a>        <span class="php-comment">//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self</span>
+</span><span id="61" class="l"><a href="#61">61: </a>        <span class="php-var">$url</span> = <span class="php-quote">'https://api.instagram.com/v1/users/self/media/recent/?count=%s&amp;access_token=%s'</span>;
+</span><span id="62" class="l"><a href="#62">62: </a>        
+</span><span id="63" class="l"><a href="#63">63: </a>        <span class="php-comment">//Adds the request ID (&quot;Next ID&quot; for Istangram)</span>
+</span><span id="64" class="l"><a href="#64">64: </a>        <span class="php-keyword1">if</span>(!<span class="php-keyword1">empty</span>(<span class="php-var">$id</span>))
+</span><span id="65" class="l"><a href="#65">65: </a>            <span class="php-var">$url</span> = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'%s&amp;max_id=%s'</span>, <span class="php-var">$url</span>, <span class="php-var">$id</span>);
+</span><span id="66" class="l"><a href="#66">66: </a>        
+</span><span id="67" class="l"><a href="#67">67: </a>        <span class="php-comment">//Gets photos</span>
+</span><span id="68" class="l"><a href="#68">68: </a>        <span class="php-var">$photos</span> = Xml::fromFile(<span class="php-keyword2">sprintf</span>(<span class="php-var">$url</span>, <span class="php-var">$limit</span>, config(<span class="php-quote">'Instagram.key'</span>)));
+</span><span id="69" class="l"><a href="#69">69: </a>        
+</span><span id="70" class="l"><a href="#70">70: </a>        <span class="php-var">$photos</span>[<span class="php-quote">'data'</span>] = <span class="php-keyword2">array_map</span>(<span class="php-keyword1">function</span>(<span class="php-var">$photo</span>) {
+</span><span id="71" class="l"><a href="#71">71: </a>            <span class="php-keyword1">return</span> (object) [
+</span><span id="72" class="l"><a href="#72">72: </a>                <span class="php-quote">'id'</span>            =&gt; <span class="php-var">$photo</span>[<span class="php-quote">'id'</span>],
+</span><span id="73" class="l"><a href="#73">73: </a>                <span class="php-quote">'description'</span>   =&gt; <span class="php-var">$photo</span>[<span class="php-quote">'caption'</span>][<span class="php-quote">'text'</span>],
+</span><span id="74" class="l"><a href="#74">74: </a>                <span class="php-quote">'path'</span>          =&gt; <span class="php-var">$photo</span>[<span class="php-quote">'images'</span>][<span class="php-quote">'standard_resolution'</span>][<span class="php-quote">'url'</span>]
+</span><span id="75" class="l"><a href="#75">75: </a>            ];
+</span><span id="76" class="l"><a href="#76">76: </a>        }, <span class="php-var">$photos</span>[<span class="php-quote">'data'</span>]);
+</span><span id="77" class="l"><a href="#77">77: </a>        
+</span><span id="78" class="l"><a href="#78">78: </a>        <span class="php-keyword1">return</span> <span class="php-var">$photos</span>;
+</span><span id="79" class="l"><a href="#79">79: </a>    }
+</span><span id="80" class="l"><a href="#80">80: </a>    
+</span><span id="81" class="l"><a href="#81">81: </a>    <span class="php-comment">/**
+</span></span><span id="82" class="l"><a href="#82">82: </a><span class="php-comment">     * Gets the user's profile
+</span></span><span id="83" class="l"><a href="#83">83: </a><span class="php-comment">     * @return object
+</span></span><span id="84" class="l"><a href="#84">84: </a><span class="php-comment">     * @uses MeTools\Utility\Xml::fromFile()
+</span></span><span id="85" class="l"><a href="#85">85: </a><span class="php-comment">     */</span>
+</span><span id="86" class="l"><a href="#86">86: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getUserProfile() {
+</span><span id="87" class="l"><a href="#87">87: </a>        <span class="php-comment">//See https://www.instagram.com/developer/endpoints/users/#get_users_self</span>
+</span><span id="88" class="l"><a href="#88">88: </a>        <span class="php-var">$url</span> = <span class="php-quote">'https://api.instagram.com/v1/users/self/?access_token=%s'</span>;
+</span><span id="89" class="l"><a href="#89">89: </a>        <span class="php-var">$user</span> = Xml::fromFile(<span class="php-keyword2">sprintf</span>(<span class="php-var">$url</span>, config(<span class="php-quote">'Instagram.key'</span>)));
+</span><span id="90" class="l"><a href="#90">90: </a>        
+</span><span id="91" class="l"><a href="#91">91: </a>        <span class="php-keyword1">return</span> (object) <span class="php-keyword2">array_map</span>(<span class="php-keyword1">function</span>(<span class="php-var">$v</span>) {
+</span><span id="92" class="l"><a href="#92">92: </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">is_array</span>(<span class="php-var">$v</span>) ? (object) <span class="php-var">$v</span> : <span class="php-var">$v</span>;
+</span><span id="93" class="l"><a href="#93">93: </a>        }, <span class="php-var">$user</span>[<span class="php-quote">'data'</span>]);
+</span><span id="94" class="l"><a href="#94">94: </a>    }
+</span><span id="95" class="l"><a href="#95">95: </a>}</span></code></pre>
 
 	<div id="footer">
 		MeInstagram API API documentation generated by <a href="http://apigen.org">ApiGen</a>
@@ -165,6 +196,6 @@
 </div>
 </div>
 <script src="resources/combined.js?cd021bc814832c24a7cec5319ea03335bfba1caf"></script>
-<script src="elementlist.js?45f6621501b61bf341093b67ef4d2c2446702863"></script>
+<script src="elementlist.js?de36266550e5ebebd85b145ffdf004c42db52552"></script>
 </body>
 </html>

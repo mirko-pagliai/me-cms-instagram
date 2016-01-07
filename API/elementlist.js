@@ -1,3 +1,3 @@
 
 var ApiGen = ApiGen || {};
-ApiGen.elements = [["c","MeInstagram\\Controller\\InstagramController"],["c","MeInstagram\\Utility\\Instagram"]];
+ApiGen.elements = [["c","MeInstagram\\Controller\\InstagramController"],["c","MeInstagram\\Shell\\InstallShell"],["c","MeInstagram\\Utility\\Instagram"]];

@@ -30,6 +30,11 @@
 
 						</li>
 				<li class="main">
+					<a href="namespace-MeInstagram.Shell.html">
+						Shell					</a>
+
+						</li>
+				<li class="main">
 					<a href="namespace-MeInstagram.Utility.html">
 						Utility					</a>
 
@@ -122,7 +127,7 @@ MeCms\Controller\AppController
 		<b>Namespace:</b> <a href="namespace-MeInstagram.html">MeInstagram</a>\<a href="namespace-MeInstagram.Controller.html">Controller</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-MeInstagram.Controller.InstagramController.html#29-71" title="Go to source code">InstagramController.php</a>
+			<b>Located at</b> <a href="source-class-MeInstagram.Controller.InstagramController.html#29-117" title="Go to source code">Controller/InstagramController.php</a>
 		<br>
 	</div>
 
@@ -130,6 +135,94 @@ MeCms\Controller\AppController
 
 	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
+	<tr data-order="__getUserProfile" id="___getUserProfile">
+
+		<td class="attributes"><code>
+			 protected 
+
+			object
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___getUserProfile">#</a>
+		<code><a href="source-class-MeInstagram.Controller.InstagramController.html#33-51" title="Go to source code">__getUserProfile</a>( )</code>
+
+		<div class="description short">
+			<p>Gets the user's profile</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets the user's profile</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					object
+				</div>
+
+
+				<h4>Uses</h4>
+				<div class="list">
+						<code><a href="class-MeInstagram.Utility.Instagram.html#_getUserProfile">MeInstagram\Utility\Instagram::getUserProfile()</a></code><br>
+				</div>
+				<h4>Used by</h4>
+				<div class="list">
+						<code><a href="class-MeInstagram.Controller.InstagramController.html#_beforeRender">MeInstagram\Controller\InstagramController::beforeRender()</a></code><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeRender" id="_beforeRender">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_beforeRender">#</a>
+		<code><a href="source-class-MeInstagram.Controller.InstagramController.html#53-66" title="Go to source code">beforeRender</a>( <span>Cake\Event\Event <var>$event</var></span> )</code>
+
+		<div class="description short">
+			<p>Called after the controller action is run, but before the view is rendered.
+You can use this method to perform logic or set view variables that are required on every request.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Called after the controller action is run, but before the view is rendered.
+You can use this method to perform logic or set view variables that are required on every request.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$event</var></dt>
+					<dd>An Event instance</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						http://api.cakephp.org/3.1/class-Cake.Controller.Controller.html#_beforeRender<br>
+				</div>
+				<h4>Uses</h4>
+				<div class="list">
+						MeCms\Controller\AppController::beforeRender()<br>
+						<code><a href="class-MeInstagram.Controller.InstagramController.html#___getUserProfile">MeInstagram\Controller\InstagramController::__getUserProfile()</a></code><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="index" id="_index">
 
 		<td class="attributes"><code>
@@ -142,7 +235,7 @@ MeCms\Controller\AppController
 
 		<td class="name"><div>
 		<a class="anchor" href="#_index">#</a>
-		<code><a href="source-class-MeInstagram.Controller.InstagramController.html#33-50" title="Go to source code">index</a>( )</code>
+		<code><a href="source-class-MeInstagram.Controller.InstagramController.html#68-96" title="Go to source code">index</a>( <span>string <var>$id</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			<p>Lists photos from Istangram</p>
@@ -152,6 +245,11 @@ MeCms\Controller\AppController
 			<p>Lists photos from Istangram</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd>Request ID ("Next ID" for Istangram)</dd>
+				</dl></div>
 
 
 
@@ -176,7 +274,7 @@ MeCms\Controller\AppController
 
 		<td class="name"><div>
 		<a class="anchor" href="#_view">#</a>
-		<code><a href="source-class-MeInstagram.Controller.InstagramController.html#52-70" title="Go to source code">view</a>( <span>string <var>$id</var></span> )</code>
+		<code><a href="source-class-MeInstagram.Controller.InstagramController.html#98-116" title="Go to source code">view</a>( <span>string <var>$id</var></span> )</code>
 
 		<div class="description short">
 			<p>Views a photo</p>
