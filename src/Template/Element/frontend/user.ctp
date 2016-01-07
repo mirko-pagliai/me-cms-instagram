@@ -22,7 +22,7 @@
  */
 ?>
 
-<?= $this->Html->css('MeInstagram.instagram', ['block' => 'css_bottom']) ?>
+<?= $this->Asset->css('MeInstagram.instagram', ['block' => 'css_bottom']) ?>
 
 <?php if(!empty($user)): ?>
 	<div id="instagram-user" class="row">
