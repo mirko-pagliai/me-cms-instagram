@@ -67,21 +67,32 @@ class InstagramController extends AppController {
 	
 	/**
 	 * Lists photos from Istangram
+	 * @param string $id Request ID ("Next ID" for Istangram)
 	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
 	 */
-	public function index() {		
-		//Tries to get data from the cache
-		$photos = Cache::read($cache = sprintf('index_limit_%s', config('MeInstagram.frontend.photos')), 'instagram');
+	public function index($id = NULL) {
+		//Sets initial cache name
+		$cache = sprintf('index_limit_%s', config('MeInstagram.frontend.photos'));
 		
+		//Adds the request ID ("Next ID" for Istangram)
+		if(!empty($id))
+			$cache = sprintf('%s_id_%s', $cache, $id);
+		
+		//Tries to get data from the cache
+		$photos = Cache::read($cache, 'instagram');
+				
 		//If the data are not available from the cache
 		if(empty($photos)) {
 			//Gets the recent medias for the user
-			$photos = Instagram::getRecentUser();
+			$photos = Instagram::getRecentUser($id, config('MeInstagram.frontend.photos'));
 			
 			Cache::write($cache, $photos, 'instagram');
 		}
 		
-		$this->set(compact('photos'));
+		$this->set([
+			'next_id'	=> empty($photos['pagination']['next_max_id']) ? NULL : $photos['pagination']['next_max_id'],
+			'photos'	=> $photos['data']
+		]);
 	}
 	
 	/**

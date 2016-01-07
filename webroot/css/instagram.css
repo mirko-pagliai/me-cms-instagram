@@ -5,6 +5,37 @@
  * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
  */
 
+/* -------------------------------- */
+/*		"Load more" button			*/
+/* -------------------------------- */
+/* "Load more" button */
+#load-more {
+	border: 2px solid #4090db;
+	border-radius: 50%;
+	color: #4090db;
+	display: block;
+	font-family: Roboto;
+	font-size: 13px;
+	height: 120px;
+	margin: 20px auto 30px;
+	outline: none !important;
+	padding: 50px 0;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	width: 120px;
+}
+
+/* "Load more" button on hover */
+#load-more:hover {
+	color: #2d6599;
+	border-color: #2d6599;
+	text-decoration: none;
+}
+
+/* -------------------------------- */
+/*			User profile			*/
+/* -------------------------------- */
 /* User profile */
 #instagram-user {
 	background: #fafafa;

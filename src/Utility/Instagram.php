@@ -51,15 +51,22 @@ class Instagram {
 
 	/**
 	 * Gets the recent media for an user from Instagram
+	 * @param string $id Request ID ("Next ID" for Istangram)
 	 * @param int $limit Limit
 	 * @return array
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
-	public static function getRecentUser($limit = 15) {
+	public static function getRecentUser($id = NULL, $limit = 15) {
 		//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
 		$url = 'https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s';
+		
+		//Adds the request ID ("Next ID" for Istangram)
+		if(!empty($id))
+			$url = sprintf('%s&max_id=%s', $url, $id);
+		
+		//Gets photos
 		$photos = Xml::fromFile(sprintf($url, $limit, config('Instagram.key')));
-				
+		
 		$photos['data'] = array_map(function($photo) {
 			return (object) [
 				'id'			=> $photo['id'],

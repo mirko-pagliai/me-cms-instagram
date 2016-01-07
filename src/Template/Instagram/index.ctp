@@ -23,20 +23,20 @@
 ?>
 	
 <?php
-	$this->assign('title', $title = __d('me_instagram', 'Photos from {0}', 'Instagram'));
+	$this->assign('title', __d('me_instagram', 'Photos from {0}', 'Instagram'));
+	
+	$this->Asset->js('MeInstagram.frontend', ['block' => 'script_bottom']);
 	
 	if(config('frontend.fancybox'))
 		$this->Library->fancybox();
-?>
-
-<?php
-	if(config('MeInstagram.frontend.user_profile'))
+	
+	if(config('MeInstagram.frontend.user_profile') && !$this->request->is('ajax'))
 		echo $this->element('frontend/user')
 ?>
 
 <div class="photosAlbums index">
 	<div class="clearfix">
-		<?php foreach($photos['data'] as $photo): ?>
+		<?php foreach($photos as $photo): ?>
 			<div class="col-sm-6 col-md-4">
 				<div class="photo-box">
 					<?php
@@ -52,7 +52,7 @@
 							'rel'					=> 'group'
 						] : [];
 						
-						echo $this->Html->link($text, ['_name' => 'instagram_photo', $photo->id], am([
+						echo $this->Html->link($text, ['action' => 'view', $photo->id], am([
 							'class' => 'thumbnail',
 							'title' => $photo->description
 						], $options));
@@ -61,4 +61,8 @@
 			</div>
 		<?php endforeach; ?>
 	</div>
+	<?php
+		if(!empty($next_id))
+			echo $this->Html->link(__d('me_instagram', 'Load more'), '#', ['id' => 'load-more', 'data-href' => \Cake\Routing\Router::url([$next_id])]);
+	?>
 </div>

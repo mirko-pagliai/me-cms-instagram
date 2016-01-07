@@ -34,6 +34,10 @@ Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
 	 * Instagram controller
 	 */
 	$routes->connect('/instagram', ['controller' => 'Instagram', 'action' => 'index']);
+	$routes->connect('/instagram/:id',
+		['controller' => 'Instagram', 'action' => 'index'],
+		['id' => '\d+_\d+', 'pass' => ['id']]
+	);
 	$routes->connect('/instagram/view/:id',
 		['controller' => 'Instagram', 'action' => 'view'],
 		['id' => '\d+_\d+', 'pass' => ['id']]
