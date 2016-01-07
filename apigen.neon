@@ -2,7 +2,7 @@ accessLevels: [public, protected, private]
 destination: API
 download: false
 exclude: {*_old, *.old, *.old.*} 
-source: {src/Controller, src/Shell, src/Template, src/Utility}
+source: {src}
 main: MeInstagram
 php: false
 title: MeInstagram API
