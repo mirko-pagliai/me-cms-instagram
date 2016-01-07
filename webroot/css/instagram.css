@@ -5,7 +5,7 @@
  * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
  */
 
-/* Instangram user */
+/* User profile */
 #instagram-user {
 	background: #fafafa;
 	color: #4b4f54;
@@ -14,30 +14,30 @@
 	padding: 20px;
 }
 
-/* Instangram user, picture */
+/* User profile, picture */
 #instagram-user #picture {
 	border: 1px solid #cccfd0;
     border-radius: 50%;
 	margin: auto;
 }
 
-/* Instangram user, username */
+/* User profile, username */
 #instagram-user #username {
 	font-size: 28px;
 }
 
-/* Instangram user, full name */
+/* User profile, full name */
 #instagram-user #fullname {
 	font-size: 16px;
 	font-weight: bold;
 }
 
-/* Instangram user, counters */
+/* User profile, counters */
 #instagram-user #counts {
 	font-size: 17px;
 }
 
-/* Instangram user, counters, span children */
+/* User profile, counters, span children */
 #instagram-user #counts > span {
 	margin-right: 40px;
 }
