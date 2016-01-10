@@ -29,7 +29,32 @@ use MeInstagram\Utility\Instagram;
 /**
  * Photos cell
  */
-class PhotosCell extends Cell {	
+class PhotosCell extends Cell {
+	/**
+	 * Latest widget
+	 * @param int $limit Limit
+	 * @uses MeInstagram\Utility\Instagram::getLatest()
+	 * @uses MeTools\Network\Request::isController()
+	 */
+	public function latest($limit = 1) {
+		//Returns on the same controller
+		if($this->request->isController('Instagram'))
+			return;
+		
+		//Returns, if there are no photos available
+		if(Cache::read($cache = 'no_photos', 'instagram'))
+			return;
+		
+		//Gets latest photos
+		$photos = Instagram::getLatest($limit);
+				
+		//Writes on cache, if there are no photos available
+		if(empty($photos))
+			Cache::write($cache, TRUE, 'instagram');
+		
+		$this->set(compact('photos'));
+	}
+	
 	/**
 	 * Random widget
 	 * @param int $limit Limit
@@ -45,7 +70,7 @@ class PhotosCell extends Cell {
 		if(Cache::read($cache = 'no_photos', 'instagram'))
 			return;
 		
-		//Gets photos
+		//Gets random photos
 		$photos = Instagram::getRandom($limit);
 				
 		//Writes on cache, if there are no photos available
