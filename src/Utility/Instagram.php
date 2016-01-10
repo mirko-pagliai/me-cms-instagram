@@ -48,9 +48,23 @@ class Instagram {
 			'path' => $photo['data']['images']['standard_resolution']['url']
 		];
 	}
+	
+	/**
+	 * Gets random photos from the recent media from Instagram
+	 * @param int $limit Limit
+	 * @return array Random photos
+	 * @uses getRecentUser()
+	 */
+	public static function getRandom($limit = 1) {
+		//Gets the recent media from Instagram
+		$photos = self::getRecentUser(NULL, 15)['data'];
+		
+		//Returns random photos		
+		return array_intersect_key($photos, array_flip(array_rand($photos, $limit)));
+	}
 
 	/**
-	 * Gets the recent media for an user from Instagram
+	 * Gets the recent media from Instagram
 	 * @param string $id Request ID ("Next ID" for Istangram)
 	 * @param int $limit Limit
 	 * @return array
