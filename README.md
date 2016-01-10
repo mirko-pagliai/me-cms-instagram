@@ -7,4 +7,6 @@ To install:
     $ composer require --prefer-dist mirko-pagliai/me-instagram
     $ bin/cake me_instagram.install all -v
 
-Then you need to get an [API access token for Instagram](https://www.instagram.com/developer/clients/manage) and edit `APP/config/instagram_keys.php`.
+Then you need to get an [API access token for Instagram](//www.instagram.com/developer/clients/manage) and edit `APP/config/instagram_keys.php`.
+
+For widgets provided by this plugin, see [here](//github.com/mirko-pagliai/me-instagram/wiki/Widgets).
