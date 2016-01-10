@@ -34,6 +34,20 @@ use MeTools\Utility\Xml;
  */
 class Instagram {
 	/**
+	 * Gets latest photos from the recent media from Instagram
+	 * @param int $limit Limit
+	 * @return array Latest photos
+	 * @uses getRecentUser()
+	 */
+	public static function getLatest($limit = 1) {
+		//Gets the recent media from Instagram
+		$photos = self::getRecentUser(NULL, 15)['data'];
+				
+		//Returns latest photos
+		return array_slice($photos, 0, $limit);		
+	}
+	
+	/**
 	 * Gets a media from Instagram
 	 * @param string $id Media ID
 	 * @return object
@@ -62,6 +76,7 @@ class Instagram {
 		//Shuffles
 		shuffle($photos);
 		
+		//Returns random photos
 		return array_slice($photos, 0, $limit);
 	}
 
