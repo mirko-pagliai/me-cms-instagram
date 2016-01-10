@@ -59,8 +59,10 @@ class Instagram {
 		//Gets the recent media from Instagram
 		$photos = self::getRecentUser(NULL, 15)['data'];
 		
-		//Returns random photos		
-		return array_intersect_key($photos, array_flip(array_rand($photos, $limit)));
+		//Shuffles
+		shuffle($photos);
+		
+		return array_slice($photos, 0, $limit);
 	}
 
 	/**
