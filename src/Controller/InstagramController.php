@@ -22,7 +22,6 @@
  */
 namespace MeInstagram\Controller;
 
-use Cake\Cache\Cache;
 use MeCms\Controller\AppController;
 use MeInstagram\Utility\Instagram;
 
@@ -31,38 +30,18 @@ use MeInstagram\Utility\Instagram;
  */
 class InstagramController extends AppController {
 	/**
-	 * Gets the user's profile
-	 * @return object
-	 * @uses MeInstagram\Utility\Instagram::getUserProfile()
-	 */
-	protected function __getUserProfile() {
-		//Tries to get data from the cache
-		$user = Cache::read($cache = 'user_profile', 'instagram');
-		
-		//If the data are not available from the cache
-		if(empty($user)) {
-			//Gets the user
-			$user = Instagram::getUserProfile();
-			
-			Cache::write($cache, $user, 'instagram');
-		}
-		
-		return $user;
-	}
-	
-	/**
 	 * Called after the controller action is run, but before the view is rendered.
 	 * You can use this method to perform logic or set view variables that are required on every request.
 	 * @param \Cake\Event\Event $event An Event instance
 	 * @see http://api.cakephp.org/3.1/class-Cake.Controller.Controller.html#_beforeRender
 	 * @uses MeCms\Controller\AppController::beforeRender()
-	 * @uses __getUserProfile()
+	 * @uses MeInstagram\Utility\Instagram::getUserProfile()
 	 */
 	public function beforeRender(\Cake\Event\Event $event) {
 		parent::beforeRender($event);
 			
 		//Gets and sets the user's profile
-		$this->set(['user' => $this->__getUserProfile()]);
+		$this->set(['user' => Instagram::getUserProfile()]);
 	}
 	
 	/**
@@ -71,23 +50,7 @@ class InstagramController extends AppController {
 	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
 	 */
 	public function index($id = NULL) {
-		//Sets initial cache name
-		$cache = sprintf('index_limit_%s', config('MeInstagram.frontend.photos'));
-		
-		//Adds the request ID ("Next ID" for Istangram)
-		if(!empty($id))
-			$cache = sprintf('%s_id_%s', $cache, $id);
-		
-		//Tries to get data from the cache
-		$photos = Cache::read($cache, 'instagram');
-				
-		//If the data are not available from the cache
-		if(empty($photos)) {
-			//Gets the recent medias for the user
-			$photos = Instagram::getRecentUser($id, config('MeInstagram.frontend.photos'));
-			
-			Cache::write($cache, $photos, 'instagram');
-		}
+		$photos = Instagram::getRecentUser($id, config('MeInstagram.frontend.photos'));
 		
 		$this->set([
 			'next_id'	=> empty($photos['pagination']['next_max_id']) ? NULL : $photos['pagination']['next_max_id'],
@@ -101,17 +64,6 @@ class InstagramController extends AppController {
 	 * @uses MeInstagram\Utility\Instagram::getMedia()
 	 */
 	public function view($id) {
-		//Tries to get data from the cache
-		$photo = Cache::read($cache = sprintf('view_%s', md5($id)), 'instagram');
-		
-		//If the data are not available from the cache
-		if(empty($photo)) {
-			//Gets the media
-			$photo = Instagram::getMedia($id);
-			
-			Cache::write($cache, $photo, 'instagram');
-		}
-		
-		$this->set(compact('photo'));
+		$this->set(['photo' => Instagram::getMedia($id)]);
 	}
 }

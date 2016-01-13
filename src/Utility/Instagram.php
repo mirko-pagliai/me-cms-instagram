@@ -22,6 +22,7 @@
  */
 namespace MeInstagram\Utility;
 
+use Cake\Cache\Cache;
 use MeTools\Utility\Xml;
 
 /**
@@ -40,11 +41,19 @@ class Instagram {
 	 * @uses getRecentUser()
 	 */
 	public static function getLatest($limit = 1) {
-		//Gets the recent media from Instagram
-		$photos = self::getRecentUser(NULL, 15)['data'];
-				
-		//Returns latest photos
-		return array_slice($photos, 0, $limit);		
+		//Tries to get data from the cache
+		$photo = Cache::read($cache = sprintf('latest_%s', $limit), 'instagram');
+		
+		//If the data are not available from the cache
+		if(empty($photo)) {
+			//Gets the recent media from Instagram
+			$photos = self::getRecentUser(NULL, 15)['data'];
+
+			if(count($photos) > $limit)
+				$photos = array_slice($photos, 0, $limit);
+		}
+		
+		return $photos;
 	}
 	
 	/**
@@ -54,13 +63,21 @@ class Instagram {
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function getMedia($id) {
-		//See https://www.instagram.com/developer/endpoints/media/#get_media
-		$url = 'https://api.instagram.com/v1/media/%s?access_token=%s';
-		$photo = Xml::fromFile(sprintf($url, $id, config('Instagram.key')));
+		//Tries to get data from the cache
+		$photo = Cache::read($cache = sprintf('media_%s', md5($id)), 'instagram');
 		
-		return (object) [
-			'path' => $photo['data']['images']['standard_resolution']['url']
-		];
+		//If the data are not available from the cache
+		if(empty($photo)) {
+			//See https://www.instagram.com/developer/endpoints/media/#get_media
+			$url = 'https://api.instagram.com/v1/media/%s?access_token=%s';
+			$photo = Xml::fromFile(sprintf($url, $id, config('Instagram.key')));
+
+			$photo = (object) ['path' => $photo['data']['images']['standard_resolution']['url']];
+			
+			Cache::write($cache, $photo, 'instagram');
+		}
+		
+		return $photo;
 	}
 	
 	/**
@@ -88,23 +105,39 @@ class Instagram {
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function getRecentUser($id = NULL, $limit = 15) {
-		//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
-		$url = 'https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s';
+		//Sets initial cache name
+		$cache = sprintf('index_limit_%s', $limit);
 		
-		//Adds the request ID ("Next ID" for Istangram)
+		//Adds the request ID ("Next ID" for Istangram) to the cache name
 		if(!empty($id))
-			$url = sprintf('%s&max_id=%s', $url, $id);
+			$cache = sprintf('%s_id_%s', $cache, $id);
 		
-		//Gets photos
-		$photos = Xml::fromFile(sprintf($url, $limit, config('Instagram.key')));
+		//Tries to get data from the cache
+		$photos = Cache::read($cache, 'instagram');
 		
-		$photos['data'] = array_map(function($photo) {
-			return (object) [
-				'id'			=> $photo['id'],
-				'description'	=> $photo['caption']['text'],
-				'path'			=> $photo['images']['standard_resolution']['url']
-			];
-		}, $photos['data']);
+		
+		//If the data are not available from the cache
+		if(empty($photos)) {
+			//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
+			$url = 'https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s';
+
+			//Adds the request ID ("Next ID" for Istangram) to the url
+			if(!empty($id))
+				$url = sprintf('%s&max_id=%s', $url, $id);
+
+			//Gets photos
+			$photos = Xml::fromFile(sprintf($url, $limit, config('Instagram.key')));
+
+			$photos['data'] = array_map(function($photo) {
+				return (object) [
+					'id'			=> $photo['id'],
+					'description'	=> $photo['caption']['text'],
+					'path'			=> $photo['images']['standard_resolution']['url']
+				];
+			}, $photos['data']);
+			
+			Cache::write($cache, $photos, 'instagram');
+		}
 		
 		return $photos;
 	}
@@ -115,12 +148,22 @@ class Instagram {
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function getUserProfile() {
-		//See https://www.instagram.com/developer/endpoints/users/#get_users_self
-		$url = 'https://api.instagram.com/v1/users/self/?access_token=%s';
-		$user = Xml::fromFile(sprintf($url, config('Instagram.key')));
+		//Tries to get data from the cache
+		$user = Cache::read($cache = 'user_profile', 'instagram');
 		
-		return (object) array_map(function($v) {
-			return is_array($v) ? (object) $v : $v;
-		}, $user['data']);
+		//If the data are not available from the cache
+		if(empty($user)) {
+			//See https://www.instagram.com/developer/endpoints/users/#get_users_self
+			$url = 'https://api.instagram.com/v1/users/self/?access_token=%s';
+			$user = Xml::fromFile(sprintf($url, config('Instagram.key')));
+
+			$user = (object) array_map(function($v) {
+				return is_array($v) ? (object) $v : $v;
+			}, $user['data']);
+			
+			Cache::write($cache, $user, 'instagram');
+		}
+		
+		return $user;
 	}
 }
