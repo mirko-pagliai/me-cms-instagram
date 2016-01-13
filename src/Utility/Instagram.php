@@ -121,12 +121,14 @@ class Instagram {
 			//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
 			$url = 'https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s';
 
+			$url = sprintf($url, $limit, config('Instagram.key'));
+			
 			//Adds the request ID ("Next ID" for Istangram) to the url
 			if(!empty($id))
 				$url = sprintf('%s&max_id=%s', $url, $id);
 
 			//Gets photos
-			$photos = Xml::fromFile(sprintf($url, $limit, config('Instagram.key')));
+			$photos = Xml::fromFile($url);
 
 			$photos['data'] = array_map(function($photo) {
 				return (object) [
