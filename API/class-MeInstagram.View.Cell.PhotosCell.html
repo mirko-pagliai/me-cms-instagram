@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class MeInstagram\Shell\InstallShell | MeInstagram API</title>
+	<title>Class MeInstagram\View\Cell\PhotosCell | MeInstagram API</title>
 
 	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
@@ -29,7 +29,7 @@
 						Controller					</a>
 
 						</li>
-				<li class="active main">
+				<li class="main">
 					<a href="namespace-MeInstagram.Shell.html">
 						Shell					</a>
 
@@ -39,13 +39,13 @@
 						Utility					</a>
 
 						</li>
-				<li class="main">
+				<li class="active main">
 					<a href="namespace-MeInstagram.View.html">
 						View<span></span>
 					</a>
 
 						<ul>
-				<li class="main">
+				<li class="active main">
 					<a href="namespace-MeInstagram.View.Cell.html">
 						Cell					</a>
 
@@ -60,7 +60,7 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li class="active"><a href="class-MeInstagram.Shell.InstallShell.html">InstallShell</a></li>
+				<li class="active"><a href="class-MeInstagram.View.Cell.PhotosCell.html">PhotosCell</a></li>
 			</ul>
 
 
@@ -87,7 +87,7 @@
 				<a href="index.html" title="Overview"><span>Overview</span></a>
 			</li>
 			<li>
-				<a href="namespace-MeInstagram.Shell.html" title="Summary of MeInstagram\Shell"><span>Namespace</span></a>
+				<a href="namespace-MeInstagram.View.Cell.html" title="Summary of MeInstagram\View\Cell"><span>Namespace</span></a>
 			</li>
 			<li class="active">
 <span>Class</span>			</li>
@@ -104,22 +104,22 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class InstallShell</h1>
+	<h1>Class PhotosCell</h1>
 
 
 	<div class="description">
-	<p>Executes some tasks to make the system ready to work</p>
+	<p>Photos cell</p>
 	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
-MeTools\Shell\InstallShell
+Cake\View\Cell
 			
 			
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>MeInstagram\Shell\InstallShell</span></b>			
+<b><span>MeInstagram\View\Cell\PhotosCell</span></b>			
 			
 			
 		</dd>
@@ -135,10 +135,10 @@ MeTools\Shell\InstallShell
 	<div class="info">
 		
 		
-		<b>Namespace:</b> <a href="namespace-MeInstagram.html">MeInstagram</a>\<a href="namespace-MeInstagram.Shell.html">Shell</a><br>
+		<b>Namespace:</b> <a href="namespace-MeInstagram.html">MeInstagram</a>\<a href="namespace-MeInstagram.View.html">View</a>\<a href="namespace-MeInstagram.View.Cell.html">Cell</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-MeInstagram.Shell.InstallShell.html#27-81" title="Go to source code">Shell/InstallShell.php</a>
+			<b>Located at</b> <a href="source-class-MeInstagram.View.Cell.PhotosCell.html#29-82" title="Go to source code">View/Cell/PhotosCell.php</a>
 		<br>
 	</div>
 
@@ -146,7 +146,7 @@ MeTools\Shell\InstallShell
 
 	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="__construct" id="___construct">
+	<tr data-order="latest" id="_latest">
 
 		<td class="attributes"><code>
 			 public 
@@ -157,31 +157,36 @@ MeTools\Shell\InstallShell
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-MeInstagram.Shell.InstallShell.html#31-44" title="Go to source code">__construct</a>( )</code>
+		<a class="anchor" href="#_latest">#</a>
+		<code><a href="source-class-MeInstagram.View.Cell.PhotosCell.html#33-56" title="Go to source code">latest</a>( <span>integer <var>$limit</var> = <span class="php-num">1</span></span> )</code>
 
 		<div class="description short">
-			<p>Construct</p>
+			<p>Latest widget</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Construct</p>
+			<p>Latest widget</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$limit</var></dt>
+					<dd>Limit</dd>
+				</dl></div>
 
 
 
 				<h4>Uses</h4>
 				<div class="list">
-						MeTools\Shell\InstallShell::__construct()<br>
-						$config<br>
+						<code><a href="class-MeInstagram.Utility.Instagram.html#_getLatest">MeInstagram\Utility\Instagram::getLatest()</a></code><br>
+						MeTools\Network\Request::isController()<br>
 				</div>
 
 
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="all" id="_all">
+	<tr data-order="random" id="_random">
 
 		<td class="attributes"><code>
 			 public 
@@ -192,61 +197,29 @@ MeTools\Shell\InstallShell
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_all">#</a>
-		<code><a href="source-class-MeInstagram.Shell.InstallShell.html#46-60" title="Go to source code">all</a>( )</code>
+		<a class="anchor" href="#_random">#</a>
+		<code><a href="source-class-MeInstagram.View.Cell.PhotosCell.html#58-81" title="Go to source code">random</a>( <span>integer <var>$limit</var> = <span class="php-num">1</span></span> )</code>
 
 		<div class="description short">
-			<p>Executes all available tasks</p>
+			<p>Random widget</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Executes all available tasks</p>
+			<p>Random widget</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$limit</var></dt>
+					<dd>Limit</dd>
+				</dl></div>
 
 
 
 				<h4>Uses</h4>
 				<div class="list">
-						MeTools\Shell\InstallShell::copyConfig()<br>
-				</div>
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getOptionParser" id="_getOptionParser">
-
-		<td class="attributes"><code>
-			 public 
-
-			ConsoleOptionParser
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getOptionParser">#</a>
-		<code><a href="source-class-MeInstagram.Shell.InstallShell.html#62-80" title="Go to source code">getOptionParser</a>( )</code>
-
-		<div class="description short">
-			<p>Gets the option parser instance and configures it.</p>
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Gets the option parser instance and configures it.</p>
-
-
-
-				<h4>Returns</h4>
-				<div class="list">
-					ConsoleOptionParser
-				</div>
-
-
-				<h4>Uses</h4>
-				<div class="list">
-						MeTools\Shell\InstallShell::getOptionParser()<br>
+						<code><a href="class-MeInstagram.Utility.Instagram.html#_getRandom">MeInstagram\Utility\Instagram::getRandom()</a></code><br>
+						MeTools\Network\Request::isController()<br>
 				</div>
 
 
