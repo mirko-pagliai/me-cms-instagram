@@ -23,6 +23,7 @@
 namespace MeInstagram\Utility;
 
 use Cake\Cache\Cache;
+use Cake\Network\Exception\NotFoundException;
 use MeTools\Utility\Xml;
 
 /**
@@ -69,9 +70,12 @@ class Instagram {
 		//If the data are not available from the cache
 		if(empty($photo)) {
 			//See https://www.instagram.com/developer/endpoints/media/#get_media
-			$url = 'https://api.instagram.com/v1/media/%s?access_token=%s';
-			$photo = Xml::fromFile(sprintf($url, $id, config('Instagram.key')));
-
+			$url = sprintf('https://api.instagram.com/v1/media/%s?access_token=%s', $id, config('Instagram.key'));
+			$photo = @Xml::fromFile($url);
+			
+			if(empty($photo['data']))
+				throw new NotFoundException(__d('me_cms', 'Record not found'));
+			
 			$photo = (object) ['path' => $photo['data']['images']['standard_resolution']['url']];
 			
 			Cache::write($cache, $photo, 'instagram');
@@ -115,20 +119,20 @@ class Instagram {
 		//Tries to get data from the cache
 		$photos = Cache::read($cache, 'instagram');
 		
-		
 		//If the data are not available from the cache
 		if(empty($photos)) {
 			//See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
-			$url = 'https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s';
-
-			$url = sprintf($url, $limit, config('Instagram.key'));
+			$url = sprintf('https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s', $limit, config('Instagram.key'));
 			
 			//Adds the request ID ("Next ID" for Istangram) to the url
 			if(!empty($id))
 				$url = sprintf('%s&max_id=%s', $url, $id);
 
 			//Gets photos
-			$photos = Xml::fromFile($url);
+			$photos = @Xml::fromFile($url);
+			
+			if(empty($photos['data']))
+				throw new NotFoundException(__d('me_cms', 'Record not found'));
 
 			$photos['data'] = array_map(function($photo) {
 				return (object) [
@@ -156,8 +160,11 @@ class Instagram {
 		//If the data are not available from the cache
 		if(empty($user)) {
 			//See https://www.instagram.com/developer/endpoints/users/#get_users_self
-			$url = 'https://api.instagram.com/v1/users/self/?access_token=%s';
-			$user = Xml::fromFile(sprintf($url, config('Instagram.key')));
+			$url = sprintf('https://api.instagram.com/v1/users/self/?access_token=%s', config('Instagram.key'));
+			$user = @Xml::fromFile($url);
+			
+			if(empty($user['data']))
+				throw new NotFoundException(__d('me_cms', 'Record not found'));
 
 			$user = (object) array_map(function($v) {
 				return is_array($v) ? (object) $v : $v;
