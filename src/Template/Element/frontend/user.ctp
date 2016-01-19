@@ -24,7 +24,7 @@
 
 <?= $this->Asset->css('MeInstagram.instagram', ['block' => 'css_bottom']) ?>
 
-<?php if(!empty($user)): ?>
+<?php if(config('MeInstagram.frontend.user_profile') && !empty($user)): ?>
 	<div id="instagram-user" class="row">
 		<div class="col-sm-5">
 			<?php echo $this->Thumb->img($user->profile_picture, ['id' => 'picture']); ?>
@@ -42,12 +42,16 @@
 					<span id="website"><?= $this->Html->link(preg_replace('/^http:\/\//', '', $user->website), $user->website, ['target' => '_blank']) ?></span>
 				<?php endif; ?>
 			</p>
+			
 			<p id="counts">
 				<span><?= __d('me_instagram', '{0} posts', $this->Html->strong($user->counts->media)) ?></span>
 				<span><?= __d('me_instagram', '{0} followers', $this->Html->strong($user->counts->followed_by)) ?></span>
 				<span><?= __d('me_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?></span>
 			</p>
-			<?= $this->Html->button(__d('me_instagram', 'Follow me on {0}', 'Instagram'), sprintf('//instagram.com/%s', $user->username), ['class' => 'btn-lg btn-success', 'icon' => 'instagram']) ?>
+			
+			<?php if(config('MeInstagram.frontend.follow_me')) :?>
+				<?= $this->Html->button(__d('me_instagram', 'Follow me on {0}', 'Instagram'), sprintf('//instagram.com/%s', $user->username), ['class' => 'btn-lg btn-success', 'icon' => 'instagram']) ?>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php endif; ?>
