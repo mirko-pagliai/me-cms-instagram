@@ -138,6 +138,7 @@ class Instagram {
 				return (object) [
 					'id'			=> $photo['id'],
 					'description'	=> $photo['caption']['text'],
+					'link'			=> $photo['link'],
 					'path'			=> $photo['images']['standard_resolution']['url']
 				];
 			}, $photos['data']);

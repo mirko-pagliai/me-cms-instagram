@@ -45,6 +45,8 @@
 							$this->Html->div('photo-info', $this->Html->div(NULL, $this->Html->para('small', $photo->description)))
 						]);
 						
+						$link = config('MeInstagram.frontend.open_on_instagram') ? $photo->link : ['action' => 'view', $photo->id];
+						
 						//If Fancybox is enabled, adds some options
 						$options = config('frontend.fancybox') ? [
 							'class'					=> 'fancybox thumbnail',
@@ -52,7 +54,7 @@
 							'rel'					=> 'group'
 						] : [];
 						
-						echo $this->Html->link($text, ['action' => 'view', $photo->id], am([
+						echo $this->Html->link($text, $link, am([
 							'class' => 'thumbnail',
 							'title' => $photo->description
 						], $options));
