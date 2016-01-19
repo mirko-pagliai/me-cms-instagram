@@ -59,8 +59,27 @@
 
 /* User profile, full name */
 #instagram-user #fullname {
-	font-size: 16px;
+	font-size: 17px;
 	font-weight: bold;
+	margin-right: 2px;
+}
+
+/* User profile, bio */
+#instagram-user #bio {
+	font-family: Roboto;
+	font-size: 17px;
+	margin-right: 2px;
+}
+
+/* User profile, website */
+#instagram-user #website {
+	font-size: 17px;
+	font-weight: bold;
+}
+
+/* User profile, website, link */
+#instagram-user #website a {
+	color: #125688;
 }
 
 /* User profile, counters */
