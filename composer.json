@@ -9,7 +9,7 @@
 		"email": "mirko.pagliai@gmail.com"
     }],
 	"require": {
-        "mirko-pagliai/me-cms": ">=2.1.6"
+        "mirko-pagliai/me-cms": ">=2.2.2"
     },
     "autoload": {
 		"psr-4": {
