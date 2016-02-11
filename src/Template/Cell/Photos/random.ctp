@@ -23,18 +23,13 @@
 ?>
 
 <?php
-	//Returns on the same controllers
-	if($this->request->isController('Instagram'))
+	if(empty($photos))
 		return;
+	
+	//Extends the widget common view
+	$this->extend('MeCms./Common/widget');
+	$this->assign('title', count($photos) > 1 ? __d('me_cms', 'Random {0} photos', count($photos)) : __d('me_cms', 'Random photo'));
+	
+	foreach($photos as $photo)
+		echo $this->Html->link($this->Thumb->img($photo->path, ['side' => 253]), ['_name' => 'instagram'], ['class' => 'thumbnail']);
 ?>
-
-<?php if(!empty($photos)): ?>
-	<div class="widget sidebar-widget">
-		<?php			
-			echo $this->Html->h4(count($photos) > 1 ? __d('me_cms', 'Random {0} photos', count($photos)) : __d('me_cms', 'Random photo'));
-			
-			foreach($photos as $photo)
-				echo $this->Html->link($this->Thumb->img($photo->path, ['side' => 253]), ['_name' => 'instagram'], ['class' => 'thumbnail']);
-		?>
-	</div>
-<?php endif; ?>
