@@ -31,7 +31,7 @@
 		$this->Library->fancybox();
 	
 	if(config('MeInstagram.frontend.user_profile') && !$this->request->is('ajax'))
-		echo $this->element('frontend/user')
+		echo $this->element('frontend/user');
 ?>
 
 <div class="photosAlbums index">
