@@ -9,6 +9,8 @@
 		"email": "mirko.pagliai@gmail.com"
     }],
 	"require": {
+		"php": ">=5.5.9",
+        "cakephp/cakephp": "~3.2",
         "mirko-pagliai/me-cms": ">=2.2.2"
     },
     "autoload": {
