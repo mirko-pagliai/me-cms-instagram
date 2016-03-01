@@ -27,7 +27,7 @@
 <?php if(config('MeInstagram.frontend.user_profile') && !empty($user)): ?>
 	<div id="instagram-user" class="row">
 		<div class="col-sm-5">
-			<?php echo $this->Thumb->img($user->profile_picture, ['id' => 'picture']); ?>
+			<?= $this->Html->img($user->profile_picture, ['id' => 'picture']) ?>
 		</div>
 		<div class="col-sm-7">
 			<p id="username"><?= $user->username ?></p>

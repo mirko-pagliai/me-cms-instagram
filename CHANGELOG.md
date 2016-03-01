@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.0 branch
+### 1.0.3
+* updated for MeCms.
+
 ### 1.0.2
 * widgets now use a common view. Rewritten the code of all widgets.
 
