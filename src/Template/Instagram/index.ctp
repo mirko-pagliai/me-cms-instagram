@@ -31,7 +31,7 @@
 		$this->Library->fancybox();
 	
 	if(config('MeInstagram.frontend.user_profile') && !$this->request->is('ajax'))
-		echo $this->element('frontend/user')
+		echo $this->element('frontend/user');
 ?>
 
 <div class="photosAlbums index">
@@ -41,7 +41,7 @@
 				<div class="photo-box">
 					<?php
 						$text = implode(PHP_EOL, [
-							$this->Thumb->img($photo->path, ['side' => 275]),
+							$this->Thumb->image($photo->path, ['side' => 275]),
 							$this->Html->div('photo-info', $this->Html->div(NULL, $this->Html->para('small', $photo->description)))
 						]);
 						
