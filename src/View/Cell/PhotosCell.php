@@ -22,7 +22,7 @@
  */
 namespace MeInstagram\View\Cell;
 
-use Cake\Cache\Cache;
+use MeTools\Cache\Cache;
 use Cake\View\Cell;
 use MeInstagram\Utility\Instagram;
 

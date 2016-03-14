@@ -22,7 +22,7 @@
  */
 namespace MeInstagram\Utility;
 
-use Cake\Cache\Cache;
+use MeTools\Cache\Cache;
 use Cake\Network\Exception\NotFoundException;
 use MeTools\Utility\Xml;
 
