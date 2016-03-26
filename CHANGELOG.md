@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.0 branch
+### 1.0.5
+* fixed a lot of little bugs and codes.
+
 ### 1.0.4
 * updated for MeCms.
 

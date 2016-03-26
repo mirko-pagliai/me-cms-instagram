@@ -40,7 +40,6 @@ class InstagramController extends AppController {
 	public function beforeRender(\Cake\Event\Event $event) {
 		parent::beforeRender($event);
 			
-		//Gets and sets the user's profile
 		$this->set(['user' => Instagram::getUserProfile()]);
 	}
 	
