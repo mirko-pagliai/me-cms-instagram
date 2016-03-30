@@ -47,18 +47,20 @@ Configure::write('MeCms', \Cake\Utility\Hash::mergeDiff(Configure::read('MeCms')
 //Loads the Instagram keys
 Configure::load('instagram_keys');
 
-//Loads the cache configuration from the plugin
+/**
+ * Loads the cache configuration
+ */
 Configure::load('MeInstagram.cache');
 
-//Loads the cache from the application, if exists
+//Merges with the configuration from application, if exists
 if(is_readable(CONFIG.'cache.php'))
-	Configure::load('cache', 'default', FALSE);
-
+	Configure::load('cache');
+    
 //Adds all cache configurations
 foreach(Configure::consume('Cache') as $key => $config) {
-	//Drops the default cache
-	if($key === 'default')
-		Cache::drop('default');
+	//Drops cache configurations that already exist
+	if(Cache::config($key))
+		Cache::drop($key);
 	
 	Cache::config($key, $config);
 }
