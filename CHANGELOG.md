@@ -1,4 +1,7 @@
 # 1.x branch
+## 1.1 branch
+### 1.1.0
+
 ## 1.0 branch
 ### 1.0.6
 * fixed bug on view template;

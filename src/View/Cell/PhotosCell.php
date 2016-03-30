@@ -34,7 +34,7 @@ class PhotosCell extends Cell {
      * Internal method to get the latest photos
 	 * @param int $limit Limit
      * @return array
-	 * @uses MeInstagram\Utility\Instagram::getLatest()
+	 * @uses MeInstagram\Utility\Instagram::recent()
      */
     protected function _latest($limit = 15) {
 		//Tries to get data from the cache
@@ -42,7 +42,7 @@ class PhotosCell extends Cell {
         
         //If the data are not available from the cache
 		if(empty($photos)) {
-            list($photos) = Instagram::getRecentUser(NULL, $limit);
+            list($photos) = Instagram::recent(NULL, $limit);
             
 			Cache::write($cache, $photos, 'instagram');
         }

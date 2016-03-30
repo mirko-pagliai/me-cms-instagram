@@ -35,13 +35,13 @@ use MeTools\Utility\Xml;
  */
 class Instagram {	
 	/**
-	 * Gets a media from Instagram
+	 * Gets a media object
 	 * @param string $id Media ID
 	 * @return object
+     * @see https://www.instagram.com/developer/endpoints/media/#get_media
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
-	public static function getMedia($id) {
-        //See https://www.instagram.com/developer/endpoints/media/#get_media
+	public static function media($id) {
         $url = sprintf('https://api.instagram.com/v1/media/%s?access_token=%s', $id, config('Instagram.key'));
         $photo = @Xml::fromFile($url);
         
@@ -52,14 +52,14 @@ class Instagram {
 	}
 
 	/**
-	 * Gets the recent media from Instagram
+	 * Gets the most recent media published by the owner of token
 	 * @param string $id Request ID ("Next ID" for Istangram)
 	 * @param int $limit Limit
 	 * @return array Array with photos and "Next ID"
+     * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
-	public static function getRecentUser($id = NULL, $limit = 15) {
-        //See https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
+	public static function recent($id = NULL, $limit = 15) {
         $url = sprintf('https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s', $limit, config('Instagram.key'));
 
         //Adds the request ID ("Next ID" for Istangram) to the url
@@ -87,12 +87,12 @@ class Instagram {
 	}
 	
 	/**
-	 * Gets the user's profile from Instagram
+	 * Gets information about the owner of the token.
 	 * @return object
+     * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
-	public static function getUserProfile() {
-        //See https://www.instagram.com/developer/endpoints/users/#get_users_self
+	public static function user() {
         $url = sprintf('https://api.instagram.com/v1/users/self/?access_token=%s', config('Instagram.key'));
         $user = @Xml::fromFile($url);
 
