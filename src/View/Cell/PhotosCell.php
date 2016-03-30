@@ -30,27 +30,38 @@ use MeInstagram\Utility\Instagram;
  * Photos cell
  */
 class PhotosCell extends Cell {
+    /**
+     * Internal method to get the latest photos
+	 * @param int $limit Limit
+     * @return array
+	 * @uses MeInstagram\Utility\Instagram::getLatest()
+     */
+    protected function _latest($limit = 15) {
+		//Tries to get data from the cache
+		$photos = Cache::read($cache = sprintf('latest_%s', $limit), 'instagram');
+        
+        //If the data are not available from the cache
+		if(empty($photos)) {
+            $photos = Instagram::getRecentUser(NULL, $limit);
+            
+			Cache::write($cache, $photos, 'instagram');
+        }
+        
+        return $photos;
+    }
+    
 	/**
 	 * Latest widget
 	 * @param int $limit Limit
-	 * @uses MeInstagram\Utility\Instagram::getLatest()
 	 * @uses MeTools\Network\Request::isController()
+     * @uses _latest()
 	 */
 	public function latest($limit = 1) {
 		//Returns on the same controller
 		if($this->request->isController('Instagram'))
 			return;
-		
-		//Returns, if there are no photos available
-		if(Cache::read($cache = 'no_photos', 'instagram'))
-			return;
-		
-		//Gets latest photos
-		$photos = Instagram::getLatest($limit);
-				
-		//Writes on cache, if there are no photos available
-		if(empty($photos))
-			Cache::write($cache, TRUE, 'instagram');
+        
+		$photos = $this->_latest($limit);
 		
 		$this->set(compact('photos'));
 	}
@@ -58,24 +69,21 @@ class PhotosCell extends Cell {
 	/**
 	 * Random widget
 	 * @param int $limit Limit
-	 * @uses MeInstagram\Utility\Instagram::getRandom()
 	 * @uses MeTools\Network\Request::isController()
+     * @uses _latest()
 	 */
 	public function random($limit = 1) {
 		//Returns on the same controller
 		if($this->request->isController('Instagram'))
 			return;
-		
-		//Returns, if there are no photos available
-		if(Cache::read($cache = 'no_photos', 'instagram'))
-			return;
-		
-		//Gets random photos
-		$photos = Instagram::getRandom($limit);
-				
-		//Writes on cache, if there are no photos available
-		if(empty($photos))
-			Cache::write($cache, TRUE, 'instagram');
+        
+		$photos = $this->_latest();
+        
+		//Shuffles
+		shuffle($photos);
+        
+        //Extract
+        $photos = array_slice($photos, 0, $limit);
 		
 		$this->set(compact('photos'));
 	}

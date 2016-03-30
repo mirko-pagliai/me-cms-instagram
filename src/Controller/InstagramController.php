@@ -24,12 +24,13 @@ namespace MeInstagram\Controller;
 
 use MeCms\Controller\AppController;
 use MeInstagram\Utility\Instagram;
+use MeTools\Cache\Cache;
 
 /**
  * Instagram controller
  */
 class InstagramController extends AppController {
-	/**
+    /**
 	 * Called after the controller action is run, but before the view is rendered.
 	 * You can use this method to perform logic or set view variables that are required on every request.
 	 * @param \Cake\Event\Event $event An Event instance
@@ -39,8 +40,18 @@ class InstagramController extends AppController {
 	 */
 	public function beforeRender(\Cake\Event\Event $event) {
 		parent::beforeRender($event);
+		
+		//Tries to get data from the cache
+		$user = Cache::read($cache = 'user_profile', 'instagram');
+        
+        //If the data are not available from the cache
+		if(empty($user)) {
+			$user = Instagram::getUserProfile();
 			
-		$this->set(['user' => Instagram::getUserProfile()]);
+			Cache::write($cache, $user, 'instagram');
+		}
+        
+		$this->set(compact('user'));
 	}
 	
 	/**
@@ -49,11 +60,26 @@ class InstagramController extends AppController {
 	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
 	 */
 	public function index($id = NULL) {
-		$photos = Instagram::getRecentUser($id, config('MeInstagram.frontend.photos'));
+        //Sets initial cache name
+		$cache = sprintf('index_limit_%s', 15);
 		
+		//Adds the request ID ("Next ID" for Istangram) to the cache name
+		if(!empty($id))
+			$cache = sprintf('%s_id_%s', $cache, $id);
+		
+		//Tries to get data from the cache
+		$photos = Cache::read($cache, 'instagram');
+        
+		//If the data are not available from the cache
+		if(empty($photos)) {
+            $photos = Instagram::getRecentUser($id, config('MeInstagram.frontend.photos'));
+            
+			Cache::write($cache, $photos, 'instagram');
+        }
+        
 		$this->set([
 			'next_id'	=> empty($photos['pagination']['next_max_id']) ? NULL : $photos['pagination']['next_max_id'],
-			'photos'	=> $photos['data']
+			'photos'	=> $photos['data'],
 		]);
 	}
 	
@@ -63,6 +89,16 @@ class InstagramController extends AppController {
 	 * @uses MeInstagram\Utility\Instagram::getMedia()
 	 */
 	public function view($id) {
-		$this->set(['photo' => Instagram::getMedia($id)]);
+		//Tries to get data from the cache
+		$photo = Cache::read($cache = sprintf('media_%s', md5($id)), 'instagram');
+        
+		//If the data are not available from the cache
+		if(empty($photo)) {
+            $photo = Instagram::getMedia($id);
+            
+			Cache::write($cache, $photo, 'instagram');
+        }
+        
+		$this->set(compact('photo'));
 	}
 }
