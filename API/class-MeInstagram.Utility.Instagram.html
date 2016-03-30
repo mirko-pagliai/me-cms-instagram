@@ -129,7 +129,7 @@
 		<b>Namespace:</b> <a href="namespace-MeInstagram.html">MeInstagram</a>\<a href="namespace-MeInstagram.Utility.html">Utility</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-MeInstagram.Utility.Instagram.html#29-179" title="Go to source code">Utility/Instagram.php</a>
+			<b>Located at</b> <a href="source-class-MeInstagram.Utility.Instagram.html#28-106" title="Go to source code">Utility/Instagram.php</a>
 		<br>
 	</div>
 
@@ -137,53 +137,6 @@
 
 	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="getLatest" id="_getLatest">
-
-		<td class="attributes"><code>
-			 public static
-
-			array
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getLatest">#</a>
-		<code><a href="source-class-MeInstagram.Utility.Instagram.html#38-58" title="Go to source code">getLatest</a>( <span>integer <var>$limit</var> = <span class="php-num">1</span></span> )</code>
-
-		<div class="description short">
-			<p>Gets latest photos from the recent media from Instagram</p>
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Gets latest photos from the recent media from Instagram</p>
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$limit</var></dt>
-					<dd>Limit</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					array<br>Latest photos
-				</div>
-
-
-				<h4>Uses</h4>
-				<div class="list">
-						<code><a href="class-MeInstagram.Utility.Instagram.html#_getRecentUser">MeInstagram\Utility\Instagram::getRecentUser()</a></code><br>
-				</div>
-				<h4>Used by</h4>
-				<div class="list">
-						<code><a href="class-MeInstagram.View.Cell.PhotosCell.html#_latest">MeInstagram\View\Cell\PhotosCell::latest()</a></code><br>
-				</div>
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="getMedia" id="_getMedia">
 
 		<td class="attributes"><code>
@@ -196,7 +149,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMedia">#</a>
-		<code><a href="source-class-MeInstagram.Utility.Instagram.html#60-85" title="Go to source code">getMedia</a>( <span>string <var>$id</var></span> )</code>
+		<code><a href="source-class-MeInstagram.Utility.Instagram.html#37-52" title="Go to source code">getMedia</a>( <span>string <var>$id</var></span> )</code>
 
 		<div class="description short">
 			<p>Gets a media from Instagram</p>
@@ -231,53 +184,6 @@
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="getRandom" id="_getRandom">
-
-		<td class="attributes"><code>
-			 public static
-
-			array
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getRandom">#</a>
-		<code><a href="source-class-MeInstagram.Utility.Instagram.html#87-102" title="Go to source code">getRandom</a>( <span>integer <var>$limit</var> = <span class="php-num">1</span></span> )</code>
-
-		<div class="description short">
-			<p>Gets random photos from the recent media from Instagram</p>
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Gets random photos from the recent media from Instagram</p>
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$limit</var></dt>
-					<dd>Limit</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					array<br>Random photos
-				</div>
-
-
-				<h4>Uses</h4>
-				<div class="list">
-						<code><a href="class-MeInstagram.Utility.Instagram.html#_getRecentUser">MeInstagram\Utility\Instagram::getRecentUser()</a></code><br>
-				</div>
-				<h4>Used by</h4>
-				<div class="list">
-						<code><a href="class-MeInstagram.View.Cell.PhotosCell.html#_random">MeInstagram\View\Cell\PhotosCell::random()</a></code><br>
-				</div>
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="getRecentUser" id="_getRecentUser">
 
 		<td class="attributes"><code>
@@ -290,7 +196,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRecentUser">#</a>
-		<code><a href="source-class-MeInstagram.Utility.Instagram.html#104-150" title="Go to source code">getRecentUser</a>( <span>string <var>$id</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$limit</var> = <span class="php-num">15</span></span> )</code>
+		<code><a href="source-class-MeInstagram.Utility.Instagram.html#54-87" title="Go to source code">getRecentUser</a>( <span>string <var>$id</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$limit</var> = <span class="php-num">15</span></span> )</code>
 
 		<div class="description short">
 			<p>Gets the recent media from Instagram</p>
@@ -310,7 +216,7 @@
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					array<br>Array with photos and "Next ID"
 				</div>
 
 
@@ -321,8 +227,6 @@
 				<h4>Used by</h4>
 				<div class="list">
 						<code><a href="class-MeInstagram.Controller.InstagramController.html#_index">MeInstagram\Controller\InstagramController::index()</a></code><br>
-						<code><a href="class-MeInstagram.Utility.Instagram.html#_getLatest">MeInstagram\Utility\Instagram::getLatest()</a></code><br>
-						<code><a href="class-MeInstagram.Utility.Instagram.html#_getRandom">MeInstagram\Utility\Instagram::getRandom()</a></code><br>
 				</div>
 
 
@@ -341,14 +245,14 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserProfile">#</a>
-		<code><a href="source-class-MeInstagram.Utility.Instagram.html#152-178" title="Go to source code">getUserProfile</a>( )</code>
+		<code><a href="source-class-MeInstagram.Utility.Instagram.html#89-105" title="Go to source code">getUserProfile</a>( )</code>
 
 		<div class="description short">
-			<p>Gets the user's profile</p>
+			<p>Gets the user's profile from Instagram</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Gets the user's profile</p>
+			<p>Gets the user's profile from Instagram</p>
 
 
 
