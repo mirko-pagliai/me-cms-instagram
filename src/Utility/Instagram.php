@@ -55,7 +55,7 @@ class Instagram {
 	 * Gets the recent media from Instagram
 	 * @param string $id Request ID ("Next ID" for Istangram)
 	 * @param int $limit Limit
-	 * @return array
+	 * @return array Array with photos and "Next ID"
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function getRecentUser($id = NULL, $limit = 15) {
@@ -72,7 +72,9 @@ class Instagram {
         if(empty($photos['data']))
             throw new NotFoundException(__d('me_cms', 'Record not found'));
 
-        $photos['data'] = array_map(function($photo) {
+        $next_id = empty($photos['pagination']['next_max_id']) ? NULL : $photos['pagination']['next_max_id'];
+        
+        $photos = array_map(function($photo) {
             return (object) [
                 'id'			=> $photo['id'],
                 'description'	=> $photo['caption']['text'],
@@ -80,8 +82,8 @@ class Instagram {
                 'path'			=> $photo['images']['standard_resolution']['url'],
             ];
         }, $photos['data']);
-        
-        return $photos;
+
+        return [$photos, $next_id];
 	}
 	
 	/**
