@@ -38,9 +38,8 @@ class InstallShell extends BaseInstallShell {
 		
 		//Configuration files to be copied
 		$this->config = [
-			'MeInstagram.me_instagram',
-			'MeInstagram.instagram_keys'
-		];
+            'MeInstagram.me_instagram',
+        ];
 	}
 	
 	/**

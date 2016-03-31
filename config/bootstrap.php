@@ -23,6 +23,7 @@
 
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
+use Cake\Network\Exception\InternalErrorException;
 use Cake\Utility\Hash;
 
 /**
@@ -37,11 +38,8 @@ if(is_readable(CONFIG.'me_instagram.php'))
 //Merges with the MeCms configuration
 Configure::write('MeCms', Hash::merge(config('MeCms'), Configure::consume('MeInstagram')));
 
-/**
- * Instagram keys 
- */
-//Loads the Instagram keys
-Configure::load('instagram_keys');
+if(!config('Instagram.key') || config('Instagram.key') === 'your-key-here')
+    throw new InternalErrorException('Instagram API access token is missing');
 
 /**
  * Loads the cache configuration
