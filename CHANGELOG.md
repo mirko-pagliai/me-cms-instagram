@@ -1,6 +1,7 @@
 # 1.x branch
 ## 1.1 branch
 ### 1.1.0
+* the code for loading the configuration files has been optimized.
 
 ## 1.0 branch
 ### 1.0.6
