@@ -32,7 +32,7 @@ use Cake\Routing\Router;
 	if(config('frontend.fancybox'))
 		$this->Library->fancybox();
 	
-	if(config('MeInstagram.frontend.user_profile') && !$this->request->is('ajax'))
+	if(config('frontend.user_profile') && !$this->request->is('ajax'))
 		echo $this->element('frontend/user');
 ?>
 
@@ -47,7 +47,7 @@ use Cake\Routing\Router;
 							$this->Html->div('photo-info', $this->Html->div(NULL, $this->Html->para('small', $photo->description)))
 						]);
 						
-						$link = config('MeInstagram.frontend.open_on_instagram') ? $photo->link : ['action' => 'view', $photo->id];
+						$link = config('frontend.open_on_instagram') ? $photo->link : ['action' => 'view', $photo->id];
 						
 						//If Fancybox is enabled, adds some options
 						$options = config('frontend.fancybox') ? [

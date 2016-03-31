@@ -23,7 +23,7 @@
 ?>
 
 <?php
-	if(config('MeInstagram.frontend.user_profile'))
+	if(config('frontend.user_profile'))
 		echo $this->element('frontend/user')
 ?>
 
