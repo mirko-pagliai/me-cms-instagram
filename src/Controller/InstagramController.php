@@ -36,7 +36,7 @@ class InstagramController extends AppController {
 	 * @param \Cake\Event\Event $event An Event instance
 	 * @see http://api.cakephp.org/3.2/class-Cake.Controller.Controller.html#_beforeRender
 	 * @uses MeCms\Controller\AppController::beforeRender()
-	 * @uses MeInstagram\Utility\Instagram::getUserProfile()
+	 * @uses MeInstagram\Utility\Instagram::user()
 	 */
 	public function beforeRender(\Cake\Event\Event $event) {
 		parent::beforeRender($event);
@@ -46,7 +46,7 @@ class InstagramController extends AppController {
         
         //If the data are not available from the cache
 		if(empty($user)) {
-			$user = Instagram::getUserProfile();
+			$user = Instagram::user();
 			
 			Cache::write($cache, $user, 'instagram');
 		}
@@ -57,11 +57,11 @@ class InstagramController extends AppController {
 	/**
 	 * Lists photos from Istangram
 	 * @param string $id Request ID ("Next ID" for Istangram)
-	 * @uses MeInstagram\Utility\Instagram::getRecentUser()
+	 * @uses MeInstagram\Utility\Instagram::recent()
 	 */
 	public function index($id = NULL) {
         //Sets initial cache name
-		$cache = sprintf('index_limit_%s', 15);
+		$cache = sprintf('index_limit_%s', config('frontend.photos'));
 		
 		//Adds the request ID ("Next ID" for Istangram) to the cache name
 		if(!empty($id))
@@ -72,7 +72,7 @@ class InstagramController extends AppController {
         
 		//If the data are not available from the cache
 		if(empty($photos)) {
-            list($photos, $next_id) = Instagram::getRecentUser($id, config('MeInstagram.frontend.photos'));
+            list($photos, $next_id) = Instagram::recent($id, config('frontend.photos'));
             
 			Cache::write($cache, [$photos, $next_id], 'instagram');
         }
@@ -83,7 +83,7 @@ class InstagramController extends AppController {
 	/**
 	 * Views a photo
 	 * @param string $id Media ID
-	 * @uses MeInstagram\Utility\Instagram::getMedia()
+	 * @uses MeInstagram\Utility\Instagram::media()
 	 */
 	public function view($id) {
 		//Tries to get data from the cache
@@ -91,7 +91,7 @@ class InstagramController extends AppController {
         
 		//If the data are not available from the cache
 		if(empty($photo)) {
-            $photo = Instagram::getMedia($id);
+            $photo = Instagram::media($id);
             
 			Cache::write($cache, $photo, 'instagram');
         }

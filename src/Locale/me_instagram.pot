@@ -1,10 +1,11 @@
-# LANGUAGE translation of MeInstagram
-# Copyright 2015 Mirko Pagliai <mirko.pagliai@gmail.com>
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2016-01-11 19:13+0000\n"
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2016-04-02 18:04+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -13,27 +14,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Template/Element/frontend/user.ctp:36
+#: /home/mirko/Libs/Plugins/MeInstagram/src/Template/Element/frontend/user.ctp:47
 msgid "{0} posts"
 msgstr ""
 
-#: Template/Element/frontend/user.ctp:37
+#: /home/mirko/Libs/Plugins/MeInstagram/src/Template/Element/frontend/user.ctp:48
 msgid "{0} followers"
 msgstr ""
 
-#: Template/Element/frontend/user.ctp:38
+#: /home/mirko/Libs/Plugins/MeInstagram/src/Template/Element/frontend/user.ctp:49
 msgid "{0} following"
 msgstr ""
 
-#: Template/Element/frontend/user.ctp:40
+#: /home/mirko/Libs/Plugins/MeInstagram/src/Template/Element/frontend/user.ctp:53
 msgid "Follow me on {0}"
 msgstr ""
 
-#: Template/Instagram/index.ctp:26
+#: /home/mirko/Libs/Plugins/MeInstagram/src/Template/Instagram/index.ctp:28
 msgid "Photos from {0}"
 msgstr ""
 
-#: Template/Instagram/index.ctp:66
+#: /home/mirko/Libs/Plugins/MeInstagram/src/Template/Instagram/index.ctp:70
 msgid "Load more"
 msgstr ""
 

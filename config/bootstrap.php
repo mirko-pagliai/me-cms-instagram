@@ -23,42 +23,38 @@
 
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
+use Cake\Network\Exception\InternalErrorException;
+use Cake\Utility\Hash;
 
 /**
- * MeInstagram configuration
+ * Loads the MeInstagram configuration
  */
-//Loads the configuration from the plugin
 Configure::load('MeInstagram.me_instagram');
 
-$config = Configure::read('MeInstagram');
+//Merges with the configuration from application, if exists
+if(is_readable(CONFIG.'me_instagram.php'))
+	Configure::load('me_instagram');
 
-//Loads the configuration from the application, if exists
-if(is_readable(CONFIG.'me_instagram.php')) {
-	Configure::load('me_instagram', 'default', FALSE);
-	
-	$config = \Cake\Utility\Hash::mergeDiff(Configure::consume('MeInstagram'), $config);
-}
+//Merges with the MeCms configuration
+Configure::write('MeCms', Hash::merge(config('MeCms'), Configure::consume('MeInstagram')));
 
-Configure::write('MeCms', \Cake\Utility\Hash::mergeDiff(Configure::read('MeCms'), $config));
+if(!config('Instagram.key') || config('Instagram.key') === 'your-key-here')
+    throw new InternalErrorException('Instagram API access token is missing');
 
 /**
- * Instagram keys 
+ * Loads the cache configuration
  */
-//Loads the Instagram keys
-Configure::load('instagram_keys');
-
-//Loads the cache configuration from the plugin
 Configure::load('MeInstagram.cache');
 
-//Loads the cache from the application, if exists
+//Merges with the configuration from application, if exists
 if(is_readable(CONFIG.'cache.php'))
-	Configure::load('cache', 'default', FALSE);
-
+	Configure::load('cache');
+    
 //Adds all cache configurations
 foreach(Configure::consume('Cache') as $key => $config) {
-	//Drops the default cache
-	if($key === 'default')
-		Cache::drop('default');
+	//Drops cache configurations that already exist
+	if(Cache::config($key))
+		Cache::drop($key);
 	
 	Cache::config($key, $config);
 }

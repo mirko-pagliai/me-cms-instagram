@@ -23,7 +23,9 @@
 ?>
 
 <?php
-	if(config('MeInstagram.frontend.user_profile'))
+    $this->assign('title', sprintf('%s - %s', __d('me_cms', 'Photo'), $photo->filename));
+    
+	if(config('frontend.user_profile'))
 		echo $this->element('frontend/user')
 ?>
 
