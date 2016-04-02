@@ -2,6 +2,7 @@
 ## 1.1 branch
 ### 1.1.0
 * the API access token has moved to `me_instagram.php`. Removed `instagram_keys.php`;
+* by default, 12 photos are shown;
 * the code for loading the configuration files has been optimized.
 
 ## 1.0 branch
