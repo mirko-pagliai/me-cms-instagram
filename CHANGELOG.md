@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.1 branch
+### 1.1.1
+* added functions to generate the site sitemap.
+
 ### 1.1.0
 * the API access token has moved to `me_instagram.php`. Removed `instagram_keys.php`;
 * by default, 12 photos are shown;
