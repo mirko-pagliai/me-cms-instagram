@@ -38,7 +38,7 @@ class Sitemap extends SitemapBuilder {
     public static function instagram() {
         //Adds Instagram index
         $url = [
-            self::url(['_name' => 'instagram']),
+            self::url(['_name' => 'instagram_photos']),
         ];
         
         return $url;

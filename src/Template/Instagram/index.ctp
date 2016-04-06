@@ -47,7 +47,7 @@ use Cake\Routing\Router;
 							$this->Html->div('photo-info', $this->Html->div(NULL, $this->Html->para('small', $photo->description)))
 						]);
 						
-						$link = config('frontend.open_on_instagram') ? $photo->link : ['action' => 'view', $photo->id];
+						$link = config('frontend.open_on_instagram') ? $photo->link : ['_name' => 'instagram_photo', $photo->id];
 						
 						//If Fancybox is enabled, adds some options
 						$options = config('frontend.fancybox') ? [
