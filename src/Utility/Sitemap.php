@@ -19,17 +19,28 @@
  * @copyright	Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
  * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link		http://git.novatlantis.it Nova Atlantis Ltd
+ * @see         MeCms\Utility\SitemapBuilder
  */
-?>
+namespace MeInstagram\Utility;
 
-<?php
-	if(empty($photos))
-		return;
-	
-	//Extends the widget common view
-	$this->extend('MeCms./Common/widget');
-	$this->assign('title', count($photos) > 1 ? __d('me_cms', 'Latest {0} photos', count($photos)) : __d('me_cms', 'Latest photo'));
-	
-	foreach($photos as $photo)
-		echo $this->Html->link($this->Thumb->image($photo->path, ['side' => 253]), ['_name' => 'instagram_photos'], ['class' => 'thumbnail']);
-?>
+use MeCms\Utility\SitemapBuilder;
+
+/**
+ * This class contains methods called by the `SitemapBuilder`.
+ * Each method must be return an array or urls to add to the sitemap.
+ */
+class Sitemap extends SitemapBuilder {
+    /**
+     * Method that returns instagram urls
+     * @return array
+     * @uses MeCms\Utility\SitemapBuilder::url()
+     */
+    public static function instagram() {
+        //Adds Instagram index
+        $url = [
+            self::url(['_name' => 'instagram_photos']),
+        ];
+        
+        return $url;
+    }
+}
