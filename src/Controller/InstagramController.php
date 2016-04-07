@@ -22,6 +22,7 @@
  */
 namespace MeInstagram\Controller;
 
+use Cake\Network\Exception\NotFoundException;
 use MeCms\Controller\AppController;
 use MeInstagram\Utility\Instagram;
 use MeTools\Cache\Cache;
@@ -91,7 +92,13 @@ class InstagramController extends AppController {
         
 		//If the data are not available from the cache
 		if(empty($photo)) {
-            $photo = Instagram::media($id);
+            //It tries to get the media (photo). If an exception is thrown, redirects to index
+            try {
+                $photo = Instagram::media($id);
+            }
+            catch(NotFoundException $e) {
+                return $this->redirect(['action' => 'index'], 301);
+            }
             
 			Cache::write($cache, $photo, 'instagram');
         }

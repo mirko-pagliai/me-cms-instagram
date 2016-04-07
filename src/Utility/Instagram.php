@@ -26,12 +26,7 @@ use Cake\Network\Exception\NotFoundException;
 use MeTools\Utility\Xml;
 
 /**
- * An utility to get media from Instagram.
- * 
- * You can use this utility by adding:
- * <code>
- * use MeInstagram\Utility\Instagram;
- * </code>
+ * An utility to get media from Instagram
  */
 class Instagram {	
 	/**
@@ -39,6 +34,7 @@ class Instagram {
 	 * @param string $id Media ID
 	 * @return object
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
+     * @throws NotFoundException
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function media($id) {
@@ -60,6 +56,7 @@ class Instagram {
 	 * @param int $limit Limit
 	 * @return array Array with photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
+     * @throws NotFoundException
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function recent($id = NULL, $limit = 15) {
@@ -93,6 +90,7 @@ class Instagram {
 	 * Gets information about the owner of the token.
 	 * @return object
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
+     * @throws NotFoundException
 	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function user() {
