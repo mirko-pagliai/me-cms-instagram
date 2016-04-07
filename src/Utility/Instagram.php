@@ -26,12 +26,7 @@ use Cake\Network\Exception\NotFoundException;
 use MeTools\Utility\Xml;
 
 /**
- * An utility to get media from Instagram.
- * 
- * You can use this utility by adding:
- * <code>
- * use MeInstagram\Utility\Instagram;
- * </code>
+ * An utility to get media from Instagram
  */
 class Instagram {	
 	/**
