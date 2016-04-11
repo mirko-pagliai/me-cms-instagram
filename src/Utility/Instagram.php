@@ -23,7 +23,7 @@
 namespace MeInstagram\Utility;
 
 use Cake\Network\Exception\NotFoundException;
-use MeTools\Utility\Xml;
+use Cake\Network\Http\Client;
 
 /**
  * An utility to get media from Instagram
@@ -35,18 +35,20 @@ class Instagram {
 	 * @return object
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
      * @throws NotFoundException
-	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function media($id) {
         $url = sprintf('https://api.instagram.com/v1/media/%s?access_token=%s', $id, config('Instagram.key'));
-        $photo = @Xml::fromFile($url);
         
-        if(empty($photo['data']['images']['standard_resolution']['url']))
+        $response = (new Client())->get($url);
+        $photo = json_decode($response->body(), TRUE);
+        
+        if(empty($photo['data']['images']['standard_resolution']['url'])) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
+        }
         
         return (object) [
-            'filename'  => explode('?', basename($photo['data']['images']['standard_resolution']['url']), 2)[0],
-            'path'      => $photo['data']['images']['standard_resolution']['url'],
+            'filename' => explode('?', basename($photo['data']['images']['standard_resolution']['url']), 2)[0],
+            'path' => $photo['data']['images']['standard_resolution']['url'],
         ];
 	}
 
@@ -57,29 +59,30 @@ class Instagram {
 	 * @return array Array with photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
      * @throws NotFoundException
-	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function recent($id = NULL, $limit = 15) {
         $url = sprintf('https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s', $limit, config('Instagram.key'));
 
         //Adds the request ID ("Next ID" for Istangram) to the url
-        if(!empty($id))
+        if(!empty($id)) {
             $url = sprintf('%s&max_id=%s', $url, $id);
+        }
 
-        //Gets photos
-        $photos = @Xml::fromFile($url);
+        $response = (new Client())->get($url);
+        $photos = json_decode($response->body(), TRUE);
 
-        if(empty($photos['data']))
+        if(empty($photos['data'])) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
+        }
 
         $next_id = empty($photos['pagination']['next_max_id']) ? NULL : $photos['pagination']['next_max_id'];
         
         $photos = array_map(function($photo) {
             return (object) [
-                'id'			=> $photo['id'],
-                'description'	=> $photo['caption']['text'],
-                'link'			=> $photo['link'],
-                'path'			=> $photo['images']['standard_resolution']['url'],
+                'id' => $photo['id'],
+                'description' => $photo['caption']['text'],
+                'link' => $photo['link'],
+                'path' => $photo['images']['standard_resolution']['url'],
             ];
         }, $photos['data']);
 
@@ -91,14 +94,16 @@ class Instagram {
 	 * @return object
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
      * @throws NotFoundException
-	 * @uses MeTools\Utility\Xml::fromFile()
 	 */
 	public static function user() {
         $url = sprintf('https://api.instagram.com/v1/users/self/?access_token=%s', config('Instagram.key'));
-        $user = @Xml::fromFile($url);
-
-        if(empty($user['data']))
+        
+        $response = (new Client())->get($url);
+        $user = json_decode($response->body(), TRUE);
+        
+        if(empty($user['data'])) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
+        }
 
         return (object) array_map(function($v) {
             return is_array($v) ? (object) $v : $v;
