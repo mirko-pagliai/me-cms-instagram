@@ -36,12 +36,12 @@ class Sitemap extends SitemapBuilder {
     /**
      * Method that returns instagram urls
      * @return array
-     * @uses MeCms\Utility\SitemapBuilder::url()
+     * @uses MeCms\Utility\SitemapBuilder::parse()
      */
     public static function instagram() {
         //Adds Instagram index
         $url = [
-            self::url(['_name' => 'instagram_photos']),
+            self::parse(['_name' => 'instagram_photos']),
         ];
         
         return $url;

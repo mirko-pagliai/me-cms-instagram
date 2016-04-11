@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.1 branch
+### 1.1.3
+* fixed for MeCms.
+
 ### 1.1.2
 * when a media (photo) can not be got and an exception is thrown, it redirects to the index.
 
