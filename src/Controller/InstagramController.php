@@ -25,7 +25,7 @@ namespace MeInstagram\Controller;
 use Cake\Network\Exception\NotFoundException;
 use MeCms\Controller\AppController;
 use MeInstagram\Utility\Instagram;
-use MeTools\Cache\Cache;
+use Cake\Cache\Cache;
 
 /**
  * Instagram controller
