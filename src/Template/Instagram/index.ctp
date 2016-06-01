@@ -20,8 +20,6 @@
  * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link		http://git.novatlantis.it Nova Atlantis Ltd
  */
-
-use Cake\Routing\Router;
 ?>
 	
 <?php
@@ -67,6 +65,6 @@ use Cake\Routing\Router;
 	</div>
     
 	<?php if(!empty($next_id)): ?>
-		<?= $this->Html->link(__d('me_instagram', 'Load more'), '#', ['id' => 'load-more', 'data-href' => Router::url([$next_id])]) ?>
+		<?= $this->Html->link(__d('me_instagram', 'Load more'), '#', ['id' => 'load-more', 'data-href' => $this->Url->build([$next_id])]) ?>
 	<?php endif; ?>
 </div>
