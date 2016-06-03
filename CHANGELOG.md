@@ -1,9 +1,8 @@
 # 1.x branch
-## 1.2 branch
-### 1.2.0
+## 1.1 branch
+### 1.1.4
 * some fixes for MeCms 2.10.0.
 
-## 1.1 branch
 ### 1.1.3
 * some fixes for MeCms 2.7.3.
 
