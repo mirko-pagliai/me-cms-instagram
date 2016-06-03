@@ -11,7 +11,7 @@
 	"require": {
 		"php": ">=5.5.9",
         "cakephp/cakephp": "~3.2.9",
-        "mirko-pagliai/me-cms": ">=2.7.3"
+        "mirko-pagliai/me-cms": ">=2.10.0"
     },
     "autoload": {
 		"psr-4": {
