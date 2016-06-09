@@ -7,13 +7,15 @@
 * some fixes for MeCms 2.7.3.
 
 ### 1.1.2
-* when a media (photo) can not be got and an exception is thrown, it redirects to the index.
+* when a media (photo) can not be got and an exception is thrown, it redirects 
+	to the index.
 
 ### 1.1.1
 * added functions to generate the site sitemap.
 
 ### 1.1.0
-* the API access token has moved to `me_instagram.php`. Removed `instagram_keys.php`;
+* the API access token has moved to `me_instagram.php`. Removed 
+	`instagram_keys.php`;
 * by default, 12 photos are shown;
 * the code for loading the configuration files has been optimized.
 
