@@ -29,7 +29,7 @@ Router::extensions('rss');
 /**
  * MeInstagram routes
  */
-Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
+Router::scope('/', ['plugin' => 'MeInstagram'], function($routes) {
 	/**
 	 * Instagram controller
 	 */
