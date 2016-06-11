@@ -20,20 +20,21 @@
  * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link		http://git.novatlantis.it Nova Atlantis Ltd
  */
-
-use Cake\Routing\Router;
 ?>
-	
+
 <?php
-	$this->assign('title', __d('me_instagram', 'Photos from {0}', 'Instagram'));
+    $this->extend('MeCms./Common/index');
+    $this->assign('title', __d('me_instagram', 'Photos from {0}', 'Instagram'));
 	
 	$this->Asset->js('MeInstagram.frontend', ['block' => 'script_bottom']);
 	
-	if(config('frontend.fancybox'))
+	if(config('frontend.fancybox')) {
 		$this->Library->fancybox();
-	
-	if(config('frontend.user_profile') && !$this->request->is('ajax'))
+    }
+    
+	if(config('frontend.user_profile') && !$this->request->is('ajax')) {
 		echo $this->element('frontend/user');
+    }
 ?>
 
 <div class="photosAlbums index">
@@ -44,21 +45,25 @@ use Cake\Routing\Router;
 					<?php
 						$text = implode(PHP_EOL, [
 							$this->Thumb->image($photo->path, ['side' => 275]),
-							$this->Html->div('photo-info', $this->Html->div(NULL, $this->Html->para('small', $photo->description)))
+							$this->Html->div('photo-info', $this->Html->div(NULL, $this->Html->para('small', $photo->description))),
 						]);
 						
 						$link = config('frontend.open_on_instagram') ? $photo->link : ['_name' => 'instagram_photo', $photo->id];
 						
+                        $options = [];
+                        
 						//If Fancybox is enabled, adds some options
-						$options = config('frontend.fancybox') ? [
-							'class'					=> 'fancybox thumbnail',
-							'data-fancybox-href'	=> $this->Thumb->url($photo->path, ['height' => 1280]),
-							'rel'					=> 'group'
-						] : [];
+                        if(config('frontend.fancybox')) {
+                            $options = [
+							'class' => 'fancybox thumbnail',
+							'data-fancybox-href' => $this->Thumb->url($photo->path, ['height' => 1280]),
+							'rel' => 'group',
+                            ];
+                        }
 						
 						echo $this->Html->link($text, $link, am([
 							'class' => 'thumbnail',
-							'title' => $photo->description
+							'title' => $photo->description,
 						], $options));
 					?>
 				</div>
@@ -67,6 +72,6 @@ use Cake\Routing\Router;
 	</div>
     
 	<?php if(!empty($next_id)): ?>
-		<?= $this->Html->link(__d('me_instagram', 'Load more'), '#', ['id' => 'load-more', 'data-href' => Router::url([$next_id])]) ?>
+		<?= $this->Html->link(__d('me_instagram', 'Load more'), '#', ['id' => 'load-more', 'data-href' => $this->Url->build([$next_id])]) ?>
 	<?php endif; ?>
 </div>

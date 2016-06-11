@@ -23,12 +23,12 @@
 ?>
 
 <?php
-    $this->assign('title', sprintf('%s - %s', __d('me_cms', 'Photo'), $photo->filename));
+    $this->extend('MeCms./Common/index');
+    $this->assign('title', __d('me_cms', 'Photo {0}', $photo->filename));
     
-	if(config('frontend.user_profile'))
-		echo $this->element('frontend/user')
+	if(config('frontend.user_profile')) {
+		echo $this->element('frontend/user');
+    }
 ?>
 
-<div class="photos view">
-    <?= $this->Html->img($photo->path) ?>
-</div>
+<?= $this->Html->img($photo->path) ?>
