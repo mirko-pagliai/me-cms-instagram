@@ -73,8 +73,8 @@ class InstallShell extends BaseInstallShell {
         }
 		
 		return $parser->addSubcommands([
-			'all'			=> ['help' => __d('me_tools', 'Executes all available tasks')],
-			'copyConfig'	=> ['help' => __d('me_tools', 'Copies the configuration files')]
+			'all' => ['help' => __d('me_tools', 'Executes all available tasks')],
+			'copyConfig' => ['help' => __d('me_tools', 'Copies the configuration files')],
 		]);
 		
 		return $parser;
