@@ -54,8 +54,9 @@ class InstallShell extends BaseInstallShell {
 		}
 		
 		$ask = $this->in(__d('me_tools', 'Copy configuration files?'), ['Y', 'n'], 'Y');
-		if(in_array($ask, ['Y', 'y']))
+		if(in_array($ask, ['Y', 'y'])) {
 			$this->copyConfig();
+        }
     }
 	
 	/**
@@ -67,8 +68,9 @@ class InstallShell extends BaseInstallShell {
 		$parser = parent::getOptionParser();
 		
 		//Resets subcommands
-		foreach(array_keys($parser->toArray()['subcommands']) as $subcommand)
+		foreach(array_keys($parser->toArray()['subcommands']) as $subcommand) {
 			$parser->removeSubcommand($subcommand);
+        }
 		
 		return $parser->addSubcommands([
 			'all'			=> ['help' => __d('me_tools', 'Executes all available tasks')],
