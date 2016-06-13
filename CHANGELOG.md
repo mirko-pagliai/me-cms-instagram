@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.1 branch
+### 1.1.5
+* fixed messages pluralized.
+
 ### 1.1.4
 * some fixes for MeCms 2.10.0.
 
