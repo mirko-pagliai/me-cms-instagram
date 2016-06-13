@@ -76,7 +76,5 @@ class InstallShell extends BaseInstallShell {
 			'all' => ['help' => __d('me_tools', 'Executes all available tasks')],
 			'copyConfig' => ['help' => __d('me_tools', 'Copies the configuration files')],
 		]);
-		
-		return $parser;
 	}
 }

@@ -65,9 +65,10 @@ class InstagramController extends AppController {
 		$cache = sprintf('index_limit_%s', config('frontend.photos'));
 		
 		//Adds the request ID ("Next ID" for Istangram) to the cache name
-		if(!empty($id))
+		if(!empty($id)) {
 			$cache = sprintf('%s_id_%s', $cache, $id);
-		
+        }
+        
 		//Tries to get data from the cache
         list($photos, $next_id) = Cache::read($cache, 'instagram');
         
