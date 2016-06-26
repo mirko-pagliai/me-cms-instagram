@@ -55,9 +55,9 @@
 						//If Fancybox is enabled, adds some options
                         if(config('frontend.fancybox')) {
                             $options = [
-							'class' => 'fancybox thumbnail',
-							'data-fancybox-href' => $this->Thumb->url($photo->path, ['height' => 1280]),
-							'rel' => 'group',
+                                'class' => 'fancybox thumbnail',
+                                'data-fancybox-href' => $this->Thumb->url($photo->path, ['height' => 1280]),
+                                'rel' => 'group',
                             ];
                         }
 						

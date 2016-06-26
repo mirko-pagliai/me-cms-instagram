@@ -23,21 +23,23 @@
 use Cake\Routing\Router;
 
 Router::defaultRouteClass('InflectedRoute');
-
 Router::extensions('rss');
 
 /**
  * MeInstagram routes
  */
 Router::scope('/', ['plugin' => 'MeInstagram'], function($routes) {
-	/**
-	 * Instagram controller
-	 */
-	$routes->connect('/instagram', ['controller' => 'Instagram', 'action' => 'index'], ['_name' => 'instagram_photos']);
+	//Instagram
+	$routes->connect('/instagram',
+        ['controller' => 'Instagram', 'action' => 'index'],
+        ['_name' => 'instagram_photos']
+    );
+	//Instagram (with ID)
 	$routes->connect('/instagram/:id',
 		['controller' => 'Instagram', 'action' => 'index'],
 		['id' => '\d+_\d+', 'pass' => ['id']]
 	);
+    //Instragram photo
 	$routes->connect('/instagram/view/:id',
 		['controller' => 'Instagram', 'action' => 'view'],
 		['_name' => 'instagram_photo', 'id' => '\d+_\d+', 'pass' => ['id']]

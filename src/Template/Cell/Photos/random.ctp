@@ -28,7 +28,7 @@
     }
     
 	$this->extend('MeCms./Common/widget');
-	$this->assign('title', count($photos) > 1 ? __d('me_cms', 'Random {0} photos', count($photos)) : __d('me_cms', 'Random photo'));
+	$this->assign('title', __dn('me_cms', 'Random photo', 'Random {0} photos', count($photos), count($photos)));
 	
 	foreach($photos as $photo) {
 		echo $this->Html->link($this->Thumb->image($photo->path, ['side' => 253]), ['_name' => 'instagram_photos'], ['class' => 'thumbnail']);
