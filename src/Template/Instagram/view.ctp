@@ -24,7 +24,7 @@
 
 <?php
     $this->extend('MeCms./Common/index');
-    $this->assign('title', $title = __d('me_cms', 'Photo {0}', $photo->filename));
+    $this->assign('title', $title = $photo->filename);
     
 	if(config('frontend.user_profile')) {
 		echo $this->element('frontend/user');
