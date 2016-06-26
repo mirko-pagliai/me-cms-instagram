@@ -24,7 +24,7 @@
 
 <?php
     $this->extend('MeCms./Common/index');
-    $this->assign('title', __d('me_instagram', 'Photos from {0}', 'Instagram'));
+    $this->assign('title', $title = __d('me_instagram', 'Photos from {0}', 'Instagram'));
 	
 	$this->Asset->js('MeInstagram.frontend', ['block' => 'script_bottom']);
 	
@@ -35,6 +35,11 @@
 	if(config('frontend.user_profile') && !$this->request->is('ajax')) {
 		echo $this->element('frontend/user');
     }
+    
+    /**
+     * Breadcrumb
+     */
+    $this->Breadcrumb->add($title, ['_name' => 'instagram_photos']);
 ?>
 
 <div class="photosAlbums index">

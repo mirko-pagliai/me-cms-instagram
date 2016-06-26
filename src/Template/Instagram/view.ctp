@@ -24,11 +24,17 @@
 
 <?php
     $this->extend('MeCms./Common/index');
-    $this->assign('title', __d('me_cms', 'Photo {0}', $photo->filename));
+    $this->assign('title', $title = __d('me_cms', 'Photo {0}', $photo->filename));
     
 	if(config('frontend.user_profile')) {
 		echo $this->element('frontend/user');
     }
+    
+    /**
+     * Breadcrumb
+     */
+    $this->Breadcrumb->add(__d('me_instagram', 'Photos from {0}', 'Instagram'), ['_name' => 'instagram_photos']);
+    $this->Breadcrumb->add($title, ['_name' => 'instagram_photo', $photo->id]);
 ?>
 
 <?= $this->Html->img($photo->path) ?>

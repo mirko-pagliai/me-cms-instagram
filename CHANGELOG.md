@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.1 branch
+### 1.1.6
+* added breadcrumb.
+
 ### 1.1.5
 * fixed messages pluralized.
 
