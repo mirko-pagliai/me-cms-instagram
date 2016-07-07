@@ -1,4 +1,8 @@
 # 1.x branch
+## 1.2 branch
+### 1.2.0
+* some fixes for MeCms 2.12.0.
+
 ## 1.1 branch
 ### 1.1.6
 * added breadcrumb.

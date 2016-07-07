@@ -24,7 +24,7 @@
 
 <?= $this->Asset->css('MeInstagram.instagram', ['block' => 'css_bottom']) ?>
 
-<?php if(config('frontend.user_profile') && !empty($user)): ?>
+<?php if(config('default.user_profile') && !empty($user)): ?>
 	<div id="instagram-user" class="row">
 		<div class="col-sm-5">
 			<?= $this->Html->img($user->profile_picture, ['id' => 'picture']) ?>
@@ -49,7 +49,7 @@
 				<span><?= __d('me_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?></span>
 			</p>
 			
-			<?php if(config('frontend.follow_me')) :?>
+			<?php if(config('default.follow_me')) :?>
 				<?= $this->Html->button(__d('me_instagram', 'Follow me on {0}', 'Instagram'), sprintf('//instagram.com/%s', $user->username), ['class' => 'btn-lg btn-success', 'icon' => 'instagram']) ?>
 			<?php endif; ?>
 		</div>

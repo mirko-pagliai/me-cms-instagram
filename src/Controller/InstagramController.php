@@ -62,7 +62,7 @@ class InstagramController extends AppController {
 	 */
 	public function index($id = NULL) {
         //Sets initial cache name
-		$cache = sprintf('index_limit_%s', config('frontend.photos'));
+		$cache = sprintf('index_limit_%s', config('default.photos'));
 		
 		//Adds the request ID ("Next ID" for Istangram) to the cache name
 		if(!empty($id)) {
@@ -74,7 +74,7 @@ class InstagramController extends AppController {
         
 		//If the data are not available from the cache
 		if(empty($photos)) {
-            list($photos, $next_id) = Instagram::recent($id, config('frontend.photos'));
+            list($photos, $next_id) = Instagram::recent($id, config('default.photos'));
             
 			Cache::write($cache, [$photos, $next_id], 'instagram');
         }
