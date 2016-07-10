@@ -46,10 +46,10 @@ class Instagram {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
         }
         
-        return (object) [
+        return (object) am([
             'filename' => explode('?', basename($photo['data']['images']['standard_resolution']['url']), 2)[0],
             'path' => $photo['data']['images']['standard_resolution']['url'],
-        ];
+        ], compact('id'));
 	}
 
 	/**

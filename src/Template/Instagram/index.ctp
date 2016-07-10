@@ -24,17 +24,22 @@
 
 <?php
     $this->extend('MeCms./Common/index');
-    $this->assign('title', __d('me_instagram', 'Photos from {0}', 'Instagram'));
+    $this->assign('title', $title = __d('me_instagram', 'Photos from {0}', 'Instagram'));
 	
-	$this->Asset->js('MeInstagram.frontend', ['block' => 'script_bottom']);
+	$this->Asset->js('MeInstagram.instagram', ['block' => 'script_bottom']);
 	
-	if(config('frontend.fancybox')) {
+	if(config('default.fancybox')) {
 		$this->Library->fancybox();
     }
     
-	if(config('frontend.user_profile') && !$this->request->is('ajax')) {
-		echo $this->element('frontend/user');
+	if(config('default.user_profile') && !$this->request->is('ajax')) {
+		echo $this->element('user');
     }
+    
+    /**
+     * Breadcrumb
+     */
+    $this->Breadcrumb->add($title, ['_name' => 'instagram_photos']);
 ?>
 
 <div class="photosAlbums index">
@@ -48,12 +53,12 @@
 							$this->Html->div('photo-info', $this->Html->div(NULL, $this->Html->para('small', $photo->description))),
 						]);
 						
-						$link = config('frontend.open_on_instagram') ? $photo->link : ['_name' => 'instagram_photo', $photo->id];
+						$link = config('default.open_on_instagram') ? $photo->link : ['_name' => 'instagram_photo', $photo->id];
 						
                         $options = [];
                         
 						//If Fancybox is enabled, adds some options
-                        if(config('frontend.fancybox')) {
+                        if(config('default.fancybox')) {
                             $options = [
                                 'class' => 'fancybox thumbnail',
                                 'data-fancybox-href' => $this->Thumb->url($photo->path, ['height' => 1280]),

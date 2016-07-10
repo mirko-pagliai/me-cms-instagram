@@ -6,8 +6,8 @@
 
 return [
     'MeInstagram' => [
-        //Frontend
-        'frontend' => [
+        //Default layout
+        'default' => [
             //Number of photos to show per page. This must be a multiple of 3
             'photos' => 12,
             //Show the "follow me button in the user's profile
