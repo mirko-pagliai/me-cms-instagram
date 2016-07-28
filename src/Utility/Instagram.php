@@ -23,7 +23,7 @@
 namespace MeInstagram\Utility;
 
 use Cake\Network\Exception\NotFoundException;
-use Cake\Network\Http\Client;
+use Cake\Http\Client;
 
 /**
  * An utility to get media from Instagram

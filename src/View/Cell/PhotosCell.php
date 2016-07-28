@@ -53,12 +53,11 @@ class PhotosCell extends Cell {
 	/**
 	 * Latest widget
 	 * @param int $limit Limit
-	 * @uses MeTools\Network\Request::isController()
      * @uses _latest()
 	 */
 	public function latest($limit = 1) {
 		//Returns on the same controller
-		if($this->request->isController('Instagram')) {
+		if($this->request->is('controller', 'Instagram')) {
 			return;
         }
         
@@ -70,12 +69,11 @@ class PhotosCell extends Cell {
 	/**
 	 * Random widget
 	 * @param int $limit Limit
-	 * @uses MeTools\Network\Request::isController()
      * @uses _latest()
 	 */
 	public function random($limit = 1) {
 		//Returns on the same controller
-		if($this->request->isController('Instagram')) {
+		if($this->request->is('controller', 'Instagram')) {
 			return;
         }
         
