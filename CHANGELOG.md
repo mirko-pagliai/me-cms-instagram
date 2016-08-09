@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.2 branch
+### 1.2.1
+* updated for CakePHP 3.3.
+
 ### 1.2.0
 * some fixes for MeCms 2.12.0.
 
