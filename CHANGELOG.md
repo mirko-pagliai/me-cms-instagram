@@ -1,6 +1,7 @@
 # 1.x branch
 ## 1.2 branch
 ### 1.2.1
+* fixed code for CakePHP Code Sniffer;
 * updated for CakePHP 3.3.
 
 ### 1.2.0

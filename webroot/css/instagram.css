@@ -1,36 +1,36 @@
 /*!
  * This file is part of MeInstagram.
- * @author		Mirko Pagliai <mirko.pagliai@gmail.com>
- * @copyright	Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
- * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
+ * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
+ * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
+ * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  */
 
 /* -------------------------------- */
-/*		"Load more" button			*/
+/*      "Load more" button          */
 /* -------------------------------- */
 /* "Load more" button */
 #load-more {
-	border: 2px solid #4090db;
-	border-radius: 50%;
-	color: #4090db;
-	display: block;
-	font-family: Roboto;
-	font-size: 13px;
-	height: 120px;
-	margin: 20px auto 30px;
-	outline: none !important;
-	padding: 50px 0;
-	text-align: center;
-	text-decoration: none;
-	text-transform: uppercase;
-	width: 120px;
+    border: 2px solid #4090db;
+    border-radius: 50%;
+    color: #4090db;
+    display: block;
+    font-family: Roboto;
+    font-size: 13px;
+    height: 120px;
+    margin: 20px auto 30px;
+    outline: none !important;
+    padding: 50px 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 120px;
 }
 
 /* "Load more" button on hover */
 #load-more:hover {
-	color: #2d6599;
-	border-color: #2d6599;
-	text-decoration: none;
+    color: #2d6599;
+    border-color: #2d6599;
+    text-decoration: none;
 }
 
 /* -------------------------------- */
@@ -38,56 +38,56 @@
 /* -------------------------------- */
 /* User profile */
 #instagram-user {
-	background: #fafafa;
-	color: #4b4f54;
-	font-family: Helvetica;
-	margin-bottom: 20px;
-	padding: 20px;
+    background: #fafafa;
+    color: #4b4f54;
+    font-family: Helvetica;
+    margin-bottom: 20px;
+    padding: 20px;
 }
 
 /* User profile, picture */
 #instagram-user #picture {
-	border: 1px solid #cccfd0;
+    border: 1px solid #cccfd0;
     border-radius: 50%;
-	margin: auto;
+    margin: auto;
 }
 
 /* User profile, username */
 #instagram-user #username {
-	font-size: 28px;
+    font-size: 28px;
 }
 
 /* User profile, full name */
 #instagram-user #fullname {
-	font-size: 17px;
-	font-weight: bold;
-	margin-right: 2px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-right: 2px;
 }
 
 /* User profile, bio */
 #instagram-user #bio {
-	font-family: Roboto;
-	font-size: 17px;
-	margin-right: 2px;
+    font-family: Roboto;
+    font-size: 17px;
+    margin-right: 2px;
 }
 
 /* User profile, website */
 #instagram-user #website {
-	font-size: 17px;
-	font-weight: bold;
+    font-size: 17px;
+    font-weight: bold;
 }
 
 /* User profile, website, link */
 #instagram-user #website a {
-	color: #125688;
+    color: #125688;
 }
 
 /* User profile, counters */
 #instagram-user #counts {
-	font-size: 17px;
+    font-size: 17px;
 }
 
 /* User profile, counters, span children */
 #instagram-user #counts > span {
-	margin-right: 40px;
+    margin-right: 40px;
 }

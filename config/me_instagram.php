@@ -11,12 +11,12 @@ return [
             //Number of photos to show per page. This must be a multiple of 3
             'photos' => 12,
             //Show the "follow me button in the user's profile
-            'follow_me' => TRUE,
+            'follow_me' => true,
             //Open the photos on Instagram, rather than on the site
-            'open_on_instagram' => FALSE,
+            'open_on_instagram' => false,
             //Show the user's profile
-            'user_profile' => TRUE,
-        ]
+            'user_profile' => true,
+        ],
     ],
     'Instagram' => [
         //API access token
