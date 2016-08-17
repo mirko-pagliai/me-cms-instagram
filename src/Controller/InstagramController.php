@@ -92,7 +92,7 @@ class InstagramController extends AppController
     /**
      * Views a photo
      * @param string $id Media ID
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Network\Response|null|void
      * @uses MeInstagram\Utility\Instagram::media()
      */
     public function view($id)
