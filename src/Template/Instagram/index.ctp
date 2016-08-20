@@ -48,10 +48,20 @@ $this->Breadcrumb->add($title, ['_name' => 'instagram_photos']);
                     <?php
                         $text = implode(PHP_EOL, [
                             $this->Thumb->image($photo->path, ['side' => 275]),
-                            $this->Html->div('photo-info', $this->Html->div(null, $this->Html->para('small', $photo->description))),
+                            $this->Html->div(
+                                'photo-info',
+                                $this->Html->div(
+                                    null,
+                                    $this->Html->para('small', $photo->description)
+                                )
+                            ),
                         ]);
 
-                        $link = config('default.open_on_instagram') ? $photo->link : ['_name' => 'instagram_photo', $photo->id];
+                        if (config('default.open_on_instagram')) {
+                            $link = $photo->link;
+                        } else {
+                            $link = ['_name' => 'instagram_photo', $photo->id];
+                        }
 
                         $options = [];
 
@@ -59,7 +69,10 @@ $this->Breadcrumb->add($title, ['_name' => 'instagram_photos']);
                         if (config('default.fancybox')) {
                             $options = [
                                 'class' => 'fancybox thumbnail',
-                                'data-fancybox-href' => $this->Thumb->url($photo->path, ['height' => 1280]),
+                                'data-fancybox-href' => $this->Thumb->url(
+                                    $photo->path,
+                                    ['height' => 1280]
+                                ),
                                 'rel' => 'group',
                             ];
                         }
@@ -83,7 +96,10 @@ $this->Breadcrumb->add($title, ['_name' => 'instagram_photos']);
             echo $this->Html->link(
                 __d('me_instagram', 'Load more'),
                 '#',
-                ['id' => 'load-more', 'data-href' => $this->Url->build([$nextId])]
+                [
+                    'id' => 'load-more',
+                    'data-href' => $this->Url->build([$nextId]),
+                ]
             );
         ?>
     <?php endif; ?>
