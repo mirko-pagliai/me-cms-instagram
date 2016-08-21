@@ -30,23 +30,29 @@ Router::extensions('rss');
  */
 Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
     //Instagram
-    $routes->connect(
-        '/instagram',
-        ['controller' => 'Instagram', 'action' => 'index'],
-        ['_name' => 'instagram_photos']
-    );
+    if (!routeNameExists('instagramPhotos')) {
+        $routes->connect(
+            '/instagram',
+            ['controller' => 'Instagram', 'action' => 'index'],
+            ['_name' => 'instagramPhotos']
+        );
+    }
+    
     //Instagram (with ID)
     $routes->connect(
         '/instagram/:id',
         ['controller' => 'Instagram', 'action' => 'index'],
         ['id' => '\d+_\d+', 'pass' => ['id']]
     );
+    
     //Instragram photo
-    $routes->connect(
-        '/instagram/view/:id',
-        ['controller' => 'Instagram', 'action' => 'view'],
-        ['_name' => 'instagram_photo', 'id' => '\d+_\d+', 'pass' => ['id']]
-    );
+    if (!routeNameExists('instagramPhoto')) {
+        $routes->connect(
+            '/instagram/view/:id',
+            ['controller' => 'Instagram', 'action' => 'view'],
+            ['_name' => 'instagramPhoto', 'id' => '\d+_\d+', 'pass' => ['id']]
+        );
+    }
 
     $routes->fallbacks();
 });
