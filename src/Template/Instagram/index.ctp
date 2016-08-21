@@ -37,7 +37,7 @@ if (config('default.user_profile') && !$this->request->is('ajax')) {
 /**
  * Breadcrumb
  */
-$this->Breadcrumb->add($title, ['_name' => 'instagram_photos']);
+$this->Breadcrumb->add($title, ['_name' => 'instagramPhotos']);
 ?>
 
 <div class="photosAlbums index">
@@ -60,7 +60,7 @@ $this->Breadcrumb->add($title, ['_name' => 'instagram_photos']);
                         if (config('default.open_on_instagram')) {
                             $link = $photo->link;
                         } else {
-                            $link = ['_name' => 'instagram_photo', $photo->id];
+                            $link = ['_name' => 'instagramPhoto', $photo->id];
                         }
 
                         $options = [];

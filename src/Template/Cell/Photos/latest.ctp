@@ -37,7 +37,7 @@ $this->assign('title', __dn(
 foreach ($photos as $photo) {
     echo $this->Html->link(
         $this->Thumb->image($photo->path, ['side' => 253]),
-        ['_name' => 'instagram_photos'],
+        ['_name' => 'instagramPhotos'],
         ['class' => 'thumbnail']
     );
 }

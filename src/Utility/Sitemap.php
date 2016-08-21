@@ -44,7 +44,7 @@ class Sitemap extends SitemapBuilder
     {
         //Adds Instagram index
         $url = [
-            self::parse(['_name' => 'instagram_photos']),
+            self::parse(['_name' => 'instagramPhotos']),
         ];
 
         return $url;
