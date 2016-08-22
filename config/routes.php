@@ -22,7 +22,7 @@
  */
 use Cake\Routing\Router;
 
-Router::defaultRouteClass('InflectedRoute');
+Router::defaultRouteClass('DashedRoute');
 Router::extensions('rss');
 
 /**
@@ -53,6 +53,4 @@ Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
             ['_name' => 'instagramPhoto', 'id' => '\d+_\d+', 'pass' => ['id']]
         );
     }
-
-    $routes->fallbacks();
 });

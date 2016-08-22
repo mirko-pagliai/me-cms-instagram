@@ -3,6 +3,7 @@
 ### 1.2.1
 * checks if there are already routes with the same name, before declaring new;
 * fixed code for CakePHP Code Sniffer;
+* now `DashedRoute` is the default route class;
 * updated for CakePHP 3.3.
 
 ### 1.2.0
