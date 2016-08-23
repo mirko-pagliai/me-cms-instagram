@@ -15,35 +15,42 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with MeInstagram.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author		Mirko Pagliai <mirko.pagliai@gmail.com>
- * @copyright	Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
- * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
- * @link		http://git.novatlantis.it Nova Atlantis Ltd
+ * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
+ * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
+ * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
+ * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
 use Cake\Routing\Router;
 
-Router::defaultRouteClass('InflectedRoute');
+Router::defaultRouteClass('DashedRoute');
 Router::extensions('rss');
 
 /**
  * MeInstagram routes
  */
-Router::scope('/', ['plugin' => 'MeInstagram'], function($routes) {
-	//Instagram
-	$routes->connect('/instagram',
+Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
+    //Instagram
+    if (!routeNameExists('instagramPhotos')) {
+        $routes->connect(
+            '/instagram',
+            ['controller' => 'Instagram', 'action' => 'index'],
+            ['_name' => 'instagramPhotos']
+        );
+    }
+    
+    //Instagram (with ID)
+    $routes->connect(
+        '/instagram/:id',
         ['controller' => 'Instagram', 'action' => 'index'],
-        ['_name' => 'instagram_photos']
+        ['id' => '\d+_\d+', 'pass' => ['id']]
     );
-	//Instagram (with ID)
-	$routes->connect('/instagram/:id',
-		['controller' => 'Instagram', 'action' => 'index'],
-		['id' => '\d+_\d+', 'pass' => ['id']]
-	);
+    
     //Instragram photo
-	$routes->connect('/instagram/view/:id',
-		['controller' => 'Instagram', 'action' => 'view'],
-		['_name' => 'instagram_photo', 'id' => '\d+_\d+', 'pass' => ['id']]
-	);
-	
-    $routes->fallbacks();
+    if (!routeNameExists('instagramPhoto')) {
+        $routes->connect(
+            '/instagram/view/:id',
+            ['controller' => 'Instagram', 'action' => 'view'],
+            ['_name' => 'instagramPhoto', 'id' => '\d+_\d+', 'pass' => ['id']]
+        );
+    }
 });

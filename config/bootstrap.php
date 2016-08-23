@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with MeInstagram.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author		Mirko Pagliai <mirko.pagliai@gmail.com>
- * @copyright	Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
- * @license		http://www.gnu.org/licenses/agpl.txt AGPL License
- * @link		http://git.novatlantis.it Nova Atlantis Ltd
+ * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
+ * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
+ * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
+ * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
 
 use Cake\Cache\Cache;
@@ -32,14 +32,16 @@ use Cake\Utility\Hash;
 Configure::load('MeInstagram.me_instagram');
 
 //Merges with the configuration from application, if exists
-if(is_readable(CONFIG.'me_instagram.php'))
-	Configure::load('me_instagram');
+if (is_readable(CONFIG . 'me_instagram.php')) {
+    Configure::load('me_instagram');
+}
 
 //Merges with the MeCms configuration
 Configure::write('MeCms', Hash::merge(config('MeCms'), Configure::consume('MeInstagram')));
 
-if(!config('Instagram.key') || config('Instagram.key') === 'your-key-here')
+if (!config('Instagram.key') || config('Instagram.key') === 'your-key-here') {
     throw new InternalErrorException('Instagram API access token is missing');
+}
 
 /**
  * Loads the cache configuration
@@ -47,14 +49,16 @@ if(!config('Instagram.key') || config('Instagram.key') === 'your-key-here')
 Configure::load('MeInstagram.cache');
 
 //Merges with the configuration from application, if exists
-if(is_readable(CONFIG.'cache.php'))
-	Configure::load('cache');
-    
+if (is_readable(CONFIG . 'cache.php')) {
+    Configure::load('cache');
+}
+
 //Adds all cache configurations
-foreach(Configure::consume('Cache') as $key => $config) {
-	//Drops cache configurations that already exist
-	if(Cache::config($key))
-		Cache::drop($key);
-	
-	Cache::config($key, $config);
+foreach (Configure::consume('Cache') as $key => $config) {
+    //Drops cache configurations that already exist
+    if (Cache::config($key)) {
+        Cache::drop($key);
+    }
+
+    Cache::config($key, $config);
 }

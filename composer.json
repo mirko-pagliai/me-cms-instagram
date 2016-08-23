@@ -4,18 +4,18 @@
     "homepage": "https://github.com/mirko-pagliai/me-instagram",
     "type": "cakephp-plugin",
     "license": "AGPL",
-	"authors": [{
-		"name": "Mirko Pagliai",
-		"email": "mirko.pagliai@gmail.com"
+    "authors": [{
+        "name": "Mirko Pagliai",
+        "email": "mirko.pagliai@gmail.com"
     }],
-	"require": {
-		"php": ">=5.5.9",
-        "cakephp/cakephp": "~3.2.9",
-        "mirko-pagliai/me-cms": ">=2.12.0"
+    "require": {
+        "php": ">=5.5.9",
+        "cakephp/cakephp": "~3.3",
+        "mirko-pagliai/me-cms": ">=2.13.0"
     },
     "autoload": {
-		"psr-4": {
-			"MeInstagram\\": "src"
-		}
-	}
+        "psr-4": {
+            "MeInstagram\\": "src"
+        }
+    }
 }
