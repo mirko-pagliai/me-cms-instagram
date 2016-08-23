@@ -61,7 +61,7 @@ class PhotosCell extends Cell
     public function latest($limit = 1)
     {
         //Returns on the same controller
-        if ($this->request->is('controller', 'Instagram')) {
+        if ($this->request->isController('Instagram')) {
             return;
         }
 
@@ -79,7 +79,7 @@ class PhotosCell extends Cell
     public function random($limit = 1)
     {
         //Returns on the same controller
-        if ($this->request->is('controller', 'Instagram')) {
+        if ($this->request->isController('Instagram')) {
             return;
         }
 
