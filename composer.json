@@ -8,10 +8,16 @@
         "name": "Mirko Pagliai",
         "email": "mirko.pagliai@gmail.com"
     }],
+    "config": {
+        "component-dir": "vendor/components"
+    },
     "require": {
         "php": ">=5.5.9",
         "cakephp/cakephp": "3.3.*",
-        "mirko-pagliai/me-cms": "2.13.*"
+        "mirko-pagliai/me-cms": "2.*"
+    },
+    "require-dev": {
+        "cakephp/cakephp-codesniffer": "2.*"
     },
     "autoload": {
         "psr-4": {

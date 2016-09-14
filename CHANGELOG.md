@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.2 branch
+### 1.2.2
+* fixed code for CakePHP Code Sniffer.
+
 ### 1.2.1
 * checks if there are already routes with the same name, before declaring new;
 * fixed code for CakePHP Code Sniffer;
