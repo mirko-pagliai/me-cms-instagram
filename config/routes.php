@@ -37,14 +37,14 @@ Router::scope('/', ['plugin' => 'MeInstagram'], function ($routes) {
             ['_name' => 'instagramPhotos']
         );
     }
-    
+
     //Instagram (with ID)
     $routes->connect(
         '/instagram/:id',
         ['controller' => 'Instagram', 'action' => 'index'],
         ['id' => '\d+_\d+', 'pass' => ['id']]
     );
-    
+
     //Instragram photo
     if (!routeNameExists('instagramPhoto')) {
         $routes->connect(
