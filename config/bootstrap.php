@@ -26,10 +26,15 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\InternalErrorException;
 use Cake\Utility\Hash;
 
+//Sets the default MeInstagram name
+if (!defined('MEINSTAGRAM')) {
+    define('MEINSTAGRAM', 'MeInstagram');
+}
+
 /**
  * Loads the MeInstagram configuration
  */
-Configure::load('MeInstagram.me_instagram');
+Configure::load(sprintf('%s.me_instagram', MEINSTAGRAM));
 
 //Merges with the configuration from application, if exists
 if (is_readable(CONFIG . 'me_instagram.php')) {
@@ -37,7 +42,10 @@ if (is_readable(CONFIG . 'me_instagram.php')) {
 }
 
 //Merges with the MeCms configuration
-Configure::write(MECMS, Hash::merge(config(MECMS), Configure::consume('MeInstagram')));
+Configure::write(
+    MECMS,
+    Hash::merge(config(MECMS), Configure::consume(MEINSTAGRAM))
+);
 
 if (!config('Instagram.key') || config('Instagram.key') === 'your-key-here') {
     throw new InternalErrorException('Instagram API access token is missing');
@@ -46,7 +54,7 @@ if (!config('Instagram.key') || config('Instagram.key') === 'your-key-here') {
 /**
  * Loads the cache configuration
  */
-Configure::load('MeInstagram.cache');
+Configure::load(sprintf('%s.cache', MEINSTAGRAM));
 
 //Merges with the configuration from application, if exists
 if (is_readable(CONFIG . 'cache.php')) {
