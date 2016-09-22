@@ -1,6 +1,7 @@
 # 1.x branch
 ## 1.2 branch
 ### 1.2.2
+* updated for Assets 1.1.0;
 * fixed code for CakePHP Code Sniffer.
 
 ### 1.2.1
