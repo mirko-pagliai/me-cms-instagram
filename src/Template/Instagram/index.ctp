@@ -24,7 +24,7 @@
 $this->extend('MeCms./Common/index');
 $this->assign('title', $title = __d('me_instagram', 'Photos from {0}', 'Instagram'));
 
-$this->Asset->js('MeInstagram.instagram', ['block' => 'script_bottom']);
+$this->Asset->script('MeInstagram.instagram', ['block' => 'script_bottom']);
 
 if (config('default.fancybox')) {
     $this->Library->fancybox();
