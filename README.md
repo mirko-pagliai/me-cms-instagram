@@ -1,5 +1,7 @@
 # MeInstagram, plugin for MeCms plugin
 
+[![Build Status](https://travis-ci.org/mirko-pagliai/me-instagram.svg?branch=master)](https://travis-ci.org/mirko-pagliai/me-instagram)
+
 This plugin allows you to manage Instagram photos on the 
 [//github.com/mirko-pagliai/cakephp-for-mecms](MeCms platform).
 
