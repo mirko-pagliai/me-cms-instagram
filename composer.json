@@ -13,8 +13,8 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "cakephp/cakephp": "3.3.*",
-        "mirko-pagliai/me-cms": "2.*"
+        "cakephp/cakephp": ">=3.3.4 <4.0",
+        "mirko-pagliai/me-cms": ">=2.14.4"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "2.*"
@@ -23,5 +23,6 @@
         "psr-4": {
             "MeInstagram\\": "src"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

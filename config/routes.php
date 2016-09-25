@@ -30,7 +30,7 @@ Router::extensions('rss');
  */
 Router::scope('/', ['plugin' => MEINSTAGRAM], function ($routes) {
     //Instagram
-    if (!routeNameExists('instagramPhotos')) {
+    if (!$routes->nameExists('instagramPhotos')) {
         $routes->connect(
             '/instagram',
             ['controller' => 'Instagram', 'action' => 'index'],
@@ -46,7 +46,7 @@ Router::scope('/', ['plugin' => MEINSTAGRAM], function ($routes) {
     );
 
     //Instragram photo
-    if (!routeNameExists('instagramPhoto')) {
+    if (!$routes->nameExists('instagramPhoto')) {
         $routes->connect(
             '/instagram/view/:id',
             ['controller' => 'Instagram', 'action' => 'view'],
