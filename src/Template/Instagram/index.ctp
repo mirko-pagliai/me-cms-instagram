@@ -47,7 +47,7 @@ $this->Breadcrumb->add($title, ['_name' => 'instagramPhotos']);
                 <div class="photo-box">
                     <?php
                         $text = implode(PHP_EOL, [
-                            $this->Thumb->image($photo->path, ['side' => 275]),
+                            $this->Thumb->crop($photo->path, ['width' => 275]),
                             $this->Html->div(
                                 'photo-info',
                                 $this->Html->div(
@@ -69,7 +69,7 @@ $this->Breadcrumb->add($title, ['_name' => 'instagramPhotos']);
                         if (config('default.fancybox')) {
                             $options = [
                                 'class' => 'fancybox thumbnail',
-                                'data-fancybox-href' => $this->Thumb->url(
+                                'data-fancybox-href' => $this->Thumb->resizeUrl(
                                     $photo->path,
                                     ['height' => 1280]
                                 ),
