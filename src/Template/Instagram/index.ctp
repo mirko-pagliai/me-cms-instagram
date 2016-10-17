@@ -47,7 +47,7 @@ $this->Breadcrumb->add($title, ['_name' => 'instagramPhotos']);
                 <div class="photo-box">
                     <?php
                         $text = implode(PHP_EOL, [
-                            $this->Thumb->crop($photo->path, ['width' => 275]),
+                            $this->Thumb->fit($photo->path, ['width' => 275]),
                             $this->Html->div(
                                 'photo-info',
                                 $this->Html->div(

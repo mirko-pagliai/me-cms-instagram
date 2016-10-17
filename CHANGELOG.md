@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.2 branch
+### 1.2.5
+* to generate thumbnails, uses the `fit()` method instead of `crop()`.
+
 ### 1.2.4
 * some fixed for MeCms 2.14.5.
 
