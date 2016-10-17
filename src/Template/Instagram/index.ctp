@@ -50,10 +50,7 @@ $this->Breadcrumb->add($title, ['_name' => 'instagramPhotos']);
                             $this->Thumb->fit($photo->path, ['width' => 275]),
                             $this->Html->div(
                                 'photo-info',
-                                $this->Html->div(
-                                    null,
-                                    $this->Html->para('small', $photo->description)
-                                )
+                                $this->Html->div(null, $this->Html->para('small', $this->Text->truncate($photo->description, 350)))
                             ),
                         ]);
 
