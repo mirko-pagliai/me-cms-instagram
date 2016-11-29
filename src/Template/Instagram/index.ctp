@@ -37,7 +37,7 @@ if (config('default.user_profile') && !$this->request->is('ajax')) {
 /**
  * Breadcrumb
  */
-$this->Breadcrumb->add($title, ['_name' => 'instagramPhotos']);
+$this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
 ?>
 
 <div class="photosAlbums index">
@@ -46,58 +46,48 @@ $this->Breadcrumb->add($title, ['_name' => 'instagramPhotos']);
             <div class="col-sm-6 col-md-4">
                 <div class="photo-box">
                     <?php
-                        $text = implode(PHP_EOL, [
-                            $this->Thumb->fit($photo->path, ['width' => 275]),
-                            $this->Html->div(
-                                'photo-info',
-                                $this->Html->div(null, $this->Html->para('small', $this->Text->truncate($photo->description, 350)))
-                            ),
-                        ]);
+                    $text = implode(PHP_EOL, [
+                        $this->Thumb->fit($photo->path, ['width' => 275]),
+                        $this->Html->div(
+                            'photo-info',
+                            $this->Html->div(null, $this->Html->para('small', $this->Text->truncate($photo->description, 350)))
+                        ),
+                    ]);
 
-                        if (config('default.open_on_instagram')) {
-                            $link = $photo->link;
-                        } else {
-                            $link = ['_name' => 'instagramPhoto', $photo->id];
-                        }
+                    if (config('default.open_on_instagram')) {
+                        $link = $photo->link;
+                    } else {
+                        $link = ['_name' => 'instagramPhoto', $photo->id];
+                    }
 
-                        $options = [];
+                    $options = [
+                        'class' => 'thumbnail',
+                        'title' => $photo->description,
+                    ];
 
-                        //If Fancybox is enabled, adds some options
-                        if (config('default.fancybox')) {
-                            $options = [
-                                'class' => 'fancybox thumbnail',
-                                'data-fancybox-href' => $this->Thumb->resizeUrl(
-                                    $photo->path,
-                                    ['height' => 1280]
-                                ),
-                                'rel' => 'group',
-                            ];
-                        }
-
-                        echo $this->Html->link(
-                            $text,
-                            $link,
-                            am([
-                                'class' => 'thumbnail',
-                                'title' => $photo->description,
-                            ], $options)
+                    //If Fancybox is enabled, adds some options
+                    if (config('default.fancybox')) {
+                        $options['class'] = 'fancybox thumbnail';
+                        $options['data-fancybox-href'] = $this->Thumb->resizeUrl(
+                            $photo->path,
+                            ['height' => 1280]
                         );
+                        $options['rel'] = 'group';
+                    }
+
+                    echo $this->Html->link($text, $link, $options);
                     ?>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
 
-    <?php if (!empty($nextId)) : ?>
-        <?php
-            echo $this->Html->link(
-                __d('me_instagram', 'Load more'),
-                '#',
-                [
-                    'id' => 'load-more',
-                    'data-href' => $this->Url->build([$nextId]),
-                ]
-            );
-        ?>
-    <?php endif; ?>
+    <?php
+    if (!empty($nextId)) {
+        echo $this->Html->link(__d('me_instagram', 'Load more'), '#', [
+            'id' => 'load-more',
+            'data-href' => $this->Url->build([$nextId]),
+        ]);
+    }
+    ?>
 </div>

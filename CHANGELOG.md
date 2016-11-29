@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.2 branch
+### 1.2.6
+* updated for MeCms 2.14.10.
+
 ### 1.2.5
 * to generate thumbnails, uses the `fit()` method instead of `crop()`;
 * the photos title is truncated, if this is too long.
