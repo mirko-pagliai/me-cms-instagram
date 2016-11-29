@@ -27,39 +27,22 @@
 <?php if (config('default.user_profile') && !empty($user)) : ?>
     <div id="instagram-user" class="row">
         <div class="col-sm-5">
-            <?php
-                echo $this->Html->img(
-                    $user->profile_picture,
-                    ['id' => 'picture']
-                );
-            ?>
+            <?= $this->Html->img($user->profile_picture, ['id' => 'picture']) ?>
         </div>
 
         <div class="col-sm-7">
-            <p id="username">
-                <?= $user->username ?>
-            </p>
+            <p id="username"><?= $user->username ?></p>
 
             <p>
-                <span id="fullname">
-                    <?= $user->full_name ?>
-                </span>
+                <span id="fullname"><?= $user->full_name ?></span>
 
                 <?php if (!empty($user->bio)) : ?>
-                    <span id="bio">
-                        <?= $user->bio ?>
-                    </span>
+                    <span id="bio"><?= $user->bio ?></span>
                 <?php endif; ?>
 
                 <?php if (!empty($user->website)) : ?>
                     <span id="website">
-                        <?php
-                            echo $this->Html->link(
-                                preg_replace('/^http:\/\//', '', $user->website),
-                                $user->website,
-                                ['target' => '_blank']
-                            );
-                        ?>
+                        <?= $this->Html->link(preg_replace('/^http:\/\//', '', $user->website), $user->website, ['target' => '_blank']) ?>
                     </span>
                 <?php endif; ?>
             </p>
@@ -76,15 +59,15 @@
                 </span>
             </p>
 
-            <?php if (config('default.follow_me')) : ?>
-                <?php
-                    echo $this->Html->button(
-                        __d('me_instagram', 'Follow me on {0}', 'Instagram'),
-                        sprintf('//instagram.com/%s', $user->username),
-                        ['class' => 'btn-lg btn-success', 'icon' => 'instagram']
-                    );
-                ?>
-            <?php endif; ?>
+            <?php
+            if (config('default.follow_me')) {
+                echo $this->Html->button(
+                    __d('me_instagram', 'Follow me on {0}', 'Instagram'),
+                    sprintf('//instagram.com/%s', $user->username),
+                    ['class' => 'btn-lg btn-success', 'icon' => 'instagram']
+                );
+            }
+            ?>
         </div>
     </div>
 <?php endif; ?>

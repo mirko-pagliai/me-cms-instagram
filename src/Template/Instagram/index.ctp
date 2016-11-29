@@ -68,10 +68,7 @@ $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
                     //If Fancybox is enabled, adds some options
                     if (config('default.fancybox')) {
                         $options['class'] = 'fancybox thumbnail';
-                        $options['data-fancybox-href'] = $this->Thumb->resizeUrl(
-                            $photo->path,
-                            ['height' => 1280]
-                        );
+                        $options['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
                         $options['rel'] = 'group';
                     }
 
