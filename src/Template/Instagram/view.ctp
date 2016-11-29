@@ -31,10 +31,10 @@ if (config('default.user_profile')) {
 /**
  * Breadcrumb
  */
-$this->Breadcrumb->add(
+$this->Breadcrumbs->add(
     __d('me_instagram', 'Photos from {0}', 'Instagram'),
     ['_name' => 'instagramPhotos']
 );
-$this->Breadcrumb->add($title, ['_name' => 'instagramPhoto', $photo->id]);
+$this->Breadcrumbs->add($title, ['_name' => 'instagramPhoto', $photo->id]);
 
 echo $this->Html->img($photo->path);
