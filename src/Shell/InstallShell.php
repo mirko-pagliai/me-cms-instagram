@@ -31,12 +31,13 @@ class InstallShell extends BaseInstallShell
 {
     /**
      * Construct
-     * @uses MeTools\Shell\InstallShell::__construct()
+     * @param \Cake\Console\ConsoleIo|null $io An io instance
      * @uses $config
+     * @uses MeTools\Shell\InstallShell::__construct()
      */
-    public function __construct()
+    public function __construct(\Cake\Console\ConsoleIo $io = null)
     {
-        parent::__construct();
+        parent::__construct($io);
 
         //Configuration files to be copied
         $this->config = [
@@ -77,13 +78,9 @@ class InstallShell extends BaseInstallShell
             $parser->removeSubcommand($subcommand);
         }
 
-        return $parser->addSubcommands([
-            'all' => [
-                'help' => __d('me_tools', 'Executes all available tasks'),
-            ],
-            'copyConfig' => [
-                'help' => __d('me_tools', 'Copies the configuration files'),
-            ],
-        ]);
+        $parser->addSubcommand('all', ['help' => __d('me_tools', 'Executes all available tasks')]);
+        $parser->addSubcommand('copyConfig', ['help' => __d('me_tools', 'Copies the configuration files')]);
+
+        return $parser;
     }
 }
