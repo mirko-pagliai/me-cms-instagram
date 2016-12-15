@@ -22,7 +22,7 @@
  */
 
 $this->extend('MeCms./Common/index');
-$this->assign('title', $title = __d('me_instagram', 'Photos from {0}', 'Instagram'));
+$this->assign('title', $title = __d('me_cms_instagram', 'Photos from {0}', 'Instagram'));
 
 $this->Asset->script('MeCmsInstagram.instagram', ['block' => 'script_bottom']);
 
@@ -81,7 +81,7 @@ $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
 
     <?php
     if (!empty($nextId)) {
-        echo $this->Html->link(__d('me_instagram', 'Load more'), '#', [
+        echo $this->Html->link(__d('me_cms_instagram', 'Load more'), '#', [
             'id' => 'load-more',
             'data-href' => $this->Url->build([$nextId]),
         ]);

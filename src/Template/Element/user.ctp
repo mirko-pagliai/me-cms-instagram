@@ -49,20 +49,20 @@
 
             <p id="counts">
                 <span>
-                    <?= __d('me_instagram', '{0} posts', $this->Html->strong($user->counts->media)) ?>
+                    <?= __d('me_cms_instagram', '{0} posts', $this->Html->strong($user->counts->media)) ?>
                 </span>
                 <span>
-                    <?= __d('me_instagram', '{0} followers', $this->Html->strong($user->counts->followed_by)) ?>
+                    <?= __d('me_cms_instagram', '{0} followers', $this->Html->strong($user->counts->followed_by)) ?>
                 </span>
                 <span>
-                    <?= __d('me_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?>
+                    <?= __d('me_cms_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?>
                 </span>
             </p>
 
             <?php
             if (config('default.follow_me')) {
                 echo $this->Html->button(
-                    __d('me_instagram', 'Follow me on {0}', 'Instagram'),
+                    __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
                     sprintf('//instagram.com/%s', $user->username),
                     ['class' => 'btn-lg btn-success', 'icon' => 'instagram']
                 );
