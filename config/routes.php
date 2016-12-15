@@ -28,7 +28,7 @@ Router::extensions('rss');
 /**
  * MeInstagram routes
  */
-Router::scope('/', ['plugin' => MEINSTAGRAM], function ($routes) {
+Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function ($routes) {
     //Instagram
     if (!$routes->nameExists('instagramPhotos')) {
         $routes->connect(

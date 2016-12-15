@@ -21,7 +21,7 @@
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  * @see         MeCms\Utility\SitemapBuilder
  */
-namespace MeInstagram\Utility;
+namespace MeCmsInstagram\Utility;
 
 use MeCms\Utility\SitemapBuilder;
 

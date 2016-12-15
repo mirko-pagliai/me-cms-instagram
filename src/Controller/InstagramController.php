@@ -20,12 +20,12 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-namespace MeInstagram\Controller;
+namespace MeCmsInstagram\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Network\Exception\NotFoundException;
 use MeCms\Controller\AppController;
-use MeInstagram\Utility\Instagram;
+use MeCmsInstagram\Utility\Instagram;
 
 /**
  * Instagram controller

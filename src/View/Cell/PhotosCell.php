@@ -20,11 +20,11 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-namespace MeInstagram\View\Cell;
+namespace MeCmsInstagram\View\Cell;
 
 use Cake\Cache\Cache;
 use Cake\View\Cell;
-use MeInstagram\Utility\Instagram;
+use MeCmsInstagram\Utility\Instagram;
 
 /**
  * Photos cell

@@ -20,7 +20,7 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-namespace MeInstagram\Utility;
+namespace MeCmsInstagram\Utility;
 
 use Cake\Http\Client;
 use Cake\Network\Exception\NotFoundException;
