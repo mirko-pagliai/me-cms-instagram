@@ -26,7 +26,7 @@ Router::defaultRouteClass('DashedRoute');
 Router::extensions('rss');
 
 /**
- * MeInstagram routes
+ * Plugin routes
  */
 Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function ($routes) {
     //Instagram

@@ -35,7 +35,7 @@ class PhotosCell extends Cell
      * Internal method to get the latest photos
      * @param int $limit Limit
      * @return array
-     * @uses MeInstagram\Utility\Instagram::recent()
+     * @uses MeCmsInstagram\Utility\Instagram::recent()
      */
     protected function _latest($limit = 15)
     {

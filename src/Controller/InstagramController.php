@@ -41,7 +41,7 @@ class InstagramController extends AppController
      * @return void
      * @see http://api.cakephp.org/3.3/class-Cake.Controller.Controller.html#_beforeRender
      * @uses MeCms\Controller\AppController::beforeRender()
-     * @uses MeInstagram\Utility\Instagram::user()
+     * @uses MeCmsInstagram\Utility\Instagram::user()
      */
     public function beforeRender(\Cake\Event\Event $event)
     {
@@ -64,7 +64,7 @@ class InstagramController extends AppController
      * Lists photos from Istangram
      * @param string $id Request ID ("Next ID" for Istangram)
      * @return void
-     * @uses MeInstagram\Utility\Instagram::recent()
+     * @uses MeCmsInstagram\Utility\Instagram::recent()
      */
     public function index($id = null)
     {
@@ -93,7 +93,7 @@ class InstagramController extends AppController
      * Views a photo
      * @param string $id Media ID
      * @return \Cake\Network\Response|null|void
-     * @uses MeInstagram\Utility\Instagram::media()
+     * @uses MeCmsInstagram\Utility\Instagram::media()
      */
     public function view($id)
     {
