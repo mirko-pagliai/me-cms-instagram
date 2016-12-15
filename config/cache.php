@@ -22,7 +22,7 @@
  */
 
 if (!defined('MECMS_INSTAGRAM_CACHE')) {
-    define('MECMS_INSTAGRAM_CACHE', CACHE . 'me_instagram' . DS);
+    define('MECMS_INSTAGRAM_CACHE', CACHE . 'me_cms_instagram' . DS);
 }
 
 return ['Cache' => [
