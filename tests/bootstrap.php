@@ -141,7 +141,11 @@ Plugin::load('MeCms', [
 
 require_once VENDOR . 'mirko-pagliai' . DS . 'me-cms' . DS . 'config' . DS . 'bootstrap_base.php';
 
-Plugin::load('MeCmsInstagram', ['bootstrap' => true, 'path' => ROOT]);
+Plugin::load('MeCmsInstagram', [
+    'bootstrap' => true,
+    'path' => ROOT,
+    'routes' => true,
+]);
 
 DispatcherFactory::add('Routing');
 DispatcherFactory::add('ControllerFactory');
