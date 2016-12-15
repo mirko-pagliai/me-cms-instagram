@@ -1,4 +1,8 @@
 # 1.x branch
+## 1.3 branch
+### 1.3.0
+* renamed repository and package. Now is `me-cms-instagram`.
+
 ## 1.2 branch
 ### 1.2.6
 * updated for MeCms 2.14.10.
