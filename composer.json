@@ -1,7 +1,7 @@
 {
     "name": "mirko-pagliai/me-instagram",
-    "description": "MeInstagram plugin for MeCms",
-    "homepage": "https://github.com/mirko-pagliai/me-instagram",
+    "description": "Instagram plugin for MeCms",
+    "homepage": "https://github.com/mirko-pagliai/me-cms-instagram",
     "type": "cakephp-plugin",
     "license": "AGPL",
     "authors": [{
@@ -23,6 +23,5 @@
         "psr-4": {
             "MeInstagram\\": "src"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
