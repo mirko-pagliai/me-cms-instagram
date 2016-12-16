@@ -52,7 +52,7 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($user)) {
-            $user = Instagram::user();
+            $user = (new Instagram)->user();
 
             Cache::write($cache, $user, 'instagram');
         }
@@ -81,7 +81,7 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($photos)) {
-            list($photos, $nextId) = Instagram::recent($id, config('default.photos'));
+            list($photos, $nextId) = (new Instagram)->recent($id, config('default.photos'));
 
             Cache::write($cache, [$photos, $nextId], 'instagram');
         }
@@ -104,7 +104,7 @@ class InstagramController extends AppController
         if (empty($photo)) {
             //It tries to get the media (photo). If an exception is thrown, redirects to index
             try {
-                $photo = Instagram::media($id);
+                $photo = (new Instagram)->media($id);
             } catch (NotFoundException $e) {
                 return $this->redirect(['action' => 'index'], 301);
             }

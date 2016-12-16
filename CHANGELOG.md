@@ -1,6 +1,7 @@
 # 1.x branch
 ## 1.3 branch
 ### 1.3.0
+* `Istangram` class does not contain more static methods;
 * renamed repository and package. Now is `me-cms-instagram`.
 
 ## 1.2 branch

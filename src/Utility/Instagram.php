@@ -31,27 +31,90 @@ use Cake\Network\Exception\NotFoundException;
 class Instagram
 {
     /**
+     * API access token
+     * @var string
+     */
+    protected $key;
+
+    /**
+     * Construct
+     * @param string $key API access token
+     * @uses $key
+     */
+    public function __construct($key = null)
+    {
+        if (empty($key)) {
+            $key = config('Instagram.key');
+        }
+
+        $this->key = $key;
+    }
+
+    /**
+     * Internal method to get a media response
+     * @param string $id Media ID
+     * @return mixed The response body
+     * @uses $key
+     */
+    protected function _getMediaResponse($id)
+    {
+        return (new Client())
+            ->get('https://api.instagram.com/v1/media/' . $id . '?access_token=' . $this->key)
+            ->body();
+    }
+
+    /**
+     * Internal method to get a "recent" response
+     * @param string $id Request ID ("Next ID" for Istangram)
+     * @param int $limit Limit
+     * @return mixed The response body
+     * @uses $key
+     */
+    protected function _getRecentResponse($id = null, $limit = 15)
+    {
+        $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token= ' . $this->key;
+
+        //Adds the request ID ("Next ID" for Istangram) to the url
+        if (!empty($id)) {
+            $url .= '&max_id=' . $id;
+        }
+
+        return (new Client())->get($url)->body();
+    }
+
+    /**
+     * Internal method to get an user response
+     * @return mixed The response body
+     * @uses $key
+     */
+    protected function _getUserResponse()
+    {
+        return (new Client())
+            ->get('https://api.instagram.com/v1/users/self/?access_token=' . $this->key)
+            ->body();
+    }
+
+    /**
      * Gets a media object
      * @param string $id Media ID
      * @return object
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
      * @throws NotFoundException
+     * @uses _getMediaResponse()
      */
-    public static function media($id)
+    public function media($id)
     {
-        $url = sprintf('https://api.instagram.com/v1/media/%s?access_token=%s', $id, config('Instagram.key'));
+        $photo = json_decode($this->_getMediaResponse($id));
 
-        $response = (new Client())->get($url);
-        $photo = json_decode($response->body(), true);
-
-        if (empty($photo['data']['images']['standard_resolution']['url'])) {
+        if (empty($photo->data->images->standard_resolution->url)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
         }
 
-        return (object)am([
-            'filename' => explode('?', basename($photo['data']['images']['standard_resolution']['url']), 2)[0],
-            'path' => $photo['data']['images']['standard_resolution']['url'],
-        ], compact('id'));
+        $object = (object)compact('id');
+        $object->path = $photo->data->images->standard_resolution->url;
+        $object->filename = explode('?', basename($object->path), 2)[0];
+
+        return $object;
     }
 
     /**
@@ -60,57 +123,48 @@ class Instagram
      * @param int $limit Limit
      * @return array Array with photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
+     * @uses _getRecentResponse()
      * @throws NotFoundException
      */
-    public static function recent($id = null, $limit = 15)
+    public function recent($id = null, $limit = 15)
     {
-        $url = sprintf('https://api.instagram.com/v1/users/self/media/recent/?count=%s&access_token=%s', $limit, config('Instagram.key'));
+        $photos = json_decode($this->_getRecentResponse($id, $limit));
 
-        //Adds the request ID ("Next ID" for Istangram) to the url
-        if (!empty($id)) {
-            $url = sprintf('%s&max_id=%s', $url, $id);
-        }
-
-        $response = (new Client())->get($url);
-        $photos = json_decode($response->body(), true);
-
-        if (empty($photos['data'])) {
+        if (empty($photos->data)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
         }
 
-        $nextId = empty($photos['pagination']['next_max_id']) ? null : $photos['pagination']['next_max_id'];
+        $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
 
         $photos = array_map(function ($photo) {
-            return (object)[
-                'id' => $photo['id'],
-                'description' => $photo['caption']['text'],
-                'link' => $photo['link'],
-                'path' => $photo['images']['standard_resolution']['url'],
-            ];
-        }, $photos['data']);
+            $object = new \stdClass;
+            $object->id = $photo->id;
+            $object->link = $photo->link;
+            $object->path = $photo->images->standard_resolution->url;
+            $object->filename = explode('?', basename($object->path), 2)[0];
+            $object->description = empty($photo->caption->text) ? null : $photo->caption->text;
+
+            return $object;
+        }, $photos->data);
 
         return [$photos, $nextId];
     }
 
     /**
-     * Gets information about the owner of the token.
+     * Gets information about the owner of the token
      * @return object
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
      * @throws NotFoundException
+     * @uses _getUserResponse()
      */
-    public static function user()
+    public function user()
     {
-        $url = sprintf('https://api.instagram.com/v1/users/self/?access_token=%s', config('Instagram.key'));
+        $user = json_decode($this->_getUserResponse());
 
-        $response = (new Client())->get($url);
-        $user = json_decode($response->body(), true);
-
-        if (empty($user['data'])) {
+        if (empty($user->data)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
         }
 
-        return (object)array_map(function ($v) {
-            return is_array($v) ? (object)$v : $v;
-        }, $user['data']);
+        return $user->data;
     }
 }
