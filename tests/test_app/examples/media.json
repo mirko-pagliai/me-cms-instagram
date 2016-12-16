@@ -18,7 +18,7 @@
         },
         "images": {
             "low_resolution": {
-                "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyLow",
+                "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyLow",
                 "width": 320,
                 "height": 267
             },

@@ -22,17 +22,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -73,17 +73,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -124,17 +124,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/3.png?ig_cache_key=cacheKey3Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/3.png?ig_cache_key=cacheKey3Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/3.png?ig_cache_key=cacheKey3Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/3.png?ig_cache_key=cacheKey3Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/3.png?ig_cache_key=cacheKey3Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/3.png?ig_cache_key=cacheKey3Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -175,17 +175,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/4.png?ig_cache_key=cacheKey4Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/4.png?ig_cache_key=cacheKey4Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/4.png?ig_cache_key=cacheKey4Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/4.png?ig_cache_key=cacheKey4Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/4.png?ig_cache_key=cacheKey4Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/4.png?ig_cache_key=cacheKey4Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -226,17 +226,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/5.png?ig_cache_key=cacheKey5Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/5.png?ig_cache_key=cacheKey5Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/5.png?ig_cache_key=cacheKey5Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/5.png?ig_cache_key=cacheKey5Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/5.png?ig_cache_key=cacheKey5Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/5.png?ig_cache_key=cacheKey5Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -277,17 +277,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/6.png?ig_cache_key=cacheKey6Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/6.png?ig_cache_key=cacheKey6Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/6.png?ig_cache_key=cacheKey6Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/6.png?ig_cache_key=cacheKey6Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/6.png?ig_cache_key=cacheKey6Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/6.png?ig_cache_key=cacheKey6Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -328,17 +328,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/7.png?ig_cache_key=cacheKey7Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/7.png?ig_cache_key=cacheKey7Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/7.png?ig_cache_key=cacheKey7Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/7.png?ig_cache_key=cacheKey7Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/7.png?ig_cache_key=cacheKey7Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/7.png?ig_cache_key=cacheKey7Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -379,17 +379,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/8.png?ig_cache_key=cacheKey8Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/8.png?ig_cache_key=cacheKey8Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/8.png?ig_cache_key=cacheKey8Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/8.png?ig_cache_key=cacheKey8Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/8.png?ig_cache_key=cacheKey8Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/8.png?ig_cache_key=cacheKey8Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -430,17 +430,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/9.png?ig_cache_key=cacheKey9Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/9.png?ig_cache_key=cacheKey9Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/9.png?ig_cache_key=cacheKey9Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/9.png?ig_cache_key=cacheKey9Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/9.png?ig_cache_key=cacheKey9Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/9.png?ig_cache_key=cacheKey9Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -481,17 +481,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/10.png?ig_cache_key=cacheKey10Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/10.png?ig_cache_key=cacheKey10Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/10.png?ig_cache_key=cacheKey10Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/10.png?ig_cache_key=cacheKey10Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/10.png?ig_cache_key=cacheKey10Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/10.png?ig_cache_key=cacheKey10Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -532,17 +532,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/11.png?ig_cache_key=cacheKey11Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/11.png?ig_cache_key=cacheKey11Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/11.png?ig_cache_key=cacheKey11Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/11.png?ig_cache_key=cacheKey11Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/11.png?ig_cache_key=cacheKey11Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/11.png?ig_cache_key=cacheKey11Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -583,17 +583,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/12.png?ig_cache_key=cacheKey12Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/12.png?ig_cache_key=cacheKey12Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/12.png?ig_cache_key=cacheKey12Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/12.png?ig_cache_key=cacheKey12Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/12.png?ig_cache_key=cacheKey12Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/12.png?ig_cache_key=cacheKey12Standard",
                     "width": 640,
                     "height": 534
                 }
