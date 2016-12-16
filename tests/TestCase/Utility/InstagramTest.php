@@ -72,7 +72,7 @@ class InstagramTest extends TestCase
         $this->Instagram->expects($this->once())
             ->method('_getMediaResponse')
             ->will($this->returnCallback(function () {
-                return file_get_contents(APP . 'examples' . DS . 'media.json');
+                return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
             }));
 
         $this->assertEquals((object)[
@@ -106,7 +106,7 @@ class InstagramTest extends TestCase
         $this->Instagram->expects($this->any())
             ->method('_getRecentResponse')
             ->will($this->returnCallback(function () {
-                return file_get_contents(APP . 'examples' . DS . 'recent.json');
+                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
             }));
 
         list($photos, $nextId) = $this->Instagram->recent();
@@ -155,7 +155,7 @@ class InstagramTest extends TestCase
         $this->Instagram->expects($this->once())
             ->method('_getUserResponse')
             ->will($this->returnCallback(function () {
-                return file_get_contents(APP . 'examples' . DS . 'user.json');
+                return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
             }));
 
         $this->assertEquals((object)[

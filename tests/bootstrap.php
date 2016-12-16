@@ -38,9 +38,10 @@ define('VENDOR', ROOT . 'vendor' . DS);
 define('CAKE_CORE_INCLUDE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
 define('CORE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp' . DS);
 define('CAKE', CORE_PATH . 'src' . DS);
-define('TESTS', ROOT . 'tests');
-define('APP', ROOT . 'tests' . DS . 'test_app' . DS);
-define('APP_DIR', 'test_app');
+define('TESTS', ROOT . 'tests' . DS);
+define('TEST_APP', TESTS . 'test_app' . DS);
+define('APP', TEST_APP . 'TestApp' . DS);
+define('APP_DIR', 'TestApp');
 define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', APP . 'webroot' . DS);
 define('TMP', sys_get_temp_dir() . DS);
@@ -115,11 +116,12 @@ Configure::write('Session', [
     'defaults' => 'php'
 ]);
 
-Configure::write('Assets.force', true);
 Configure::write('Assets.target', TMP . 'assets');
+Configure::write('Thumbs.target', TMP . 'thumbs');
 
 //@codingStandardsIgnoreStart
 @mkdir(Configure::read('Assets.target'));
+@mkdir(Configure::read('Thumbs.target'));
 //@codingStandardsIgnoreEnd
 
 /**
@@ -132,6 +134,10 @@ Plugin::load('Assets', [
 Plugin::load('MeTools', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'me-tools' . DS,
+]);
+Plugin::load('Thumber', [
+    'bootstrap' => true,
+    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-thumber' . DS,
 ]);
 Plugin::load('MeCms', [
     'bootstrap' => false, //Doesn't load the bootstrap
