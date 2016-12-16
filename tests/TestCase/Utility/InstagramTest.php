@@ -77,8 +77,9 @@ class InstagramTest extends TestCase
 
         $this->assertEquals((object)[
             'id' => 1,
-            'path' => 'http://example/photo_standard.jpg?ig_cache_key=cacheKeyStandard',
-            'filename' => 'photo_standard.jpg',
+            'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard',
+            'filename' => '1.png',
+
         ], $this->Instagram->media(1));
     }
 
@@ -125,8 +126,8 @@ class InstagramTest extends TestCase
                 'id' => '9999999999999999999_999999' . sprintf('%02d', $i),
                 'description' => 'Example text ' . $i,
                 'link' => 'http://example/link' . $i . '/',
-                'path' => 'http://example/photo' . $i . '_standard.jpg?ig_cache_key=cacheKey' . $i . 'Standard',
-                'filename' => 'photo' . $i . '_standard.jpg',
+                'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/' . $i . '.png?ig_cache_key=cacheKey' . $i . 'Standard',
+                'filename' => $i . '.png',
             ], (array)$photo);
         }
     }

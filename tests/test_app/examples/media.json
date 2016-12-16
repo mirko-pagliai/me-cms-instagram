@@ -18,17 +18,17 @@
         },
         "images": {
             "low_resolution": {
-                "url": "http://example/photo_low.jpg?ig_cache_key=cacheKeyLow",
+                "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyLow",
                 "width": 320,
                 "height": 267
             },
             "thumbnail": {
-                "url": "http://example/photo_thumb.jpg?ig_cache_key=cacheKeyThumb",
+                "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyThumb",
                 "width": 150,
                 "height": 150
             },
             "standard_resolution": {
-                "url": "http://example/photo_standard.jpg?ig_cache_key=cacheKeyStandard",
+                "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard",
                 "width": 640,
                 "height": 534
             }
