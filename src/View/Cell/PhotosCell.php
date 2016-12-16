@@ -44,7 +44,7 @@ class PhotosCell extends Cell
 
         //If the data are not available from the cache
         if (empty($photos)) {
-            list($photos) = Instagram::recent(null, $limit);
+            list($photos) = (new Instagram)->recent(null, $limit);
 
             Cache::write($cache, $photos, 'instagram');
         }
