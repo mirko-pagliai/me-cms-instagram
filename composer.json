@@ -24,5 +24,10 @@
             "MeCmsInstagram\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "MeCmsInstagram\\Test\\": "tests"
+        }
+    },
     "minimum-stability": "dev"
 }
