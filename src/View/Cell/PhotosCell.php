@@ -23,6 +23,8 @@
 namespace MeCmsInstagram\View\Cell;
 
 use Cake\Cache\Cache;
+use Cake\Network\Request;
+use Cake\Network\Response;
 use Cake\View\Cell;
 use MeCmsInstagram\Utility\Instagram;
 
@@ -32,9 +34,44 @@ use MeCmsInstagram\Utility\Instagram;
 class PhotosCell extends Cell
 {
     /**
+     * Instagram instance
+     * @var \MeCmsInstagram\Utility\Instagram|object
+     */
+    protected $InstagramInstance;
+
+    /**
+     * Construct
+     * @param Request $request The request to use in the cell
+     * @param Response $response The response to use in the cell
+     * @param \Cake\Event\EventManager $eventManager The eventManager to bind
+     *  events to
+     * @param array $cellOptions Cell options to apply
+     * @return void
+     * @uses $InstagramInstance
+     */
+    public function __construct(
+        Request $request = null,
+        Response $response = null,
+        \Cake\Event\EventManager $eventManager = null,
+        array $cellOptions = []
+    ) {
+        //Sets the Instagram instance
+        if (empty($cellOptions['instagramInstance'])) {
+            $this->InstagramInstance = new Instagram;
+        } else {
+            $this->InstagramInstance = $cellOptions['instagramInstance'];
+        }
+
+        unset($cellOptions['instagramInstance']);
+
+        parent::__construct($request, $response, $eventManager, $cellOptions);
+    }
+
+    /**
      * Internal method to get the latest photos
      * @param int $limit Limit
      * @return array
+     * @uses $InstagramInstance
      * @uses MeCmsInstagram\Utility\Instagram::recent()
      */
     protected function _latest($limit = 15)
@@ -44,7 +81,7 @@ class PhotosCell extends Cell
 
         //If the data are not available from the cache
         if (empty($photos)) {
-            list($photos) = (new Instagram)->recent(null, $limit);
+            list($photos) = $this->InstagramInstance->recent(null, $limit);
 
             Cache::write($cache, $photos, 'instagram');
         }

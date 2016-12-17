@@ -38,6 +38,6 @@ foreach ($photos as $photo) {
     echo $this->Html->link(
         $this->Thumb->fit($photo->path, ['width' => 253]),
         ['_name' => 'instagramPhotos'],
-        ['class' => 'thumbnail']
+        ['class' => 'thumbnail', 'title' => $photo->description]
     );
 }
