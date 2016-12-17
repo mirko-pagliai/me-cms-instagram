@@ -153,6 +153,11 @@ class PhotosCellTest extends TestCase
         //Removes new lines and spaces from render
         $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
         $this->assertHtml($expected, $result);
+
+        //Sets `Instagram` controller
+        $this->PhotosCell = $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::latest');
+        $this->PhotosCell->request->params['controller'] = 'Instagram';
+        $this->assertEmpty($this->PhotosCell->render());
     }
 
     /**
@@ -202,5 +207,10 @@ class PhotosCellTest extends TestCase
         //Removes new lines and spaces from render
         $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
         $this->assertHtml($expected, $result);
+
+        //Sets `Instagram` controller
+        $this->PhotosCell = $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::random');
+        $this->PhotosCell->request->params['controller'] = 'Instagram';
+        $this->assertEmpty($this->PhotosCell->render());
     }
 }
