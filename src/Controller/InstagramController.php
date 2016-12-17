@@ -33,6 +33,15 @@ use MeCms\Controller\AppController;
 class InstagramController extends AppController
 {
     /**
+     * Returns an `Instagram` instance
+     * @return \MeCmsInstagram\Utility\Instagram
+     */
+    protected function _getInstagramInstance()
+    {
+        return new Instagram;
+    }
+
+    /**
      * Called after the controller action is run, but before the view is
      * rendered.
      * You can use this method to perform logic or set view variables that
@@ -52,7 +61,7 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($user)) {
-            $user = (new Instagram)->user();
+            $user = $this->_getInstagramInstance()->user();
 
             Cache::write($cache, $user, 'instagram');
         }
@@ -81,7 +90,7 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($photos)) {
-            list($photos, $nextId) = (new Instagram)->recent($id, config('default.photos'));
+            list($photos, $nextId) = $this->_getInstagramInstance()->recent($id, config('default.photos'));
 
             Cache::write($cache, [$photos, $nextId], 'instagram');
         }
@@ -104,9 +113,9 @@ class InstagramController extends AppController
         if (empty($photo)) {
             //It tries to get the media (photo). If an exception is thrown, redirects to index
             try {
-                $photo = (new Instagram)->media($id);
+                $photo = $this->_getInstagramInstance()->media($id);
             } catch (NotFoundException $e) {
-                return $this->redirect(['action' => 'index'], 301);
+                return $this->redirect(['_name' => 'instagramPhotos'], 301);
             }
 
             Cache::write($cache, $photo, 'instagram');
