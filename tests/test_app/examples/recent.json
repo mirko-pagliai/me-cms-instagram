@@ -73,17 +73,17 @@
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Low",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey2Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Thumb",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey2Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/2.png?ig_cache_key=cacheKey2Standard",
+                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey2Standard",
                     "width": 640,
                     "height": 534
                 }
