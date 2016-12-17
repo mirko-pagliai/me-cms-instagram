@@ -50,8 +50,6 @@ class PhotosCellTest extends TestCase
     {
         parent::setUp();
 
-        Configure::write('App.namespace', 'TestApp');
-
         $this->View = new View(
             $this->getMockBuilder(Request::class)->getMock(),
             $this->getMockBuilder(Response::class)->getMock(),
