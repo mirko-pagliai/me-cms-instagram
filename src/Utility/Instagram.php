@@ -136,6 +136,8 @@ class Instagram
 
         $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
 
+        $photos = array_slice($photos->data, 0, $limit);
+
         $photos = array_map(function ($photo) {
             $object = new \stdClass;
             $object->id = $photo->id;
@@ -145,7 +147,7 @@ class Instagram
             $object->description = empty($photo->caption->text) ? null : $photo->caption->text;
 
             return $object;
-        }, $photos->data);
+        }, $photos);
 
         return [$photos, $nextId];
     }
