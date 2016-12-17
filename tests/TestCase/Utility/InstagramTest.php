@@ -45,6 +45,8 @@ class InstagramTest extends TestCase
     {
         parent::setUp();
 
+        Cache::disable();
+
         $this->Instagram = new Instagram;
     }
 

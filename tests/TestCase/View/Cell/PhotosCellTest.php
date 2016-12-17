@@ -22,6 +22,8 @@
  */
 namespace MeCmsInstagram\Test\TestCase\View\Cell;
 
+use Cake\Cache\Cache;
+use Cake\Network\Request;
 use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Instagram;
 use MeCmsInstagram\View\Cell\PhotosCell;
@@ -33,6 +35,16 @@ use MeCms\View\View\AppView;
 class PhotosCellTest extends TestCase
 {
     /**
+     * @var \MeCmsInstagram\View\Cell\PhotosCell
+     */
+    protected $PhotosCell;
+
+    /**
+     * @var \MeCms\View\View\AppView
+     */
+    protected $View;
+
+    /**
      * Setup the test case, backup the static object values so they can be
      * restored. Specifically backs up the contents of Configure and paths in
      *  App if they have not already been backed up
@@ -42,9 +54,13 @@ class PhotosCellTest extends TestCase
     {
         parent::setUp();
 
+        Cache::disable();
+
+        $this->View = new AppView;
+
         $this->PhotosCell = $this->getMockBuilder(PhotosCell::class)
             ->setMethods(['_getInstagramInstance'])
-            ->setConstructorArgs([$this->getMockBuilder('Cake\Network\Request')->getMock()])
+            ->setConstructorArgs([new Request])
             ->getMock();
 
         $this->PhotosCell->expects($this->any())
@@ -65,7 +81,7 @@ class PhotosCellTest extends TestCase
 
         $this->PhotosCell->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
         $this->PhotosCell->viewBuilder()->templatePath('Cell/Photos');
-        $this->PhotosCell->viewClass = get_class(new AppView);
+        $this->PhotosCell->viewClass = get_class($this->View);
     }
 
     /**
@@ -76,7 +92,18 @@ class PhotosCellTest extends TestCase
     {
         parent::tearDown();
 
-        unset($this->PhotosCell);
+        unset($this->PhotosCell, $this->View);
+    }
+
+    /**
+     * Test withoud mocking the `Instagram` object
+     * @expectedException Cake\Network\Exception\NotFoundException
+     * @expectedExceptionMessage Record not found
+     * @test
+     */
+    public function testWithoutMockingInstagram()
+    {
+        $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::latest')->render();
     }
 
     /**
