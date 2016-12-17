@@ -42,7 +42,7 @@ Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function ($routes) {
     $routes->connect(
         '/instagram/:id',
         ['controller' => 'Instagram', 'action' => 'index'],
-        ['id' => '\d+_\d+', 'pass' => ['id']]
+        ['_name' => 'instagramPhotosId', 'id' => '\d+_\d+', 'pass' => ['id']]
     );
 
     //Instragram photo

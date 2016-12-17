@@ -83,7 +83,7 @@ $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
     if (!empty($nextId)) {
         echo $this->Html->link(__d('me_cms_instagram', 'Load more'), '#', [
             'id' => 'load-more',
-            'data-href' => $this->Url->build([$nextId]),
+            'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
         ]);
     }
     ?>
