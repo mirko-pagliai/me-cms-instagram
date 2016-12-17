@@ -115,7 +115,7 @@ class InstagramTest extends TestCase
 
         list($photos, $nextId) = $this->Instagram->recent();
 
-        $this->assertEquals('nextIdValue', $nextId);
+        $this->assertEquals('111_222', $nextId);
         $this->assertEquals(12, count($photos));
 
         $i = 0;

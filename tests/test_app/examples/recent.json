@@ -1,7 +1,7 @@
 {
     "pagination": {
         "next_url": "http://example/recent?access_token=accessTokenValue",
-        "next_max_id": "nextIdValue"
+        "next_max_id": "111_222"
     },
     "meta": {
         "code": 200
