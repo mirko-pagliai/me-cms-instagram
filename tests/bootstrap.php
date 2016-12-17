@@ -138,6 +138,7 @@ Plugin::load('MeTools', [
 Plugin::load('Thumber', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-thumber' . DS,
+    'routes' => true,
 ]);
 Plugin::load('MeCms', [
     'bootstrap' => false, //Doesn't load the bootstrap
