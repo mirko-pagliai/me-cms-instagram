@@ -27,7 +27,7 @@
     "autoload-dev": {
         "psr-4": {
             "MeCmsInstagram\\Test\\": "tests",
-            "TestApp\\": "tests/test_app/TestApp"
+            "App\\": "tests/test_app/TestApp"
         }
     },
     "minimum-stability": "dev"

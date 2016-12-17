@@ -22,24 +22,16 @@
  */
 namespace MeCmsInstagram\Test\TestCase\View\Cell;
 
-use Cake\Core\Configure;
-use Cake\Event\EventManager;
-use Cake\Network\Request;
-use Cake\Network\Response;
 use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Instagram;
-use TestApp\View\AppView as View;
+use MeCmsInstagram\View\Cell\PhotosCell;
+use MeCms\View\View\AppView;
 
 /**
  * PhotosCellTest class
  */
 class PhotosCellTest extends TestCase
 {
-    /**
-     * @var \TestApp\View\AppView
-     */
-    protected $View;
-
     /**
      * Setup the test case, backup the static object values so they can be
      * restored. Specifically backs up the contents of Configure and paths in
@@ -50,11 +42,30 @@ class PhotosCellTest extends TestCase
     {
         parent::setUp();
 
-        $this->View = new View(
-            $this->getMockBuilder(Request::class)->getMock(),
-            $this->getMockBuilder(Response::class)->getMock(),
-            new EventManager
-        );
+        $this->PhotosCell = $this->getMockBuilder(PhotosCell::class)
+            ->setMethods(['_getInstagramInstance'])
+            ->setConstructorArgs([$this->getMockBuilder('Cake\Network\Request')->getMock()])
+            ->getMock();
+
+        $this->PhotosCell->expects($this->any())
+            ->method('_getInstagramInstance')
+            ->will($this->returnCallback(function () {
+                $instagram = $this->getMockBuilder(Instagram::class)
+                    ->setMethods(['_getRecentResponse'])
+                    ->getMock();
+
+                $instagram->expects($this->any())
+                    ->method('_getRecentResponse')
+                    ->will($this->returnCallback(function () {
+                        return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
+                    }));
+
+                return $instagram;
+            }));
+
+        $this->PhotosCell->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
+        $this->PhotosCell->viewBuilder()->templatePath('Cell/Photos');
+        $this->PhotosCell->viewClass = get_class(new AppView);
     }
 
     /**
@@ -65,7 +76,7 @@ class PhotosCellTest extends TestCase
     {
         parent::tearDown();
 
-        unset($this->View);
+        unset($this->PhotosCell);
     }
 
     /**
@@ -74,17 +85,7 @@ class PhotosCellTest extends TestCase
      */
     public function testLatest()
     {
-        $mock = $this->getMockBuilder(Instagram::class)
-            ->setMethods(['_getRecentResponse'])
-            ->getMock();
-
-        $mock->expects($this->any())
-            ->method('_getRecentResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-            }));
-
-        $cell = $this->View->cell('MeCmsInstagram.Photos::latest', ['limit' => 1], ['instagramInstance' => $mock]);
+        $this->PhotosCell->action = $this->PhotosCell->template = 'latest';
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -100,11 +101,11 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $cell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
         $this->assertHtml($expected, $result);
-        $this->assertEquals('latest', $cell->template);
+        $this->assertEquals('latest', $this->PhotosCell->template);
 
-        $cell = $this->View->cell('MeCmsInstagram.Photos::latest', ['limit' => 2], ['instagramInstance' => $mock]);
+        $this->PhotosCell->args = ['limit' => 2];
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -123,7 +124,7 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $cell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
         $this->assertHtml($expected, $result);
     }
 
@@ -133,17 +134,7 @@ class PhotosCellTest extends TestCase
      */
     public function testRandom()
     {
-        $mock = $this->getMockBuilder(Instagram::class)
-            ->setMethods(['_getRecentResponse'])
-            ->getMock();
-
-        $mock->expects($this->any())
-            ->method('_getRecentResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-            }));
-
-        $cell = $this->View->cell('MeCmsInstagram.Photos::random', ['limit' => 1], ['instagramInstance' => $mock]);
+        $this->PhotosCell->action = $this->PhotosCell->template = 'random';
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -159,11 +150,11 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $cell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
         $this->assertHtml($expected, $result);
-        $this->assertEquals('random', $cell->template);
+        $this->assertEquals('random', $this->PhotosCell->template);
 
-        $cell = $this->View->cell('MeCmsInstagram.Photos::random', ['limit' => 2], ['instagramInstance' => $mock]);
+        $this->PhotosCell->args = ['limit' => 2];
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -182,7 +173,7 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $cell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
         $this->assertHtml($expected, $result);
     }
 }
