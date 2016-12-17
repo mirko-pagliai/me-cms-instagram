@@ -22,6 +22,7 @@
  */
 namespace MeCmsInstagram\Test\TestCase\Utility;
 
+use Cake\Cache\Cache;
 use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Instagram;
 
