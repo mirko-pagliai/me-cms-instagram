@@ -66,7 +66,7 @@ class InstallShellTest extends TestCase
         $io->level(2);
 
         $this->InstallShell = $this->getMockBuilder(InstallShell::class)
-            ->setMethods(['in', '_stop'])
+            ->setMethods(['_stop', 'copyConfig'])
             ->setConstructorArgs([$io])
             ->getMock();
     }
@@ -91,6 +91,33 @@ class InstallShellTest extends TestCase
         $this->assertEquals([
             'MeCmsInstagram.me_cms_instagram',
         ], $this->getProperty($this->InstallShell, 'config'));
+    }
+
+    /**
+     * Test for `all()` method
+     * @test
+     */
+    public function testAll()
+    {
+        $this->InstallShell->method('copyConfig')
+            ->will($this->returnCallback(function () {
+                $this->out->write('called `copyConfig`');
+            }));
+
+        //Calls with `force` options
+        $this->InstallShell->params['force'] = true;
+        $this->InstallShell->all();
+
+        //Calls with no interactive mode
+        unset($this->InstallShell->params['force']);
+        $this->InstallShell->interactive = false;
+        $this->InstallShell->all();
+
+        $this->assertEquals([
+            'called `copyConfig`',
+            'called `copyConfig`',
+        ], $this->out->messages());
+        $this->assertEmpty($this->err->messages());
     }
 
     /**
