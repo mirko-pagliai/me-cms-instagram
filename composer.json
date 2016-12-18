@@ -1,5 +1,5 @@
 {
-    "name": "mirko-pagliai/me-instagram",
+    "name": "mirko-pagliai/me-cms-instagram",
     "description": "Instagram plugin for MeCms",
     "homepage": "https://github.com/mirko-pagliai/me-cms-instagram",
     "type": "cakephp-plugin",
@@ -17,7 +17,8 @@
         "mirko-pagliai/me-cms": ">=2.14.10"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "2.*"
+        "cakephp/cakephp-codesniffer": "2.*",
+        "mirko-pagliai/reflection": "*"
     },
     "autoload": {
         "psr-4": {
