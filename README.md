@@ -1,6 +1,7 @@
 # Instagram plugin for MeCms
 
 [![Build Status](https://travis-ci.org/mirko-pagliai/me-cms-instagram.svg?branch=master)](https://travis-ci.org/mirko-pagliai/me-cms-instagram)
+[![Coverage Status](https://img.shields.io/codecov/c/github/mirko-pagliai/me-cms-instagram.svg?style=flat-square)](https://codecov.io/github/mirko-pagliai/me-cms-instagram)
 
 *me-cms-instagram* plugin allows you to manage Instagram photos with 
 [//github.com/mirko-pagliai/cakephp-for-mecms](MeCms platform).
