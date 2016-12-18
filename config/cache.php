@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of MeInstagram.
+ * This file is part of me-cms-instagram.
  *
- * MeInstagram is free software: you can redistribute it and/or modify
+ * me-cms-instagram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
  *
- * MeInstagram is distributed in the hope that it will be useful,
+ * me-cms-instagram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with MeInstagram.  If not, see <http://www.gnu.org/licenses/>.
+ * along with me-cms-instagram.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
  * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
@@ -21,15 +21,15 @@
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
 
-if (!defined('ME_INSTAGRAM_CACHE')) {
-    define('ME_INSTAGRAM_CACHE', CACHE . 'me_instagram' . DS);
+if (!defined('MECMS_INSTAGRAM_CACHE')) {
+    define('MECMS_INSTAGRAM_CACHE', CACHE . 'me_cms_instagram' . DS);
 }
 
 return ['Cache' => [
     'instagram' => [
         'className' => 'File',
         'duration' => '+1 hour',
-        'path' => ME_INSTAGRAM_CACHE,
+        'path' => MECMS_INSTAGRAM_CACHE,
         'prefix' => '',
         'mask' => 0777,
     ],

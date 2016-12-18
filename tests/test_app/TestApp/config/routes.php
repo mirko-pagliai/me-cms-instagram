@@ -20,24 +20,7 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
+use Cake\Core\Plugin;
 
-if (empty($photos)) {
-    return;
-}
-
-$this->extend('MeCms./Common/widget');
-$this->assign('title', __dn(
-    'me_cms',
-    'Random photo',
-    'Random {0} photos',
-    count($photos),
-    count($photos)
-));
-
-foreach ($photos as $photo) {
-    echo $this->Html->link(
-        $this->Thumb->fit($photo->path, ['width' => 253]),
-        ['_name' => 'instagramPhotos'],
-        ['class' => 'thumbnail', 'title' => $photo->description]
-    );
-}
+//Load all plugin routes
+Plugin::routes();

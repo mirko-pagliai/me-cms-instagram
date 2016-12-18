@@ -3,7 +3,7 @@ destination: API
 download: false
 exclude: {*_old, *.old, *.old.*} 
 source: {src}
-main: MeInstagram
+main: me-cms-instagram
 php: false
-title: MeInstagram API
+title: me-cms-instagram API
 todo: true

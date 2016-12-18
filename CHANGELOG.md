@@ -1,4 +1,11 @@
 # 1.x branch
+## 1.3 branch
+### 1.3.0
+* `Istangram` class does not contain more static methods;
+* renamed repository and package. Now is `me-cms-instagram`;
+* little fixes for `PhotosCell` and its templates (widgets);
+* added tests for all classes.
+
 ## 1.2 branch
 ### 1.2.6
 * updated for MeCms 2.14.10.

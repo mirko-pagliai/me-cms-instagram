@@ -1,13 +1,13 @@
-# MeInstagram, plugin for MeCms plugin
+# Instagram plugin for MeCms
 
-[![Build Status](https://travis-ci.org/mirko-pagliai/me-instagram.svg?branch=master)](https://travis-ci.org/mirko-pagliai/me-instagram)
+[![Build Status](https://travis-ci.org/mirko-pagliai/me-cms-instagram.svg?branch=master)](https://travis-ci.org/mirko-pagliai/me-cms-instagram)
 
-This plugin allows you to manage Instagram photos on the 
+*me-cms-instagram* plugin allows you to manage Instagram photos with 
 [//github.com/mirko-pagliai/cakephp-for-mecms](MeCms platform).
 
 To install:
 
-    $ composer require --prefer-dist mirko-pagliai/me-instagram
+    $ composer require --prefer-dist mirko-pagliai/me-cms-instagram
     $ bin/cake me_instagram.install all -v
 
 Then you need to get an 
@@ -15,9 +15,9 @@ Then you need to get an
 and edit `APP/config/instagram_keys.php`.
 
 For widgets provided by this plugin, see 
-[here](//github.com/mirko-pagliai/me-instagram/wiki/Widgets).
+[here](//github.com/mirko-pagliai/me-cms-instagram/wiki/Widgets).
 
 ## Versioning
 For transparency and insight into our release cycle and to maintain backward 
-compatibility, MeInstagram will be maintained under the 
+compatibility, *me-cms-instagram* will be maintained under the 
 [Semantic Versioning guidelines](http://semver.org).

@@ -1,37 +1,46 @@
 <?php
 /**
- * This file is part of MeInstagram.
+ * This file is part of me-cms-instagram.
  *
- * MeInstagram is free software: you can redistribute it and/or modify
+ * me-cms-instagram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
  *
- * MeInstagram is distributed in the hope that it will be useful,
+ * me-cms-instagram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with MeInstagram.  If not, see <http://www.gnu.org/licenses/>.
+ * along with me-cms-instagram.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
  * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-namespace MeInstagram\Controller;
+namespace MeCmsInstagram\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Network\Exception\NotFoundException;
+use MeCmsInstagram\Utility\Instagram;
 use MeCms\Controller\AppController;
-use MeInstagram\Utility\Instagram;
 
 /**
  * Instagram controller
  */
 class InstagramController extends AppController
 {
+    /**
+     * Returns an `Instagram` instance
+     * @return \MeCmsInstagram\Utility\Instagram
+     */
+    protected function _getInstagramInstance()
+    {
+        return new Instagram;
+    }
+
     /**
      * Called after the controller action is run, but before the view is
      * rendered.
@@ -41,7 +50,7 @@ class InstagramController extends AppController
      * @return void
      * @see http://api.cakephp.org/3.3/class-Cake.Controller.Controller.html#_beforeRender
      * @uses MeCms\Controller\AppController::beforeRender()
-     * @uses MeInstagram\Utility\Instagram::user()
+     * @uses MeCmsInstagram\Utility\Instagram::user()
      */
     public function beforeRender(\Cake\Event\Event $event)
     {
@@ -52,7 +61,7 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($user)) {
-            $user = Instagram::user();
+            $user = $this->_getInstagramInstance()->user();
 
             Cache::write($cache, $user, 'instagram');
         }
@@ -64,7 +73,7 @@ class InstagramController extends AppController
      * Lists photos from Istangram
      * @param string $id Request ID ("Next ID" for Istangram)
      * @return void
-     * @uses MeInstagram\Utility\Instagram::recent()
+     * @uses MeCmsInstagram\Utility\Instagram::recent()
      */
     public function index($id = null)
     {
@@ -81,7 +90,7 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($photos)) {
-            list($photos, $nextId) = Instagram::recent($id, config('default.photos'));
+            list($photos, $nextId) = $this->_getInstagramInstance()->recent($id, config('default.photos'));
 
             Cache::write($cache, [$photos, $nextId], 'instagram');
         }
@@ -93,7 +102,7 @@ class InstagramController extends AppController
      * Views a photo
      * @param string $id Media ID
      * @return \Cake\Network\Response|null|void
-     * @uses MeInstagram\Utility\Instagram::media()
+     * @uses MeCmsInstagram\Utility\Instagram::media()
      */
     public function view($id)
     {
@@ -104,9 +113,9 @@ class InstagramController extends AppController
         if (empty($photo)) {
             //It tries to get the media (photo). If an exception is thrown, redirects to index
             try {
-                $photo = Instagram::media($id);
+                $photo = $this->_getInstagramInstance()->media($id);
             } catch (NotFoundException $e) {
-                return $this->redirect(['action' => 'index'], 301);
+                return $this->redirect(['_name' => 'instagramPhotos'], 301);
             }
 
             Cache::write($cache, $photo, 'instagram');

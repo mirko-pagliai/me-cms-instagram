@@ -1,0 +1,57 @@
+{
+    "meta": {
+        "code": 200
+    },
+    "data": {
+        "attribution": null,
+        "tags": [],
+        "type": "image",
+        "location": null,
+        "comments": {
+            "count": 4
+        },
+        "filter": "Lo-fi",
+        "created_time": "1481139879",
+        "link": "http://example/mediaID/",
+        "likes": {
+            "count": 17
+        },
+        "images": {
+            "low_resolution": {
+                "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyLow",
+                "width": 320,
+                "height": 267
+            },
+            "thumbnail": {
+                "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyThumb",
+                "width": 150,
+                "height": 150
+            },
+            "standard_resolution": {
+                "url": "https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard",
+                "width": 640,
+                "height": 534
+            }
+        },
+        "users_in_photo": [],
+        "caption": {
+            "created_time": "1481139879",
+            "text": "Example text",
+            "from": {
+                "username": "myusername",
+                "profile_picture": "https://example/profile.jpg",
+                "id": "99999999",
+                "full_name": "Full Name"
+            },
+            "id": "99999999999999999"
+        },
+        "user_has_liked": false,
+        "id": "9999999999999999999_99999999",
+        "user": {
+            "username": "myusername",
+            "profile_picture": "https://example/profile.jpg",
+            "id": "99999999",
+            "full_name": "Full Name"
+        }
+    }
+}

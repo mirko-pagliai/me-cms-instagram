@@ -1,5 +1,5 @@
 /*!
- * This file is part of MeInstagram.
+ * This file is part of me-cms-instagram.
  * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
  * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License

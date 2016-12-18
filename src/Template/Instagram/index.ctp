@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of MeInstagram.
+ * This file is part of me-cms-instagram.
  *
- * MeInstagram is free software: you can redistribute it and/or modify
+ * me-cms-instagram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
  *
- * MeInstagram is distributed in the hope that it will be useful,
+ * me-cms-instagram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with MeInstagram.  If not, see <http://www.gnu.org/licenses/>.
+ * along with me-cms-instagram.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
  * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
@@ -22,9 +22,9 @@
  */
 
 $this->extend('MeCms./Common/index');
-$this->assign('title', $title = __d('me_instagram', 'Photos from {0}', 'Instagram'));
+$this->assign('title', $title = __d('me_cms_instagram', 'Photos from {0}', 'Instagram'));
 
-$this->Asset->script('MeInstagram.instagram', ['block' => 'script_bottom']);
+$this->Asset->script('MeCmsInstagram.instagram', ['block' => 'script_bottom']);
 
 if (config('default.fancybox')) {
     $this->Library->fancybox();
@@ -81,9 +81,9 @@ $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
 
     <?php
     if (!empty($nextId)) {
-        echo $this->Html->link(__d('me_instagram', 'Load more'), '#', [
+        echo $this->Html->link(__d('me_cms_instagram', 'Load more'), '#', [
             'id' => 'load-more',
-            'data-href' => $this->Url->build([$nextId]),
+            'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
         ]);
     }
     ?>

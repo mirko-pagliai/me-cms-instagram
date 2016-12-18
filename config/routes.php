@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of MeInstagram.
+ * This file is part of me-cms-instagram.
  *
- * MeInstagram is free software: you can redistribute it and/or modify
+ * me-cms-instagram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
  *
- * MeInstagram is distributed in the hope that it will be useful,
+ * me-cms-instagram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with MeInstagram.  If not, see <http://www.gnu.org/licenses/>.
+ * along with me-cms-instagram.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
  * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
@@ -26,9 +26,9 @@ Router::defaultRouteClass('DashedRoute');
 Router::extensions('rss');
 
 /**
- * MeInstagram routes
+ * Plugin routes
  */
-Router::scope('/', ['plugin' => MEINSTAGRAM], function ($routes) {
+Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function ($routes) {
     //Instagram
     if (!$routes->nameExists('instagramPhotos')) {
         $routes->connect(
@@ -42,7 +42,7 @@ Router::scope('/', ['plugin' => MEINSTAGRAM], function ($routes) {
     $routes->connect(
         '/instagram/:id',
         ['controller' => 'Instagram', 'action' => 'index'],
-        ['id' => '\d+_\d+', 'pass' => ['id']]
+        ['_name' => 'instagramPhotosId', 'id' => '\d+_\d+', 'pass' => ['id']]
     );
 
     //Instragram photo

@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of MeInstagram.
+ * This file is part of me-cms-instagram.
  *
- * MeInstagram is free software: you can redistribute it and/or modify
+ * me-cms-instagram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
  *
- * MeInstagram is distributed in the hope that it will be useful,
+ * me-cms-instagram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with MeInstagram.  If not, see <http://www.gnu.org/licenses/>.
+ * along with me-cms-instagram.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
  * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
@@ -26,26 +26,23 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\InternalErrorException;
 use Cake\Utility\Hash;
 
-//Sets the default MeInstagram name
-if (!defined('MEINSTAGRAM')) {
-    define('MEINSTAGRAM', 'MeInstagram');
+//Sets the default me-cms-instagram name
+if (!defined('ME_CMS_INSTAGRAM')) {
+    define('ME_CMS_INSTAGRAM', 'MeCmsInstagram');
 }
 
 /**
- * Loads the MeInstagram configuration
+ * Loads the me-cms-instagram configuration
  */
-Configure::load(sprintf('%s.me_instagram', MEINSTAGRAM));
+Configure::load(sprintf('%s.me_cms_instagram', ME_CMS_INSTAGRAM));
 
 //Merges with the configuration from application, if exists
-if (is_readable(CONFIG . 'me_instagram.php')) {
-    Configure::load('me_instagram');
+if (is_readable(CONFIG . 'me_cms_instagram.php')) {
+    Configure::load('me_cms_instagram');
 }
 
 //Merges with the MeCms configuration
-Configure::write(
-    MECMS,
-    Hash::merge(config(MECMS), Configure::consume(MEINSTAGRAM))
-);
+Configure::write(MECMS, Hash::merge(config(MECMS), Configure::consume(ME_CMS_INSTAGRAM)));
 
 if (!config('Instagram.key') || config('Instagram.key') === 'your-key-here') {
     throw new InternalErrorException('Instagram API access token is missing');
@@ -54,7 +51,7 @@ if (!config('Instagram.key') || config('Instagram.key') === 'your-key-here') {
 /**
  * Loads the cache configuration
  */
-Configure::load(sprintf('%s.cache', MEINSTAGRAM));
+Configure::load(sprintf('%s.cache', ME_CMS_INSTAGRAM));
 
 //Merges with the configuration from application, if exists
 if (is_readable(CONFIG . 'cache.php')) {
