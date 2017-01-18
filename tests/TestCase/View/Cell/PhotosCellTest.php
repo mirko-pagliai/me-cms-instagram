@@ -27,7 +27,7 @@ use Cake\Network\Request;
 use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Instagram;
 use MeCmsInstagram\View\Cell\PhotosCell;
-use MeCms\View\View\AppView;
+use MeCms\View\View\AppView as View;
 
 /**
  * PhotosCellTest class
@@ -56,7 +56,7 @@ class PhotosCellTest extends TestCase
 
         Cache::disable();
 
-        $this->View = new AppView;
+        $this->View = new View;
 
         $this->PhotosCell = $this->getMockBuilder(PhotosCell::class)
             ->setMethods(['_getInstagramInstance'])
