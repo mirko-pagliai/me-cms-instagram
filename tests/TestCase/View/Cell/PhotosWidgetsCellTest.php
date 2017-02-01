@@ -123,6 +123,7 @@ class PhotosWidgetsCellTest extends TestCase
     {
         $this->PhotosWidgetsCell->action = $this->PhotosWidgetsCell->template = 'latest';
 
+        $result = $this->PhotosWidgetsCell->render();
         $expected = [
             ['div' => ['class' => 'widget']],
             'h4' => ['class' => 'widget-title'],
@@ -135,14 +136,11 @@ class PhotosWidgetsCellTest extends TestCase
             '/div',
             '/div',
         ];
-
-        //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
-        $this->assertEquals('latest', $this->PhotosWidgetsCell->template);
 
         $this->PhotosWidgetsCell->args = ['limit' => 2];
 
+        $result = $this->PhotosWidgetsCell->render();
         $expected = [
             ['div' => ['class' => 'widget']],
             'h4' => ['class' => 'widget-title'],
@@ -158,15 +156,12 @@ class PhotosWidgetsCellTest extends TestCase
             '/div',
             '/div',
         ];
-
-        //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
 
         //Sets `Instagram` controller
-        $this->PhotosWidgetsCell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::latest');
-        $this->PhotosWidgetsCell->request->params['controller'] = 'Instagram';
-        $this->assertEmpty($this->PhotosWidgetsCell->render());
+        $cell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::latest');
+        $cell->request->params['controller'] = 'Instagram';
+        $this->assertEmpty($cell->render());
 
         //Tests cache
         $fromCache = Cache::read('widget_latest_1', 'instagram');
@@ -184,6 +179,7 @@ class PhotosWidgetsCellTest extends TestCase
     {
         $this->PhotosWidgetsCell->action = $this->PhotosWidgetsCell->template = 'random';
 
+        $result = $this->PhotosWidgetsCell->render();
         $expected = [
             ['div' => ['class' => 'widget']],
             'h4' => ['class' => 'widget-title'],
@@ -196,14 +192,11 @@ class PhotosWidgetsCellTest extends TestCase
             '/div',
             '/div',
         ];
-
-        //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
-        $this->assertEquals('random', $this->PhotosWidgetsCell->template);
 
         $this->PhotosWidgetsCell->args = ['limit' => 2];
 
+        $result = $this->PhotosWidgetsCell->render();
         $expected = [
             ['div' => ['class' => 'widget']],
             'h4' => ['class' => 'widget-title'],
@@ -219,15 +212,12 @@ class PhotosWidgetsCellTest extends TestCase
             '/div',
             '/div',
         ];
-
-        //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
 
         //Sets `Instagram` controller
-        $this->PhotosWidgetsCell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::random');
-        $this->PhotosWidgetsCell->request->params['controller'] = 'Instagram';
-        $this->assertEmpty($this->PhotosWidgetsCell->render());
+        $cell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::random');
+        $cell->request->params['controller'] = 'Instagram';
+        $this->assertEmpty($cell->render());
 
         //Tests cache
         $fromCache = Cache::read('widget_latest_12', 'instagram');
