@@ -46,7 +46,7 @@ class InstagramTest extends TestCase
     {
         parent::setUp();
 
-        Cache::disable();
+        Cache::clearAll();
 
         $this->Instagram = new Instagram;
     }
@@ -124,7 +124,7 @@ class InstagramTest extends TestCase
         foreach ($photos as $photo) {
             ++$i;
 
-            $this->assertEquals('stdClass', get_class($photo));
+            $this->assertInstanceOf('stdClass', $photo);
             $this->assertEquals([
                 'id' => '9999999999999999999_999999' . sprintf('%02d', $i),
                 'description' => 'Example text ' . $i,

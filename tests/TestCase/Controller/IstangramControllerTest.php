@@ -49,7 +49,7 @@ class IstangramControllerTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        Cache::disable();
+        Cache::clearAll();
 
         $this->InstagramController = $this->getMockBuilder(InstagramController::class)
             ->setConstructorArgs([new Request(), new Response()])
