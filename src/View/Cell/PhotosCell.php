@@ -47,10 +47,13 @@ class PhotosCell extends Cell
      * @uses MeCmsInstagram\Utility\Instagram::recent()
      * @uses _getInstagramInstance()
      */
-    protected function _latest($limit = 15)
+    protected function _latest($limit = 12)
     {
+        //Sets the cache name
+        $cache = sprintf('widget_latest_%s', $limit);
+
         //Tries to get data from the cache
-        $photos = Cache::read($cache = sprintf('latest_%s', $limit), 'instagram');
+        $photos = Cache::read($cache, 'instagram');
 
         //If the data are not available from the cache
         if (empty($photos)) {
