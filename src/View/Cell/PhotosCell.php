@@ -93,13 +93,7 @@ class PhotosCell extends Cell
             return;
         }
 
-        $photos = $this->_latest();
-
-        //Shuffles
-        shuffle($photos);
-
-        //Extract
-        $photos = array_slice($photos, 0, $limit);
+        $photos = collection($this->_latest())->sample($limit)->toArray();
 
         $this->set(compact('photos'));
     }
