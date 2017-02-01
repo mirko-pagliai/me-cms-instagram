@@ -54,7 +54,7 @@ class PhotosCellTest extends TestCase
     {
         parent::setUp();
 
-        Cache::disable();
+        Cache::clearAll();
 
         $this->View = new View;
 
@@ -158,6 +158,13 @@ class PhotosCellTest extends TestCase
         $this->PhotosCell = $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::latest');
         $this->PhotosCell->request->params['controller'] = 'Instagram';
         $this->assertEmpty($this->PhotosCell->render());
+
+        //Tests cache
+        $fromCache = Cache::read('widget_latest_1', 'instagram');
+        $this->assertCount(1, $fromCache);
+
+        $fromCache = Cache::read('widget_latest_2', 'instagram');
+        $this->assertCount(2, $fromCache);
     }
 
     /**
@@ -212,5 +219,9 @@ class PhotosCellTest extends TestCase
         $this->PhotosCell = $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::random');
         $this->PhotosCell->request->params['controller'] = 'Instagram';
         $this->assertEmpty($this->PhotosCell->render());
+
+        //Tests cache
+        $fromCache = Cache::read('widget_latest_12', 'instagram');
+        $this->assertCount(12, $fromCache);
     }
 }
