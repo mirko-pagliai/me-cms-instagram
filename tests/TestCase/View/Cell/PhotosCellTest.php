@@ -161,10 +161,10 @@ class PhotosCellTest extends TestCase
 
         //Tests cache
         $fromCache = Cache::read('widget_latest_1', 'instagram');
-        $this->assertCount(1, $fromCache);
+        $this->assertEquals(1, count($fromCache));
 
         $fromCache = Cache::read('widget_latest_2', 'instagram');
-        $this->assertCount(2, $fromCache);
+        $this->assertEquals(2, count($fromCache));
     }
 
     /**
@@ -222,6 +222,6 @@ class PhotosCellTest extends TestCase
 
         //Tests cache
         $fromCache = Cache::read('widget_latest_12', 'instagram');
-        $this->assertCount(12, $fromCache);
+        $this->assertEquals(12, count($fromCache));
     }
 }
