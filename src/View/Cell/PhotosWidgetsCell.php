@@ -27,9 +27,9 @@ use Cake\View\Cell;
 use MeCmsInstagram\Utility\Instagram;
 
 /**
- * Photos cell
+ * PhotosWidgets cell
  */
-class PhotosCell extends Cell
+class PhotosWidgetsCell extends Cell
 {
     /**
      * Returns an `Instagram` instance

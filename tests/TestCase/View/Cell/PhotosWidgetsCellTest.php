@@ -26,23 +26,30 @@ use Cake\Cache\Cache;
 use Cake\Network\Request;
 use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Instagram;
-use MeCmsInstagram\View\Cell\PhotosCell;
+use MeCmsInstagram\View\Cell\PhotosWidgetsCell;
+use MeCms\View\Helper\WidgetHelper;
 use MeCms\View\View\AppView as View;
 
 /**
- * PhotosCellTest class
+ * PhotosWidgetsCellTest class
  */
-class PhotosCellTest extends TestCase
+class PhotosWidgetsCellTest extends TestCase
 {
     /**
-     * @var \MeCmsInstagram\View\Cell\PhotosCell
+     * @var \MeCmsInstagram\View\Cell\PhotosWidgetsCell
      */
-    protected $PhotosCell;
+    protected $PhotosWidgetsCell;
 
     /**
      * @var \MeCms\View\View\AppView
      */
     protected $View;
+
+    /**
+     *
+     * @var \MeCms\View\Helper\WidgetHelper
+     */
+    protected $WidgetHelper;
 
     /**
      * Setup the test case, backup the static object values so they can be
@@ -58,12 +65,14 @@ class PhotosCellTest extends TestCase
 
         $this->View = new View;
 
-        $this->PhotosCell = $this->getMockBuilder(PhotosCell::class)
+        $this->WidgetHelper = new WidgetHelper($this->View);
+
+        $this->PhotosWidgetsCell = $this->getMockBuilder(PhotosWidgetsCell::class)
             ->setMethods(['_getInstagramInstance'])
             ->setConstructorArgs([new Request])
             ->getMock();
 
-        $this->PhotosCell->expects($this->any())
+        $this->PhotosWidgetsCell->expects($this->any())
             ->method('_getInstagramInstance')
             ->will($this->returnCallback(function () {
                 $instagram = $this->getMockBuilder(Instagram::class)
@@ -79,9 +88,9 @@ class PhotosCellTest extends TestCase
                 return $instagram;
             }));
 
-        $this->PhotosCell->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
-        $this->PhotosCell->viewBuilder()->templatePath('Cell/Photos');
-        $this->PhotosCell->viewClass = get_class($this->View);
+        $this->PhotosWidgetsCell->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
+        $this->PhotosWidgetsCell->viewBuilder()->templatePath('Cell/PhotosWidgets');
+        $this->PhotosWidgetsCell->viewClass = get_class($this->View);
     }
 
     /**
@@ -92,7 +101,7 @@ class PhotosCellTest extends TestCase
     {
         parent::tearDown();
 
-        unset($this->PhotosCell, $this->View);
+        unset($this->PhotosWidgetsCell, $this->View, $this->WidgetHelper);
     }
 
     /**
@@ -103,7 +112,7 @@ class PhotosCellTest extends TestCase
      */
     public function testWithoutMockingInstagram()
     {
-        $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::latest')->render();
+        $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::latest')->render();
     }
 
     /**
@@ -112,7 +121,7 @@ class PhotosCellTest extends TestCase
      */
     public function testLatest()
     {
-        $this->PhotosCell->action = $this->PhotosCell->template = 'latest';
+        $this->PhotosWidgetsCell->action = $this->PhotosWidgetsCell->template = 'latest';
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -128,11 +137,11 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
-        $this->assertEquals('latest', $this->PhotosCell->template);
+        $this->assertEquals('latest', $this->PhotosWidgetsCell->template);
 
-        $this->PhotosCell->args = ['limit' => 2];
+        $this->PhotosWidgetsCell->args = ['limit' => 2];
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -151,13 +160,13 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
 
         //Sets `Instagram` controller
-        $this->PhotosCell = $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::latest');
-        $this->PhotosCell->request->params['controller'] = 'Instagram';
-        $this->assertEmpty($this->PhotosCell->render());
+        $this->PhotosWidgetsCell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::latest');
+        $this->PhotosWidgetsCell->request->params['controller'] = 'Instagram';
+        $this->assertEmpty($this->PhotosWidgetsCell->render());
 
         //Tests cache
         $fromCache = Cache::read('widget_latest_1', 'instagram');
@@ -173,7 +182,7 @@ class PhotosCellTest extends TestCase
      */
     public function testRandom()
     {
-        $this->PhotosCell->action = $this->PhotosCell->template = 'random';
+        $this->PhotosWidgetsCell->action = $this->PhotosWidgetsCell->template = 'random';
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -189,11 +198,11 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
-        $this->assertEquals('random', $this->PhotosCell->template);
+        $this->assertEquals('random', $this->PhotosWidgetsCell->template);
 
-        $this->PhotosCell->args = ['limit' => 2];
+        $this->PhotosWidgetsCell->args = ['limit' => 2];
 
         $expected = [
             ['div' => ['class' => 'widget']],
@@ -212,13 +221,13 @@ class PhotosCellTest extends TestCase
         ];
 
         //Removes new lines and spaces from render
-        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosCell->render());
+        $result = preg_replace('/(\n|\s{2})/', '', $this->PhotosWidgetsCell->render());
         $this->assertHtml($expected, $result);
 
         //Sets `Instagram` controller
-        $this->PhotosCell = $this->View->cell(ME_CMS_INSTAGRAM . '.Photos::random');
-        $this->PhotosCell->request->params['controller'] = 'Instagram';
-        $this->assertEmpty($this->PhotosCell->render());
+        $this->PhotosWidgetsCell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::random');
+        $this->PhotosWidgetsCell->request->params['controller'] = 'Instagram';
+        $this->assertEmpty($this->PhotosWidgetsCell->render());
 
         //Tests cache
         $fromCache = Cache::read('widget_latest_12', 'instagram');

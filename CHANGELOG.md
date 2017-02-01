@@ -1,4 +1,9 @@
 # 1.x branch
+## 1.4 branch
+### 1.4.0
+* the cells that act as widgets now have "Widgets" in the name, for the classes
+    and the template directory.
+
 ## 1.3 branch
 ### 1.3.0
 * `Istangram` class does not contain more static methods;

@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.5.9",
         "cakephp/cakephp": ">=3.3.4 <4.0",
-        "mirko-pagliai/me-cms": ">=2.14.10"
+        "mirko-pagliai/me-cms": "dev-2.15version"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "2.*",
