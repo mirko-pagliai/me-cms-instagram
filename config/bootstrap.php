@@ -42,7 +42,7 @@ if (is_readable(CONFIG . 'me_cms_instagram.php')) {
 }
 
 //Merges with the MeCms configuration
-Configure::write(MECMS, Hash::merge(config(MECMS), Configure::consume(ME_CMS_INSTAGRAM)));
+Configure::write(ME_CMS, Hash::merge(config(ME_CMS), Configure::consume(ME_CMS_INSTAGRAM)));
 
 if (!config('Instagram.key') || config('Instagram.key') === 'your-key-here') {
     throw new InternalErrorException('Instagram API access token is missing');
