@@ -13,8 +13,8 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "cakephp/cakephp": ">=3.3.4 <4.0",
-        "mirko-pagliai/me-cms": ">=2.15.0"
+        "cakephp/cakephp": ">=3.3.4 <3.4",
+        "mirko-pagliai/me-cms": ">=2.15.0 <3"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "2.*",
