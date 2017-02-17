@@ -116,30 +116,40 @@ Configure::write('Session', [
     'defaults' => 'php'
 ]);
 
-Configure::write('Assets.target', TMP . 'assets');
-Configure::write('Thumbs.target', TMP . 'thumbs');
-
-//@codingStandardsIgnoreStart
-@mkdir(Configure::read('Assets.target'));
-@mkdir(Configure::read('Thumbs.target'));
-//@codingStandardsIgnoreEnd
-
 /**
  * Loads plugins
  */
+Configure::write('Assets.target', TMP . 'assets');
+
+//@codingStandardsIgnoreLine
+@mkdir(Configure::read('Assets.target'));
+
+//@codingStandardsIgnoreEnd
 Plugin::load('Assets', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'assets' . DS,
 ]);
+
 Plugin::load('MeTools', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'me-tools' . DS,
 ]);
+
+Configure::write('Thumbs.target', TMP . 'thumbs');
+//@codingStandardsIgnoreLine
+@mkdir(Configure::read('Thumbs.target'));
+
 Plugin::load('Thumber', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-thumber' . DS,
     'routes' => true,
 ]);
+
+define('LOGIN_RECORDS', TMP . 'login' . DS);
+
+//@codingStandardsIgnoreLine
+@mkdir(LOGIN_RECORDS);
+
 Plugin::load('MeCms', [
     'bootstrap' => false, //Doesn't load the bootstrap
     'path' => VENDOR . 'mirko-pagliai' . DS . 'me-cms' . DS,

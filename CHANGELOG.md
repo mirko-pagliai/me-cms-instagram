@@ -1,5 +1,10 @@
 # 1.x branch
-## 1.3 branch
+## 1.4 branch
+### 1.4.0
+* the cells that act as widgets now have "Widgets" in the name, for the classes
+    and the template directory;
+* updated for MeCms 2.15.0.
+
 ### 1.3.0
 * `Istangram` class does not contain more static methods;
 * renamed repository and package. Now is `me-cms-instagram`;

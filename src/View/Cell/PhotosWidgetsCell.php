@@ -27,9 +27,9 @@ use Cake\View\Cell;
 use MeCmsInstagram\Utility\Instagram;
 
 /**
- * Photos cell
+ * PhotosWidgets cell
  */
-class PhotosCell extends Cell
+class PhotosWidgetsCell extends Cell
 {
     /**
      * Returns an `Instagram` instance
@@ -47,10 +47,13 @@ class PhotosCell extends Cell
      * @uses MeCmsInstagram\Utility\Instagram::recent()
      * @uses _getInstagramInstance()
      */
-    protected function _latest($limit = 15)
+    protected function _latest($limit = 12)
     {
+        //Sets the cache name
+        $cache = sprintf('widget_latest_%s', $limit);
+
         //Tries to get data from the cache
-        $photos = Cache::read($cache = sprintf('latest_%s', $limit), 'instagram');
+        $photos = Cache::read($cache, 'instagram');
 
         //If the data are not available from the cache
         if (empty($photos)) {
@@ -93,13 +96,7 @@ class PhotosCell extends Cell
             return;
         }
 
-        $photos = $this->_latest();
-
-        //Shuffles
-        shuffle($photos);
-
-        //Extract
-        $photos = array_slice($photos, 0, $limit);
+        $photos = collection($this->_latest())->sample($limit)->toArray();
 
         $this->set(compact('photos'));
     }

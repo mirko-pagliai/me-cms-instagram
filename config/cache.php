@@ -21,15 +21,15 @@
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
 
-if (!defined('MECMS_INSTAGRAM_CACHE')) {
-    define('MECMS_INSTAGRAM_CACHE', CACHE . 'me_cms_instagram' . DS);
+if (!defined('ME_CMS_INSTAGRAM_CACHE')) {
+    define('ME_CMS_INSTAGRAM_CACHE', CACHE . 'me_cms_instagram' . DS);
 }
 
 return ['Cache' => [
     'instagram' => [
         'className' => 'File',
         'duration' => '+1 hour',
-        'path' => MECMS_INSTAGRAM_CACHE,
+        'path' => ME_CMS_INSTAGRAM_CACHE,
         'prefix' => '',
         'mask' => 0777,
     ],
