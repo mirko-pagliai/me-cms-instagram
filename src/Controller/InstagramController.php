@@ -48,7 +48,7 @@ class InstagramController extends AppController
      * are required on every request.
      * @param \Cake\Event\Event $event An Event instance
      * @return void
-     * @see http://api.cakephp.org/3.3/class-Cake.Controller.Controller.html#_beforeRender
+     * @see http://api.cakephp.org/3.4/class-Cake.Controller.Controller.html#_beforeRender
      * @uses MeCms\Controller\AppController::beforeRender()
      * @uses MeCmsInstagram\Utility\Instagram::user()
      */
