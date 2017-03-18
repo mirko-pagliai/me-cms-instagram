@@ -31,6 +31,11 @@ use Cake\Network\Exception\NotFoundException;
 class Instagram
 {
     /**
+     * @var Cake\Http\Client
+     */
+    protected $Client;
+
+    /**
      * API access token
      * @var string
      */
@@ -39,10 +44,13 @@ class Instagram
     /**
      * Construct
      * @param string $key API access token
+     * @uses $Client
      * @uses $key
      */
     public function __construct($key = null)
     {
+        $this->Client = new Client;
+
         if (empty($key)) {
             $key = config('Instagram.key');
         }
@@ -54,13 +62,14 @@ class Instagram
      * Internal method to get a media response
      * @param string $id Media ID
      * @return mixed The response body
+     * @uses $Client
      * @uses $key
      */
     protected function _getMediaResponse($id)
     {
-        return (new Client())
-            ->get('https://api.instagram.com/v1/media/' . $id . '?access_token=' . $this->key)
-            ->body();
+        $url = 'https://api.instagram.com/v1/media/' . $id . '?access_token=' . $this->key;
+
+        return $this->Client->get($url)->body;
     }
 
     /**
@@ -68,6 +77,7 @@ class Instagram
      * @param string $id Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
      * @return mixed The response body
+     * @uses $Client
      * @uses $key
      */
     protected function _getRecentResponse($id = null, $limit = 15)
@@ -79,19 +89,20 @@ class Instagram
             $url .= '&max_id=' . $id;
         }
 
-        return (new Client())->get($url)->body();
+        return $this->Client->get($url)->body;
     }
 
     /**
      * Internal method to get an user response
      * @return mixed The response body
+     * @uses $Client
      * @uses $key
      */
     protected function _getUserResponse()
     {
-        return (new Client())
-            ->get('https://api.instagram.com/v1/users/self/?access_token=' . $this->key)
-            ->body();
+        $url = 'https://api.instagram.com/v1/users/self/?access_token=' . $this->key;
+
+        return $this->Client->get($url)->body;
     }
 
     /**
@@ -136,9 +147,7 @@ class Instagram
 
         $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
 
-        $photos = collection($photos->data)->take($limit)->toArray();
-
-        $photos = array_map(function ($photo) {
+        $photos = collection($photos->data)->take($limit)->map(function ($photo) {
             $object = new \stdClass;
             $object->id = $photo->id;
             $object->link = $photo->link;
@@ -147,7 +156,7 @@ class Instagram
             $object->description = empty($photo->caption->text) ? null : $photo->caption->text;
 
             return $object;
-        }, $photos);
+        })->toList();
 
         return [$photos, $nextId];
     }

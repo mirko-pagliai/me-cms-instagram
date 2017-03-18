@@ -107,7 +107,7 @@ class IstangramControllerTest extends IntegrationTestCase
         $this->InstagramController->index(1);
         $response = $this->InstagramController->render('index');
 
-        $this->assertNotEmpty(trim($response->body()));
+        $this->assertNotEmpty(trim($response->getBody()));
     }
 
     /**
@@ -118,7 +118,7 @@ class IstangramControllerTest extends IntegrationTestCase
         $this->InstagramController->view(1);
         $response = $this->InstagramController->render('view');
 
-        $this->assertNotEmpty(trim($response->body()));
+        $this->assertNotEmpty(trim($response->getBody()));
     }
 
     /**
