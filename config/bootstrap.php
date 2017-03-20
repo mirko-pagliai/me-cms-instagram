@@ -61,9 +61,9 @@ if (is_readable(CONFIG . 'cache.php')) {
 //Adds all cache configurations
 foreach (Configure::consume('Cache') as $key => $config) {
     //Drops cache configurations that already exist
-    if (Cache::config($key)) {
+    if (Cache::getConfig($key)) {
         Cache::drop($key);
     }
 
-    Cache::config($key, $config);
+    Cache::setConfig($key, $config);
 }
