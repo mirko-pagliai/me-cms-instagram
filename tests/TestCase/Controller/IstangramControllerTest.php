@@ -83,9 +83,9 @@ class IstangramControllerTest extends IntegrationTestCase
                 return $instagram;
             }));
 
-        $this->InstagramController->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
-        $this->InstagramController->viewBuilder()->templatePath('Instagram');
-        $this->InstagramController->viewBuilder()->layout(false);
+        $this->InstagramController->viewBuilder()->setPlugin(ME_CMS_INSTAGRAM);
+        $this->InstagramController->viewBuilder()->setTemplatePath('Instagram');
+        $this->InstagramController->viewBuilder()->setLayout(false);
     }
 
     /**

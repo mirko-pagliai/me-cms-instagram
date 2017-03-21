@@ -88,8 +88,8 @@ class PhotosWidgetsCellTest extends TestCase
                 return $instagram;
             }));
 
-        $this->PhotosWidgetsCell->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
-        $this->PhotosWidgetsCell->viewBuilder()->templatePath('Cell/PhotosWidgets');
+        $this->PhotosWidgetsCell->viewBuilder()->setPlugin(ME_CMS_INSTAGRAM);
+        $this->PhotosWidgetsCell->viewBuilder()->setTemplatePath('Cell/PhotosWidgets');
         $this->PhotosWidgetsCell->viewClass = get_class($this->View);
     }
 
