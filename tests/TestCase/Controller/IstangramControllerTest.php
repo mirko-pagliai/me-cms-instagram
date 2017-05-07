@@ -83,9 +83,9 @@ class IstangramControllerTest extends IntegrationTestCase
                 return $instagram;
             }));
 
-        $this->InstagramController->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
-        $this->InstagramController->viewBuilder()->templatePath('Instagram');
-        $this->InstagramController->viewBuilder()->layout(false);
+        $this->InstagramController->viewBuilder()->setPlugin(ME_CMS_INSTAGRAM);
+        $this->InstagramController->viewBuilder()->setTemplatePath('Instagram');
+        $this->InstagramController->viewBuilder()->setLayout(false);
     }
 
     /**
@@ -107,7 +107,7 @@ class IstangramControllerTest extends IntegrationTestCase
         $this->InstagramController->index(1);
         $response = $this->InstagramController->render('index');
 
-        $this->assertNotEmpty(trim($response->body()));
+        $this->assertNotEmpty(trim($response->getBody()));
     }
 
     /**
@@ -118,7 +118,7 @@ class IstangramControllerTest extends IntegrationTestCase
         $this->InstagramController->view(1);
         $response = $this->InstagramController->render('view');
 
-        $this->assertNotEmpty(trim($response->body()));
+        $this->assertNotEmpty(trim($response->getBody()));
     }
 
     /**

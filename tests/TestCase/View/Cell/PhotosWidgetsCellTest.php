@@ -88,8 +88,8 @@ class PhotosWidgetsCellTest extends TestCase
                 return $instagram;
             }));
 
-        $this->PhotosWidgetsCell->viewBuilder()->plugin(ME_CMS_INSTAGRAM);
-        $this->PhotosWidgetsCell->viewBuilder()->templatePath('Cell/PhotosWidgets');
+        $this->PhotosWidgetsCell->viewBuilder()->setPlugin(ME_CMS_INSTAGRAM);
+        $this->PhotosWidgetsCell->viewBuilder()->setTemplatePath('Cell/PhotosWidgets');
         $this->PhotosWidgetsCell->viewClass = get_class($this->View);
     }
 
@@ -160,7 +160,7 @@ class PhotosWidgetsCellTest extends TestCase
 
         //Sets `Instagram` controller
         $cell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::latest');
-        $cell->request->params['controller'] = 'Instagram';
+        $cell->request = $cell->request->withParam('controller', 'Instagram');
         $this->assertEmpty($cell->render());
 
         //Tests cache
@@ -216,7 +216,7 @@ class PhotosWidgetsCellTest extends TestCase
 
         //Sets `Instagram` controller
         $cell = $this->WidgetHelper->widget(ME_CMS_INSTAGRAM . '.Photos::random');
-        $cell->request->params['controller'] = 'Instagram';
+        $cell->request = $cell->request->withParam('controller', 'Instagram');
         $this->assertEmpty($cell->render());
 
         //Tests cache

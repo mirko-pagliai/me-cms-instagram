@@ -31,6 +31,5 @@
             "MeCmsInstagram\\Test\\": "tests",
             "App\\": "tests/test_app/TestApp"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
