@@ -24,7 +24,7 @@
 $this->extend('MeCms./Common/index');
 $this->assign('title', $title = $photo->filename);
 
-if (config('default.user_profile')) {
+if (getConfig('default.user_profile')) {
     echo $this->element('user');
 }
 

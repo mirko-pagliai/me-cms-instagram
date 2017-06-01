@@ -24,7 +24,7 @@
 
 <?= $this->Asset->css('MeCmsInstagram.instagram', ['block' => 'css_bottom']) ?>
 
-<?php if (config('default.user_profile') && !empty($user)) : ?>
+<?php if (getConfig('default.user_profile') && !empty($user)) : ?>
     <div id="instagram-user" class="row">
         <div class="col-sm-5">
             <?= $this->Html->img($user->profile_picture, ['id' => 'picture']) ?>
@@ -60,7 +60,7 @@
             </p>
 
             <?php
-            if (config('default.follow_me')) {
+            if (getConfig('default.follow_me')) {
                 echo $this->Html->button(
                     __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
                     sprintf('//instagram.com/%s', $user->username),

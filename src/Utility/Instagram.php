@@ -52,7 +52,7 @@ class Instagram
         $this->Client = new Client;
 
         if (empty($key)) {
-            $key = config('Instagram.key');
+            $key = getConfig('Instagram.key');
         }
 
         $this->key = $key;
