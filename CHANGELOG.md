@@ -2,6 +2,7 @@
 ## 1.5 branch
 ### 1.5.0
 * fixed bug, added template for ajax requests;
+* fixed bugs to not rewrite existing routes;
 * the `Instagram` utility has been replaced by the `InstagramComponent`.
 
 ## 1.4 branch
