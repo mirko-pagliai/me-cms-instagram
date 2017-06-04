@@ -20,21 +20,50 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-namespace MeCmsInstagram\Test\TestCase\Utility;
+namespace MeCmsInstagram\Test\TestCase\Controller\Component;
 
 use Cake\Cache\Cache;
+use Cake\Controller\ComponentRegistry;
 use Cake\TestSuite\TestCase;
-use MeCmsInstagram\Utility\Instagram;
+use MeCmsInstagram\Controller\Component\InstagramComponent;
 
 /**
- * InstagramTest class
+ * InstagramComponentTest class
  */
-class InstagramTest extends TestCase
+class InstagramComponentTest extends TestCase
 {
     /**
-     * @var \MeCmsInstagram\Utility\Instagram
+     * @var \MeCmsInstagram\Controller\Component\InstagramComponent
      */
     protected $Instagram;
+
+    /**
+     * Internal method to get a mock instance of `InstagramComponent`
+     */
+    protected function getInstagramComponentMock()
+    {
+        $this->Instagram = $this->getMockBuilder(InstagramComponent::class)
+            ->setConstructorArgs([new ComponentRegistry])
+            ->setMethods(['_getMediaResponse', '_getRecentResponse', '_getUserResponse'])
+            ->getMock();
+
+        $this->Instagram->method('_getMediaResponse')
+            ->will($this->returnCallback(function () {
+                return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
+            }));
+
+        $this->Instagram->method('_getRecentResponse')
+            ->will($this->returnCallback(function () {
+                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
+            }));
+
+        $this->Instagram->method('_getUserResponse')
+            ->will($this->returnCallback(function () {
+                return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
+            }));
+
+        return $this->Instagram;
+    }
 
     /**
      * Setup the test case, backup the static object values so they can be
@@ -48,7 +77,7 @@ class InstagramTest extends TestCase
 
         Cache::clearAll();
 
-        $this->Instagram = new Instagram;
+        $this->Instagram = new InstagramComponent(new ComponentRegistry);
     }
 
     /**
@@ -63,27 +92,31 @@ class InstagramTest extends TestCase
     }
 
     /**
+     * Test for `__construct()` method
+     * @test
+     */
+    public function testConstruct()
+    {
+        $this->assertInstanceof('Cake\Http\Client', $this->Instagram->Client);
+        $this->assertEquals(config('Instagram.key'), $this->Instagram->key);
+
+        $this->Instagram = new InstagramComponent(new ComponentRegistry, ['key' => 'anotherKey']);
+        $this->assertEquals('anotherKey', $this->Instagram->key);
+    }
+
+    /**
      * Test for `media()` method
      * @test
      */
     public function testMedia()
     {
-        $this->Instagram = $this->getMockBuilder(Instagram::class)
-            ->setMethods(['_getMediaResponse'])
-            ->getMock();
-
-        $this->Instagram->expects($this->once())
-            ->method('_getMediaResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
-            }));
-
-        $this->assertEquals((object)[
+        $expected = (object)[
             'id' => 1,
-            'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard',
+            'path' => 'http://example.com/examples/1.png?ig_cache_key=cacheKeyStandard',
             'filename' => '1.png',
+        ];
 
-        ], $this->Instagram->media(1));
+        $this->assertEquals($expected, $this->getInstagramComponentMock()->media(1));
     }
 
     /**
@@ -103,17 +136,7 @@ class InstagramTest extends TestCase
      */
     public function testRecent()
     {
-        $this->Instagram = $this->getMockBuilder(Instagram::class)
-            ->setMethods(['_getRecentResponse'])
-            ->getMock();
-
-        $this->Instagram->expects($this->any())
-            ->method('_getRecentResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-            }));
-
-        list($photos, $nextId) = $this->Instagram->recent();
+        list($photos, $nextId) = $this->getInstagramComponentMock()->recent();
 
         $this->assertEquals('111_222', $nextId);
         $this->assertEquals(12, count($photos));
@@ -124,14 +147,16 @@ class InstagramTest extends TestCase
         foreach ($photos as $photo) {
             ++$i;
 
-            $this->assertInstanceOf('stdClass', $photo);
-            $this->assertEquals([
+            $expected = [
                 'id' => '9999999999999999999_999999' . sprintf('%02d', $i),
                 'description' => 'Example text ' . $i,
-                'link' => 'http://example/link' . $i . '/',
-                'path' => 'https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey' . $i . 'Standard',
+                'link' => 'http://example.com/examples/link' . $i . '/',
+                'path' => 'http://example.com/examples/1.png?ig_cache_key=cacheKey' . $i . 'Standard',
                 'filename' => '1.png',
-            ], (array)$photo);
+            ];
+
+            $this->assertInstanceOf('stdClass', $photo);
+            $this->assertEquals($expected, (array)$photo);
         }
     }
 
@@ -145,28 +170,17 @@ class InstagramTest extends TestCase
     {
         $this->Instagram->recent(1);
     }
-
     /**
      * Test for `user()` method
      * @test
      */
     public function testUser()
     {
-        $this->Instagram = $this->getMockBuilder(Instagram::class)
-            ->setMethods(['_getUserResponse'])
-            ->getMock();
-
-        $this->Instagram->expects($this->once())
-            ->method('_getUserResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
-            }));
-
-        $this->assertEquals((object)[
+        $expected = (object)[
             'username' => 'myusername',
             'bio' => 'mybio',
-            'website' => 'http://example/site',
-            'profile_picture' => 'http://example/image.jpg',
+            'website' => 'http://example.come/examples/site',
+            'profile_picture' => 'ttp://example.come/examples/image.jpg',
             'full_name' => 'Full Name',
             'counts' => (object)[
                 'media' => 148,
@@ -174,7 +188,9 @@ class InstagramTest extends TestCase
                 'follows' => 185,
             ],
             'id' => '99999999',
-        ], $this->Instagram->user());
+        ];
+
+        $this->assertEquals($expected, $this->getInstagramComponentMock()->user());
     }
 
     /**

@@ -5,8 +5,8 @@
     "data": {
         "username": "myusername",
         "bio": "mybio",
-        "website": "http://example/site",
-        "profile_picture": "http://example/image.jpg",
+        "website": "http://example.come/examples/site",
+        "profile_picture": "ttp://example.come/examples/image.jpg",
         "full_name": "Full Name",
         "counts": {
             "media": 148,

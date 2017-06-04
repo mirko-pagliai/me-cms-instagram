@@ -20,15 +20,17 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-namespace MeCmsInstagram\Utility;
+namespace MeCmsInstagram\Controller\Component;
 
+use Cake\Controller\Component;
+use Cake\Controller\ComponentRegistry;
 use Cake\Http\Client;
 use Cake\Network\Exception\NotFoundException;
 
 /**
- * An utility to get media from Instagram
+ * A component to get media from Instagram
  */
-class Instagram
+class InstagramComponent extends Component
 {
     /**
      * @var Cake\Http\Client
@@ -43,19 +45,21 @@ class Instagram
 
     /**
      * Construct
-     * @param string $key API access token
-     * @uses $Client
-     * @uses $key
+     * @param \Cake\Controller\ComponentRegistry $registry A ComponentRegistry
+     *  this component can use to lazy load its components
+     * @param array $config Array of configuration settings
      */
-    public function __construct($key = null)
+    public function __construct(ComponentRegistry $registry, $config = [])
     {
+        parent::__construct($registry, $config);
+
         $this->Client = new Client;
 
-        if (empty($key)) {
-            $key = config('Instagram.key');
+        if (empty($config['key'])) {
+            $config['key'] = config('Instagram.key');
         }
 
-        $this->key = $key;
+        $this->key = $config['key'];
     }
 
     /**

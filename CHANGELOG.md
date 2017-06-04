@@ -1,4 +1,8 @@
 # 1.x branch
+## 1.5 branch
+### 1.5.0
+* the `Instagram` utility has been replaced by the `InstagramComponent`.
+
 ## 1.4 branch
 ### 1.4.1
 * updated for CakePHP 3.4.

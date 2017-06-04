@@ -1,6 +1,6 @@
 {
     "pagination": {
-        "next_url": "http://example/recent?access_token=accessTokenValue",
+        "next_url": "http://example.com/examples/recent?access_token=accessTokenValue",
         "next_max_id": "111_222"
     },
     "meta": {
@@ -16,23 +16,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link1/",
+            "link": "http://example.com/examples/link1/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey1Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey1Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey1Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey1Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -43,7 +43,7 @@
                 "text": "Example text 1",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -53,7 +53,7 @@
             "id": "9999999999999999999_99999901",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -67,23 +67,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link2/",
+            "link": "http://example.com/examples/link2/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey2Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey2Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey2Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey2Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey2Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey2Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -94,7 +94,7 @@
                 "text": "Example text 2",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -104,7 +104,7 @@
             "id": "9999999999999999999_99999902",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -118,23 +118,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link3/",
+            "link": "http://example.com/examples/link3/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey3Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey3Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey3Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey3Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey3Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey3Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -145,7 +145,7 @@
                 "text": "Example text 3",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -155,7 +155,7 @@
             "id": "9999999999999999999_99999903",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -169,23 +169,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link4/",
+            "link": "http://example.com/examples/link4/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey4Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey4Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey4Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey4Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey4Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey4Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -196,7 +196,7 @@
                 "text": "Example text 4",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -206,7 +206,7 @@
             "id": "9999999999999999999_99999904",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -220,23 +220,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link5/",
+            "link": "http://example.com/examples/link5/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey5Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey5Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey5Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey5Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey5Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey5Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -247,7 +247,7 @@
                 "text": "Example text 5",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -257,7 +257,7 @@
             "id": "9999999999999999999_99999905",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -271,23 +271,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link6/",
+            "link": "http://example.com/examples/link6/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey6Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey6Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey6Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey6Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey6Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey6Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -298,7 +298,7 @@
                 "text": "Example text 6",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -308,7 +308,7 @@
             "id": "9999999999999999999_99999906",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -322,23 +322,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link7/",
+            "link": "http://example.com/examples/link7/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey7Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey7Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey7Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey7Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey7Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey7Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -349,7 +349,7 @@
                 "text": "Example text 7",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -359,7 +359,7 @@
             "id": "9999999999999999999_99999907",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -373,23 +373,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link8/",
+            "link": "http://example.com/examples/link8/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey8Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey8Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey8Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey8Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey8Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey8Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -400,7 +400,7 @@
                 "text": "Example text 8",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -410,7 +410,7 @@
             "id": "9999999999999999999_99999908",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -424,23 +424,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link9/",
+            "link": "http://example.com/examples/link9/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey9Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey9Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey9Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey9Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey9Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey9Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -451,7 +451,7 @@
                 "text": "Example text 9",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -461,7 +461,7 @@
             "id": "9999999999999999999_99999909",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -475,23 +475,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link10/",
+            "link": "http://example.com/examples/link10/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey10Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey10Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey10Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey10Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey10Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey10Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -502,7 +502,7 @@
                 "text": "Example text 10",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -512,7 +512,7 @@
             "id": "9999999999999999999_99999910",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -526,23 +526,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link11/",
+            "link": "http://example.com/examples/link11/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey11Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey11Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey11Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey11Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey11Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey11Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -553,7 +553,7 @@
                 "text": "Example text 11",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -563,7 +563,7 @@
             "id": "9999999999999999999_99999911",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
@@ -577,23 +577,23 @@
             },
             "filter": "Lo-fi",
             "created_time": "1481139879",
-            "link": "http://example/link12/",
+            "link": "http://example.com/examples/link12/",
             "likes": {
                 "count": 17
             },
             "images": {
                 "low_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey12Low",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey12Low",
                     "width": 320,
                     "height": 267
                 },
                 "thumbnail": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey12Thumb",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey12Thumb",
                     "width": 150,
                     "height": 150
                 },
                 "standard_resolution": {
-                    "url": "https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey12Standard",
+                    "url": "http://example.com/examples/1.png?ig_cache_key=cacheKey12Standard",
                     "width": 640,
                     "height": 534
                 }
@@ -604,7 +604,7 @@
                 "text": "Example text 12",
                 "from": {
                     "username": "myusername",
-                    "profile_picture": "https://example/profile.jpg",
+                    "profile_picture": "http://example.com/examples/profile.jpg",
                     "id": "99999999",
                     "full_name": "Full Name"
                 },
@@ -614,7 +614,7 @@
             "id": "9999999999999999999_99999912",
             "user": {
                 "username": "myusername",
-                "profile_picture": "https://example/profile.jpg",
+                "profile_picture": "http://example.com/examples/profile.jpg",
                 "id": "99999999",
                 "full_name": "Full Name"
             }
