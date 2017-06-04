@@ -20,7 +20,6 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Network\Exception\InternalErrorException;
