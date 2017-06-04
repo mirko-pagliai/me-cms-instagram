@@ -42,27 +42,27 @@ class InstagramComponentTest extends TestCase
      */
     protected function getInstagramComponentMock()
     {
-        $this->Instagram = $this->getMockBuilder(InstagramComponent::class)
+        $component = $this->getMockBuilder(InstagramComponent::class)
             ->setConstructorArgs([new ComponentRegistry])
             ->setMethods(['_getMediaResponse', '_getRecentResponse', '_getUserResponse'])
             ->getMock();
 
-        $this->Instagram->method('_getMediaResponse')
+        $component->method('_getMediaResponse')
             ->will($this->returnCallback(function () {
                 return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
             }));
 
-        $this->Instagram->method('_getRecentResponse')
+        $component->method('_getRecentResponse')
             ->will($this->returnCallback(function () {
                 return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
             }));
 
-        $this->Instagram->method('_getUserResponse')
+        $component->method('_getUserResponse')
             ->will($this->returnCallback(function () {
                 return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
             }));
 
-        return $this->Instagram;
+        return $component;
     }
 
     /**
@@ -112,7 +112,7 @@ class InstagramComponentTest extends TestCase
     {
         $expected = (object)[
             'id' => 1,
-            'path' => 'http://example.com/examples/1.png?ig_cache_key=cacheKeyStandard',
+            'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard',
             'filename' => '1.png',
         ];
 
@@ -150,8 +150,8 @@ class InstagramComponentTest extends TestCase
             $expected = [
                 'id' => '9999999999999999999_999999' . sprintf('%02d', $i),
                 'description' => 'Example text ' . $i,
-                'link' => 'http://example.com/examples/link' . $i . '/',
-                'path' => 'http://example.com/examples/1.png?ig_cache_key=cacheKey' . $i . 'Standard',
+                'link' => 'http://example/link' . $i . '/',
+                'path' => 'https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey' . $i . 'Standard',
                 'filename' => '1.png',
             ];
 
@@ -179,8 +179,8 @@ class InstagramComponentTest extends TestCase
         $expected = (object)[
             'username' => 'myusername',
             'bio' => 'mybio',
-            'website' => 'http://example.come/examples/site',
-            'profile_picture' => 'ttp://example.come/examples/image.jpg',
+            'website' => 'http://example/site',
+            'profile_picture' => 'http://example/image.jpg',
             'full_name' => 'Full Name',
             'counts' => (object)[
                 'media' => 148,
