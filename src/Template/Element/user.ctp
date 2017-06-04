@@ -20,9 +20,8 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
+$this->Asset->css('MeCmsInstagram.instagram', ['block' => 'css_bottom']);
 ?>
-
-<?= $this->Asset->css('MeCmsInstagram.instagram', ['block' => 'css_bottom']) ?>
 
 <?php if (config('default.user_profile') && !empty($user)) : ?>
     <div id="instagram-user" class="row">
