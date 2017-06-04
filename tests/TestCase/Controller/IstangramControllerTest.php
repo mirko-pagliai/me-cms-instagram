@@ -23,11 +23,9 @@
 namespace MeCmsInstagram\Test\TestCase\Controller;
 
 use Cake\Cache\Cache;
-use Cake\Network\Request;
-use Cake\Network\Response;
+use Cake\Controller\ComponentRegistry;
 use Cake\TestSuite\IntegrationTestCase;
-use MeCmsInstagram\Controller\InstagramController;
-use MeCmsInstagram\Utility\Instagram;
+use MeCmsInstagram\Controller\Component\InstagramComponent;
 
 /**
  * IstangramControllerTest class
@@ -37,7 +35,35 @@ class IstangramControllerTest extends IntegrationTestCase
     /**
      * @var \MeCmsInstagram\Controller\InstagramController
      */
-    protected $InstagramController;
+    protected $InstagramComponent;
+
+    /**
+     * Internal method to get a mock instance of `InstagramComponent`
+     */
+    protected function getInstagramComponentMock()
+    {
+        $component = $this->getMockBuilder(InstagramComponent::class)
+            ->setConstructorArgs([new ComponentRegistry])
+            ->setMethods(['_getMediaResponse', '_getRecentResponse', '_getUserResponse'])
+            ->getMock();
+
+        $component->method('_getMediaResponse')
+            ->will($this->returnCallback(function () {
+                return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
+            }));
+
+        $component->method('_getRecentResponse')
+            ->will($this->returnCallback(function () {
+                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
+            }));
+
+        $component->method('_getUserResponse')
+            ->will($this->returnCallback(function () {
+                return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
+            }));
+
+        return $component;
+    }
 
     /**
      * Setup the test case, backup the static object values so they can be
@@ -49,43 +75,9 @@ class IstangramControllerTest extends IntegrationTestCase
     {
         parent::setUp();
 
+        $this->InstagramComponent = $this->getInstagramComponentMock();
+
         Cache::clearAll();
-
-        $this->InstagramController = $this->getMockBuilder(InstagramController::class)
-            ->setConstructorArgs([new Request(), new Response()])
-            ->setMethods(['_getInstagramInstance'])
-            ->getMock();
-
-        $this->InstagramController->method('_getInstagramInstance')
-            ->will($this->returnCallback(function () {
-                $instagram = $this->getMockBuilder(Instagram::class)
-                    ->setMethods(['_getMediaResponse', '_getRecentResponse', '_getUserResponse'])
-                    ->getMock();
-
-                $instagram->expects($this->any())
-                    ->method('_getMediaResponse')
-                    ->will($this->returnCallback(function () {
-                        return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
-                    }));
-
-                $instagram->expects($this->any())
-                    ->method('_getRecentResponse')
-                    ->will($this->returnCallback(function () {
-                        return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-                    }));
-
-                $instagram->expects($this->any())
-                    ->method('_getUserResponse')
-                    ->will($this->returnCallback(function () {
-                        return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
-                    }));
-
-                return $instagram;
-            }));
-
-        $this->InstagramController->viewBuilder()->setPlugin(ME_CMS_INSTAGRAM);
-        $this->InstagramController->viewBuilder()->setTemplatePath('Instagram');
-        $this->InstagramController->viewBuilder()->setLayout(false);
     }
 
     /**
@@ -96,7 +88,40 @@ class IstangramControllerTest extends IntegrationTestCase
     {
         parent::tearDown();
 
-        unset($this->InstagramController);
+        unset($this->Controller);
+    }
+
+    /**
+     * Adds additional event spies to the controller/view event manager
+     * @param \Cake\Event\Event $event A dispatcher event
+     * @param \Cake\Controller\Controller|null $controller Controller instance
+     * @return void
+     */
+    public function controllerSpy($event, $controller = null)
+    {
+        //Mocks the `InstagramComponent`, expect for the testViewInvalidId` method
+        if ($this->getName() !== 'testViewInvalidId') {
+            $controller->Instagram = $this->getInstagramComponentMock();
+        }
+
+        $controller->viewBuilder()->setLayout(false);
+
+        parent::controllerSpy($event, $controller);
+    }
+
+    /**
+     * Test for `beforeRender()` method
+     */
+    public function testBeforeRender()
+    {
+        $this->get(['_name' => 'instagramPhotos']);
+
+        $userFromView = $this->viewVariable('user');
+        $this->assertInstanceof('stdClass', $userFromView);
+        $this->assertNotEmpty($userFromView);
+
+        $userFromCache = Cache::read('user_profile', 'instagram');
+        $this->assertEquals($userFromView, $userFromCache);
     }
 
     /**
@@ -104,10 +129,34 @@ class IstangramControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->InstagramController->index(1);
-        $response = $this->InstagramController->render('index');
+        $this->get(['_name' => 'instagramPhotos']);
+        $this->assertResponseOk();
+        $this->assertResponseNotEmpty();
+        $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
 
-        $this->assertNotEmpty(trim($response->getBody()));
+        $photosFromView = $this->viewVariable('photos');
+        $this->assertTrue(is_array($photosFromView));
+        $this->assertNotEmpty($photosFromView);
+
+        foreach ($photosFromView as $photo) {
+            $this->assertInstanceof('stdClass', $photo);
+        }
+
+        $nextIdFromView = $this->viewVariable('nextId');
+        $this->assertEquals('111_222', $nextIdFromView);
+
+        //Sets the cache name
+        $cache = sprintf('index_limit_%s', config('default.photos'));
+        list($photosFromCache, $nextIdFromCache) = array_values(Cache::read($cache, 'instagram'));
+
+        $this->assertEquals($photosFromView, $photosFromCache);
+        $this->assertEquals($nextIdFromView, $nextIdFromCache);
+
+        //GET request. Not with the `nextId`
+        $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
+        $this->assertResponseOk();
+        $this->assertResponseNotEmpty();
+        $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
     }
 
     /**
@@ -115,36 +164,27 @@ class IstangramControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->InstagramController->view(1);
-        $response = $this->InstagramController->render('view');
+        list($photos) = ($this->InstagramComponent->recent());
+        $id = $photos[0]->id;
 
-        $this->assertNotEmpty(trim($response->getBody()));
+        $this->get(['_name' => 'instagramPhoto', $id]);
+        $this->assertResponseOk();
+        $this->assertResponseNotEmpty();
+        $this->assertTemplate(ROOT . 'src/Template/Instagram/view.ctp');
+
+        $photoFromView = $this->viewVariable('photo');
+        $this->assertInstanceof('stdClass', $photoFromView);
+
+        $photoFromCache = Cache::read(sprintf('media_%s', md5($id)), 'instagram');
+        $this->assertEquals($photoFromView, $photoFromCache);
     }
 
     /**
-     * Test for `view()` method, with invalid media Id
+     * Test for `view()` method, with invalid ID
      */
-    public function testViewInvalidMediaId()
+    public function testViewInvalidId()
     {
-        $this->InstagramController = $this->getMockBuilder(InstagramController::class)
-            ->setConstructorArgs([new Request(), new Response()])
-            ->setMethods(['redirect'])
-            ->getMock();
-
-        $this->InstagramController->method('redirect')
-             ->willReturn('called redirect');
-
-        $this->assertEquals('called redirect', $this->InstagramController->view(1));
-    }
-
-    /**
-     * Test withoud mocking the `Instagram` object
-     * @expectedException Cake\Network\Exception\NotFoundException
-     * @expectedExceptionMessage Record not found
-     * @test
-     */
-    public function testWithoutMockingInstagram()
-    {
-        (new InstagramController)->index();
+        $this->get(['_name' => 'instagramPhoto', '1_1']);
+        $this->assertRedirect(['_name' => 'instagramPhotos']);
     }
 }
