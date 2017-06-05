@@ -125,11 +125,11 @@ trait InstagramTrait
             throw new NotFoundException(__d('me_cms', 'Record not found'));
         }
 
-        $object = (object)compact('id');
-        $object->path = $photo->data->images->standard_resolution->url;
-        $object->filename = explode('?', basename($object->path), 2)[0];
+        $path = $photo->data->images->standard_resolution->url;
 
-        return $object;
+        return (object)array_merge(compact('id', 'path'), [
+            'filename' => explode('?', basename($path), 2)[0],
+        ]);
     }
 
     /**
@@ -152,14 +152,14 @@ trait InstagramTrait
         $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
 
         $photos = collection($photos->data)->take($limit)->map(function ($photo) {
-            $object = new \stdClass;
-            $object->id = $photo->id;
-            $object->link = $photo->link;
-            $object->path = $photo->images->standard_resolution->url;
-            $object->filename = explode('?', basename($object->path), 2)[0];
-            $object->description = empty($photo->caption->text) ? null : $photo->caption->text;
+            $path = $photo->images->standard_resolution->url;
 
-            return $object;
+            return (object)array_merge(compact('path'), [
+                'id' => $photo->id,
+                'link' => $photo->link,
+                'filename' => explode('?', basename($path), 2)[0],
+                'description' => empty($photo->caption->text) ? null : $photo->caption->text,
+            ]);
         })->toList();
 
         return [$photos, $nextId];
