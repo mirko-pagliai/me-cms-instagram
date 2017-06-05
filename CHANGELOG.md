@@ -6,7 +6,8 @@
 * added the `InstagramTrait`, inheriting methods from the `Instagram` utility
     (which continues to exist, using the trait itself);
 * added the `InstagramComponent`;
-* `PhotosWidgetsCell` uses the `__construct()` method to set an `Instagram` instance;
+* the `PhotosWidgetsCell` class uses the `__construct()` method to set an
+    `Instagram` instance;
 * updated for MeCms 2.18.2.
 
 ## 1.4 branch
