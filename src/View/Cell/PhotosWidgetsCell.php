@@ -23,6 +23,9 @@
 namespace MeCmsInstagram\View\Cell;
 
 use Cake\Cache\Cache;
+use Cake\Event\EventManager;
+use Cake\Http\ServerRequest;
+use Cake\Network\Response;
 use Cake\View\Cell;
 use MeCmsInstagram\Utility\Instagram;
 
@@ -32,12 +35,27 @@ use MeCmsInstagram\Utility\Instagram;
 class PhotosWidgetsCell extends Cell
 {
     /**
-     * Returns an `Instagram` instance
-     * @return \MeCmsInstagram\Utility\Instagram
+     * @var \MeCmsInstagram\Utility\Instagram
      */
-    protected function _getInstagramInstance()
-    {
-        return new Instagram;
+    public $Instagram;
+
+    /**
+     * Constructor
+     * @param \Cake\Http\ServerRequest|null $request The request to use in the cell
+     * @param \Cake\Http\Response|null $response The response to use in the cell
+     * @param \Cake\Event\EventManager|null $eventManager The eventManager to bind events to
+     * @param array $cellOptions Cell options to apply
+     * @since 1.5.0
+     */
+    public function __construct(
+        ServerRequest $request = null,
+        Response $response = null,
+        EventManager $eventManager = null,
+        array $cellOptions = []
+    ) {
+        parent::__construct($request, $response, $eventManager, $cellOptions);
+
+        $this->Instagram = new Instagram;
     }
 
     /**
@@ -45,7 +63,7 @@ class PhotosWidgetsCell extends Cell
      * @param int $limit Limit
      * @return array
      * @uses MeCmsInstagram\Utility\Instagram::recent()
-     * @uses _getInstagramInstance()
+     * @uses $Instagram
      */
     protected function _latest($limit = 12)
     {
@@ -57,7 +75,7 @@ class PhotosWidgetsCell extends Cell
 
         //If the data are not available from the cache
         if (empty($photos)) {
-            list($photos) = $this->_getInstagramInstance()->recent(null, $limit);
+            list($photos) = $this->Instagram->recent(null, $limit);
 
             Cache::write($cache, $photos, 'instagram');
         }
