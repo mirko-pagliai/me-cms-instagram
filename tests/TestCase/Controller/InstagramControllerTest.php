@@ -152,11 +152,19 @@ class InstagramControllerTest extends IntegrationTestCase
         $this->assertEquals($photosFromView, $photosFromCache);
         $this->assertEquals($nextIdFromView, $nextIdFromCache);
 
-        //GET request. Not with the `nextId`
+        //GET request. Now with the `nextId`
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
         $this->assertResponseOk();
         $this->assertResponseNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
+
+        //GET request. Now it's an ajax request, with the `nextId`
+        $this->configRequest(['headers' => ['X-Requested-With' => 'XMLHttpRequest']]);
+        $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
+        $this->assertResponseOk();
+        $this->assertResponseNotEmpty();
+        $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
+        $this->assertLayout('src/Template/Layout/ajax/ajax.ctp');
     }
 
     /**
