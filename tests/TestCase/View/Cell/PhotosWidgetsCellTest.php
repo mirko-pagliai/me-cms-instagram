@@ -105,7 +105,7 @@ class PhotosWidgetsCellTest extends TestCase
     }
 
     /**
-     * Test withoud mocking the `Instagram` object
+     * Test without mocking the `Instagram` object
      * @expectedException Cake\Network\Exception\NotFoundException
      * @expectedExceptionMessage Record not found
      * @test
