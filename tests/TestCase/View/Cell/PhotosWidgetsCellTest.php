@@ -63,34 +63,21 @@ class PhotosWidgetsCellTest extends TestCase
 
         Cache::clearAll();
 
-        $this->View = new View;
+        $this->WidgetHelper = new WidgetHelper(new View);
 
-        $this->WidgetHelper = new WidgetHelper($this->View);
+        $this->PhotosWidgetsCell = new PhotosWidgetsCell(new Request);
 
-        $this->PhotosWidgetsCell = $this->getMockBuilder(PhotosWidgetsCell::class)
-            ->setMethods(['_getInstagramInstance'])
-            ->setConstructorArgs([new Request])
+        $this->PhotosWidgetsCell->Instagram = $this->getMockBuilder(Instagram::class)
+            ->setMethods(['_getRecentResponse'])
             ->getMock();
 
-        $this->PhotosWidgetsCell->expects($this->any())
-            ->method('_getInstagramInstance')
+        $this->PhotosWidgetsCell->Instagram->method('_getRecentResponse')
             ->will($this->returnCallback(function () {
-                $instagram = $this->getMockBuilder(Instagram::class)
-                    ->setMethods(['_getRecentResponse'])
-                    ->getMock();
-
-                $instagram->expects($this->any())
-                    ->method('_getRecentResponse')
-                    ->will($this->returnCallback(function () {
-                        return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-                    }));
-
-                return $instagram;
+                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
             }));
 
         $this->PhotosWidgetsCell->viewBuilder()->setPlugin(ME_CMS_INSTAGRAM);
-        $this->PhotosWidgetsCell->viewBuilder()->setTemplatePath('Cell/PhotosWidgets');
-        $this->PhotosWidgetsCell->viewClass = get_class($this->View);
+        $this->PhotosWidgetsCell->viewClass = View::class;
     }
 
     /**
@@ -101,11 +88,11 @@ class PhotosWidgetsCellTest extends TestCase
     {
         parent::tearDown();
 
-        unset($this->PhotosWidgetsCell, $this->View, $this->WidgetHelper);
+        unset($this->PhotosWidgetsCell, $this->WidgetHelper);
     }
 
     /**
-     * Test withoud mocking the `Instagram` object
+     * Test without mocking the `Instagram` object
      * @expectedException Cake\Network\Exception\NotFoundException
      * @expectedExceptionMessage Record not found
      * @test

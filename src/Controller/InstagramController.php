@@ -24,7 +24,6 @@ namespace MeCmsInstagram\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Network\Exception\NotFoundException;
-use MeCmsInstagram\Utility\Instagram;
 use MeCms\Controller\AppController;
 
 /**
@@ -32,15 +31,6 @@ use MeCms\Controller\AppController;
  */
 class InstagramController extends AppController
 {
-    /**
-     * Returns an `Instagram` instance
-     * @return \MeCmsInstagram\Utility\Instagram
-     */
-    protected function _getInstagramInstance()
-    {
-        return new Instagram;
-    }
-
     /**
      * Called after the controller action is run, but before the view is
      * rendered.
@@ -61,12 +51,24 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($user)) {
-            $user = $this->_getInstagramInstance()->user();
+            $user = $this->Instagram->user();
 
             Cache::write($cache, $user, 'instagram');
         }
 
         $this->set(compact('user'));
+    }
+
+    /**
+     * Initialization hook method
+     * @return void
+     * @uses MeCms\Controller\AppController::initialize()
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->loadComponent(ME_CMS_INSTAGRAM . '.Instagram');
     }
 
     /**
@@ -90,7 +92,7 @@ class InstagramController extends AppController
 
         //If the data are not available from the cache
         if (empty($photos)) {
-            list($photos, $nextId) = $this->_getInstagramInstance()->recent($id, config('default.photos'));
+            list($photos, $nextId) = $this->Instagram->recent($id, config('default.photos'));
 
             Cache::write($cache, [$photos, $nextId], 'instagram');
         }
@@ -113,7 +115,7 @@ class InstagramController extends AppController
         if (empty($photo)) {
             //It tries to get the media (photo). If an exception is thrown, redirects to index
             try {
-                $photo = $this->_getInstagramInstance()->media($id);
+                $photo = $this->Instagram->media($id);
             } catch (NotFoundException $e) {
                 return $this->redirect(['_name' => 'instagramPhotos'], 301);
             }

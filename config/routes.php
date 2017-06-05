@@ -39,13 +39,15 @@ Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function ($routes) {
     }
 
     //Instagram (with ID)
-    $routes->connect(
-        '/instagram/:id',
-        ['controller' => 'Instagram', 'action' => 'index'],
-        ['_name' => 'instagramPhotosId', 'id' => '\d+_\d+', 'pass' => ['id']]
-    );
+    if (!$routes->nameExists('instagramPhotosId')) {
+        $routes->connect(
+            '/instagram/:id',
+            ['controller' => 'Instagram', 'action' => 'index'],
+            ['_name' => 'instagramPhotosId', 'id' => '\d+_\d+', 'pass' => ['id']]
+        );
+    }
 
-    //Instragram photo
+    //Instagram photo
     if (!$routes->nameExists('instagramPhoto')) {
         $routes->connect(
             '/instagram/view/:id',

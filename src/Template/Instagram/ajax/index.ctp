@@ -20,17 +20,4 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-$this->extend('MeCms./Common/index');
-$this->assign('title', $title = $photo->filename);
-
-if (config('default.user_profile')) {
-    echo $this->element('user');
-}
-
-/**
- * Breadcrumb
- */
-$this->Breadcrumbs->add(__d('me_cms_instagram', 'Photos from {0}', 'Instagram'), ['_name' => 'instagramPhotos']);
-$this->Breadcrumbs->add($title, ['_name' => 'instagramPhoto', $photo->id]);
-
-echo $this->Html->img($photo->path);
+$this->extend(ME_CMS_INSTAGRAM . './Instagram/index');

@@ -19,18 +19,35 @@
  * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
+ * @since       1.5.0
  */
-$this->extend('MeCms./Common/index');
-$this->assign('title', $title = $photo->filename);
+namespace MeCmsInstagram\Controller\Component;
 
-if (config('default.user_profile')) {
-    echo $this->element('user');
-}
+use Cake\Controller\Component;
+use Cake\Controller\ComponentRegistry;
+use MeCmsInstagram\InstagramTrait;
 
 /**
- * Breadcrumb
+ * A component to get media from Instagram
  */
-$this->Breadcrumbs->add(__d('me_cms_instagram', 'Photos from {0}', 'Instagram'), ['_name' => 'instagramPhotos']);
-$this->Breadcrumbs->add($title, ['_name' => 'instagramPhoto', $photo->id]);
+class InstagramComponent extends Component
+{
+    use InstagramTrait;
 
-echo $this->Html->img($photo->path);
+    /**
+     * Construct
+     * @param \Cake\Controller\ComponentRegistry $registry A ComponentRegistry
+     *  this component can use to lazy load its components
+     * @param array $config Array of configuration settings
+     */
+    public function __construct(ComponentRegistry $registry, $config = [])
+    {
+        parent::__construct($registry, $config);
+
+        if (empty($config['key'])) {
+            $config['key'] = config('Instagram.key');
+        }
+
+        $this->key = $config['key'];
+    }
+}

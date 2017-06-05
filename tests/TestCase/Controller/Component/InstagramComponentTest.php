@@ -20,17 +20,27 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-$this->extend('MeCms./Common/index');
-$this->assign('title', $title = $photo->filename);
+namespace MeCmsInstagram\Test\TestCase\Controller\Component;
 
-if (config('default.user_profile')) {
-    echo $this->element('user');
-}
+use Cake\Controller\ComponentRegistry;
+use Cake\TestSuite\TestCase;
+use MeCmsInstagram\Controller\Component\InstagramComponent;
 
 /**
- * Breadcrumb
+ * InstagramComponentTest class
  */
-$this->Breadcrumbs->add(__d('me_cms_instagram', 'Photos from {0}', 'Instagram'), ['_name' => 'instagramPhotos']);
-$this->Breadcrumbs->add($title, ['_name' => 'instagramPhoto', $photo->id]);
+class InstagramComponentTest extends TestCase
+{
+    /**
+     * Test for `__construct()` method
+     * @test
+     */
+    public function testConstruct()
+    {
+        $this->Instagram = new InstagramComponent(new ComponentRegistry);
+        $this->assertEquals(config('Instagram.key'), $this->Instagram->key);
 
-echo $this->Html->img($photo->path);
+        $this->Instagram = new InstagramComponent(new ComponentRegistry, ['key' => 'anotherKey']);
+        $this->assertEquals('anotherKey', $this->Instagram->key);
+    }
+}

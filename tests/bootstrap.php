@@ -78,8 +78,8 @@ Configure::write('App', [
     'cssBaseUrl' => 'css/',
     'paths' => [
         'plugins' => [APP . 'Plugin' . DS],
-        'templates' => [APP . 'TestApp' . DS . 'Template' . DS],
-    ]
+        'templates' => [APP . 'Template' . DS],
+    ],
 ]);
 
 Cache::setConfig([
@@ -104,26 +104,15 @@ Cache::setConfig([
 if (!getenv('db_dsn')) {
     putenv('db_dsn=sqlite://127.0.0.1/' . TMP . 'debug_kit_test.sqlite');
 }
-$config = [
-    'url' => getenv('db_dsn'),
-    'timezone' => 'UTC',
-];
 
 // Use the test connection for 'debug_kit' as well.
-ConnectionManager::setConfig('test', $config);
+ConnectionManager::setConfig('test', ['url' => getenv('db_dsn'), 'timezone' => 'UTC']);
 
-Configure::write('Session', [
-    'defaults' => 'php'
-]);
+Configure::write('Session', ['defaults' => 'php']);
 
 /**
  * Loads plugins
  */
-Configure::write('Assets.target', TMP . 'assets');
-
-//@codingStandardsIgnoreLine
-@mkdir(Configure::read('Assets.target'));
-
 //@codingStandardsIgnoreEnd
 Plugin::load('Assets', [
     'bootstrap' => true,
@@ -135,20 +124,11 @@ Plugin::load('MeTools', [
     'path' => VENDOR . 'mirko-pagliai' . DS . 'me-tools' . DS,
 ]);
 
-Configure::write('Thumbs.target', TMP . 'thumbs');
-//@codingStandardsIgnoreLine
-@mkdir(Configure::read('Thumbs.target'));
-
 Plugin::load('Thumber', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-thumber' . DS,
     'routes' => true,
 ]);
-
-define('LOGIN_RECORDS', TMP . 'login' . DS);
-
-//@codingStandardsIgnoreLine
-@mkdir(LOGIN_RECORDS);
 
 Plugin::load('MeCms', [
     'bootstrap' => false, //Doesn't load the bootstrap
