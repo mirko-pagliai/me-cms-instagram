@@ -28,9 +28,9 @@ use Cake\TestSuite\IntegrationTestCase;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
 
 /**
- * IstangramControllerTest class
+ * InstagramControllerTest class
  */
-class IstangramControllerTest extends IntegrationTestCase
+class InstagramControllerTest extends IntegrationTestCase
 {
     /**
      * @var \MeCmsInstagram\Controller\InstagramController
@@ -88,7 +88,7 @@ class IstangramControllerTest extends IntegrationTestCase
     {
         parent::tearDown();
 
-        unset($this->Controller);
+        unset($this->InstagramComponent);
     }
 
     /**

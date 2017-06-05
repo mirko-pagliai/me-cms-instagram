@@ -3,7 +3,9 @@
 ### 1.5.0
 * fixed bug, added template for ajax requests;
 * fixed bugs to not rewrite existing routes;
-* the `Instagram` utility has been replaced by the `InstagramComponent`.
+* added the `InstagramTrait`, inheriting methods from the `Instagram` utility
+    (which continues to exist, using the trait itself);
+* added the `InstagramComponent`.
 
 ## 1.4 branch
 ### 1.4.1
