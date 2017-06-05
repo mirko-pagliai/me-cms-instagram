@@ -5,7 +5,8 @@
 * fixed bugs to not rewrite existing routes;
 * added the `InstagramTrait`, inheriting methods from the `Instagram` utility
     (which continues to exist, using the trait itself);
-* added the `InstagramComponent`.
+* added the `InstagramComponent`;
+* updated for MeCms 2.18.2.
 
 ## 1.4 branch
 ### 1.4.1
