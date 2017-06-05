@@ -21,4 +21,3 @@
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
 $this->extend(ME_CMS_INSTAGRAM . './Instagram/index');
-
