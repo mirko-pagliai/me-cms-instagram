@@ -38,7 +38,7 @@ class InstagramComponentTest extends TestCase
     public function testConstruct()
     {
         $this->Instagram = new InstagramComponent(new ComponentRegistry);
-        $this->assertEquals(config('Instagram.key'), $this->Instagram->key);
+        $this->assertEquals(getConfig('Instagram.key'), $this->Instagram->key);
 
         $this->Instagram = new InstagramComponent(new ComponentRegistry, ['key' => 'anotherKey']);
         $this->assertEquals('anotherKey', $this->Instagram->key);

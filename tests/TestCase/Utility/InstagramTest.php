@@ -98,7 +98,7 @@ class InstagramTest extends TestCase
      */
     public function testConstruct()
     {
-        $this->assertEquals(config('Instagram.key'), $this->invokeMethod($this->Instagram, '_getKey'));
+        $this->assertEquals(getConfig('Instagram.key'), $this->invokeMethod($this->Instagram, '_getKey'));
 
         $key = 'anotherKey';
 

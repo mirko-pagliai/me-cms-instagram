@@ -8,7 +8,7 @@
 * added the `InstagramComponent`;
 * the `PhotosWidgetsCell` class uses the `__construct()` method to set an
     `Instagram` instance;
-* updated for MeCms 2.18.2.
+* updated for MeCms 2.19.0.
 
 ## 1.4 branch
 ### 1.4.1
