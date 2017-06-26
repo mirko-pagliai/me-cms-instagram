@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.5 branch
+### 1.5.1
+* updated for MeCms 2.19.0.
+
 ### 1.5.0
 * fixed bug, added template for ajax requests;
 * fixed bugs to not rewrite existing routes;
@@ -8,7 +11,7 @@
 * added the `InstagramComponent`;
 * the `PhotosWidgetsCell` class uses the `__construct()` method to set an
     `Instagram` instance;
-* updated for MeCms 2.19.0.
+* updated for MeCms 2.18.2.
 
 ## 1.4 branch
 ### 1.4.1
