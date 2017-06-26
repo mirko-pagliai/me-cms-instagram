@@ -25,11 +25,11 @@ $this->assign('title', $title = __d('me_cms_instagram', 'Photos from {0}', 'Inst
 
 $this->Asset->script('MeCmsInstagram.instagram', ['block' => 'script_bottom']);
 
-if (config('default.fancybox')) {
+if (getConfig('default.fancybox')) {
     $this->Library->fancybox();
 }
 
-if (config('default.user_profile') && !$this->request->is('ajax')) {
+if (getConfig('default.user_profile') && !$this->request->is('ajax')) {
     echo $this->element('user');
 }
 
@@ -53,7 +53,7 @@ $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
                         ),
                     ]);
 
-                    if (config('default.open_on_instagram')) {
+                    if (getConfig('default.open_on_instagram')) {
                         $link = $photo->link;
                     } else {
                         $link = ['_name' => 'instagramPhoto', $photo->id];
@@ -65,7 +65,7 @@ $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
                     ];
 
                     //If Fancybox is enabled, adds some options
-                    if (config('default.fancybox')) {
+                    if (getConfig('default.fancybox')) {
                         $options['class'] = 'fancybox thumbnail';
                         $options['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
                         $options['rel'] = 'group';

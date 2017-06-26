@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.5 branch
+### 1.5.1
+* updated for MeCms 2.19.0.
+
 ### 1.5.0
 * fixed bug, added template for ajax requests;
 * fixed bugs to not rewrite existing routes;
