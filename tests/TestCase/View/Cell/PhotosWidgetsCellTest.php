@@ -72,9 +72,7 @@ class PhotosWidgetsCellTest extends TestCase
             ->getMock();
 
         $this->PhotosWidgetsCell->Instagram->method('_getRecentResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-            }));
+            ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . 'recent.json')));
 
         $this->PhotosWidgetsCell->viewBuilder()->setPlugin(ME_CMS_INSTAGRAM);
         $this->PhotosWidgetsCell->viewClass = View::class;
