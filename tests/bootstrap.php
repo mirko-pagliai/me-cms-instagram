@@ -113,15 +113,32 @@ Configure::write('Session', ['defaults' => 'php']);
 /**
  * Loads plugins
  */
-//@codingStandardsIgnoreEnd
 Plugin::load('Assets', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'assets' . DS,
 ]);
 
+Configure::write('DatabaseBackup.connection', 'test');
+Configure::write('DatabaseBackup.target', TMP . 'backups');
+
+Plugin::load('DatabaseBackup', [
+    'bootstrap' => true,
+    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-database-backup' . DS,
+]);
+
 Plugin::load('MeTools', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'me-tools' . DS,
+]);
+
+Plugin::load('Recaptcha', [
+    'path' => VENDOR . 'crabstudio' . DS . 'recaptcha' . DS,
+]);
+
+Plugin::load('RecaptchaMailhide', [
+    'bootstrap' => true,
+    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-recaptcha-mailhide' . DS,
+    'routes' => true,
 ]);
 
 Plugin::load('Thumber', [

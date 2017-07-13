@@ -22,7 +22,7 @@
  */
 namespace MeCmsInstagram\Shell;
 
-use MeTools\Shell\InstallShell as BaseInstallShell;
+use MeCms\Shell\InstallShell as BaseInstallShell;
 
 /**
  * Executes some tasks to make the system ready to work
