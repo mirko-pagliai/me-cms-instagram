@@ -17,7 +17,7 @@
         "mirko-pagliai/me-cms": ">=2.19.0 <2.20"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "2.*",
+        "cakephp/cakephp-codesniffer": "^3.0",
         "mirko-pagliai/reflection": "^1.0",
         "phpunit/phpunit": "^5.7|^6.0"
     },
