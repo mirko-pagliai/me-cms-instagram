@@ -70,24 +70,20 @@ class InstagramTest extends TestCase
      */
     protected function getInstagramComponentMock()
     {
+        $methods = [
+            '_getMediaResponse' => 'media.json',
+            '_getRecentResponse' => 'recent.json',
+            '_getUserResponse' => 'user.json',
+        ];
+
         $instance = $this->getMockBuilder(Instagram::class)
-            ->setMethods(['_getMediaResponse', '_getRecentResponse', '_getUserResponse'])
+            ->setMethods(array_keys($methods))
             ->getMock();
 
-        $instance->method('_getMediaResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
-            }));
-
-        $instance->method('_getRecentResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-            }));
-
-        $instance->method('_getUserResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
-            }));
+        foreach ($methods as $method => $filename) {
+            $instance->method($method)
+                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $filename)));
+        }
 
         return $instance;
     }

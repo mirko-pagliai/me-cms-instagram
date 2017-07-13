@@ -42,27 +42,23 @@ class InstagramControllerTest extends IntegrationTestCase
      */
     protected function getInstagramComponentMock()
     {
-        $component = $this->getMockBuilder(InstagramComponent::class)
+        $methods = [
+            '_getMediaResponse' => 'media.json',
+            '_getRecentResponse' => 'recent.json',
+            '_getUserResponse' => 'user.json',
+        ];
+
+        $instance = $this->getMockBuilder(InstagramComponent::class)
             ->setConstructorArgs([new ComponentRegistry])
-            ->setMethods(['_getMediaResponse', '_getRecentResponse', '_getUserResponse'])
+            ->setMethods(array_keys($methods))
             ->getMock();
 
-        $component->method('_getMediaResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'media.json');
-            }));
+        foreach ($methods as $method => $filename) {
+            $instance->method($method)
+                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $filename)));
+        }
 
-        $component->method('_getRecentResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
-            }));
-
-        $component->method('_getUserResponse')
-            ->will($this->returnCallback(function () {
-                return file_get_contents(TEST_APP . 'examples' . DS . 'user.json');
-            }));
-
-        return $component;
+        return $instance;
     }
 
     /**
