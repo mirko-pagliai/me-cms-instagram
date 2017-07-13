@@ -22,6 +22,7 @@
  */
 namespace MeCmsInstagram\Shell;
 
+use Cake\Console\ConsoleIo;
 use MeCms\Shell\InstallShell as BaseInstallShell;
 
 /**
@@ -33,9 +34,9 @@ class InstallShell extends BaseInstallShell
      * Construct
      * @param \Cake\Console\ConsoleIo|null $io An io instance
      * @uses $config
-     * @uses MeTools\Shell\InstallShell::__construct()
+     * @uses MeCms\Shell\InstallShell::__construct()
      */
-    public function __construct(\Cake\Console\ConsoleIo $io = null)
+    public function __construct(ConsoleIo $io = null)
     {
         parent::__construct($io);
 
@@ -48,7 +49,7 @@ class InstallShell extends BaseInstallShell
     /**
      * Executes all available tasks
      * @return void
-     * @uses MeTools\Shell\InstallShell::copyConfig()
+     * @uses MeCms\Shell\InstallShell::copyConfig()
      */
     public function all()
     {
@@ -67,7 +68,7 @@ class InstallShell extends BaseInstallShell
     /**
      * Gets the option parser instance and configures it.
      * @return ConsoleOptionParser
-     * @uses MeTools\Shell\InstallShell::getOptionParser()
+     * @uses MeCms\Shell\InstallShell::getOptionParser()
      */
     public function getOptionParser()
     {
