@@ -20,19 +20,12 @@
  * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
-
 if (empty($photos)) {
     return;
 }
 
 $this->extend('MeCms./Common/widget');
-$this->assign('title', __dn(
-    'me_cms',
-    'Random photo',
-    'Random {0} photos',
-    count($photos),
-    count($photos)
-));
+$this->assign('title', __dn('me_cms', 'Random photo', 'Random {0} photos', count($photos), count($photos)));
 
 foreach ($photos as $photo) {
     echo $this->Html->link(
