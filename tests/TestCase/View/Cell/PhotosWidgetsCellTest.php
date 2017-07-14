@@ -54,7 +54,7 @@ class PhotosWidgetsCellTest extends TestCase
             ->setMethods(['widget'])
             ->getMock();
 
-        $this->Widget->method('widget')->will($this->returnCallback(function() {
+        $this->Widget->method('widget')->will($this->returnCallback(function () {
             $widgetClass = call_user_func_array([new WidgetHelper(new View), 'widget'], func_get_args());
 
             $widgetClass->Instagram = $this->getMockBuilder(get_class($widgetClass->Instagram))
