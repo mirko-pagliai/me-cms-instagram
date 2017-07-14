@@ -177,9 +177,9 @@ class PhotosWidgetsCellTest extends TestCase
         $this->assertHtml($expected, $result);
 
         //Sets `Instagram` controller
-        $cell = $this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::random');
-        $cell->request = $cell->request->withParam('controller', 'Instagram');
-        $this->assertEmpty($cell->render());
+        $widget = $this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::random');
+        $widget->request = $widget->request->withParam('controller', 'Instagram');
+        $this->assertEmpty($widget->render());
 
         //Tests cache
         $fromCache = Cache::read('widget_latest_12', 'instagram');
