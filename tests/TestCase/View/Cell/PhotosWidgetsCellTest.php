@@ -33,7 +33,6 @@ use MeCms\View\View\AppView as View;
 class PhotosWidgetsCellTest extends TestCase
 {
     /**
-     *
      * @var \MeCms\View\Helper\WidgetHelper
      */
     protected $Widget;
@@ -62,9 +61,15 @@ class PhotosWidgetsCellTest extends TestCase
                 ->setMethods(['_getRecentResponse'])
                 ->getMock();
 
-            $widgetClass->Instagram
-                ->method('_getRecentResponse')
-                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . 'recent.json')));
+            if (in_array($this->getName(), ['testLatestNoPhotos', 'testRandomNoPhotos'])) {
+                $widgetClass->Instagram
+                    ->method('_getRecentResponse')
+                    ->will($this->returnValue(json_encode(['data' => []])));
+            } else {
+                $widgetClass->Instagram
+                    ->method('_getRecentResponse')
+                    ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . 'recent.json')));
+            }
 
             return $widgetClass;
         }));
@@ -136,6 +141,15 @@ class PhotosWidgetsCellTest extends TestCase
     }
 
     /**
+     * Test for `latest()` method, with no photos
+     * @test
+     */
+    public function testLatestNoPhotos()
+    {
+        $this->assertEmpty($this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::latest')->render());
+    }
+
+    /**
      * Test for `random()` method
      * @test
      */
@@ -184,5 +198,14 @@ class PhotosWidgetsCellTest extends TestCase
         //Tests cache
         $fromCache = Cache::read('widget_latest_12', 'instagram');
         $this->assertEquals(12, count($fromCache));
+    }
+
+    /**
+     * Test for `random()` method, with no photos
+     * @test
+     */
+    public function testRandomNoPhotos()
+    {
+        $this->assertEmpty($this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::random')->render());
     }
 }
