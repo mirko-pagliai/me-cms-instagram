@@ -3,7 +3,7 @@
     "description": "Instagram plugin for MeCms",
     "homepage": "https://github.com/mirko-pagliai/me-cms-instagram",
     "type": "cakephp-plugin",
-    "license": "AGPL",
+    "license": "AGPL-3.0",
     "authors": [{
         "name": "Mirko Pagliai",
         "email": "mirko.pagliai@gmail.com"
