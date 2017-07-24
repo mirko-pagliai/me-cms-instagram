@@ -142,7 +142,7 @@ class InstagramControllerTest extends IntegrationTestCase
         $this->assertEquals('111_222', $nextIdFromView);
 
         //Sets the cache name
-        $cache = sprintf('index_limit_%s', getConfig('default.photos'));
+        $cache = sprintf('index_limit_%s', getConfigOrFail('default.photos'));
         list($photosFromCache, $nextIdFromCache) = array_values(Cache::read($cache, 'instagram'));
 
         $this->assertEquals($photosFromView, $photosFromCache);

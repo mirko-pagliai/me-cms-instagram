@@ -57,7 +57,7 @@ trait InstagramTrait
     protected function _getKey()
     {
         if (!$this->key) {
-            return getConfig('Instagram.key');
+            return getConfigOrFail('Instagram.key');
         }
 
         return $this->key;
