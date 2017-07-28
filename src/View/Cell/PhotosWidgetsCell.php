@@ -55,7 +55,7 @@ class PhotosWidgetsCell extends Cell
      * @uses MeCmsInstagram\Utility\Instagram::recent()
      * @uses $Instagram
      */
-    protected function _latest($limit = 12)
+    protected function getLatest($limit = 12)
     {
         //Sets the cache name
         $cache = sprintf('widget_latest_%s', $limit);
@@ -77,7 +77,7 @@ class PhotosWidgetsCell extends Cell
      * Latest widget
      * @param int $limit Limit
      * @return void
-     * @uses _latest()
+     * @uses getLatest()
      */
     public function latest($limit = 1)
     {
@@ -86,7 +86,7 @@ class PhotosWidgetsCell extends Cell
             return;
         }
 
-        $photos = $this->_latest($limit);
+        $photos = $this->getLatest($limit);
 
         $this->set(compact('photos'));
     }
@@ -95,7 +95,7 @@ class PhotosWidgetsCell extends Cell
      * Random widget
      * @param int $limit Limit
      * @return void
-     * @uses _latest()
+     * @uses getLatest()
      */
     public function random($limit = 1)
     {
@@ -104,7 +104,7 @@ class PhotosWidgetsCell extends Cell
             return;
         }
 
-        $photos = collection($this->_latest())->sample($limit)->toArray();
+        $photos = collection($this->getLatest())->sample($limit)->toArray();
 
         $this->set(compact('photos'));
     }
