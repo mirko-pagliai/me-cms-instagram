@@ -55,33 +55,33 @@ trait InstagramTrait
 
     /**
      * Internal method to get a media response
-     * @param string $id Media ID
+     * @param string $mediaId Media ID
      * @return mixed The response body
      * @uses getClient()
      * @uses $key
      */
-    protected function getMediaResponse($id)
+    protected function getMediaResponse($mediaId)
     {
-        $url = 'https://api.instagram.com/v1/media/' . $id . '?access_token=' . $this->key;
+        $url = 'https://api.instagram.com/v1/media/' . $mediaId . '?access_token=' . $this->key;
 
         return $this->getClient()->get($url)->body;
     }
 
     /**
      * Internal method to get a "recent" response
-     * @param string $id Request ID ("Next ID" for Istangram)
+     * @param string $requestId Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
      * @return mixed The response body
      * @uses getClient()
      * @uses $key
      */
-    protected function getRecentResponse($id = null, $limit = 15)
+    protected function getRecentResponse($requestId = null, $limit = 15)
     {
         $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token= ' . $this->key;
 
         //Adds the request ID ("Next ID" for Istangram) to the url
-        if (!empty($id)) {
-            $url .= '&max_id=' . $id;
+        if (!empty($requestId)) {
+            $url .= '&max_id=' . $requestId;
         }
 
         return $this->getClient()->get($url)->body;
@@ -102,15 +102,15 @@ trait InstagramTrait
 
     /**
      * Gets a media object
-     * @param string $id Media ID
+     * @param string $mediaId Media ID
      * @return object
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
      * @throws NotFoundException
      * @uses getMediaResponse()
      */
-    public function media($id)
+    public function media($mediaId)
     {
-        $photo = json_decode($this->getMediaResponse($id));
+        $photo = json_decode($this->getMediaResponse($mediaId));
 
         if (!isset($photo->data->images->standard_resolution->url)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
@@ -118,23 +118,23 @@ trait InstagramTrait
 
         $path = $photo->data->images->standard_resolution->url;
 
-        return (object)array_merge(compact('id', 'path'), [
+        return (object)array_merge(['id' => $mediaId], compact('path'), [
             'filename' => explode('?', basename($path), 2)[0],
         ]);
     }
 
     /**
      * Gets the most recent media published by the owner of token
-     * @param string $id Request ID ("Next ID" for Istangram)
+     * @param string $requestId Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
      * @return array Array with photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
      * @uses getRecentResponse()
      * @throws NotFoundException
      */
-    public function recent($id = null, $limit = 15)
+    public function recent($requestId = null, $limit = 15)
     {
-        $photos = json_decode($this->getRecentResponse($id, $limit));
+        $photos = json_decode($this->getRecentResponse($requestId, $limit));
 
         if (!isset($photos->data)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
