@@ -21,7 +21,7 @@ use Cake\Network\Exception\NotFoundException;
  *
  * Remember that you should set the `$key` property (the API access token)
  *  somewhere, for example in the `__construct()` method. Otherwise, the
- *  `_getKey()` method will automatically return the configuration value.
+ *  `getKey()` method will automatically return the configuration value.
  */
 trait InstagramTrait
 {
