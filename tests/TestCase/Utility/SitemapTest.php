@@ -13,8 +13,8 @@
 namespace MeCmsInstagram\Test\TestCase\Utility;
 
 use Cake\Routing\Router;
-use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Sitemap;
+use MeTools\TestSuite\TestCase;
 
 /**
  * SitemapTest class

@@ -13,9 +13,9 @@
 namespace MeCmsInstagram\Test\TestCase\View\Cell;
 
 use Cake\Cache\Cache;
-use Cake\TestSuite\TestCase;
 use MeCms\View\Helper\WidgetHelper;
 use MeCms\View\View\AppView as View;
+use MeTools\TestSuite\TestCase;
 
 /**
  * PhotosWidgetsCellTest class
@@ -63,17 +63,6 @@ class PhotosWidgetsCellTest extends TestCase
 
             return $widgetClass;
         }));
-    }
-
-    /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->Widget);
     }
 
     /**

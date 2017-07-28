@@ -14,8 +14,8 @@ namespace MeCmsInstagram\Test\TestCase\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Controller\ComponentRegistry;
-use Cake\TestSuite\IntegrationTestCase;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
+use MeTools\TestSuite\IntegrationTestCase;
 
 /**
  * InstagramControllerTest class
@@ -67,17 +67,6 @@ class InstagramControllerTest extends IntegrationTestCase
     }
 
     /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->InstagramComponent);
-    }
-
-    /**
      * Adds additional event spies to the controller/view event manager
      * @param \Cake\Event\Event $event A dispatcher event
      * @param \Cake\Controller\Controller|null $controller Controller instance
@@ -116,17 +105,12 @@ class InstagramControllerTest extends IntegrationTestCase
     public function testIndex()
     {
         $this->get(['_name' => 'instagramPhotos']);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
 
         $photosFromView = $this->viewVariable('photos');
-        $this->assertTrue(is_array($photosFromView));
         $this->assertNotEmpty($photosFromView);
-
-        foreach ($photosFromView as $photo) {
-            $this->assertInstanceof('stdClass', $photo);
-        }
+        $this->assertInstanceof('stdClass', $photosFromView);
 
         $nextIdFromView = $this->viewVariable('nextId');
         $this->assertEquals('111_222', $nextIdFromView);
@@ -140,15 +124,13 @@ class InstagramControllerTest extends IntegrationTestCase
 
         //GET request. Now with the `nextId`
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
 
         //GET request. Now it's an ajax request, with the `nextId`
         $this->configRequest(['headers' => ['X-Requested-With' => 'XMLHttpRequest']]);
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
         $this->assertLayout('src/Template/Layout/ajax/ajax.ctp');
     }
@@ -158,12 +140,10 @@ class InstagramControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        list($photos) = ($this->InstagramComponent->recent());
-        $id = $photos[0]->id;
+        $id = $this->InstagramComponent->recent()[0][0]->id;
 
         $this->get(['_name' => 'instagramPhoto', $id]);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/view.ctp');
 
         $photoFromView = $this->viewVariable('photo');

@@ -13,17 +13,14 @@
 namespace MeCmsInstagram\Test\TestCase\Utility;
 
 use Cake\Cache\Cache;
-use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Instagram;
-use Reflection\ReflectionTrait;
+use MeTools\TestSuite\TestCase;
 
 /**
  * InstagramTest class
  */
 class InstagramTest extends TestCase
 {
-    use ReflectionTrait;
-
     /**
      * @var \MeCmsInstagram\Utility\Instagram
      */
@@ -42,17 +39,6 @@ class InstagramTest extends TestCase
         Cache::clearAll();
 
         $this->Instagram = new Instagram;
-    }
-
-    /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->Instagram);
     }
 
     /**

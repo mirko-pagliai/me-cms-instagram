@@ -1,7 +1,8 @@
 # 1.x branch
 ## 1.5 branch
 ### 1.5.4
-* the MIT license has been applied.
+* the MIT license has been applied;
+* significantly improved all tests.
 
 ### 1.5.3
 * fixed bug for widgets: they do not show anything if there are no records.

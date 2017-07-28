@@ -13,7 +13,6 @@
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Utility\Hash;
-use RuntimeException;
 
 //Sets the default me-cms-instagram name
 if (!defined('ME_CMS_INSTAGRAM')) {
@@ -34,7 +33,7 @@ if (is_readable(CONFIG . 'me_cms_instagram.php')) {
 Configure::write(ME_CMS, Hash::merge(getConfig(ME_CMS), Configure::consume(ME_CMS_INSTAGRAM)));
 
 if (getConfigOrFail('Instagram.key') === 'your-key-here') {
-    throw new RuntimeException('Instagram API access token is missing');
+    throw new \RuntimeException('Instagram API access token is missing');
 }
 
 /**

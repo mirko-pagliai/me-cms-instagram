@@ -13,8 +13,8 @@
 namespace MeCmsInstagram\Test\TestCase\Controller\Component;
 
 use Cake\Controller\ComponentRegistry;
-use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
+use MeTools\TestSuite\TestCase;
 
 /**
  * InstagramComponentTest class
