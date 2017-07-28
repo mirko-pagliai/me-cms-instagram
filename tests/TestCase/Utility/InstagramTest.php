@@ -47,9 +47,9 @@ class InstagramTest extends TestCase
     protected function getInstagramComponentMock()
     {
         $methods = [
-            '_getMediaResponse' => 'media.json',
-            '_getRecentResponse' => 'recent.json',
-            '_getUserResponse' => 'user.json',
+            'getMediaResponse' => 'media.json',
+            'getRecentResponse' => 'recent.json',
+            'getUserResponse' => 'user.json',
         ];
 
         $instance = $this->getMockBuilder(Instagram::class)
@@ -70,21 +70,21 @@ class InstagramTest extends TestCase
      */
     public function testConstruct()
     {
-        $this->assertEquals(getConfigOrFail('Instagram.key'), $this->invokeMethod($this->Instagram, '_getKey'));
+        $this->assertEquals(getConfigOrFail('Instagram.key'), $this->invokeMethod($this->Instagram, 'getKey'));
 
         $key = 'anotherKey';
 
         $this->Instagram = new Instagram($key);
-        $this->assertEquals($key, $this->invokeMethod($this->Instagram, '_getKey'));
+        $this->assertEquals($key, $this->invokeMethod($this->Instagram, 'getKey'));
     }
 
     /**
-     * Test for `_getClient()` method
+     * Test for `getClient()` method
      * @test
      */
     public function testGetClient()
     {
-        $this->assertInstanceof('Cake\Http\Client', $this->invokeMethod($this->Instagram, '_getClient'));
+        $this->assertInstanceof('Cake\Http\Client', $this->invokeMethod($this->Instagram, 'getClient'));
     }
 
     /**

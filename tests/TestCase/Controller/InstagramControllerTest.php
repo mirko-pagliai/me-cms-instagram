@@ -33,9 +33,9 @@ class InstagramControllerTest extends IntegrationTestCase
     protected function getInstagramComponentMock()
     {
         $methods = [
-            '_getMediaResponse' => 'media.json',
-            '_getRecentResponse' => 'recent.json',
-            '_getUserResponse' => 'user.json',
+            'getMediaResponse' => 'media.json',
+            'getRecentResponse' => 'recent.json',
+            'getUserResponse' => 'user.json',
         ];
 
         $instance = $this->getMockBuilder(InstagramComponent::class)

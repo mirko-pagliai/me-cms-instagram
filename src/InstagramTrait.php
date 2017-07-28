@@ -35,7 +35,7 @@ trait InstagramTrait
      * Internal method to get a `Client` instance
      * @return \Cake\Http\Client
      */
-    protected function _getClient()
+    protected function getClient()
     {
         return new Client;
     }
@@ -44,7 +44,7 @@ trait InstagramTrait
      * Internal method to get the key
      * @return string
      */
-    protected function _getKey()
+    protected function getKey()
     {
         if (!$this->key) {
             return getConfigOrFail('Instagram.key');
@@ -57,14 +57,14 @@ trait InstagramTrait
      * Internal method to get a media response
      * @param string $id Media ID
      * @return mixed The response body
-     * @uses _getClient()
+     * @uses getClient()
      * @uses $key
      */
-    protected function _getMediaResponse($id)
+    protected function getMediaResponse($id)
     {
         $url = 'https://api.instagram.com/v1/media/' . $id . '?access_token=' . $this->key;
 
-        return $this->_getClient()->get($url)->body;
+        return $this->getClient()->get($url)->body;
     }
 
     /**
@@ -72,10 +72,10 @@ trait InstagramTrait
      * @param string $id Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
      * @return mixed The response body
-     * @uses _getClient()
+     * @uses getClient()
      * @uses $key
      */
-    protected function _getRecentResponse($id = null, $limit = 15)
+    protected function getRecentResponse($id = null, $limit = 15)
     {
         $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token= ' . $this->key;
 
@@ -84,20 +84,20 @@ trait InstagramTrait
             $url .= '&max_id=' . $id;
         }
 
-        return $this->_getClient()->get($url)->body;
+        return $this->getClient()->get($url)->body;
     }
 
     /**
      * Internal method to get an user response
      * @return mixed The response body
-     * @uses _getClient()
+     * @uses getClient()
      * @uses $key
      */
-    protected function _getUserResponse()
+    protected function getUserResponse()
     {
         $url = 'https://api.instagram.com/v1/users/self/?access_token=' . $this->key;
 
-        return $this->_getClient()->get($url)->body;
+        return $this->getClient()->get($url)->body;
     }
 
     /**
@@ -106,11 +106,11 @@ trait InstagramTrait
      * @return object
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
      * @throws NotFoundException
-     * @uses _getMediaResponse()
+     * @uses getMediaResponse()
      */
     public function media($id)
     {
-        $photo = json_decode($this->_getMediaResponse($id));
+        $photo = json_decode($this->getMediaResponse($id));
 
         if (!isset($photo->data->images->standard_resolution->url)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
@@ -129,12 +129,12 @@ trait InstagramTrait
      * @param int $limit Limit
      * @return array Array with photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
-     * @uses _getRecentResponse()
+     * @uses getRecentResponse()
      * @throws NotFoundException
      */
     public function recent($id = null, $limit = 15)
     {
-        $photos = json_decode($this->_getRecentResponse($id, $limit));
+        $photos = json_decode($this->getRecentResponse($id, $limit));
 
         if (!isset($photos->data)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));
@@ -161,11 +161,11 @@ trait InstagramTrait
      * @return object
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
      * @throws NotFoundException
-     * @uses _getUserResponse()
+     * @uses getUserResponse()
      */
     public function user()
     {
-        $user = json_decode($this->_getUserResponse());
+        $user = json_decode($this->getUserResponse());
 
         if (!isset($user->data)) {
             throw new NotFoundException(__d('me_cms', 'Record not found'));

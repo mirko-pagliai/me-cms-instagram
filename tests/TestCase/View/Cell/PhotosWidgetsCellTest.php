@@ -48,7 +48,7 @@ class PhotosWidgetsCellTest extends TestCase
             $widgetClass = call_user_func_array([new WidgetHelper(new View), 'widget'], func_get_args());
 
             $widgetClass->Instagram = $this->getMockBuilder(get_class($widgetClass->Instagram))
-                ->setMethods(['_getRecentResponse'])
+                ->setMethods(['getRecentResponse'])
                 ->getMock();
 
             $returnValue = file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
@@ -57,7 +57,7 @@ class PhotosWidgetsCellTest extends TestCase
                 $returnValue = json_encode(['data' => []]);
             }
 
-            $widgetClass->Instagram->method('_getRecentResponse')
+            $widgetClass->Instagram->method('getRecentResponse')
                 ->will($this->returnValue($returnValue));
 
             return $widgetClass;
