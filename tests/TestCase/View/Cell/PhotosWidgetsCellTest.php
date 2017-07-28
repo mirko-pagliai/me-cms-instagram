@@ -51,15 +51,14 @@ class PhotosWidgetsCellTest extends TestCase
                 ->setMethods(['_getRecentResponse'])
                 ->getMock();
 
+            $returnValue = file_get_contents(TEST_APP . 'examples' . DS . 'recent.json');
+
             if (in_array($this->getName(), ['testLatestNoPhotos', 'testRandomNoPhotos'])) {
-                $widgetClass->Instagram
-                    ->method('_getRecentResponse')
-                    ->will($this->returnValue(json_encode(['data' => []])));
-            } else {
-                $widgetClass->Instagram
-                    ->method('_getRecentResponse')
-                    ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . 'recent.json')));
+                $returnValue = json_encode(['data' => []]);
             }
+
+            $widgetClass->Instagram->method('_getRecentResponse')
+                ->will($this->returnValue($returnValue));
 
             return $widgetClass;
         }));
