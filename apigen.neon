@@ -1,9 +1,0 @@
-accessLevels: [public, protected, private]
-destination: API
-download: false
-exclude: {*_old, *.old, *.old.*} 
-source: {src}
-main: me-cms-instagram
-php: false
-title: me-cms-instagram API
-todo: true
