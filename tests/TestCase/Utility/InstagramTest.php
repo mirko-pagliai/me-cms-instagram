@@ -2,38 +2,25 @@
 /**
  * This file is part of me-cms-instagram.
  *
- * me-cms-instagram is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
  *
- * me-cms-instagram is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with me-cms-instagram.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
- * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
- * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
- * @link        http://git.novatlantis.it Nova Atlantis Ltd
+ * @copyright   Copyright (c) Mirko Pagliai
+ * @link        https://github.com/mirko-pagliai/me-cms-instagram
+ * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace MeCmsInstagram\Test\TestCase\Utility;
 
 use Cake\Cache\Cache;
-use Cake\TestSuite\TestCase;
 use MeCmsInstagram\Utility\Instagram;
-use Reflection\ReflectionTrait;
+use MeTools\TestSuite\TestCase;
 
 /**
  * InstagramTest class
  */
 class InstagramTest extends TestCase
 {
-    use ReflectionTrait;
-
     /**
      * @var \MeCmsInstagram\Utility\Instagram
      */
@@ -55,25 +42,14 @@ class InstagramTest extends TestCase
     }
 
     /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->Instagram);
-    }
-
-    /**
      * Internal method to get a mock instance of `InstagramComponent`
      */
     protected function getInstagramComponentMock()
     {
         $methods = [
-            '_getMediaResponse' => 'media.json',
-            '_getRecentResponse' => 'recent.json',
-            '_getUserResponse' => 'user.json',
+            'getMediaResponse' => 'media.json',
+            'getRecentResponse' => 'recent.json',
+            'getUserResponse' => 'user.json',
         ];
 
         $instance = $this->getMockBuilder(Instagram::class)
@@ -94,21 +70,21 @@ class InstagramTest extends TestCase
      */
     public function testConstruct()
     {
-        $this->assertEquals(getConfig('Instagram.key'), $this->invokeMethod($this->Instagram, '_getKey'));
+        $this->assertEquals(getConfigOrFail('Instagram.key'), $this->invokeMethod($this->Instagram, 'getKey'));
 
         $key = 'anotherKey';
 
         $this->Instagram = new Instagram($key);
-        $this->assertEquals($key, $this->invokeMethod($this->Instagram, '_getKey'));
+        $this->assertEquals($key, $this->invokeMethod($this->Instagram, 'getKey'));
     }
 
     /**
-     * Test for `_getClient()` method
+     * Test for `getClient()` method
      * @test
      */
     public function testGetClient()
     {
-        $this->assertInstanceof('Cake\Http\Client', $this->invokeMethod($this->Instagram, '_getClient'));
+        $this->assertInstanceof('Cake\Http\Client', $this->invokeMethod($this->Instagram, 'getClient'));
     }
 
     /**

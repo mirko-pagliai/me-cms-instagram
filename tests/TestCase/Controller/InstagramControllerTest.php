@@ -2,30 +2,20 @@
 /**
  * This file is part of me-cms-instagram.
  *
- * me-cms-instagram is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
  *
- * me-cms-instagram is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with me-cms-instagram.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author      Mirko Pagliai <mirko.pagliai@gmail.com>
- * @copyright   Copyright (c) 2016, Mirko Pagliai for Nova Atlantis Ltd
- * @license     http://www.gnu.org/licenses/agpl.txt AGPL License
- * @link        http://git.novatlantis.it Nova Atlantis Ltd
+ * @copyright   Copyright (c) Mirko Pagliai
+ * @link        https://github.com/mirko-pagliai/me-cms-instagram
+ * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace MeCmsInstagram\Test\TestCase\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Controller\ComponentRegistry;
-use Cake\TestSuite\IntegrationTestCase;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
+use MeTools\TestSuite\IntegrationTestCase;
 
 /**
  * InstagramControllerTest class
@@ -43,9 +33,9 @@ class InstagramControllerTest extends IntegrationTestCase
     protected function getInstagramComponentMock()
     {
         $methods = [
-            '_getMediaResponse' => 'media.json',
-            '_getRecentResponse' => 'recent.json',
-            '_getUserResponse' => 'user.json',
+            'getMediaResponse' => 'media.json',
+            'getRecentResponse' => 'recent.json',
+            'getUserResponse' => 'user.json',
         ];
 
         $instance = $this->getMockBuilder(InstagramComponent::class)
@@ -74,17 +64,6 @@ class InstagramControllerTest extends IntegrationTestCase
         $this->InstagramComponent = $this->getInstagramComponentMock();
 
         Cache::clearAll();
-    }
-
-    /**
-     * Teardown any static object changes and restore them
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        unset($this->InstagramComponent);
     }
 
     /**
@@ -126,23 +105,18 @@ class InstagramControllerTest extends IntegrationTestCase
     public function testIndex()
     {
         $this->get(['_name' => 'instagramPhotos']);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
 
         $photosFromView = $this->viewVariable('photos');
-        $this->assertTrue(is_array($photosFromView));
         $this->assertNotEmpty($photosFromView);
-
-        foreach ($photosFromView as $photo) {
-            $this->assertInstanceof('stdClass', $photo);
-        }
+        $this->assertInstanceof('stdClass', $photosFromView);
 
         $nextIdFromView = $this->viewVariable('nextId');
         $this->assertEquals('111_222', $nextIdFromView);
 
         //Sets the cache name
-        $cache = sprintf('index_limit_%s', getConfig('default.photos'));
+        $cache = sprintf('index_limit_%s', getConfigOrFail('default.photos'));
         list($photosFromCache, $nextIdFromCache) = array_values(Cache::read($cache, 'instagram'));
 
         $this->assertEquals($photosFromView, $photosFromCache);
@@ -150,15 +124,13 @@ class InstagramControllerTest extends IntegrationTestCase
 
         //GET request. Now with the `nextId`
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
 
         //GET request. Now it's an ajax request, with the `nextId`
         $this->configRequest(['headers' => ['X-Requested-With' => 'XMLHttpRequest']]);
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
         $this->assertLayout('src/Template/Layout/ajax/ajax.ctp');
     }
@@ -168,12 +140,10 @@ class InstagramControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        list($photos) = ($this->InstagramComponent->recent());
-        $id = $photos[0]->id;
+        $id = $this->InstagramComponent->recent()[0][0]->id;
 
         $this->get(['_name' => 'instagramPhoto', $id]);
-        $this->assertResponseOk();
-        $this->assertResponseNotEmpty();
+        $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate(ROOT . 'src/Template/Instagram/view.ctp');
 
         $photoFromView = $this->viewVariable('photo');
