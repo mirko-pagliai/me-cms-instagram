@@ -15,6 +15,7 @@ namespace MeCmsInstagram;
 
 use Cake\Http\Client;
 use Cake\Network\Exception\NotFoundException;
+use stdClass;
 
 /**
  * A trait that provides methods for getting media from Instagram.
@@ -142,16 +143,19 @@ trait InstagramTrait
 
         $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
 
-        $photos = collection($photos->data)->take($limit)->map(function ($photo) {
-            $path = $photo->images->standard_resolution->url;
+        $photos = collection($photos->data)
+            ->take($limit)
+            ->map(function (stdClass $photo) {
+                $path = $photo->images->standard_resolution->url;
 
-            return (object)array_merge(compact('path'), [
-                'id' => $photo->id,
-                'link' => $photo->link,
-                'filename' => explode('?', basename($path), 2)[0],
-                'description' => empty($photo->caption->text) ? null : $photo->caption->text,
-            ]);
-        })->toList();
+                return (object)array_merge(compact('path'), [
+                    'id' => $photo->id,
+                    'link' => $photo->link,
+                    'filename' => explode('?', basename($path), 2)[0],
+                    'description' => empty($photo->caption->text) ? null : $photo->caption->text,
+                ]);
+            })
+            ->toList();
 
         return [$photos, $nextId];
     }
