@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.5 branch
+### 1.5.5
+* updated for MeCms 2.20.1.
+
 ### 1.5.4
 * the MIT license has been applied;
 * significantly improved all tests.
