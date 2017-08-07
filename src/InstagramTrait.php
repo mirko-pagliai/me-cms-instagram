@@ -113,7 +113,7 @@ trait InstagramTrait
         $photo = json_decode($this->getMediaResponse($mediaId));
 
         if (!isset($photo->data->images->standard_resolution->url)) {
-            throw new NotFoundException(__d('me_cms', 'Record not found'));
+            throw new NotFoundException(I18N_NOT_FOUND);
         }
 
         $path = $photo->data->images->standard_resolution->url;
@@ -137,7 +137,7 @@ trait InstagramTrait
         $photos = json_decode($this->getRecentResponse($requestId, $limit));
 
         if (!isset($photos->data)) {
-            throw new NotFoundException(__d('me_cms', 'Record not found'));
+            throw new NotFoundException(I18N_NOT_FOUND);
         }
 
         $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
@@ -168,7 +168,7 @@ trait InstagramTrait
         $user = json_decode($this->getUserResponse());
 
         if (!isset($user->data)) {
-            throw new NotFoundException(__d('me_cms', 'Record not found'));
+            throw new NotFoundException(I18N_NOT_FOUND);
         }
 
         return $user->data;
