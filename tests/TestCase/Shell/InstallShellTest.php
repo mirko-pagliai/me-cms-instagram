@@ -105,6 +105,9 @@ class InstallShellTest extends TestCase
         $parser = $this->InstallShell->getOptionParser();
 
         $this->assertInstanceOf('Cake\Console\ConsoleOptionParser', $parser);
-        $this->assertArrayKeysEqual(['all', 'copyConfig'], $parser->subcommands());
+        $this->assertArrayKeysEqual([
+            'all',
+            'copy_config',
+        ], $parser->subcommands());
     }
 }

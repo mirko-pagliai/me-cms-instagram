@@ -14,12 +14,13 @@ use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 
 Router::defaultRouteClass('DashedRoute');
-Router::extensions('rss');
 
 /**
  * Plugin routes
  */
 Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function (RouteBuilder $routes) {
+    $routes->setExtensions(['rss']);
+
     //Instagram
     if (!$routes->nameExists('instagramPhotos')) {
         $routes->connect(
