@@ -137,13 +137,16 @@ Plugin::load('Thumber', [
     'routes' => true,
 ]);
 
+Plugin::load('Tokens', [
+    'bootstrap' => true,
+    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-tokens' . DS,
+]);
+
 Plugin::load('MeCms', [
-    'bootstrap' => false, //Doesn't load the bootstrap
+    'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'me-cms' . DS,
     'routes' => true,
 ]);
-
-require_once VENDOR . 'mirko-pagliai' . DS . 'me-cms' . DS . 'config' . DS . 'bootstrap_base.php';
 
 Plugin::load('MeCmsInstagram', [
     'bootstrap' => true,
