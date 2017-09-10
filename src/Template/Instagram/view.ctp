@@ -22,5 +22,8 @@ if (getConfig('default.user_profile')) {
  */
 $this->Breadcrumbs->add(__d('me_cms_instagram', 'Photos from {0}', 'Instagram'), ['_name' => 'instagramPhotos']);
 $this->Breadcrumbs->add($title, ['_name' => 'instagramPhoto', $photo->id]);
+?>
 
-echo $this->Html->img($photo->path);
+<div class="mb-4">
+    <?= $this->Html->img($photo->path) ?>
+</div>

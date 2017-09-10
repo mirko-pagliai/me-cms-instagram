@@ -27,53 +27,51 @@ if (getConfig('default.user_profile') && !$this->request->is('ajax')) {
  * Breadcrumb
  */
 $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
+
+//Sets base options for each photo
+$baseOptions = ['class' => 'd-block'];
+
+//If Fancybox is enabled
+if (getConfig('default.fancybox')) {
+    $baseOptions = ['class' => 'd-block fancybox', 'rel' => 'fancybox-group'];
+}
 ?>
 
-<div class="photosAlbums index">
-    <div class="clearfix">
-        <?php foreach ($photos as $photo) : ?>
-            <div class="col-sm-6 col-md-4">
-                <div class="photo-box">
-                    <?php
-                    $text = implode(PHP_EOL, [
-                        $this->Thumb->fit($photo->path, ['width' => 275]),
-                        $this->Html->div(
-                            'photo-info',
-                            $this->Html->div(null, $this->Html->para('small', $this->Text->truncate($photo->description, 350)))
-                        ),
-                    ]);
+<div class="row">
+    <?php foreach ($photos as $photo) : ?>
+        <?php
+        if (getConfig('default.open_on_instagram')) {
+            $link = $photo->link;
+        } else {
+            $link = $this->Url->build(['_name' => 'instagramPhoto', $photo->id]);
+        }
+        $options = $baseOptions + ['title' => $photo->description];
 
-                    if (getConfig('default.open_on_instagram')) {
-                        $link = $photo->link;
-                    } else {
-                        $link = ['_name' => 'instagramPhoto', $photo->id];
-                    }
+        //If Fancybox is enabled, adds some options
+        if (getConfig('default.fancybox')) {
+            $options += ['data-fancybox-href' => $this->Thumb->resizeUrl($photo->path, ['height' => 1280])];
+        }
+        ?>
 
-                    $options = [
-                        'class' => 'thumbnail',
-                        'title' => $photo->description,
-                    ];
-
-                    //If Fancybox is enabled, adds some options
-                    if (getConfig('default.fancybox')) {
-                        $options['class'] = 'fancybox thumbnail';
-                        $options['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
-                        $options['rel'] = 'group';
-                    }
-
-                    echo $this->Html->link($text, $link, $options);
-                    ?>
+        <div class="col-md-4 col-lg-3 mb-4">
+            <a href="<?= $link ?>" <?= toAttributes($options) ?>>
+                <div class="card border-0 text-white">
+                    <?= $this->Thumb->fit($photo->path, ['width' => 275], ['class' => 'card-img rounded-0']) ?>
+                    <div class="card-img-overlay card-img-overlay-transition p-3">
+                        <p class="card-text small"><?= $this->Text->truncate($photo->description, 150) ?></p>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-
-    <?php
-    if (!empty($nextId)) {
-        echo $this->Html->link(__d('me_cms_instagram', 'Load more'), '#', [
-            'id' => 'load-more',
-            'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
-        ]);
-    }
-    ?>
+            </a>
+        </div>
+    <?php endforeach; ?>
 </div>
+
+<?php if (!empty($nextId)) : ?>
+    <div class="mb-3 text-center">
+        <?= $this->Html->link(__d('me_cms_instagram', 'Load more'), '#', [
+            'id' => 'load-more',
+            'class' => 'primary lg',
+            'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
+        ]) ?>
+    </div>
+<?php endif; ?>
