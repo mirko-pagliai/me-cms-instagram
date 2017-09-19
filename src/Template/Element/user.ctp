@@ -59,7 +59,7 @@
                     echo $this->Html->button(
                         __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
                         sprintf('//instagram.com/%s', $user->username),
-                        ['class' => 'success sm', 'icon' => 'instagram', 'target' => '_blank']
+                        ['class' => 'btn-success btn-sm', 'icon' => 'instagram', 'target' => '_blank']
                     );
                 }
                 ?>
