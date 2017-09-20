@@ -28,49 +28,39 @@ if (getConfig('default.user_profile') && !$this->request->is('ajax')) {
  */
 $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
 
-//Sets base options for each photo
-$baseOptions = ['class' => 'd-block'];
+$linkOptions = [];
 
 //If Fancybox is enabled
 if (getConfig('default.fancybox')) {
-    $baseOptions = ['class' => 'd-block fancybox', 'rel' => 'fancybox-group'];
+    $linkOptions = ['class' => 'fancybox', 'rel' => 'fancybox-group'];
 }
 ?>
 
 <div class="row">
-    <?php foreach ($photos as $photo) : ?>
-        <?php
-        if (getConfig('default.open_on_instagram')) {
-            $link = $photo->link;
-        } else {
-            $link = $this->Url->build(['_name' => 'instagramPhoto', $photo->id]);
-        }
-        $options = $baseOptions + ['title' => $photo->description];
+    <?php
+    foreach ($photos as $photo) {
+        $link = getConfig('default.open_on_instagram') ? $photo->link : ['_name' => 'instagramPhoto', $photo->id];
+        $path = $photo->path;
+        $text = $photo->description;
 
         //If Fancybox is enabled, adds some options
         if (getConfig('default.fancybox')) {
-            $options += ['data-fancybox-href' => $this->Thumb->resizeUrl($photo->path, ['height' => 1280])];
+            $linkOptions += ['data-fancybox-href' => $this->Thumb->resizeUrl($photo->path, ['height' => 1280])];
         }
-        ?>
 
-        <div class="col-md-4 col-lg-3 mb-4">
-            <a href="<?= $link ?>" <?= toAttributes($options) ?>>
-                <div class="card border-0 text-white">
-                    <?= $this->Thumb->fit($photo->path, ['width' => 275], ['class' => 'card-img rounded-0']) ?>
-                    <div class="card-img-overlay card-img-overlay-transition p-3">
-                        <p class="card-text small"><?= $this->Text->truncate($photo->description, 150) ?></p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    <?php endforeach; ?>
+        echo $this->Html->div(
+            'col-md-4 col-lg-3 mb-4',
+            $this->element(ME_CMS . '.views/photo-preview', compact('link', 'linkOptions', 'path', 'text'))
+        );
+    }
+    ?>
 </div>
 
 <?php if (!empty($nextId)) : ?>
-    <div class="mb-3 text-center">
+    <div class="mb-4 text-center">
         <?= $this->Html->link(__d('me_cms_instagram', 'Load more'), '#', [
             'id' => 'load-more',
-            'class' => 'primary lg',
+            'class' => 'btn-primary btn-lg',
             'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
         ]) ?>
     </div>
