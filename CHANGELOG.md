@@ -1,6 +1,6 @@
 # 1.x branch
 ## 1.7 branch
-### 1.7.0
+### 1.7.0-beta
 * fixed all templates for Bootstrap 4.
 
 ## 1.6 branch
