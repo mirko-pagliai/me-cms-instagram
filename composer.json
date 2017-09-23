@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.5.9",
         "cakephp/cakephp": ">=3.5 <4",
-        "mirko-pagliai/me-cms": ">=2.21 <2.22"
+        "mirko-pagliai/me-cms": ">=2.22 <2.23"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^3.0",
@@ -31,5 +31,6 @@
             "MeCmsInstagram\\Test\\": "tests",
             "App\\": "tests/test_app/TestApp"
         }
-    }
+    },
+    "minimum-stability": "beta"
 }
