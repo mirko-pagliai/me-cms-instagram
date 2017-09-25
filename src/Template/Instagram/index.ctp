@@ -45,7 +45,7 @@ if (getConfig('default.fancybox')) {
 
         //If Fancybox is enabled, adds some options
         if (getConfig('default.fancybox')) {
-            $linkOptions += ['data-fancybox-href' => $this->Thumb->resizeUrl($photo->path, ['height' => 1280])];
+            $linkOptions['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
         }
 
         echo $this->Html->div(
