@@ -1,4 +1,11 @@
 # 1.x branch
+## 1.7 branch
+### 1.7.1-RC1
+* updated for MeCms 2.22.4-RC1.
+
+### 1.7.0-beta
+* fixed all templates for Bootstrap 4.
+
 ## 1.6 branch
 ### 1.6.0
 * updated for CakePHP 3.5 and MeCms 2.21.
