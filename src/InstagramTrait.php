@@ -105,7 +105,7 @@ trait InstagramTrait
     /**
      * Gets a media object
      * @param string $mediaId Media ID
-     * @return object
+     * @return Entity
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
      * @throws NotFoundException
      * @uses getMediaResponse()
@@ -120,9 +120,9 @@ trait InstagramTrait
 
         $path = $photo->data->images->standard_resolution->url;
 
-        return (object)array_merge(['id' => $mediaId], compact('path'), [
+        return new Entity(array_merge(['id' => $mediaId], compact('path'), [
             'filename' => explode('?', basename($path), 2)[0],
-        ]);
+        ]));
     }
 
     /**

@@ -93,13 +93,13 @@ class InstagramTest extends TestCase
      */
     public function testMedia()
     {
-        $expected = (object)[
+        $result = $this->getInstagramComponentMock()->media(1);
+        $this->assertInstanceof('Cake\ORM\Entity', $result);
+        $this->assertEquals([
             'id' => 1,
             'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard',
             'filename' => '1.png',
-        ];
-
-        $this->assertEquals($expected, $this->getInstagramComponentMock()->media(1));
+        ], $this->getInstagramComponentMock()->media(1)->toArray());
     }
 
     /**
