@@ -24,6 +24,7 @@ class InstallShell extends BaseInstallShell
      * Construct
      * @param \Cake\Console\ConsoleIo|null $io An io instance
      * @uses $config
+     * @uses $questions
      * @uses MeCms\Shell\InstallShell::__construct()
      */
     public function __construct(ConsoleIo $io = null)
@@ -34,25 +35,15 @@ class InstallShell extends BaseInstallShell
         $this->config = [
             'MeCmsInstagram.me_cms_instagram',
         ];
-    }
 
-    /**
-     * Executes all available tasks
-     * @return void
-     * @uses MeCms\Shell\InstallShell::copyConfig()
-     */
-    public function all()
-    {
-        if ($this->param('force')) {
-            $this->copyConfig();
-
-            return;
-        }
-
-        $ask = $this->in(__d('me_tools', 'Copy configuration files?'), ['Y', 'n'], 'Y');
-        if (in_array($ask, ['Y', 'y'])) {
-            $this->copyConfig();
-        }
+        //Questions used by `all()` method
+        $this->questions = [
+            [
+                'question' => __d('me_tools', 'Copy configuration files?'),
+                'default' => 'Y',
+                'method' => 'copyConfig',
+            ],
+        ];
     }
 
     /**

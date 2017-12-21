@@ -13,6 +13,7 @@
 namespace MeCmsInstagram\Controller;
 
 use Cake\Cache\Cache;
+use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
 use MeCms\Controller\AppController;
 
@@ -32,7 +33,7 @@ class InstagramController extends AppController
      * @uses MeCms\Controller\AppController::beforeRender()
      * @uses MeCmsInstagram\Utility\Instagram::user()
      */
-    public function beforeRender(\Cake\Event\Event $event)
+    public function beforeRender(Event $event)
     {
         parent::beforeRender($event);
 
