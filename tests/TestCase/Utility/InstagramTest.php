@@ -159,21 +159,22 @@ class InstagramTest extends TestCase
      */
     public function testUser()
     {
-        $expected = (object)[
+        $result = $this->getInstagramComponentMock()->user();
+        $this->assertInstanceof('Cake\ORM\Entity', $result);
+        $this->assertInstanceof('Cake\ORM\Entity', $result->counts);
+        $this->assertEquals([
             'username' => 'myusername',
             'bio' => 'mybio',
             'website' => 'http://example/site',
             'profile_picture' => 'http://example/image.jpg',
             'full_name' => 'Full Name',
-            'counts' => (object)[
+            'counts' => [
                 'media' => 148,
                 'followed_by' => 569,
                 'follows' => 185,
             ],
             'id' => '99999999',
-        ];
-
-        $this->assertEquals($expected, $this->getInstagramComponentMock()->user());
+        ], $result->toArray());
     }
 
     /**

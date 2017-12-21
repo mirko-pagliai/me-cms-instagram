@@ -15,6 +15,7 @@ namespace MeCmsInstagram;
 
 use Cake\Http\Client;
 use Cake\Network\Exception\NotFoundException;
+use Cake\ORM\Entity;
 use stdClass;
 
 /**
@@ -162,7 +163,7 @@ trait InstagramTrait
 
     /**
      * Gets information about the owner of the token
-     * @return object
+     * @return Entity
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
      * @throws NotFoundException
      * @uses getUserResponse()
@@ -175,6 +176,8 @@ trait InstagramTrait
             throw new NotFoundException(I18N_NOT_FOUND);
         }
 
-        return $user->data;
+        $user->data->counts = new Entity((array)$user->data->counts);
+
+        return new Entity((array)$user->data);
     }
 }
