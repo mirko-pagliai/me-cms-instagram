@@ -129,7 +129,7 @@ trait InstagramTrait
      * Gets the most recent media published by the owner of token
      * @param string $requestId Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
-     * @return array Array with photos and "Next ID"
+     * @return array Array with entities of photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
      * @uses getRecentResponse()
      * @throws NotFoundException

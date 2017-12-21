@@ -130,16 +130,14 @@ class InstagramTest extends TestCase
         foreach ($photos as $photo) {
             ++$i;
 
-            $expected = [
+            $this->assertInstanceOf('Cake\ORM\Entity', $photo);
+            $this->assertEquals([
                 'id' => '9999999999999999999_999999' . sprintf('%02d', $i),
                 'description' => 'Example text ' . $i,
                 'link' => 'http://example/link' . $i . '/',
                 'path' => 'https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey' . $i . 'Standard',
                 'filename' => '1.png',
-            ];
-
-            $this->assertInstanceOf('stdClass', $photo);
-            $this->assertEquals($expected, (array)$photo);
+            ], $photo->toArray());
         }
     }
 
