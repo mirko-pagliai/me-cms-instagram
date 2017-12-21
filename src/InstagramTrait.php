@@ -15,6 +15,7 @@ namespace MeCmsInstagram;
 
 use Cake\Http\Client;
 use Cake\Network\Exception\NotFoundException;
+use Cake\ORM\Entity;
 use stdClass;
 
 /**
@@ -104,7 +105,7 @@ trait InstagramTrait
     /**
      * Gets a media object
      * @param string $mediaId Media ID
-     * @return object
+     * @return Entity
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
      * @throws NotFoundException
      * @uses getMediaResponse()
@@ -119,16 +120,16 @@ trait InstagramTrait
 
         $path = $photo->data->images->standard_resolution->url;
 
-        return (object)array_merge(['id' => $mediaId], compact('path'), [
+        return new Entity(array_merge(['id' => $mediaId], compact('path'), [
             'filename' => explode('?', basename($path), 2)[0],
-        ]);
+        ]));
     }
 
     /**
      * Gets the most recent media published by the owner of token
      * @param string $requestId Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
-     * @return array Array with photos and "Next ID"
+     * @return array Array with entities of photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
      * @uses getRecentResponse()
      * @throws NotFoundException
@@ -148,12 +149,12 @@ trait InstagramTrait
             ->map(function (stdClass $photo) {
                 $path = $photo->images->standard_resolution->url;
 
-                return (object)array_merge(compact('path'), [
+                return new Entity(array_merge(compact('path'), [
                     'id' => $photo->id,
                     'link' => $photo->link,
                     'filename' => explode('?', basename($path), 2)[0],
                     'description' => empty($photo->caption->text) ? null : $photo->caption->text,
-                ]);
+                ]));
             })
             ->toList();
 
@@ -162,7 +163,7 @@ trait InstagramTrait
 
     /**
      * Gets information about the owner of the token
-     * @return object
+     * @return Entity
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
      * @throws NotFoundException
      * @uses getUserResponse()
@@ -175,6 +176,8 @@ trait InstagramTrait
             throw new NotFoundException(I18N_NOT_FOUND);
         }
 
-        return $user->data;
+        $user->data->counts = new Entity((array)$user->data->counts);
+
+        return new Entity((array)$user->data);
     }
 }

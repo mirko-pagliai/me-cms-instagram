@@ -1,5 +1,11 @@
 # 1.x branch
 ## 1.7 branch
+### 1.7.2-RC2
+* `InstagramTrait::user()` and `InstagramTrait::media()` methods now return
+    `Entity` instances;
+* `InstagramTrait::photos()` method now returns an array with entities of photos;
+* updated for MeCms 2.22.5-RC2.
+
 ### 1.7.1-RC1
 * updated for MeCms 2.22.4-RC1.
 

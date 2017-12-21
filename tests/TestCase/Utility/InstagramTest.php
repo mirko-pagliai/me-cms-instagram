@@ -93,13 +93,13 @@ class InstagramTest extends TestCase
      */
     public function testMedia()
     {
-        $expected = (object)[
+        $result = $this->getInstagramComponentMock()->media(1);
+        $this->assertInstanceof('Cake\ORM\Entity', $result);
+        $this->assertEquals([
             'id' => 1,
             'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard',
             'filename' => '1.png',
-        ];
-
-        $this->assertEquals($expected, $this->getInstagramComponentMock()->media(1));
+        ], $this->getInstagramComponentMock()->media(1)->toArray());
     }
 
     /**
@@ -130,16 +130,14 @@ class InstagramTest extends TestCase
         foreach ($photos as $photo) {
             ++$i;
 
-            $expected = [
+            $this->assertInstanceOf('Cake\ORM\Entity', $photo);
+            $this->assertEquals([
                 'id' => '9999999999999999999_999999' . sprintf('%02d', $i),
                 'description' => 'Example text ' . $i,
                 'link' => 'http://example/link' . $i . '/',
                 'path' => 'https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey' . $i . 'Standard',
                 'filename' => '1.png',
-            ];
-
-            $this->assertInstanceOf('stdClass', $photo);
-            $this->assertEquals($expected, (array)$photo);
+            ], $photo->toArray());
         }
     }
 
@@ -159,21 +157,22 @@ class InstagramTest extends TestCase
      */
     public function testUser()
     {
-        $expected = (object)[
+        $result = $this->getInstagramComponentMock()->user();
+        $this->assertInstanceof('Cake\ORM\Entity', $result);
+        $this->assertInstanceof('Cake\ORM\Entity', $result->counts);
+        $this->assertEquals([
             'username' => 'myusername',
             'bio' => 'mybio',
             'website' => 'http://example/site',
             'profile_picture' => 'http://example/image.jpg',
             'full_name' => 'Full Name',
-            'counts' => (object)[
+            'counts' => [
                 'media' => 148,
                 'followed_by' => 569,
                 'follows' => 185,
             ],
             'id' => '99999999',
-        ];
-
-        $this->assertEquals($expected, $this->getInstagramComponentMock()->user());
+        ], $result->toArray());
     }
 
     /**

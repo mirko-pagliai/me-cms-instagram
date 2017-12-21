@@ -27,11 +27,11 @@
                 <p>
                     <strong class="mr-2"><?= $user->full_name ?></strong>
 
-                    <?php if (!empty($user->bio)) : ?>
+                    <?php if ($user->has('bio')) : ?>
                         <span class="mr-2"><?= $user->bio ?></span>
                     <?php endif; ?>
 
-                    <?php if (!empty($user->website)) : ?>
+                    <?php if ($user->has('website')) : ?>
                         <span>
                             <?= $this->Html->link(
                                 preg_replace(['/^http:\/\//', '/\/$/'], '', $user->website),

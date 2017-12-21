@@ -92,7 +92,7 @@ class InstagramControllerTest extends IntegrationTestCase
         $this->get(['_name' => 'instagramPhotos']);
 
         $userFromView = $this->viewVariable('user');
-        $this->assertInstanceof('stdClass', $userFromView);
+        $this->assertInstanceof('Cake\ORM\Entity', $userFromView);
         $this->assertNotEmpty($userFromView);
 
         $userFromCache = Cache::read('user_profile', 'instagram');
@@ -110,7 +110,7 @@ class InstagramControllerTest extends IntegrationTestCase
 
         $photosFromView = $this->viewVariable('photos');
         $this->assertNotEmpty($photosFromView);
-        $this->assertInstanceof('stdClass', $photosFromView);
+        $this->assertInstanceof('Cake\ORM\Entity', $photosFromView);
 
         $nextIdFromView = $this->viewVariable('nextId');
         $this->assertEquals('111_222', $nextIdFromView);
@@ -147,7 +147,7 @@ class InstagramControllerTest extends IntegrationTestCase
         $this->assertTemplate(ROOT . 'src/Template/Instagram/view.ctp');
 
         $photoFromView = $this->viewVariable('photo');
-        $this->assertInstanceof('stdClass', $photoFromView);
+        $this->assertInstanceof('Cake\ORM\Entity', $photoFromView);
 
         $photoFromCache = Cache::read(sprintf('media_%s', md5($id)), 'instagram');
         $this->assertEquals($photoFromView, $photoFromCache);
