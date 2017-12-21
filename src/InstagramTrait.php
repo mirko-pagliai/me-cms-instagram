@@ -149,12 +149,12 @@ trait InstagramTrait
             ->map(function (stdClass $photo) {
                 $path = $photo->images->standard_resolution->url;
 
-                return (object)array_merge(compact('path'), [
+                return new Entity(array_merge(compact('path'), [
                     'id' => $photo->id,
                     'link' => $photo->link,
                     'filename' => explode('?', basename($path), 2)[0],
                     'description' => empty($photo->caption->text) ? null : $photo->caption->text,
-                ]);
+                ]));
             })
             ->toList();
 
