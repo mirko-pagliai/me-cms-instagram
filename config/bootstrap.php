@@ -13,7 +13,7 @@
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Utility\Hash;
-use RuntimeException;
+use RuntimeException as RuntimeException;
 
 //Sets the default me-cms-instagram name
 if (!defined('ME_CMS_INSTAGRAM')) {
