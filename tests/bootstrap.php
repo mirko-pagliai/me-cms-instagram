@@ -131,6 +131,12 @@ Plugin::load('RecaptchaMailhide', [
     'routes' => true,
 ]);
 
+if (!getenv('THUMBER_DRIVER')) {
+    putenv('THUMBER_DRIVER=imagick');
+}
+
+Configure::write('Thumber.driver', getenv('THUMBER_DRIVER'));
+
 Plugin::load('Thumber', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-thumber' . DS,
