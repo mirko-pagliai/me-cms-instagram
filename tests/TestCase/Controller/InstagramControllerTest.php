@@ -131,7 +131,7 @@ class InstagramControllerTest extends IntegrationTestCase
         $this->configRequest(['headers' => ['X-Requested-With' => 'XMLHttpRequest']]);
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
         $this->assertResponseOkAndNotEmpty();
-        $this->assertTemplate(ROOT . 'src/Template/Instagram/index.ctp');
+        $this->assertTemplate('src/Template/Instagram/index.ctp');
         $this->assertLayout('src/Template/Layout/ajax/ajax.ctp');
     }
 
@@ -144,7 +144,7 @@ class InstagramControllerTest extends IntegrationTestCase
 
         $this->get(['_name' => 'instagramPhoto', $id]);
         $this->assertResponseOkAndNotEmpty();
-        $this->assertTemplate(ROOT . 'src/Template/Instagram/view.ctp');
+        $this->assertTemplate('src/Template/Instagram/view.ctp');
 
         $photoFromView = $this->viewVariable('photo');
         $this->assertInstanceof('Cake\ORM\Entity', $photoFromView);
