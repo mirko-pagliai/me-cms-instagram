@@ -108,6 +108,9 @@ Plugin::load('Assets', [
     'path' => VENDOR . 'mirko-pagliai' . DS . 'assets' . DS,
 ]);
 
+foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlite3'] as $binary) {
+    Configure::write('DatabaseBackup.binaries.' . $binary, null);
+}
 Configure::write('DatabaseBackup.connection', 'test');
 Configure::write('DatabaseBackup.target', TMP . 'backups');
 
