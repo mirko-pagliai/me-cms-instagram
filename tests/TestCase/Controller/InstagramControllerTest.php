@@ -14,8 +14,8 @@ namespace MeCmsInstagram\Test\TestCase\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Controller\ComponentRegistry;
-use MeCms\TestSuite\IntegrationTestCase;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
+use MeCms\TestSuite\IntegrationTestCase;
 
 /**
  * InstagramControllerTest class
