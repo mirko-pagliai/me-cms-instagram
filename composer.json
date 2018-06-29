@@ -13,13 +13,20 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "cakephp/cakephp": ">=3.5 <4",
-        "mirko-pagliai/me-cms": ">=2.23 <2.24"
+        "cakephp/cakephp": "^3.6",
+        "mirko-pagliai/me-cms": "^2.24",
+        "mirko-pagliai/php-tools": "^1.0"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^3.0",
         "phpunit/phpunit": "^5.7|^6.0"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "MeCmsInstagram\\": "src"

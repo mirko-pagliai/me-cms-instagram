@@ -14,11 +14,10 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
-use Cake\Routing\DispatcherFactory;
 
 ini_set('intl.default_locale', 'en_US');
-
-require dirname(__DIR__) . '/vendor/autoload.php';
+date_default_timezone_set('UTC');
+mb_internal_encoding('UTF-8');
 
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
@@ -36,24 +35,22 @@ define('APP', TEST_APP . 'TestApp' . DS);
 define('APP_DIR', 'TestApp');
 define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', APP . 'webroot' . DS);
-define('TMP', sys_get_temp_dir() . DS);
+define('TMP', sys_get_temp_dir() . DS . 'me_cms_instagram' . DS);
 define('CONFIG', APP . 'config' . DS);
 define('CACHE', TMP);
 define('LOGS', TMP);
 define('SESSIONS', TMP . 'sessions' . DS);
 
-//@codingStandardsIgnoreStart
-@mkdir(LOGS);
-@mkdir(SESSIONS);
-@mkdir(CACHE);
-@mkdir(CACHE . 'views');
-@mkdir(CACHE . 'models');
-//@codingStandardsIgnoreEnd
-
+require dirname(__DIR__) . '/vendor/autoload.php';
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
-date_default_timezone_set('UTC');
-mb_internal_encoding('UTF-8');
+error_reporting(E_ALL & ~E_USER_DEPRECATED);
+
+safe_mkdir(LOGS);
+safe_mkdir(SESSIONS);
+safe_mkdir(CACHE);
+safe_mkdir(CACHE . 'views');
+safe_mkdir(CACHE . 'models');
 
 Configure::write('debug', true);
 Configure::write('App', [
@@ -70,7 +67,10 @@ Configure::write('App', [
     'cssBaseUrl' => 'css/',
     'paths' => [
         'plugins' => [APP . 'Plugin' . DS],
-        'templates' => [APP . 'Template' . DS],
+        'templates' => [
+            APP . 'Template' . DS,
+            ROOT . 'src' . DS . 'Template' . DS,
+        ],
     ],
 ]);
 
@@ -103,16 +103,18 @@ Configure::write('Session', ['defaults' => 'php']);
 /**
  * Loads plugins
  */
-Plugin::load('Assets', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'assets' . DS,
-]);
+Configure::write('Assets.target', TMP . 'assets');
+Configure::write('DatabaseBackup.connection', 'test');
+Configure::write('DatabaseBackup.target', TMP . 'backups');
 
 foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlite3'] as $binary) {
     Configure::write('DatabaseBackup.binaries.' . $binary, null);
 }
-Configure::write('DatabaseBackup.connection', 'test');
-Configure::write('DatabaseBackup.target', TMP . 'backups');
+
+Plugin::load('Assets', [
+    'bootstrap' => true,
+    'path' => VENDOR . 'mirko-pagliai' . DS . 'assets' . DS,
+]);
 
 Plugin::load('DatabaseBackup', [
     'bootstrap' => true,
@@ -163,5 +165,4 @@ Plugin::load('MeCmsInstagram', [
     'routes' => true,
 ]);
 
-DispatcherFactory::add('Routing');
-DispatcherFactory::add('ControllerFactory');
+$_SERVER['PHP_SELF'] = '/';
