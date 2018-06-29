@@ -13,8 +13,6 @@
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 
-Router::defaultRouteClass('DashedRoute');
-
 /**
  * Plugin routes
  */
@@ -22,29 +20,15 @@ Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function (RouteBuilder $route
     $routes->setExtensions(['rss']);
 
     //Instagram
-    if (!$routes->nameExists('instagramPhotos')) {
-        $routes->connect(
-            '/instagram',
-            ['controller' => 'Instagram', 'action' => 'index'],
-            ['_name' => 'instagramPhotos']
-        );
-    }
+    $routes->get('/instagram', ['controller' => 'Instagram', 'action' => 'index'], 'instagramPhotos');
 
     //Instagram (with ID)
-    if (!$routes->nameExists('instagramPhotosId')) {
-        $routes->connect(
-            '/instagram/:id',
-            ['controller' => 'Instagram', 'action' => 'index'],
-            ['_name' => 'instagramPhotosId', 'id' => '\d+_\d+', 'pass' => ['id']]
-        );
-    }
+    $routes->get('/instagram/:id', ['controller' => 'Instagram', 'action' => 'index'], 'instagramPhotosId')
+        ->setPatterns(['id' => '\d+_\d+'])
+        ->setPass(['id']);
 
     //Instagram photo
-    if (!$routes->nameExists('instagramPhoto')) {
-        $routes->connect(
-            '/instagram/view/:id',
-            ['controller' => 'Instagram', 'action' => 'view'],
-            ['_name' => 'instagramPhoto', 'id' => '\d+_\d+', 'pass' => ['id']]
-        );
-    }
+    $routes->get('/instagram/view/:id', ['controller' => 'Instagram', 'action' => 'view'], 'instagramPhoto')
+        ->setPatterns(['id' => '\d+_\d+'])
+        ->setPass(['id']);
 });
