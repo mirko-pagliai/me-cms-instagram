@@ -14,8 +14,8 @@ namespace MeCmsInstagram\Test\TestCase\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Controller\ComponentRegistry;
+use MeCms\TestSuite\IntegrationTestCase;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
-use MeTools\TestSuite\IntegrationTestCase;
 
 /**
  * InstagramControllerTest class
@@ -74,14 +74,12 @@ class InstagramControllerTest extends IntegrationTestCase
      */
     public function controllerSpy($event, $controller = null)
     {
+        parent::controllerSpy($event, $controller);
+
         //Mocks the `InstagramComponent`, expect for the testViewInvalidId` method
         if ($this->getName() !== 'testViewInvalidId') {
-            $controller->Instagram = $this->getInstagramComponentMock();
+            $this->_controller->Instagram = $this->getInstagramComponentMock();
         }
-
-        $controller->viewBuilder()->setLayout(false);
-
-        parent::controllerSpy($event, $controller);
     }
 
     /**
