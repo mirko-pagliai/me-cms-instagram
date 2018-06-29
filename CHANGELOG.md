@@ -3,7 +3,8 @@
 ### 1.8.0
 * updated for CakePHP 3.6 and MeCms 2.24;
 * now it uses the `mirko-pagliai/php-tools` package. This also replaces
-    `mirko-pagliai/reflection`.
+    `mirko-pagliai/reflection`;
+* full support for Windows, added Appveyor tests.
 
 ## 1.7 branch
 ### 1.7.3
