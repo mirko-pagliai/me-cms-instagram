@@ -5,7 +5,7 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/mirko-pagliai/me-cms-instagram.svg?style=flat-square)](https://codecov.io/github/mirko-pagliai/me-cms-instagram)
 
 *me-cms-instagram* plugin allows you to manage Instagram photos with 
-[//github.com/mirko-pagliai/cakephp-for-mecms](MeCms platform).
+[MeCms platform](//github.com/mirko-pagliai/cakephp-for-mecms).
 
 To install:
 
