@@ -106,6 +106,7 @@ Configure::write('Session', ['defaults' => 'php']);
 Configure::write('Assets.target', TMP . 'assets');
 Configure::write('DatabaseBackup.connection', 'test');
 Configure::write('DatabaseBackup.target', TMP . 'backups');
+Configure::write('Thumber.driver', 'gd');
 
 foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlite3'] as $binary) {
     Configure::write('DatabaseBackup.binaries.' . $binary, null);
@@ -135,12 +136,6 @@ Plugin::load('RecaptchaMailhide', [
     'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-recaptcha-mailhide' . DS,
     'routes' => true,
 ]);
-
-if (!getenv('THUMBER_DRIVER')) {
-    putenv('THUMBER_DRIVER=imagick');
-}
-
-Configure::write('Thumber.driver', getenv('THUMBER_DRIVER'));
 
 Plugin::load('Thumber', [
     'bootstrap' => true,
