@@ -37,15 +37,9 @@ class InstagramController extends AppController
     {
         parent::beforeRender($event);
 
-        //Tries to get data from the cache
-        $user = Cache::read($cache = 'user_profile', 'instagram');
-
-        //If the data are not available from the cache
-        if (empty($user)) {
-            $user = $this->Instagram->user();
-
-            Cache::write($cache, $user, 'instagram');
-        }
+        $user = Cache::remember('user_profile', function () {
+            return $this->Instagram->user();
+        }, 'instagram');
 
         $this->set(compact('user'));
     }
@@ -78,15 +72,9 @@ class InstagramController extends AppController
             $cache = sprintf('%s_id_%s', $cache, $id);
         }
 
-        //Tries to get data from the cache
-        list($photos, $nextId) = Cache::read($cache, 'instagram');
-
-        //If the data are not available from the cache
-        if (empty($photos)) {
-            list($photos, $nextId) = $this->Instagram->recent($id, getConfigOrFail('default.photos'));
-
-            Cache::write($cache, [$photos, $nextId], 'instagram');
-        }
+        list($photos, $nextId) = Cache::remember($cache, function () use ($id) {
+            return $this->Instagram->recent($id, getConfigOrFail('default.photos'));
+        }, 'instagram');
 
         $this->set(compact('photos', 'nextId'));
     }
@@ -99,20 +87,14 @@ class InstagramController extends AppController
      */
     public function view($id)
     {
-        //Tries to get data from the cache
-        $photo = Cache::read($cache = sprintf('media_%s', md5($id)), 'instagram');
-
-        //If the data are not available from the cache
-        if (empty($photo)) {
+        $photo = Cache::remember(sprintf('media_%s', md5($id)), function () use ($id) {
             //It tries to get the media (photo). If an exception is thrown, redirects to index
             try {
-                $photo = $this->Instagram->media($id);
+                return $this->Instagram->media($id);
             } catch (NotFoundException $e) {
                 return $this->redirect(['_name' => 'instagramPhotos'], 301);
             }
-
-            Cache::write($cache, $photo, 'instagram');
-        }
+        }, 'instagram');
 
         $this->set(compact('photo'));
     }

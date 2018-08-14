@@ -108,7 +108,7 @@ class InstagramControllerTest extends IntegrationTestCase
 
         $photosFromView = $this->viewVariable('photos');
         $this->assertNotEmpty($photosFromView);
-        $this->assertInstanceof('Cake\ORM\Entity', $photosFromView);
+        $this->assertContainsInstanceof('Cake\ORM\Entity', $photosFromView);
 
         $nextIdFromView = $this->viewVariable('nextId');
         $this->assertEquals('111_222', $nextIdFromView);
@@ -158,5 +158,6 @@ class InstagramControllerTest extends IntegrationTestCase
     {
         $this->get(['_name' => 'instagramPhoto', '1_1']);
         $this->assertRedirect(['_name' => 'instagramPhotos']);
+        $this->assertResponseCode(301);
     }
 }

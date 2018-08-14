@@ -122,6 +122,11 @@ Plugin::load('DatabaseBackup', [
     'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-database-backup' . DS,
 ]);
 
+Plugin::load('EntityFileLog', [
+    'bootstrap' => true,
+    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-entity-file-log' . DS,
+]);
+
 Plugin::load('MeTools', [
     'bootstrap' => true,
     'path' => VENDOR . 'mirko-pagliai' . DS . 'me-tools' . DS,
