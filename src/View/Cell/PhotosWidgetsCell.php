@@ -57,20 +57,9 @@ class PhotosWidgetsCell extends Cell
      */
     protected function getLatest($limit = 12)
     {
-        //Sets the cache name
-        $cache = sprintf('widget_latest_%s', $limit);
-
-        //Tries to get data from the cache
-        $photos = Cache::read($cache, 'instagram');
-
-        //If the data are not available from the cache
-        if (empty($photos)) {
-            list($photos) = $this->Instagram->recent(null, $limit);
-
-            Cache::write($cache, $photos, 'instagram');
-        }
-
-        return $photos;
+        return Cache::remember(sprintf('widget_latest_%s', $limit), function () use ($limit) {
+            return first_value($this->Instagram->recent(null, $limit));
+        }, 'instagram');
     }
 
     /**
