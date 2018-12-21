@@ -1,4 +1,8 @@
 # 1.x branch
+## 1.9 branch
+### 1.9.0
+* removed `ME_CMS_INSTAGRAM` constants. It no longer uses also `ME_CMS` constant.
+
 ## 1.8 branch
 ### 1.8.1
 * updated for MeCms 2.25.

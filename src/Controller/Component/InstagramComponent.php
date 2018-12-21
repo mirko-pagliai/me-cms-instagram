@@ -34,10 +34,6 @@ class InstagramComponent extends Component
     {
         parent::__construct($registry, $config);
 
-        if (empty($config['key'])) {
-            $config['key'] = getConfigOrFail('Instagram.key');
-        }
-
-        $this->key = $config['key'];
+        $this->key = empty($config['key']) ? getConfigOrFail('Instagram.key') : $config['key'];
     }
 }

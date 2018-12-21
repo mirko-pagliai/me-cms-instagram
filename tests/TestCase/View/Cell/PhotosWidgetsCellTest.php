@@ -28,9 +28,7 @@ class PhotosWidgetsCellTest extends TestCase
     protected $Widget;
 
     /**
-     * Setup the test case, backup the static object values so they can be
-     * restored. Specifically backs up the contents of Configure and paths in
-     *  App if they have not already been backed up
+     * Called before every test method
      * @return void
      */
     public function setUp()
@@ -70,7 +68,7 @@ class PhotosWidgetsCellTest extends TestCase
      */
     public function testLatest()
     {
-        $widget = ME_CMS_INSTAGRAM . '.Photos::latest';
+        $widget = 'MeCmsInstagram.Photos::latest';
 
         $result = $this->Widget->widget($widget)->render();
         $expected = [
@@ -106,7 +104,7 @@ class PhotosWidgetsCellTest extends TestCase
         $this->assertHtml($expected, $result);
 
         //Sets `Instagram` controller
-        $widget = $this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::latest');
+        $widget = $this->Widget->widget('MeCmsInstagram.Photos::latest');
         $widget->request = $widget->request->withParam('controller', 'Instagram');
         $this->assertEmpty($widget->render());
 
@@ -124,7 +122,7 @@ class PhotosWidgetsCellTest extends TestCase
      */
     public function testLatestNoPhotos()
     {
-        $this->assertEmpty($this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::latest')->render());
+        $this->assertEmpty($this->Widget->widget('MeCmsInstagram.Photos::latest')->render());
     }
 
     /**
@@ -133,7 +131,7 @@ class PhotosWidgetsCellTest extends TestCase
      */
     public function testRandom()
     {
-        $widget = ME_CMS_INSTAGRAM . '.Photos::random';
+        $widget = 'MeCmsInstagram.Photos::random';
 
         $result = $this->Widget->widget($widget)->render();
         $expected = [
@@ -169,7 +167,7 @@ class PhotosWidgetsCellTest extends TestCase
         $this->assertHtml($expected, $result);
 
         //Sets `Instagram` controller
-        $widget = $this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::random');
+        $widget = $this->Widget->widget('MeCmsInstagram.Photos::random');
         $widget->request = $widget->request->withParam('controller', 'Instagram');
         $this->assertEmpty($widget->render());
 
@@ -184,6 +182,6 @@ class PhotosWidgetsCellTest extends TestCase
      */
     public function testRandomNoPhotos()
     {
-        $this->assertEmpty($this->Widget->widget(ME_CMS_INSTAGRAM . '.Photos::random')->render());
+        $this->assertEmpty($this->Widget->widget('MeCmsInstagram.Photos::random')->render());
     }
 }

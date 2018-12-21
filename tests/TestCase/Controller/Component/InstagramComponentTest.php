@@ -14,12 +14,12 @@ namespace MeCmsInstagram\Test\TestCase\Controller\Component;
 
 use Cake\Controller\ComponentRegistry;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
-use MeTools\TestSuite\TestCase;
+use MeTools\TestSuite\ComponentTestCase;
 
 /**
  * InstagramComponentTest class
  */
-class InstagramComponentTest extends TestCase
+class InstagramComponentTest extends ComponentTestCase
 {
     /**
      * Test for `__construct()` method
@@ -27,10 +27,9 @@ class InstagramComponentTest extends TestCase
      */
     public function testConstruct()
     {
-        $this->Instagram = new InstagramComponent(new ComponentRegistry);
-        $this->assertEquals(getConfigOrFail('Instagram.key'), $this->Instagram->key);
+        $this->assertEquals(getConfigOrFail('Instagram.key'), $this->Component->key);
 
-        $this->Instagram = new InstagramComponent(new ComponentRegistry, ['key' => 'anotherKey']);
-        $this->assertEquals('anotherKey', $this->Instagram->key);
+        $component = new InstagramComponent(new ComponentRegistry, ['key' => 'anotherKey']);
+        $this->assertEquals('anotherKey', $component->key);
     }
 }

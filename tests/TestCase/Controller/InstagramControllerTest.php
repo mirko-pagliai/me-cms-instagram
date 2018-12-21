@@ -13,37 +13,35 @@
 namespace MeCmsInstagram\Test\TestCase\Controller;
 
 use Cake\Cache\Cache;
-use Cake\Controller\ComponentRegistry;
+use Cake\ORM\Entity;
 use MeCmsInstagram\Controller\Component\InstagramComponent;
-use MeCms\TestSuite\IntegrationTestCase;
+use MeCms\TestSuite\ControllerTestCase;
 
 /**
  * InstagramControllerTest class
  */
-class InstagramControllerTest extends IntegrationTestCase
+class InstagramControllerTest extends ControllerTestCase
 {
     /**
-     * @var \MeCmsInstagram\Controller\InstagramController
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
-    protected $InstagramComponent;
+    protected $Component;
 
     /**
      * Internal method to get a mock instance of `InstagramComponent`
      */
     protected function getInstagramComponentMock()
     {
-        $methods = [
+        $methodsAndValuesToReturn = [
             'getMediaResponse' => 'media.json',
             'getRecentResponse' => 'recent.json',
             'getUserResponse' => 'user.json',
         ];
+        $methods = array_keys($methodsAndValuesToReturn);
 
-        $instance = $this->getMockBuilder(InstagramComponent::class)
-            ->setConstructorArgs([new ComponentRegistry])
-            ->setMethods(array_keys($methods))
-            ->getMock();
+        $instance = $this->getMockForComponent(InstagramComponent::class, $methods);
 
-        foreach ($methods as $method => $filename) {
+        foreach ($methodsAndValuesToReturn as $method => $filename) {
             $instance->method($method)
                 ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $filename)));
         }
@@ -52,18 +50,25 @@ class InstagramControllerTest extends IntegrationTestCase
     }
 
     /**
-     * Setup the test case, backup the static object values so they can be
-     * restored. Specifically backs up the contents of Configure and paths in
-     *  App if they have not already been backed up
+     * Called once before test methods in a case are started
+     */
+    public static function setupBeforeClass()
+    {
+        parent::setupBeforeClass();
+
+        Cache::clearAll();
+    }
+
+    /**
+     * Called before every test method
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
 
-        $this->InstagramComponent = $this->getInstagramComponentMock();
+        $this->Component = $this->getInstagramComponentMock();
 
-        Cache::clearAll();
     }
 
     /**
@@ -88,13 +93,10 @@ class InstagramControllerTest extends IntegrationTestCase
     public function testBeforeRender()
     {
         $this->get(['_name' => 'instagramPhotos']);
-
-        $userFromView = $this->viewVariable('user');
-        $this->assertInstanceof('Cake\ORM\Entity', $userFromView);
-        $this->assertNotEmpty($userFromView);
+        $this->assertInstanceof(Entity::class, $this->viewVariable('user'));
 
         $userFromCache = Cache::read('user_profile', 'instagram');
-        $this->assertEquals($userFromView, $userFromCache);
+        $this->assertEquals($this->viewVariable('user'), $userFromCache);
     }
 
     /**
@@ -105,10 +107,7 @@ class InstagramControllerTest extends IntegrationTestCase
         $this->get(['_name' => 'instagramPhotos']);
         $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate('src' . DS . 'Template' . DS . 'Instagram' . DS . 'index.ctp');
-
-        $photosFromView = $this->viewVariable('photos');
-        $this->assertNotEmpty($photosFromView);
-        $this->assertContainsInstanceof('Cake\ORM\Entity', $photosFromView);
+        $this->assertContainsInstanceof(Entity::class, $this->viewVariable('photos'));
 
         $nextIdFromView = $this->viewVariable('nextId');
         $this->assertEquals('111_222', $nextIdFromView);
@@ -117,7 +116,7 @@ class InstagramControllerTest extends IntegrationTestCase
         $cache = sprintf('index_limit_%s', getConfigOrFail('default.photos'));
         list($photosFromCache, $nextIdFromCache) = array_values(Cache::read($cache, 'instagram'));
 
-        $this->assertEquals($photosFromView, $photosFromCache);
+        $this->assertEquals($this->viewVariable('photos'), $photosFromCache);
         $this->assertEquals($nextIdFromView, $nextIdFromCache);
 
         //GET request. Now with the `nextId`
@@ -138,17 +137,15 @@ class InstagramControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $id = $this->InstagramComponent->recent()[0][0]->id;
+        $id = $this->Component->recent()[0][0]->id;
 
         $this->get(['_name' => 'instagramPhoto', $id]);
         $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate('src' . DS . 'Template' . DS . 'Instagram' . DS . 'view.ctp');
-
-        $photoFromView = $this->viewVariable('photo');
-        $this->assertInstanceof('Cake\ORM\Entity', $photoFromView);
+        $this->assertInstanceof(Entity::class, $this->viewVariable('photo'));
 
         $photoFromCache = Cache::read(sprintf('media_%s', md5($id)), 'instagram');
-        $this->assertEquals($photoFromView, $photoFromCache);
+        $this->assertEquals($this->viewVariable('photo'), $photoFromCache);
     }
 
     /**

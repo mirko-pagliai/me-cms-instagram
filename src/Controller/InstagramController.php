@@ -53,7 +53,7 @@ class InstagramController extends AppController
     {
         parent::initialize();
 
-        $this->loadComponent(ME_CMS_INSTAGRAM . '.Instagram');
+        $this->loadComponent('MeCmsInstagram.Instagram');
     }
 
     /**

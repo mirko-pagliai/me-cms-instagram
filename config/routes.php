@@ -16,7 +16,7 @@ use Cake\Routing\Router;
 /**
  * Plugin routes
  */
-Router::scope('/', ['plugin' => ME_CMS_INSTAGRAM], function (RouteBuilder $routes) {
+Router::scope('/', ['plugin' => 'MeCmsInstagram'], function (RouteBuilder $routes) {
     $routes->setExtensions(['rss']);
 
     //Instagram
