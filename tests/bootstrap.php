@@ -104,3 +104,5 @@ foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlit
 }
 
 $_SERVER['PHP_SELF'] = '/';
+
+loadPHPUnitAliases();
