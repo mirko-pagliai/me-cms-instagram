@@ -22,10 +22,21 @@ use MeTools\TestSuite\ComponentTestCase;
 class InstagramComponentTest extends ComponentTestCase
 {
     /**
-     * Test for `__construct()` method
+     * Called before every test method
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->loadPlugins(['MeCms', 'MeCmsInstagram']);
+    }
+
+    /**
+     * Test for `initialize()` method
      * @test
      */
-    public function testConstruct()
+    public function testInitialize()
     {
         $this->assertEquals(getConfigOrFail('Instagram.key'), $this->Component->key);
 

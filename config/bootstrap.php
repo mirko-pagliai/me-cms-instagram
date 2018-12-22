@@ -15,12 +15,9 @@ use Cake\Core\Configure;
 use Cake\Utility\Hash;
 use RuntimeException as RuntimeException;
 
-/**
- * Loads the me-cms-instagram configuration
- */
-Configure::load(sprintf('%s.me_cms_instagram', 'MeCmsInstagram'));
-
-//Merges with the configuration from application, if exists
+//Loads the me-cms-instagram configuration and merges with the configuration
+//  from application, if exists
+Configure::load('MeCmsInstagram.me_cms_instagram');
 if (is_readable(CONFIG . 'me_cms_instagram.php')) {
     Configure::load('me_cms_instagram');
 }
@@ -32,12 +29,9 @@ if (getConfigOrFail('Instagram.key') === 'your-key-here') {
     throw new RuntimeException('Instagram API access token is missing');
 }
 
-/**
- * Loads the cache configuration
- */
-Configure::load(sprintf('%s.cache', 'MeCmsInstagram'));
-
-//Merges with the configuration from application, if exists
+//Loads the cache configuration and merges with the configuration from
+//  application, if exists
+Configure::load('MeCmsInstagram.cache');
 if (is_readable(CONFIG . 'cache.php')) {
     Configure::load('cache');
 }

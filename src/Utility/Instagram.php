@@ -27,8 +27,6 @@ class Instagram
      */
     public function __construct($key = null)
     {
-        if ($key) {
-            $this->key = $key;
-        }
+        $this->key = $key;
     }
 }

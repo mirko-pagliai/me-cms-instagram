@@ -14,7 +14,7 @@
 namespace MeCmsInstagram;
 
 use Cake\Http\Client;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 use Cake\ORM\Entity;
 use stdClass;
 
@@ -48,11 +48,7 @@ trait InstagramTrait
      */
     protected function getKey()
     {
-        if (!$this->key) {
-            return getConfigOrFail('Instagram.key');
-        }
-
-        return $this->key;
+        return $this->key ?: getConfigOrFail('Instagram.key');
     }
 
     /**
@@ -66,7 +62,7 @@ trait InstagramTrait
     {
         $url = 'https://api.instagram.com/v1/media/' . $mediaId . '?access_token=' . $this->key;
 
-        return $this->getClient()->get($url)->body;
+        return $this->getClient()->get($url)->getStringBody();
     }
 
     /**
@@ -82,11 +78,11 @@ trait InstagramTrait
         $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token= ' . $this->key;
 
         //Adds the request ID ("Next ID" for Istangram) to the url
-        if (!empty($requestId)) {
+        if ($requestId) {
             $url .= '&max_id=' . $requestId;
         }
 
-        return $this->getClient()->get($url)->body;
+        return $this->getClient()->get($url)->getStringBody();
     }
 
     /**
@@ -99,7 +95,7 @@ trait InstagramTrait
     {
         $url = 'https://api.instagram.com/v1/users/self/?access_token=' . $this->key;
 
-        return $this->getClient()->get($url)->body;
+        return $this->getClient()->get($url)->getStringBody();
     }
 
     /**
@@ -113,16 +109,16 @@ trait InstagramTrait
     public function media($mediaId)
     {
         $photo = json_decode($this->getMediaResponse($mediaId));
+        $path = isset($photo->data->images->standard_resolution->url) ? $photo->data->images->standard_resolution->url : null;
 
-        if (!isset($photo->data->images->standard_resolution->url)) {
+        if (!$path) {
             throw new NotFoundException(I18N_NOT_FOUND);
         }
 
-        $path = $photo->data->images->standard_resolution->url;
-
-        return new Entity(array_merge(['id' => $mediaId], compact('path'), [
-            'filename' => explode('?', basename($path), 2)[0],
-        ]));
+        return new Entity([
+            'id' => $mediaId,
+            'filename' => first_value(explode('?', basename($path), 2)),
+        ] + compact('path'));
     }
 
     /**
@@ -149,12 +145,12 @@ trait InstagramTrait
             ->map(function (stdClass $photo) {
                 $path = $photo->images->standard_resolution->url;
 
-                return new Entity(array_merge(compact('path'), [
+                return new Entity(compact('path') + [
                     'id' => $photo->id,
                     'link' => $photo->link,
-                    'filename' => explode('?', basename($path), 2)[0],
+                    'filename' => first_value(explode('?', basename($path), 2)),
                     'description' => empty($photo->caption->text) ? null : $photo->caption->text,
-                ]));
+                ]);
             })
             ->toList();
 
@@ -172,12 +168,14 @@ trait InstagramTrait
     {
         $user = json_decode($this->getUserResponse());
 
-        if (!isset($user->data)) {
+        $data = isset($user->data) ? $user->data : null;
+
+        if (!$data) {
             throw new NotFoundException(I18N_NOT_FOUND);
         }
 
-        $user->data->counts = new Entity((array)$user->data->counts);
+        $data->counts = new Entity((array)$data->counts);
 
-        return new Entity((array)$user->data);
+        return new Entity((array)$data);
     }
 }

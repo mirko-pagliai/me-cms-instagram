@@ -20,15 +20,21 @@ Router::scope('/', ['plugin' => 'MeCmsInstagram'], function (RouteBuilder $route
     $routes->setExtensions(['rss']);
 
     //Instagram
-    $routes->get('/instagram', ['controller' => 'Instagram', 'action' => 'index'], 'instagramPhotos');
+    if (!$routes->nameExists('instagramPhotos')) {
+        $routes->get('/instagram', ['controller' => 'Instagram', 'action' => 'index'], 'instagramPhotos');
+    }
 
     //Instagram (with ID)
-    $routes->get('/instagram/:id', ['controller' => 'Instagram', 'action' => 'index'], 'instagramPhotosId')
-        ->setPatterns(['id' => '\d+_\d+'])
-        ->setPass(['id']);
+    if (!$routes->nameExists('instagramPhotosId')) {
+        $routes->get('/instagram/:id', ['controller' => 'Instagram', 'action' => 'index'], 'instagramPhotosId')
+            ->setPatterns(['id' => '\d+_\d+'])
+            ->setPass(['id']);
+    }
 
     //Instagram photo
-    $routes->get('/instagram/view/:id', ['controller' => 'Instagram', 'action' => 'view'], 'instagramPhoto')
-        ->setPatterns(['id' => '\d+_\d+'])
-        ->setPass(['id']);
+    if (!$routes->nameExists('instagramPhoto')) {
+        $routes->get('/instagram/view/:id', ['controller' => 'Instagram', 'action' => 'view'], 'instagramPhoto')
+            ->setPatterns(['id' => '\d+_\d+'])
+            ->setPass(['id']);
+    }
 });

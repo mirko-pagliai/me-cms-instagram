@@ -102,7 +102,7 @@ class InstagramTest extends TestCase
 
     /**
      * Test for `media()` method, with no media data
-     * @expectedException Cake\Network\Exception\NotFoundException
+     * @expectedException Cake\Http\Exception\NotFoundException
      * @expectedExceptionMessage Record not found
      * @test
      */
@@ -141,7 +141,7 @@ class InstagramTest extends TestCase
 
     /**
      * Test for `recent()` method, with no recent data
-     * @expectedException Cake\Network\Exception\NotFoundException
+     * @expectedException Cake\Http\Exception\NotFoundException
      * @expectedExceptionMessage Record not found
      * @test
      */
@@ -175,7 +175,7 @@ class InstagramTest extends TestCase
 
     /**
      * Test for `user()` method, with no user data
-     * @expectedException Cake\Network\Exception\NotFoundException
+     * @expectedException Cake\Http\Exception\NotFoundException
      * @expectedExceptionMessage Record not found
      * @test
      */

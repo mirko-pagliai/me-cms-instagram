@@ -12,7 +12,6 @@
  */
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
-use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
 
 ini_set('intl.default_locale', 'en_US');
@@ -44,8 +43,6 @@ define('SESSIONS', TMP . 'sessions' . DS);
 require dirname(__DIR__) . '/vendor/autoload.php';
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
-error_reporting(E_ALL & ~E_USER_DEPRECATED);
-
 safe_mkdir(LOGS);
 safe_mkdir(SESSIONS);
 safe_mkdir(CACHE);
@@ -73,6 +70,7 @@ Configure::write('App', [
         ],
     ],
 ]);
+Configure::write('Session', ['defaults' => 'php']);
 
 Cache::setConfig([
     '_cake_core_' => [
@@ -95,71 +93,14 @@ Cache::setConfig([
 // Ensure default test connection is defined
 ConnectionManager::setConfig('test', ['url' => 'sqlite://127.0.0.1/' . TMP . 'debug_kit_test.sqlite']);
 
-Configure::write('Session', ['defaults' => 'php']);
-
-/**
- * Loads plugins
- */
 Configure::write('Assets.target', TMP . 'assets');
 Configure::write('DatabaseBackup.connection', 'test');
 Configure::write('DatabaseBackup.target', TMP . 'backups');
+Configure::write('Instagram.key', '00000000');
 Configure::write('Thumber.driver', 'gd');
 
 foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlite3'] as $binary) {
     Configure::write('DatabaseBackup.binaries.' . $binary, null);
 }
-
-Plugin::load('Assets', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'assets' . DS,
-]);
-
-Plugin::load('DatabaseBackup', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-database-backup' . DS,
-]);
-
-Plugin::load('EntityFileLog', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-entity-file-log' . DS,
-]);
-
-Plugin::load('MeTools', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'me-tools' . DS,
-]);
-
-Plugin::load('Recaptcha', [
-    'path' => VENDOR . 'crabstudio' . DS . 'recaptcha' . DS,
-]);
-
-Plugin::load('RecaptchaMailhide', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-recaptcha-mailhide' . DS,
-    'routes' => true,
-]);
-
-Plugin::load('Thumber', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-thumber' . DS,
-    'routes' => true,
-]);
-
-Plugin::load('Tokens', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'cakephp-tokens' . DS,
-]);
-
-Plugin::load('MeCms', [
-    'bootstrap' => true,
-    'path' => VENDOR . 'mirko-pagliai' . DS . 'me-cms' . DS,
-    'routes' => true,
-]);
-
-Plugin::load('MeCmsInstagram', [
-    'bootstrap' => true,
-    'path' => ROOT,
-    'routes' => true,
-]);
 
 $_SERVER['PHP_SELF'] = '/';

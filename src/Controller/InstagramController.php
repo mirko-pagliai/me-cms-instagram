@@ -14,7 +14,7 @@ namespace MeCmsInstagram\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Event\Event;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 use MeCms\Controller\AppController;
 
 /**
@@ -68,7 +68,7 @@ class InstagramController extends AppController
         $cache = sprintf('index_limit_%s', getConfigOrFail('default.photos'));
 
         //Adds the request ID ("Next ID" for Istangram) to the cache name
-        if (!empty($id)) {
+        if ($id) {
             $cache = sprintf('%s_id_%s', $cache, $id);
         }
 

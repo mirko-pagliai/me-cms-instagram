@@ -10,16 +10,11 @@
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
-
-if (!defined('ME_CMS_INSTAGRAM_CACHE')) {
-    define('ME_CMS_INSTAGRAM_CACHE', CACHE . 'me_cms_instagram' . DS);
-}
-
 return ['Cache' => [
     'instagram' => [
         'className' => 'File',
         'duration' => '+1 hour',
-        'path' => ME_CMS_INSTAGRAM_CACHE,
+        'path' => CACHE . 'me_cms_instagram' . DS,
         'prefix' => '',
         'mask' => 0777,
     ],

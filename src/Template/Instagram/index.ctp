@@ -28,9 +28,8 @@ if (getConfig('default.user_profile') && !$this->request->is('ajax')) {
  */
 $this->Breadcrumbs->add($title, ['_name' => 'instagramPhotos']);
 
-$linkOptions = [];
-
 //If Fancybox is enabled
+$linkOptions = [];
 if (getConfig('default.fancybox')) {
     $linkOptions = ['class' => 'fancybox', 'rel' => 'fancybox-group'];
 }
@@ -45,7 +44,7 @@ if (getConfig('default.fancybox')) {
 
         //If Fancybox is enabled, adds some options
         if (getConfig('default.fancybox')) {
-            $linkOptions['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
+            $linkOptions['data-fancybox-href'] = $this->Thumb->resizeUrl($path, ['height' => 1280]);
         }
 
         echo $this->Html->div(

@@ -37,26 +37,15 @@ class InstagramControllerTest extends ControllerTestCase
             'getRecentResponse' => 'recent.json',
             'getUserResponse' => 'user.json',
         ];
-        $methods = array_keys($methodsAndValuesToReturn);
 
-        $instance = $this->getMockForComponent(InstagramComponent::class, $methods);
+        $instance = $this->getMockForComponent(InstagramComponent::class, array_keys($methodsAndValuesToReturn));
 
-        foreach ($methodsAndValuesToReturn as $method => $filename) {
+        foreach ($methodsAndValuesToReturn as $method => $value) {
             $instance->method($method)
-                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $filename)));
+                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $value)));
         }
 
         return $instance;
-    }
-
-    /**
-     * Called once before test methods in a case are started
-     */
-    public static function setupBeforeClass()
-    {
-        parent::setupBeforeClass();
-
-        Cache::clearAll();
     }
 
     /**
@@ -67,8 +56,9 @@ class InstagramControllerTest extends ControllerTestCase
     {
         parent::setUp();
 
-        $this->Component = $this->getInstagramComponentMock();
+        $this->loadPlugins(['MeCms', 'MeCmsInstagram']);
 
+        $this->Component = $this->getInstagramComponentMock();
     }
 
     /**
