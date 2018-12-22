@@ -1,6 +1,8 @@
 # 1.x branch
 ## 1.9 branch
 ### 1.9.0
+* `InstallShell` has been replaced with console commands. Every method of the
+    previous class is now a `MeCmsInstagram\Command\Install` class;
 * removed `ME_CMS_INSTAGRAM` constants. It no longer uses also `ME_CMS` and
     `THUMBER` constants;
 * updated for CakePHP 3.7.

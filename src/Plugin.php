@@ -14,10 +14,25 @@
 namespace MeCmsInstagram;
 
 use Cake\Core\BasePlugin;
+use MeCmsInstagram\Command\Install\CopyConfigCommand;
+use MeCmsInstagram\Command\Install\RunAllCommand;
 
 /**
  * Plugin class
  */
 class Plugin extends BasePlugin
 {
+    /**
+     * Add console commands for the plugin
+     * @param Cake\Console\CommandCollection $commands The command collection to update
+     * @return Cake\Console\CommandCollection
+     * @since 1.9.0
+     */
+    public function console($commands)
+    {
+        $commands->add('me_cms_instagram.copy_config', CopyConfigCommand::class);
+        $commands->add('me_cms_instagram.install', RunAllCommand::class);
+
+        return $commands;
+    }
 }
