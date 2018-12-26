@@ -20,26 +20,13 @@ use MeTools\TestSuite\ConsoleIntegrationTestTrait;
  */
 class CopyConfigCommandTest extends TestCase
 {
-    use ConsoleIntegrationTestTrait {
-        ConsoleIntegrationTestTrait::setUp as consoleSetUp;
-    }
+    use ConsoleIntegrationTestTrait;
 
     /**
      * If `true`, a mock instance of the shell will be created
      * @var bool
      */
     protected $autoInitializeClass = true;
-
-    /**
-     * Called before every test method
-     * @return void
-     */
-    public function setUp()
-    {
-        $this->consoleSetUp();
-
-        $this->loadPlugins(['MeCms', 'MeCmsInstagram']);
-    }
 
     /**
      * Test for `execute()` method

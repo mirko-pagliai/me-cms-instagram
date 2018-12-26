@@ -110,10 +110,7 @@ trait InstagramTrait
     {
         $photo = json_decode($this->getMediaResponse($mediaId));
         $path = isset($photo->data->images->standard_resolution->url) ? $photo->data->images->standard_resolution->url : null;
-
-        if (!$path) {
-            throw new NotFoundException(I18N_NOT_FOUND);
-        }
+        is_true_or_fail($path, I18N_NOT_FOUND, NotFoundException::class);
 
         return new Entity([
             'id' => $mediaId,
@@ -133,10 +130,7 @@ trait InstagramTrait
     public function recent($requestId = null, $limit = 15)
     {
         $photos = json_decode($this->getRecentResponse($requestId, $limit));
-
-        if (!isset($photos->data)) {
-            throw new NotFoundException(I18N_NOT_FOUND);
-        }
+        is_true_or_fail(isset($photos->data), I18N_NOT_FOUND, NotFoundException::class);
 
         $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
 
@@ -167,15 +161,9 @@ trait InstagramTrait
     public function user()
     {
         $user = json_decode($this->getUserResponse());
+        is_true_or_fail(isset($user->data), I18N_NOT_FOUND, NotFoundException::class);
+        $user->data->counts = new Entity((array)$user->data->counts);
 
-        $data = isset($user->data) ? $user->data : null;
-
-        if (!$data) {
-            throw new NotFoundException(I18N_NOT_FOUND);
-        }
-
-        $data->counts = new Entity((array)$data->counts);
-
-        return new Entity((array)$data);
+        return new Entity((array)$user->data);
     }
 }

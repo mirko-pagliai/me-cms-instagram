@@ -23,12 +23,8 @@ use MeCms\TestSuite\ControllerTestCase;
 class InstagramControllerTest extends ControllerTestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $Component;
-
-    /**
      * Internal method to get a mock instance of `InstagramComponent`
+     * @return \MeCmsInstagram\Controller\Component\InstagramComponent|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getInstagramComponentMock()
     {
@@ -46,19 +42,6 @@ class InstagramControllerTest extends ControllerTestCase
         }
 
         return $instance;
-    }
-
-    /**
-     * Called before every test method
-     * @return void
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->loadPlugins(['MeCms', 'MeCmsInstagram']);
-
-        $this->Component = $this->getInstagramComponentMock();
     }
 
     /**
@@ -127,7 +110,7 @@ class InstagramControllerTest extends ControllerTestCase
      */
     public function testView()
     {
-        $id = $this->Component->recent()[0][0]->id;
+        $id = $this->getInstagramComponentMock()->recent()[0][0]->id;
 
         $this->get(['_name' => 'instagramPhoto', $id]);
         $this->assertResponseOkAndNotEmpty();

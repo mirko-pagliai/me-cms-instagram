@@ -37,11 +37,7 @@ class InstagramController extends AppController
     {
         parent::beforeRender($event);
 
-        $user = Cache::remember('user_profile', function () {
-            return $this->Instagram->user();
-        }, 'instagram');
-
-        $this->set(compact('user'));
+        $this->set('user', Cache::remember('user_profile', [$this->Instagram, 'user'], 'instagram'));
     }
 
     /**
@@ -87,14 +83,14 @@ class InstagramController extends AppController
      */
     public function view($id)
     {
-        $photo = Cache::remember(sprintf('media_%s', md5($id)), function () use ($id) {
-            //It tries to get the media (photo). If an exception is thrown, redirects to index
-            try {
+        //It tries to get the media (photo). If an exception is thrown, redirects to index
+        try {
+            $photo = Cache::remember(sprintf('media_%s', md5($id)), function () use ($id) {
                 return $this->Instagram->media($id);
-            } catch (NotFoundException $e) {
-                return $this->redirect(['_name' => 'instagramPhotos'], 301);
-            }
-        }, 'instagram');
+            }, 'instagram');
+        } catch (NotFoundException $e) {
+            return $this->redirect(['_name' => 'instagramPhotos'], 301);
+        }
 
         $this->set(compact('photo'));
     }

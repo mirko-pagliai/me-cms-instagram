@@ -11,7 +11,6 @@
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-
 <?php if (getConfig('default.user_profile') && !empty($user)) : ?>
     <div class="card bg-light border-light mb-4">
         <div class="card-body row">

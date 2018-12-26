@@ -103,6 +103,8 @@ foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlit
     Configure::write('DatabaseBackup.binaries.' . $binary, null);
 }
 
+Configure::write('pluginsToLoad', ['MeCms', 'MeCmsInstagram']);
+
 $_SERVER['PHP_SELF'] = '/';
 
 loadPHPUnitAliases();

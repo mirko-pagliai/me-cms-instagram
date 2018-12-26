@@ -23,9 +23,7 @@ use MeTools\TestSuite\ConsoleIntegrationTestTrait;
  */
 class RunAllCommandTest extends TestCase
 {
-    use ConsoleIntegrationTestTrait {
-        ConsoleIntegrationTestTrait::setUp as consoleSetUp;
-    }
+    use ConsoleIntegrationTestTrait;
 
     /**
      * If `true`, a mock instance of the shell will be created
@@ -37,17 +35,6 @@ class RunAllCommandTest extends TestCase
      * @var array
      */
     protected $debug = [];
-
-    /**
-     * Called before every test method
-     * @return void
-     */
-    public function setUp()
-    {
-        $this->consoleSetUp();
-
-        $this->loadPlugins(['MeCms', 'MeCmsInstagram']);
-    }
 
     /**
      * Tests for `execute()` method

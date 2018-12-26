@@ -22,17 +22,6 @@ use MeTools\TestSuite\ComponentTestCase;
 class InstagramComponentTest extends ComponentTestCase
 {
     /**
-     * Called before every test method
-     * @return void
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->loadPlugins(['MeCms', 'MeCmsInstagram']);
-    }
-
-    /**
      * Test for `initialize()` method
      * @test
      */

@@ -13,9 +13,6 @@
 namespace MeCmsInstagram\View\Cell;
 
 use Cake\Cache\Cache;
-use Cake\Event\EventManager;
-use Cake\Http\ServerRequest;
-use Cake\Network\Response;
 use Cake\View\Cell;
 use MeCmsInstagram\Utility\Instagram;
 
@@ -30,21 +27,10 @@ class PhotosWidgetsCell extends Cell
     public $Instagram;
 
     /**
-     * Constructor
-     * @param \Cake\Http\ServerRequest|null $request The request to use in the cell
-     * @param \Cake\Http\Response|null $response The response to use in the cell
-     * @param \Cake\Event\EventManager|null $eventManager The eventManager to bind events to
-     * @param array $cellOptions Cell options to apply
-     * @since 1.5.0
+     * Initialization hook method
+     * @uses $Instagram
      */
-    public function __construct(
-        ServerRequest $request = null,
-        Response $response = null,
-        EventManager $eventManager = null,
-        array $cellOptions = []
-    ) {
-        parent::__construct($request, $response, $eventManager, $cellOptions);
-
+    public function initialize() {
         $this->Instagram = new Instagram;
     }
 
@@ -75,9 +61,7 @@ class PhotosWidgetsCell extends Cell
             return;
         }
 
-        $photos = $this->getLatest($limit);
-
-        $this->set(compact('photos'));
+        $this->set('photos', $this->getLatest($limit));
     }
 
     /**
@@ -93,8 +77,6 @@ class PhotosWidgetsCell extends Cell
             return;
         }
 
-        $photos = collection($this->getLatest())->sample($limit)->toArray();
-
-        $this->set(compact('photos'));
+        $this->set('photos', collection($this->getLatest())->sample($limit)->toArray());
     }
 }

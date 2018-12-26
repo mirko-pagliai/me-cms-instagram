@@ -39,18 +39,16 @@ if (getConfig('default.fancybox')) {
     <?php
     foreach ($photos as $photo) {
         $link = getConfig('default.open_on_instagram') ? $photo->link : ['_name' => 'instagramPhoto', $photo->id];
-        $path = $photo->path;
-        $text = $photo->description;
 
         //If Fancybox is enabled, adds some options
         if (getConfig('default.fancybox')) {
-            $linkOptions['data-fancybox-href'] = $this->Thumb->resizeUrl($path, ['height' => 1280]);
+            $linkOptions['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
         }
 
-        echo $this->Html->div(
-            'col-md-4 col-lg-3 mb-4',
-            $this->element('MeCms.views/photo-preview', compact('link', 'linkOptions', 'path', 'text'))
-        );
+        echo $this->Html->div('col-md-4 col-lg-3 mb-4', $this->element('MeCms.views/photo-preview', [
+            'path' => $photo->path,
+            'text' => $photo->description,
+        ] + compact('link', 'linkOptions')));
     }
     ?>
 </div>

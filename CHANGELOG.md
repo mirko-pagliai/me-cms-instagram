@@ -5,7 +5,7 @@
     previous class is now a `MeCmsInstagram\Command\Install` class;
 * removed `ME_CMS_INSTAGRAM` constants. It no longer uses also `ME_CMS` and
     `THUMBER` constants;
-* updated for CakePHP 3.7.
+* updated for CakePHP 3.7.1 and `php-tools` 1.1.10.
 
 ## 1.8 branch
 ### 1.8.1

@@ -53,8 +53,6 @@ class PhotosWidgetsCellTest extends CellTestCase
         }));
 
         parent::setUp();
-
-        $this->loadPlugins(['MeCmsInstagram']);
     }
 
     /**
@@ -107,14 +105,14 @@ class PhotosWidgetsCellTest extends CellTestCase
         ];
         $this->assertHtml($expected, $this->Widget->widget($widget, ['limit' => 2])->render());
 
+        //Tests cache
+        $this->assertEquals(1, count(Cache::read('widget_latest_1', 'instagram')));
+        $this->assertEquals(2, count(Cache::read('widget_latest_2', 'instagram')));
+
         //Sets `Instagram` controller
         $request = $this->Widget->getView()->getRequest()->withParam('controller', 'Instagram');
         $this->Widget->getView()->setRequest($request);
         $this->assertEmpty($this->Widget->widget($widget)->render());
-
-        //Tests cache
-        $this->assertEquals(1, count(Cache::read('widget_latest_1', 'instagram')));
-        $this->assertEquals(2, count(Cache::read('widget_latest_2', 'instagram')));
     }
 
     /**
@@ -167,13 +165,13 @@ class PhotosWidgetsCellTest extends CellTestCase
         ];
         $this->assertHtml($expected, $result);
 
+        //Tests cache
+        $this->assertEquals(12, count(Cache::read('widget_latest_12', 'instagram')));
+
         //Sets `Instagram` controller
         $request = $this->Widget->getView()->getRequest()->withParam('controller', 'Instagram');
         $this->Widget->getView()->setRequest($request);
         $this->assertEmpty($this->Widget->widget($widget)->render());
-
-        //Tests cache
-        $this->assertEquals(12, count(Cache::read('widget_latest_12', 'instagram')));
     }
 
     /**
