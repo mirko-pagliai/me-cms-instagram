@@ -28,9 +28,11 @@ class PhotosWidgetsCell extends Cell
 
     /**
      * Initialization hook method
+     * @return void
      * @uses $Instagram
      */
-    public function initialize() {
+    public function initialize()
+    {
         $this->Instagram = new Instagram;
     }
 
