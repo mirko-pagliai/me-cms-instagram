@@ -12,7 +12,6 @@
  */
 namespace MeCmsInstagram\Test\TestCase\Command\Install;
 
-use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 use MeCms\TestSuite\TestCase;
 use MeTools\Console\Command;
@@ -61,11 +60,7 @@ class RunAllCommandTest extends TestCase
         }, $this->Command->questions);
 
         $expected = ['MeCmsInstagram\Command\Install\CopyConfigCommand'];
-        $this->Command->execute(new Arguments([], ['force' => true], []), $io);
-        $this->assertEquals($expected, $this->debug);
-
-        $this->debug = [];
-        $this->Command->execute(new Arguments([], [], []), $io);
+        $this->assertNull($this->Command->run([], $io));
         $this->assertEquals($expected, $this->debug);
     }
 }
