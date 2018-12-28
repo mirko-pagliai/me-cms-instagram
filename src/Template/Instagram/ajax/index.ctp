@@ -10,4 +10,4 @@
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
-$this->extend(ME_CMS_INSTAGRAM . './Instagram/index');
+$this->extend('MeCmsInstagram./Instagram/index');

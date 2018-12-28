@@ -8,17 +8,15 @@
         "name": "Mirko Pagliai",
         "email": "mirko.pagliai@gmail.com"
     }],
-    "config": {
-        "component-dir": "vendor/components"
-    },
     "require": {
         "php": ">=5.5.9",
-        "cakephp/cakephp": "^3.6",
-        "mirko-pagliai/me-cms": "^2.25",
-        "mirko-pagliai/php-tools": "^1.0"
+        "cakephp/cakephp": "^3.7.1",
+        "mirko-pagliai/me-cms": "^2.26",
+        "mirko-pagliai/php-tools": "^1.1.10"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^3.0",
+        "mirko-pagliai/cakephp-assets": "^1.3",
         "phpunit/phpunit": "^5.7|^6.0"
     },
     "repositories": [

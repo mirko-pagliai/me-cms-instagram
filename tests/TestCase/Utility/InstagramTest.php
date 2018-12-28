@@ -13,6 +13,9 @@
 namespace MeCmsInstagram\Test\TestCase\Utility;
 
 use Cake\Cache\Cache;
+use Cake\Http\Client;
+use Cake\Http\Exception\NotFoundException;
+use Cake\ORM\Entity;
 use MeCmsInstagram\Utility\Instagram;
 use MeTools\TestSuite\TestCase;
 
@@ -27,18 +30,25 @@ class InstagramTest extends TestCase
     protected $Instagram;
 
     /**
-     * Setup the test case, backup the static object values so they can be
-     * restored. Specifically backs up the contents of Configure and paths in
-     *  App if they have not already been backed up
+     * Called before every test method
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
 
-        Cache::clearAll();
-
         $this->Instagram = new Instagram;
+    }
+
+    /**
+     * Called after every test method
+     * @return void
+     */
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        Cache::clearAll();
     }
 
     /**
@@ -73,7 +83,6 @@ class InstagramTest extends TestCase
         $this->assertEquals(getConfigOrFail('Instagram.key'), $this->invokeMethod($this->Instagram, 'getKey'));
 
         $key = 'anotherKey';
-
         $this->Instagram = new Instagram($key);
         $this->assertEquals($key, $this->invokeMethod($this->Instagram, 'getKey'));
     }
@@ -84,7 +93,7 @@ class InstagramTest extends TestCase
      */
     public function testGetClient()
     {
-        $this->assertInstanceof('Cake\Http\Client', $this->invokeMethod($this->Instagram, 'getClient'));
+        $this->assertInstanceof(Client::class, $this->invokeMethod($this->Instagram, 'getClient'));
     }
 
     /**
@@ -94,22 +103,16 @@ class InstagramTest extends TestCase
     public function testMedia()
     {
         $result = $this->getInstagramComponentMock()->media(1);
-        $this->assertInstanceof('Cake\ORM\Entity', $result);
+        $this->assertInstanceof(Entity::class, $result);
         $this->assertEquals([
             'id' => 1,
             'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard',
             'filename' => '1.png',
         ], $this->getInstagramComponentMock()->media(1)->toArray());
-    }
 
-    /**
-     * Test for `media()` method, with no media data
-     * @expectedException Cake\Network\Exception\NotFoundException
-     * @expectedExceptionMessage Record not found
-     * @test
-     */
-    public function testUserNoMediaData()
-    {
+        //With no media data
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Record not found');
         $this->Instagram->media(1);
     }
 
@@ -128,27 +131,19 @@ class InstagramTest extends TestCase
 
         //Asserts for each photo
         foreach ($photos as $photo) {
-            ++$i;
-
-            $this->assertInstanceOf('Cake\ORM\Entity', $photo);
+            $this->assertInstanceOf(Entity::class, $photo);
             $this->assertEquals([
-                'id' => '9999999999999999999_999999' . sprintf('%02d', $i),
+                'id' => '9999999999999999999_999999' . sprintf('%02d', ++$i),
                 'description' => 'Example text ' . $i,
                 'link' => 'http://example/link' . $i . '/',
                 'path' => 'https://raw.githubusercontent.com/mirko-pagliai/me-cms-instagram/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKey' . $i . 'Standard',
                 'filename' => '1.png',
             ], $photo->toArray());
         }
-    }
 
-    /**
-     * Test for `recent()` method, with no recent data
-     * @expectedException Cake\Network\Exception\NotFoundException
-     * @expectedExceptionMessage Record not found
-     * @test
-     */
-    public function testUserNoRecentData()
-    {
+        //With no recent data
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Record not found');
         $this->Instagram->recent(1);
     }
     /**
@@ -158,8 +153,8 @@ class InstagramTest extends TestCase
     public function testUser()
     {
         $result = $this->getInstagramComponentMock()->user();
-        $this->assertInstanceof('Cake\ORM\Entity', $result);
-        $this->assertInstanceof('Cake\ORM\Entity', $result->counts);
+        $this->assertInstanceof(Entity::class, $result);
+        $this->assertInstanceof(Entity::class, $result->counts);
         $this->assertEquals([
             'username' => 'myusername',
             'bio' => 'mybio',
@@ -173,16 +168,10 @@ class InstagramTest extends TestCase
             ],
             'id' => '99999999',
         ], $result->toArray());
-    }
 
-    /**
-     * Test for `user()` method, with no user data
-     * @expectedException Cake\Network\Exception\NotFoundException
-     * @expectedExceptionMessage Record not found
-     * @test
-     */
-    public function testUserNoUserData()
-    {
+        //With no user data
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Record not found');
         $this->Instagram->user();
     }
 }

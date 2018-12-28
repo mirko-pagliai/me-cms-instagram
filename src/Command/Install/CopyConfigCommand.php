@@ -9,24 +9,22 @@
  * @copyright   Copyright (c) Mirko Pagliai
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
+ * @since       1.9.0
  */
-namespace MeCmsInstagram\Utility;
+namespace MeCmsInstagram\Command\Install;
 
-use MeCmsInstagram\InstagramTrait;
+use MeCms\Command\Install\CopyConfigCommand as BaseCopyConfigCommand;
 
 /**
- * An utility to get media from Instagram
+ * Copies the configuration files
  */
-class Instagram
+class CopyConfigCommand extends BaseCopyConfigCommand
 {
-    use InstagramTrait;
-
     /**
-     * Construct
-     * @param string $key API access token
+     * Configuration files to be copied
+     * @var array
      */
-    public function __construct($key = null)
-    {
-        $this->key = $key;
-    }
+    public $config = [
+        'MeCmsInstagram.me_cms_instagram',
+    ];
 }

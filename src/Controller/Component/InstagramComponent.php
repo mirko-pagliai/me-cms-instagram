@@ -14,7 +14,6 @@
 namespace MeCmsInstagram\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
 use MeCmsInstagram\InstagramTrait;
 
 /**
@@ -25,19 +24,12 @@ class InstagramComponent extends Component
     use InstagramTrait;
 
     /**
-     * Construct
-     * @param \Cake\Controller\ComponentRegistry $registry A ComponentRegistry
-     *  this component can use to lazy load its components
-     * @param array $config Array of configuration settings
+     * Constructor hook method
+     * @param array $config The configuration settings provided to this component
+     * @return void
      */
-    public function __construct(ComponentRegistry $registry, $config = [])
+    public function initialize(array $config)
     {
-        parent::__construct($registry, $config);
-
-        if (empty($config['key'])) {
-            $config['key'] = getConfigOrFail('Instagram.key');
-        }
-
-        $this->key = $config['key'];
+        $this->key = empty($config['key']) ? getConfigOrFail('Instagram.key') : $config['key'];
     }
 }

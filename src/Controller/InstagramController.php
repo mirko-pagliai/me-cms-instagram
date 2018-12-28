@@ -14,7 +14,7 @@ namespace MeCmsInstagram\Controller;
 
 use Cake\Cache\Cache;
 use Cake\Event\Event;
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 use MeCms\Controller\AppController;
 
 /**
@@ -37,11 +37,7 @@ class InstagramController extends AppController
     {
         parent::beforeRender($event);
 
-        $user = Cache::remember('user_profile', function () {
-            return $this->Instagram->user();
-        }, 'instagram');
-
-        $this->set(compact('user'));
+        $this->set('user', Cache::remember('user_profile', [$this->Instagram, 'user'], 'instagram'));
     }
 
     /**
@@ -53,7 +49,7 @@ class InstagramController extends AppController
     {
         parent::initialize();
 
-        $this->loadComponent(ME_CMS_INSTAGRAM . '.Instagram');
+        $this->loadComponent('MeCmsInstagram.Instagram');
     }
 
     /**
@@ -68,7 +64,7 @@ class InstagramController extends AppController
         $cache = sprintf('index_limit_%s', getConfigOrFail('default.photos'));
 
         //Adds the request ID ("Next ID" for Istangram) to the cache name
-        if (!empty($id)) {
+        if ($id) {
             $cache = sprintf('%s_id_%s', $cache, $id);
         }
 
@@ -87,14 +83,14 @@ class InstagramController extends AppController
      */
     public function view($id)
     {
-        $photo = Cache::remember(sprintf('media_%s', md5($id)), function () use ($id) {
-            //It tries to get the media (photo). If an exception is thrown, redirects to index
-            try {
+        //It tries to get the media (photo). If an exception is thrown, redirects to index
+        try {
+            $photo = Cache::remember(sprintf('media_%s', md5($id)), function () use ($id) {
                 return $this->Instagram->media($id);
-            } catch (NotFoundException $e) {
-                return $this->redirect(['_name' => 'instagramPhotos'], 301);
-            }
-        }, 'instagram');
+            }, 'instagram');
+        } catch (NotFoundException $e) {
+            return $this->redirect(['_name' => 'instagramPhotos'], 301);
+        }
 
         $this->set(compact('photo'));
     }

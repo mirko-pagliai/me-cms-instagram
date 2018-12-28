@@ -4,7 +4,7 @@
  * https://www.instagram.com/developer/clients/manage
  */
 return [
-    ME_CMS_INSTAGRAM => [
+    'MeCmsInstagram' => [
         //Default layout
         'default' => [
             //Number of photos to show per page. This must be a multiple of 3

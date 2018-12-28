@@ -13,10 +13,10 @@
  */
 namespace App;
 
-use Assets\Plugin as Assets;
 use Cake\Http\BaseApplication;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use MeCmsInstagram\Plugin as MeCmsInstagram;
+use MeCms\Plugin as MeCms;
 use RecaptchaMailhide\Plugin as RecaptchaMailhide;
 use Thumber\Plugin as Thumber;
 
@@ -33,9 +33,9 @@ class Application extends BaseApplication
      */
     public function bootstrap()
     {
-        $this->addPlugin(Assets::class, ['routes' => false]);
         $this->addPlugin(RecaptchaMailhide::class, ['routes' => false]);
         $this->addPlugin(Thumber::class, ['routes' => false]);
+        $this->addPlugin(MeCms::class, ['bootstrap' => false, 'routes' => false]);
         $this->addPlugin(MeCmsInstagram::class, ['bootstrap' => false, 'routes' => false]);
     }
 
