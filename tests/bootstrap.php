@@ -36,18 +36,19 @@ define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', APP . 'webroot' . DS);
 define('TMP', sys_get_temp_dir() . DS . 'me_cms_instagram' . DS);
 define('CONFIG', APP . 'config' . DS);
-define('CACHE', TMP);
-define('LOGS', TMP);
+define('CACHE', TMP . 'cache');
+define('LOGS', TMP . 'logs');
 define('SESSIONS', TMP . 'sessions' . DS);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
-safe_mkdir(LOGS);
-safe_mkdir(SESSIONS);
-safe_mkdir(CACHE);
-safe_mkdir(CACHE . 'views');
-safe_mkdir(CACHE . 'models');
+@mkdir(TMP);
+@mkdir(LOGS);
+@mkdir(SESSIONS);
+@mkdir(CACHE);
+@mkdir(CACHE . 'views');
+@mkdir(CACHE . 'models');
 
 Configure::write('debug', true);
 Configure::write('App', [

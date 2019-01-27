@@ -80,7 +80,7 @@ class InstagramControllerTest extends ControllerTestCase
         $this->get(['_name' => 'instagramPhotos']);
         $this->assertResponseOkAndNotEmpty();
         $this->assertTemplate('src' . DS . 'Template' . DS . 'Instagram' . DS . 'index.ctp');
-        $this->assertContainsInstanceof(Entity::class, $this->viewVariable('photos'));
+        $this->assertContainsOnlyInstancesOf(Entity::class, $this->viewVariable('photos'));
 
         $nextIdFromView = $this->viewVariable('nextId');
         $this->assertEquals('111_222', $nextIdFromView);

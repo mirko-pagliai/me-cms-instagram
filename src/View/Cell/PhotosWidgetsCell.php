@@ -46,7 +46,7 @@ class PhotosWidgetsCell extends Cell
     protected function getLatest($limit = 12)
     {
         return Cache::remember(sprintf('widget_latest_%s', $limit), function () use ($limit) {
-            return first_value($this->Instagram->recent(null, $limit));
+            return array_value_first($this->Instagram->recent(null, $limit));
         }, 'instagram');
     }
 
