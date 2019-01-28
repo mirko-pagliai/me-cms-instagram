@@ -114,7 +114,7 @@ trait InstagramTrait
 
         return new Entity([
             'id' => $mediaId,
-            'filename' => first_value(explode('?', basename($path), 2)),
+            'filename' => array_value_first(explode('?', basename($path), 2)),
         ] + compact('path'));
     }
 
@@ -142,7 +142,7 @@ trait InstagramTrait
                 return new Entity(compact('path') + [
                     'id' => $photo->id,
                     'link' => $photo->link,
-                    'filename' => first_value(explode('?', basename($path), 2)),
+                    'filename' => array_value_first(explode('?', basename($path), 2)),
                     'description' => empty($photo->caption->text) ? null : $photo->caption->text,
                 ]);
             })

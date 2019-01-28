@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.9 branch
+### 1.9.1
+* updated for `php-tools` 1.1.12.
+
 ### 1.9.0
 * `InstallShell` has been replaced with console commands. Every method of the
     previous class is now a `MeCmsInstagram\Command\Install` class;
