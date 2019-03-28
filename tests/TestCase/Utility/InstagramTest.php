@@ -143,7 +143,7 @@ class InstagramTest extends TestCase
 
         //With no recent data
         $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage('Record not found');
+        $this->expectExceptionMessage('Missing client_id or access_token URL parameter.');
         $this->Instagram->recent(1);
     }
     /**
