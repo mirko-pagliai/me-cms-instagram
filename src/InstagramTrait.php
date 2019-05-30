@@ -130,7 +130,7 @@ trait InstagramTrait
     public function recent($requestId = null, $limit = 15)
     {
         $photos = json_decode($this->getRecentResponse($requestId, $limit));
-        is_true_or_fail(isset($photos->data), I18N_NOT_FOUND, NotFoundException::class);
+        is_true_or_fail(isset($photos->data), isset($photos->meta->error_message) ? $photos->meta->error_message : I18N_NOT_FOUND, NotFoundException::class);
 
         $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
 

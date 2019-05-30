@@ -12,57 +12,59 @@
  */
 ?>
 <?php if (getConfig('default.user_profile') && !empty($user)) : ?>
-    <div class="card bg-light border-light mb-4">
-        <div class="card-body row">
-            <div class="col-5 text-center">
-                <?= $this->Html->img($user->profile_picture, ['class' => 'rounded-circle']) ?>
-            </div>
+<div class="card bg-light border-light mb-4">
+    <div class="card-body row">
+        <div class="col-5 text-center">
+            <?= $this->Html->img($user->profile_picture, ['class' => 'rounded-circle']) ?>
+        </div>
 
-            <div class="col">
-                <h3 class="card-title">
-                    <?= $user->username ?>
-                </h3>
+        <div class="col">
+            <h3 class="card-title">
+                <?= $user->username ?>
+            </h3>
 
-                <p>
-                    <strong class="mr-2"><?= $user->full_name ?></strong>
+            <p>
+                <span class="mr-4">
+                    <?= __d('me_cms_instagram', '{0} posts', $this->Html->strong($user->counts->media)) ?>
+                </span>
+                <span class="mr-4">
+                    <?= __d('me_cms_instagram', '{0} followers', $this->Html->strong($user->counts->followed_by)) ?>
+                </span>
+                <span>
+                    <?= __d('me_cms_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?>
+                </span>
+            </p>
 
-                    <?php if ($user->has('bio')) : ?>
-                        <span class="mr-2"><?= $user->bio ?></span>
-                    <?php endif; ?>
+            <p>
+                <strong><?= $user->full_name ?></strong>
+            <p>
 
-                    <?php if ($user->has('website')) : ?>
-                        <span>
-                            <?= $this->Html->link(
-                                preg_replace(['/^http:\/\//', '/\/$/'], '', $user->website),
-                                $user->website,
-                                ['target' => '_blank']
-                            ) ?>
-                        </span>
-                    <?php endif; ?>
-                </p>
+            <p>
+                <?php if ($user->has('bio')) : ?>
+                    <div><?= $user->bio ?></div>
+                <?php endif; ?>
 
-                <p>
-                    <span class="mr-3">
-                        <?= __d('me_cms_instagram', '{0} posts', $this->Html->strong($user->counts->media)) ?>
-                    </span>
-                    <span class="mr-3">
-                        <?= __d('me_cms_instagram', '{0} followers', $this->Html->strong($user->counts->followed_by)) ?>
-                    </span>
-                    <span>
-                        <?= __d('me_cms_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?>
-                    </span>
-                </p>
+                <?php if ($user->has('website')) : ?>
+                    <div>
+                        <?= $this->Html->link(
+                            preg_replace(['/^http:\/\//', '/\/$/'], '', $user->website),
+                            $user->website,
+                            ['target' => '_blank']
+                        ) ?>
+                    </div>
+                <?php endif; ?>
+            </p>
 
-                <?php
-                if (getConfig('default.follow_me')) {
-                    echo $this->Html->button(
-                        __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
-                        sprintf('//instagram.com/%s', $user->username),
-                        ['class' => 'btn-success btn-sm', 'icon' => 'instagram', 'target' => '_blank']
-                    );
-                }
-                ?>
-            </div>
+            <?php
+            if (getConfig('default.follow_me')) {
+                echo $this->Html->button(
+                    __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
+                    sprintf('//instagram.com/%s', $user->username),
+                    ['class' => 'btn-success btn-sm', 'icon' => 'fab instagram', 'target' => '_blank']
+                );
+            }
+            ?>
         </div>
     </div>
+</div>
 <?php endif; ?>

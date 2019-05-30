@@ -1,5 +1,9 @@
 # 1.x branch
 ## 1.9 branch
+### 1.9.2
+* fixed templates;
+* fixed a little bug for `InstagramTrait`.
+
 ### 1.9.1
 * updated for `php-tools` 1.1.12.
 

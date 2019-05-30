@@ -36,29 +36,37 @@ if (getConfig('default.fancybox')) {
 ?>
 
 <div class="row">
-    <?php
-    foreach ($photos as $photo) {
-        $link = getConfig('default.open_on_instagram') ? $photo->link : ['_name' => 'instagramPhoto', $photo->id];
+<?php
+foreach ($photos as $photo) {
+    $link = getConfig('default.open_on_instagram') ? $photo->link : ['_name' => 'instagramPhoto', $photo->id];
 
-        //If Fancybox is enabled, adds some options
-        if (getConfig('default.fancybox')) {
-            $linkOptions['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
-        }
-
-        echo $this->Html->div('col-md-4 col-lg-3 mb-4', $this->element('MeCms.views/photo-preview', [
-            'path' => $photo->path,
-            'text' => $photo->description,
-        ] + compact('link', 'linkOptions')));
+    //If Fancybox is enabled, adds some options
+    if (getConfig('default.fancybox')) {
+        $linkOptions['data-fancybox-href'] = $this->Thumb->resizeUrl($photo->path, ['height' => 1280]);
     }
-    ?>
+
+    echo $this->Html->div('col-md-4 col-lg-3 mb-4', $this->element('MeCms.views/photo-preview', [
+        'path' => $photo->path,
+        'text' => $photo->description,
+    ] + compact('link', 'linkOptions')));
+}
+?>
 </div>
 
-<?php if (!empty($nextId)) : ?>
-    <div class="mb-4 text-center">
-        <?= $this->Html->link(__d('me_cms_instagram', 'Load more'), '#', [
+<div class="mb-4 text-center">
+<?php
+    if (empty($nextId)) {
+        echo $this->Html->button(
+            __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
+            sprintf('//instagram.com/%s', $user->username),
+            ['class' => 'btn-primary btn-lg', 'icon' => 'fab instagram', 'target' => '_blank']
+        );
+    } else {
+        echo $this->Html->button(__d('me_cms_instagram', 'Load more'), '#', [
             'id' => 'load-more',
             'class' => 'btn-primary btn-lg',
             'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
-        ]) ?>
-    </div>
-<?php endif; ?>
+        ]);
+    }
+?>
+</div>
