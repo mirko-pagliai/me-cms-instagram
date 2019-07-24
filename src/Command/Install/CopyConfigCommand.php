@@ -22,9 +22,8 @@ class CopyConfigCommand extends BaseCopyConfigCommand
 {
     /**
      * Configuration files to be copied
-     * @var array
      */
-    public $config = [
+    const CONFIG_FILES = [
         'MeCmsInstagram.me_cms_instagram',
     ];
 }

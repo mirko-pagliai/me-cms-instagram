@@ -12,6 +12,7 @@
  */
 namespace MeCmsInstagram\Test\TestCase\Command\Install;
 
+use MeCmsInstagram\Command\Install\CopyConfigCommand;
 use MeCms\TestSuite\TestCase;
 use MeTools\TestSuite\ConsoleIntegrationTestTrait;
 
@@ -37,7 +38,7 @@ class CopyConfigCommandTest extends TestCase
         $this->exec('me_cms_instagram.copy_config -v');
         $this->assertExitWithSuccess();
 
-        foreach ($this->Command->config as $file) {
+        foreach (CopyConfigCommand::CONFIG_FILES as $file) {
             $this->assertOutputContains('File or directory `' . rtr(CONFIG . pluginSplit($file)[1] . '.php') . '` already exists');
         }
     }
