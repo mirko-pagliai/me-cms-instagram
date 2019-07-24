@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![Build Status](https://travis-ci.org/mirko-pagliai/me-cms-instagram.svg?branch=master)](https://travis-ci.org/mirko-pagliai/me-cms-instagram)
-[![Coverage Status](https://img.shields.io/codecov/c/github/mirko-pagliai/me-cms-instagram.svg?style=flat-square)](https://codecov.io/github/mirko-pagliai/me-cms-instagram)
+[![codecov](https://codecov.io/gh/mirko-pagliai/me-cms-instagram/branch/master/graph/badge.svg)](https://codecov.io/gh/mirko-pagliai/me-cms-instagram)
 
 *me-cms-instagram* plugin allows you to manage Instagram photos with 
 [MeCms platform](//github.com/mirko-pagliai/cakephp-for-mecms).
