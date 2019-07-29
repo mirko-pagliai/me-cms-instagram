@@ -39,7 +39,7 @@ trait InstagramTrait
      */
     protected function getClient()
     {
-        return new Client;
+        return new Client();
     }
 
     /**
@@ -101,9 +101,9 @@ trait InstagramTrait
     /**
      * Gets a media object
      * @param string $id Media ID
-     * @return Entity
+     * @return \Cake\ORM\Entity
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
-     * @throws NotFoundException
+     * @throws \Cake\Http\Exception\NotFoundException
      * @uses getMediaResponse()
      */
     public function media($id)
@@ -123,7 +123,7 @@ trait InstagramTrait
      * @return array Array with entities of photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
      * @uses getRecentResponse()
-     * @throws NotFoundException
+     * @throws \Cake\Http\Exception\NotFoundException
      */
     public function recent($requestId = null, $limit = 15)
     {
@@ -151,9 +151,9 @@ trait InstagramTrait
 
     /**
      * Gets information about the owner of the token
-     * @return Entity
+     * @return \Cake\ORM\Entity
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
-     * @throws NotFoundException
+     * @throws \Cake\Http\Exception\NotFoundException
      * @uses getUserResponse()
      */
     public function user()

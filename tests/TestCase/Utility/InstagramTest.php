@@ -13,7 +13,6 @@
 namespace MeCmsInstagram\Test\TestCase\Utility;
 
 use Cake\Cache\Cache;
-use Cake\Http\Client;
 use Cake\Http\Exception\NotFoundException;
 use Cake\ORM\Entity;
 use MeCmsInstagram\Utility\Instagram;
@@ -135,6 +134,7 @@ class InstagramTest extends TestCase
         $this->expectException(NotFoundException::class);
         $this->Instagram->recent(1);
     }
+
     /**
      * Test for `user()` method
      * @test
