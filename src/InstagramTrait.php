@@ -75,7 +75,7 @@ trait InstagramTrait
      */
     protected function getRecentResponse($requestId = null, $limit = 15)
     {
-        $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token= ' . $this->key;
+        $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token=' . $this->key;
 
         //Adds the request ID ("Next ID" for Istangram) to the url
         if ($requestId) {
