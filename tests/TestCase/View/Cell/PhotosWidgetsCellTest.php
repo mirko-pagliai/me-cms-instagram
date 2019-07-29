@@ -16,6 +16,7 @@ use Cake\Cache\Cache;
 use MeCms\TestSuite\CellTestCase;
 use MeCms\View\Helper\WidgetHelper;
 use MeCms\View\View\AppView as View;
+use MeCmsInstagram\Utility\Instagram;
 
 /**
  * PhotosWidgetsCellTest class
@@ -28,15 +29,16 @@ class PhotosWidgetsCellTest extends CellTestCase
      */
     public function setUp()
     {
+        $view = new View();
         $this->Widget = $this->getMockBuilder(WidgetHelper::class)
-            ->setConstructorArgs([new View])
+            ->setConstructorArgs([$view])
             ->setMethods(['widget'])
             ->getMock();
 
-        $this->Widget->method('widget')->will($this->returnCallback(function () {
-            $widgetClass = call_user_func_array([new WidgetHelper($this->Widget->getView()), 'widget'], func_get_args());
+        $this->Widget->method('widget')->will($this->returnCallback(function () use ($view) {
+            $widgetClass = call_user_func_array([new WidgetHelper($view), 'widget'], func_get_args());
 
-            $widgetClass->Instagram = $this->getMockBuilder(get_class($widgetClass->Instagram))
+            $widgetClass->Instagram = $this->getMockBuilder(Instagram::class)
                 ->setMethods(['getRecentResponse'])
                 ->getMock();
 
