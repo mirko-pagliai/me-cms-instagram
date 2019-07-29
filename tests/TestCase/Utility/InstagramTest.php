@@ -88,15 +88,6 @@ class InstagramTest extends TestCase
     }
 
     /**
-     * Test for `getClient()` method
-     * @test
-     */
-    public function testGetClient()
-    {
-        $this->assertInstanceof(Client::class, $this->invokeMethod($this->Instagram, 'getClient'));
-    }
-
-    /**
      * Test for `media()` method
      * @test
      */
@@ -112,7 +103,6 @@ class InstagramTest extends TestCase
 
         //With no media data
         $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage('Record not found');
         $this->Instagram->media(1);
     }
 
@@ -143,7 +133,6 @@ class InstagramTest extends TestCase
 
         //With no recent data
         $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage('Missing client_id or access_token URL parameter.');
         $this->Instagram->recent(1);
     }
     /**
@@ -171,7 +160,6 @@ class InstagramTest extends TestCase
 
         //With no user data
         $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage('Record not found');
         $this->Instagram->user();
     }
 }
