@@ -79,7 +79,7 @@ class InstagramControllerTest extends ControllerTestCase
     {
         $this->get(['_name' => 'instagramPhotos']);
         $this->assertResponseOkAndNotEmpty();
-        $this->assertTemplate('src' . DS . 'Template' . DS . 'Instagram' . DS . 'index.ctp');
+        $this->assertTemplate('Instagram' . DS . 'index.ctp');
         $this->assertContainsOnlyInstancesOf(Entity::class, $this->viewVariable('photos'));
 
         $nextIdFromView = $this->viewVariable('nextId');
@@ -95,14 +95,14 @@ class InstagramControllerTest extends ControllerTestCase
         //GET request. Now with the `nextId`
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
         $this->assertResponseOkAndNotEmpty();
-        $this->assertTemplate('src' . DS . 'Template' . DS . 'Instagram' . DS . 'index.ctp');
+        $this->assertTemplate('Instagram' . DS . 'index.ctp');
 
         //GET request. Now it's an ajax request, with the `nextId`
         $this->configRequest(['headers' => ['X-Requested-With' => 'XMLHttpRequest']]);
         $this->get(['_name' => 'instagramPhotosId', $nextIdFromView]);
         $this->assertResponseOkAndNotEmpty();
-        $this->assertTemplate('src' . DS . 'Template' . DS . 'Instagram' . DS . 'index.ctp');
-        $this->assertLayout('src' . DS . 'Template' . DS . 'Layout' . DS . 'ajax' . DS . 'ajax.ctp');
+        $this->assertTemplate('Instagram' . DS . 'index.ctp');
+        $this->assertLayout('Layout' . DS . 'ajax' . DS . 'ajax.ctp');
     }
 
     /**
@@ -114,7 +114,7 @@ class InstagramControllerTest extends ControllerTestCase
 
         $this->get(['_name' => 'instagramPhoto', $id]);
         $this->assertResponseOkAndNotEmpty();
-        $this->assertTemplate('src' . DS . 'Template' . DS . 'Instagram' . DS . 'view.ctp');
+        $this->assertTemplate('Instagram' . DS . 'view.ctp');
         $this->assertInstanceof(Entity::class, $this->viewVariable('photo'));
 
         $photoFromCache = Cache::read(sprintf('media_%s', md5($id)), 'instagram');
