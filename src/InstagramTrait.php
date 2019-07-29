@@ -69,7 +69,7 @@ trait InstagramTrait
      * Internal method to get a "recent" response
      * @param string|null $requestId Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
-     * @return mixed The response body
+     * @return string The response body as string
      * @uses getClient()
      * @uses $key
      */
@@ -87,7 +87,7 @@ trait InstagramTrait
 
     /**
      * Internal method to get an user response
-     * @return mixed The response body
+     * @return string The response body as string
      * @uses getClient()
      * @uses $key
      */
