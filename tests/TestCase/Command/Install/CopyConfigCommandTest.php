@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -12,8 +13,8 @@
  */
 namespace MeCmsInstagram\Test\TestCase\Command\Install;
 
-use MeCmsInstagram\Command\Install\CopyConfigCommand;
 use MeCms\TestSuite\TestCase;
+use MeCmsInstagram\Command\Install\CopyConfigCommand;
 use MeTools\TestSuite\ConsoleIntegrationTestTrait;
 
 /**

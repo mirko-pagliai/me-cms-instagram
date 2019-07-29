@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -66,10 +67,7 @@ Configure::write('App', [
     'cssBaseUrl' => 'css/',
     'paths' => [
         'plugins' => [APP . 'Plugin' . DS],
-        'templates' => [
-            APP . 'Template' . DS,
-            ROOT . 'src' . DS . 'Template' . DS,
-        ],
+        'templates' => [APP . 'templates' . DS],
     ],
 ]);
 Configure::write('Session', ['defaults' => 'php']);
@@ -108,5 +106,3 @@ foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlit
 Configure::write('pluginsToLoad', ['MeCms', 'MeCmsInstagram']);
 
 $_SERVER['PHP_SELF'] = '/';
-
-loadPHPUnitAliases();

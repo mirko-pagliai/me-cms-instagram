@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -23,7 +24,7 @@ class CopyConfigCommand extends BaseCopyConfigCommand
     /**
      * Configuration files to be copied
      */
-    const CONFIG_FILES = [
+    public const CONFIG_FILES = [
         'MeCmsInstagram.me_cms_instagram',
     ];
 }

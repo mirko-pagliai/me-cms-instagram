@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -55,18 +56,18 @@ foreach ($photos as $photo) {
 
 <div class="mb-4 text-center">
 <?php
-    if (empty($nextId)) {
-        echo $this->Html->button(
-            __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
-            sprintf('//instagram.com/%s', $user->username),
-            ['class' => 'btn-primary btn-lg', 'icon' => 'fab instagram', 'target' => '_blank']
-        );
-    } else {
-        echo $this->Html->button(__d('me_cms_instagram', 'Load more'), '#', [
-            'id' => 'load-more',
-            'class' => 'btn-primary btn-lg',
-            'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
-        ]);
-    }
+if (empty($nextId)) {
+    echo $this->Html->button(
+        __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
+        sprintf('//instagram.com/%s', $user->username),
+        ['class' => 'btn-primary btn-lg', 'icon' => 'fab instagram', 'target' => '_blank']
+    );
+} else {
+    echo $this->Html->button(__d('me_cms_instagram', 'Load more'), '#', [
+        'id' => 'load-more',
+        'class' => 'btn-primary btn-lg',
+        'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
+    ]);
+}
 ?>
 </div>

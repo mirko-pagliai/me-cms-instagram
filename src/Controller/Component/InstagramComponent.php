@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -28,8 +29,8 @@ class InstagramComponent extends Component
      * @param array $config The configuration settings provided to this component
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
-        $this->key = empty($config['key']) ? getConfigOrFail('Instagram.key') : $config['key'];
+        $this->key = $config['key'] ?? getConfigOrFail('Instagram.key');
     }
 }

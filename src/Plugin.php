@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -13,6 +14,7 @@
  */
 namespace MeCmsInstagram;
 
+use Cake\Console\CommandCollection;
 use Cake\Core\BasePlugin;
 use MeCmsInstagram\Command\Install\CopyConfigCommand;
 use MeCmsInstagram\Command\Install\RunAllCommand;
@@ -28,11 +30,9 @@ class Plugin extends BasePlugin
      * @return \Cake\Console\CommandCollection
      * @since 1.9.0
      */
-    public function console($commands)
+    public function console(CommandCollection $commands): CommandCollection
     {
-        $commands->add('me_cms_instagram.copy_config', CopyConfigCommand::class);
-        $commands->add('me_cms_instagram.install', RunAllCommand::class);
-
-        return $commands;
+        return $commands->add('me_cms_instagram.copy_config', CopyConfigCommand::class)
+            ->add('me_cms_instagram.install', RunAllCommand::class);
     }
 }
