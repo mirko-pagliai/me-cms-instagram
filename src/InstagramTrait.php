@@ -54,7 +54,7 @@ trait InstagramTrait
     /**
      * Internal method to get a media response
      * @param string $mediaId Media ID
-     * @return mixed The response body
+     * @return string The response body as string
      * @uses getClient()
      * @uses $key
      */
