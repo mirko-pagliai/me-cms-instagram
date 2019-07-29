@@ -33,14 +33,14 @@ class PhotosWidgetsCell extends Cell
      */
     public function initialize()
     {
-        $this->Instagram = new Instagram;
+        $this->Instagram = new Instagram();
     }
 
     /**
      * Internal method to get the latest photos
      * @param int $limit Limit
      * @return array
-     * @uses MeCmsInstagram\Utility\Instagram::recent()
+     * @uses \MeCmsInstagram\Utility\Instagram::recent()
      * @uses $Instagram
      */
     protected function getLatest($limit = 12)

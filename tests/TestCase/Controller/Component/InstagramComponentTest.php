@@ -29,7 +29,7 @@ class InstagramComponentTest extends ComponentTestCase
     {
         $this->assertEquals(getConfigOrFail('Instagram.key'), $this->Component->key);
 
-        $component = new InstagramComponent(new ComponentRegistry, ['key' => 'anotherKey']);
+        $component = new InstagramComponent(new ComponentRegistry(), ['key' => 'anotherKey']);
         $this->assertEquals('anotherKey', $component->key);
     }
 }

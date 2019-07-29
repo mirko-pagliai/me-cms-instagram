@@ -39,7 +39,7 @@ trait InstagramTrait
      */
     protected function getClient()
     {
-        return new Client;
+        return new Client();
     }
 
     /**
@@ -54,7 +54,7 @@ trait InstagramTrait
     /**
      * Internal method to get a media response
      * @param string $mediaId Media ID
-     * @return mixed The response body
+     * @return string The response body as string
      * @uses getClient()
      * @uses $key
      */
@@ -67,15 +67,15 @@ trait InstagramTrait
 
     /**
      * Internal method to get a "recent" response
-     * @param string $requestId Request ID ("Next ID" for Istangram)
+     * @param string|null $requestId Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
-     * @return mixed The response body
+     * @return string The response body as string
      * @uses getClient()
      * @uses $key
      */
     protected function getRecentResponse($requestId = null, $limit = 15)
     {
-        $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token= ' . $this->key;
+        $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token=' . $this->key;
 
         //Adds the request ID ("Next ID" for Istangram) to the url
         if ($requestId) {
@@ -87,7 +87,7 @@ trait InstagramTrait
 
     /**
      * Internal method to get an user response
-     * @return mixed The response body
+     * @return string The response body as string
      * @uses getClient()
      * @uses $key
      */
@@ -100,39 +100,37 @@ trait InstagramTrait
 
     /**
      * Gets a media object
-     * @param string $mediaId Media ID
-     * @return Entity
+     * @param string $id Media ID
+     * @return \Cake\ORM\Entity
      * @see https://www.instagram.com/developer/endpoints/media/#get_media
-     * @throws NotFoundException
+     * @throws \Cake\Http\Exception\NotFoundException
      * @uses getMediaResponse()
      */
-    public function media($mediaId)
+    public function media($id)
     {
-        $photo = json_decode($this->getMediaResponse($mediaId));
+        $photo = json_decode($this->getMediaResponse($id));
         $path = isset($photo->data->images->standard_resolution->url) ? $photo->data->images->standard_resolution->url : null;
         is_true_or_fail($path, I18N_NOT_FOUND, NotFoundException::class);
+        $filename = array_value_first(explode('?', basename($path), 2));
 
-        return new Entity([
-            'id' => $mediaId,
-            'filename' => array_value_first(explode('?', basename($path), 2)),
-        ] + compact('path'));
+        return new Entity(compact('id', 'filename', 'path'));
     }
 
     /**
      * Gets the most recent media published by the owner of token
-     * @param string $requestId Request ID ("Next ID" for Istangram)
+     * @param string|null $requestId Request ID ("Next ID" for Istangram)
      * @param int $limit Limit
      * @return array Array with entities of photos and "Next ID"
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_media_recent_self
      * @uses getRecentResponse()
-     * @throws NotFoundException
+     * @throws \Cake\Http\Exception\NotFoundException
      */
     public function recent($requestId = null, $limit = 15)
     {
         $photos = json_decode($this->getRecentResponse($requestId, $limit));
         is_true_or_fail(isset($photos->data), isset($photos->meta->error_message) ? $photos->meta->error_message : I18N_NOT_FOUND, NotFoundException::class);
 
-        $nextId = empty($photos->pagination->next_max_id) ? null : $photos->pagination->next_max_id;
+        $nextId = isset($photos->pagination->next_max_id) ? $photos->pagination->next_max_id : null;
 
         $photos = collection($photos->data)
             ->take($limit)
@@ -143,7 +141,7 @@ trait InstagramTrait
                     'id' => $photo->id,
                     'link' => $photo->link,
                     'filename' => array_value_first(explode('?', basename($path), 2)),
-                    'description' => empty($photo->caption->text) ? null : $photo->caption->text,
+                    'description' => isset($photo->caption->text) ? $photo->caption->text : null,
                 ]);
             })
             ->toList();
@@ -153,9 +151,9 @@ trait InstagramTrait
 
     /**
      * Gets information about the owner of the token
-     * @return Entity
+     * @return \Cake\ORM\Entity
      * @see https://www.instagram.com/developer/endpoints/users/#get_users_self
-     * @throws NotFoundException
+     * @throws \Cake\Http\Exception\NotFoundException
      * @uses getUserResponse()
      */
     public function user()

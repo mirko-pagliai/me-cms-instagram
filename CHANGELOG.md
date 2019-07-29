@@ -1,5 +1,8 @@
 # 1.x branch
 ## 1.9 branch
+### 1.9.3
+* updated for `me-cms` 2.26.6.
+
 ### 1.9.2
 * fixed templates;
 * fixed a little bug for `InstagramTrait`.
