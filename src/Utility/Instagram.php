@@ -23,7 +23,7 @@ class Instagram
 
     /**
      * Construct
-     * @param string $key API access token
+     * @param string|null $key API access token
      */
     public function __construct($key = null)
     {
