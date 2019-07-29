@@ -37,7 +37,7 @@ class InstagramTest extends TestCase
     {
         parent::setUp();
 
-        $this->Instagram = new Instagram;
+        $this->Instagram = new Instagram();
     }
 
     /**
@@ -48,7 +48,7 @@ class InstagramTest extends TestCase
     {
         parent::tearDown();
 
-        Cache::clearAll();
+        Cache::clear(false, 'instagram');
     }
 
     /**

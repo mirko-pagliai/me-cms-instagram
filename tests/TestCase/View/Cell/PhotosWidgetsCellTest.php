@@ -13,10 +13,10 @@
 namespace MeCmsInstagram\Test\TestCase\View\Cell;
 
 use Cake\Cache\Cache;
+use MeCmsInstagram\Utility\Instagram;
 use MeCms\TestSuite\CellTestCase;
 use MeCms\View\Helper\WidgetHelper;
 use MeCms\View\View\AppView as View;
-use MeCmsInstagram\Utility\Instagram;
 
 /**
  * PhotosWidgetsCellTest class
@@ -65,7 +65,7 @@ class PhotosWidgetsCellTest extends CellTestCase
     {
         parent::tearDown();
 
-        Cache::clearAll();
+        Cache::clear(false, 'instagram');
     }
 
     /**

@@ -36,8 +36,8 @@ define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', APP . 'webroot' . DS);
 define('TMP', sys_get_temp_dir() . DS . 'me_cms_instagram' . DS);
 define('CONFIG', APP . 'config' . DS);
-define('CACHE', TMP . 'cache');
-define('LOGS', TMP . 'logs');
+define('CACHE', TMP . 'cache' . DS);
+define('LOGS', TMP . 'logs' . DS);
 define('SESSIONS', TMP . 'sessions' . DS);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
