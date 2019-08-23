@@ -30,9 +30,7 @@ class Plugin extends BasePlugin
      */
     public function console($commands)
     {
-        $commands->add('me_cms_instagram.copy_config', CopyConfigCommand::class);
-        $commands->add('me_cms_instagram.install', RunAllCommand::class);
-
-        return $commands;
+        return $commands->add('me_cms_instagram.copy_config', CopyConfigCommand::class)
+            ->add('me_cms_instagram.install', RunAllCommand::class);
     }
 }
