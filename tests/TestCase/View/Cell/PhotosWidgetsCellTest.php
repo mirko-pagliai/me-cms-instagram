@@ -25,6 +25,11 @@ use MeCmsInstagram\Utility\Instagram;
 class PhotosWidgetsCellTest extends CellTestCase
 {
     /**
+     * @var bool
+     */
+    protected $autoInitializeClass = false;
+
+    /**
      * Called before every test method
      * @return void
      */

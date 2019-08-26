@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
-$this->extend('MeCms./Common/index');
+$this->extend('MeCms./common/index');
 $this->assign('title', $title = __d('me_cms_instagram', 'Photos from {0}', 'Instagram'));
 
 $this->Asset->script('MeCmsInstagram.instagram', ['block' => 'script_bottom']);
