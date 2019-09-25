@@ -28,17 +28,16 @@ class InstagramControllerTest extends ControllerTestCase
      */
     protected function getInstagramComponentMock()
     {
-        $methodsAndValuesToReturn = [
+        $valuesToReturn = [
             'getMediaResponse' => 'media.json',
             'getRecentResponse' => 'recent.json',
             'getUserResponse' => 'user.json',
         ];
 
-        $instance = $this->getMockForComponent(InstagramComponent::class, array_keys($methodsAndValuesToReturn));
-
-        foreach ($methodsAndValuesToReturn as $method => $value) {
-            $instance->method($method)
-                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $value)));
+        $instance = $this->getMockForComponent(InstagramComponent::class, array_keys($valuesToReturn));
+        foreach ($valuesToReturn as $method => $value) {
+            $content = file_get_contents(TEST_APP . 'examples' . DS . $value);
+            $instance->method($method)->will($this->returnValue($content));
         }
 
         return $instance;
