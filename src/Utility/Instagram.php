@@ -27,6 +27,6 @@ class Instagram
      */
     public function __construct($key = null)
     {
-        $this->key = $key;
+        $this->key = $key ?: getConfigOrFail('Instagram.key');
     }
 }
