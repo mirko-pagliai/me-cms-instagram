@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -11,6 +12,7 @@
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  * @since       1.5.0
  */
+
 namespace MeCmsInstagram;
 
 use Cake\Http\Client;
@@ -40,15 +42,6 @@ trait InstagramTrait
     protected function getClient()
     {
         return new Client();
-    }
-
-    /**
-     * Internal method to get the key
-     * @return string
-     */
-    protected function getKey()
-    {
-        return $this->key ?: getConfigOrFail('Instagram.key');
     }
 
     /**

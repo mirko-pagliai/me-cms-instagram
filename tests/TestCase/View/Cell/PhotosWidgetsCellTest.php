@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -10,6 +11,7 @@
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace MeCmsInstagram\Test\TestCase\View\Cell;
 
 use Cake\Cache\Cache;
@@ -23,6 +25,11 @@ use MeCms\View\View\AppView as View;
  */
 class PhotosWidgetsCellTest extends CellTestCase
 {
+    /**
+     * @var bool
+     */
+    protected $autoInitializeClass = false;
+
     /**
      * Called before every test method
      * @return void

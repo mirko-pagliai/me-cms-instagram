@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -11,6 +12,7 @@
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  * @since       1.8.0
  */
+
 namespace MeCmsInstagram;
 
 use Cake\Core\BasePlugin;
@@ -30,9 +32,7 @@ class Plugin extends BasePlugin
      */
     public function console($commands)
     {
-        $commands->add('me_cms_instagram.copy_config', CopyConfigCommand::class);
-        $commands->add('me_cms_instagram.install', RunAllCommand::class);
-
-        return $commands;
+        return $commands->add('me_cms_instagram.copy_config', CopyConfigCommand::class)
+            ->add('me_cms_instagram.install', RunAllCommand::class);
     }
 }

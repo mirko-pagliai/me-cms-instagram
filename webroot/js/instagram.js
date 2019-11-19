@@ -12,12 +12,12 @@
 $(function () {
     //On click on the "Load more button"
     //See http://stackoverflow.com/a/16063194/1480263
-    $(document).on('click', '#load-more', function (event) {
+    $(document).on("click", "#load-more", function (event) {
         event.preventDefault();
 
-        $.get($(this).data('href'), function (data) {
+        $.get($(this).data("href"), function (data) {
             //Scrolls to the element
-            $('html, body').animate({
+            $("html, body").animate({
                 scrollTop: $("#load-more").offset().top
             }, 1500);
             //Removes the "Load more" button
