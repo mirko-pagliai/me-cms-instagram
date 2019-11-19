@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -11,6 +12,7 @@ declare(strict_types=1);
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace MeCmsInstagram\Test\TestCase\Controller;
 
 use Cake\Cache\Cache;
@@ -31,17 +33,16 @@ class InstagramControllerTest extends ControllerTestCase
      */
     protected function getInstagramComponentMock(): object
     {
-        $methodsAndValuesToReturn = [
+        $methods = [
             'getMediaResponse' => 'media.json',
             'getRecentResponse' => 'recent.json',
             'getUserResponse' => 'user.json',
         ];
 
-        $instance = $this->getMockForComponent(InstagramComponent::class, array_keys($methodsAndValuesToReturn));
-
-        foreach ($methodsAndValuesToReturn as $method => $value) {
-            $instance->method($method)
-                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $value)));
+        $instance = $this->getMockForComponent(InstagramComponent::class, array_keys($methods));
+        foreach ($methods as $method => $value) {
+            $content = file_get_contents(TEST_APP . 'examples' . DS . $value);
+            $instance->method($method)->will($this->returnValue($content));
         }
 
         return $instance;

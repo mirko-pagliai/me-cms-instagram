@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -11,6 +12,7 @@ declare(strict_types=1);
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace MeCmsInstagram\Test\TestCase\Utility;
 
 use Cake\Cache\Cache;
@@ -65,10 +67,9 @@ class InstagramTest extends TestCase
         $instance = $this->getMockBuilder(Instagram::class)
             ->setMethods(array_keys($methods))
             ->getMock();
-
-        foreach ($methods as $method => $filename) {
-            $instance->method($method)
-                ->will($this->returnValue(file_get_contents(TEST_APP . 'examples' . DS . $filename)));
+        foreach ($methods as $method => $value) {
+            $content = file_get_contents(TEST_APP . 'examples' . DS . $value);
+            $instance->method($method)->will($this->returnValue($content));
         }
 
         return $instance;
@@ -80,11 +81,10 @@ class InstagramTest extends TestCase
      */
     public function testConstruct()
     {
-        $this->assertEquals(getConfigOrFail('Instagram.key'), $this->invokeMethod($this->Instagram, 'getKey'));
+        $this->assertEquals(getConfigOrFail('Instagram.key'), $this->getProperty($this->Instagram, 'key'));
 
-        $key = 'anotherKey';
-        $this->Instagram = new Instagram($key);
-        $this->assertEquals($key, $this->invokeMethod($this->Instagram, 'getKey'));
+        $Instagram = new Instagram('anotherKey');
+        $this->assertEquals('anotherKey', $this->getProperty($Instagram, 'key'));
     }
 
     /**

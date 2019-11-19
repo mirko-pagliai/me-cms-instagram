@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -12,6 +13,7 @@ declare(strict_types=1);
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  * @since       1.9.0
  */
+
 namespace MeCmsInstagram\Command\Install;
 
 use MeCms\Command\Install\CopyConfigCommand as BaseCopyConfigCommand;

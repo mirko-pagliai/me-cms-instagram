@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -12,6 +13,7 @@ declare(strict_types=1);
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  * @since       1.8.0
  */
+
 namespace App;
 
 use Cake\Http\BaseApplication;
@@ -19,7 +21,7 @@ use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use MeCms\Plugin as MeCms;
 use MeCmsInstagram\Plugin as MeCmsInstagram;
-use Thumber\Plugin as Thumber;
+use Thumber\Cake\Plugin as Thumber;
 
 /**
  * Application setup class.
