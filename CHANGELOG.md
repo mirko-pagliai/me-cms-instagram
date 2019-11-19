@@ -1,7 +1,7 @@
 # 1.x branch
 ## 1.9 branch
 ### 1.9.4
-* updated for `me-cms` 2.27.3`;
+* updated for `me-cms` `2.27.3`;
 * added tests for lower dependencies.
 
 ### 1.9.3
