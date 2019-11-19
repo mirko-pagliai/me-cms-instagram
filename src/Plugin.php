@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of me-cms-instagram.
  *
@@ -11,6 +12,7 @@
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  * @since       1.8.0
  */
+
 namespace MeCmsInstagram;
 
 use Cake\Core\BasePlugin;
