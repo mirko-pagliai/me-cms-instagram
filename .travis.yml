@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 5.6
   - 7.0
   - 7.1
   - 7.2
@@ -12,8 +11,9 @@ matrix:
 
   include:
     - php: 7.0
+      env: dependencies=lowest
+    - php: 7.0
       env: PHPCS=1
-
     - php: 7.0
       env: COVERAGE=1
 
@@ -21,12 +21,13 @@ install:
   - printf "\n" | pecl install imagick
   - composer self-update
   - composer install --prefer-dist --no-interaction
+  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest -n; fi;
 
 script:
   - if [[ $PHPCS != '1' && $COVERAGE != '1' ]]; then vendor/bin/phpunit; fi
   - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs --standard=phpcs.xml.dist; fi
   - if [[ $COVERAGE = 1 ]]; then vendor/bin/phpunit --coverage-clover=clover.xml; fi
-  
+
 after_success:
   - if [[ $COVERAGE = 1 ]]; then bash <(curl -s https://codecov.io/bash); fi
 
