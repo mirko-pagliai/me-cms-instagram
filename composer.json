@@ -11,11 +11,12 @@
     "require": {
         "php": ">=7.2",
         "ctlabvn/recaptcha": "dev-cake-4",
+        "dereuromark/cakephp-feed": "^2.0|2.0.0-beta",
         "mirko-pagliai/me-cms": "dev-cakephp4"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "dev-next",
-        "mirko-pagliai/cakephp-assets": "dev-cakephp4",
+        "cakephp/cakephp-codesniffer": "^4.0",
+        "mirko-pagliai/cakephp-assets": "^1.5",
         "phpunit/phpunit": "^8.0"
     },
     "repositories": [
@@ -47,6 +48,5 @@
             "MeCmsInstagram\\Test\\": "tests",
             "App\\": "tests/test_app/TestApp"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
