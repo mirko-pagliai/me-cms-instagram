@@ -8,6 +8,9 @@
     <rule ref="PSR12.Properties.ConstantVisibility.NotFound">
         <severity>0</severity>
     </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace.UseFromSameNamespace">
+        <severity>0</severity>
+    </rule>
 
     <exclude-pattern>/config/Migrations</exclude-pattern>
 </ruleset>
