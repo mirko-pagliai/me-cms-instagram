@@ -5,6 +5,9 @@
 * fixed I18n translations.
 
 ## 1.9 branch
+### 1.9.5
+* little fixes.
+
 ### 1.9.4
 * updated for `me-cms` `2.27.3`;
 * added tests for lower dependencies.

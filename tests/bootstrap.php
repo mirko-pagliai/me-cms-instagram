@@ -21,11 +21,6 @@ ini_set('intl.default_locale', 'en_US');
 date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
-if (!defined('DS')) {
-    define('DS', DIRECTORY_SEPARATOR);
-}
-
-// Path constants to a few helpful things.
 define('ROOT', dirname(__DIR__) . DS);
 define('VENDOR', ROOT . 'vendor' . DS);
 define('CAKE_CORE_INCLUDE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
@@ -42,16 +37,15 @@ define('CONFIG', APP . 'config' . DS);
 define('CACHE', TMP . 'cache' . DS);
 define('LOGS', TMP . 'logs' . DS);
 define('SESSIONS', TMP . 'sessions' . DS);
-
-require dirname(__DIR__) . '/vendor/autoload.php';
-require CORE_PATH . 'config' . DS . 'bootstrap.php';
-
 @mkdir(TMP);
 @mkdir(LOGS);
 @mkdir(SESSIONS);
 @mkdir(CACHE);
 @mkdir(CACHE . 'views');
 @mkdir(CACHE . 'models');
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 Configure::write('debug', true);
 Configure::write('App', [
@@ -66,12 +60,19 @@ Configure::write('App', [
     'imageBaseUrl' => 'img/',
     'jsBaseUrl' => 'js/',
     'cssBaseUrl' => 'css/',
-    'paths' => [
-        'plugins' => [APP . 'Plugin' . DS],
-        'templates' => [APP . 'templates' . DS],
-    ],
+    'paths' => ['templates' => [APP . 'templates' . DS]],
 ]);
 Configure::write('Session', ['defaults' => 'php']);
+Configure::write('Assets.target', TMP . 'assets');
+Configure::write('DatabaseBackup.connection', 'test');
+Configure::write('DatabaseBackup.target', TMP . 'backups');
+Configure::write('Instagram.key', '00000000');
+Configure::write('Thumber.driver', 'gd');
+foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlite3'] as $binary) {
+    Configure::write('DatabaseBackup.binaries.' . $binary, null);
+}
+Configure::write('pluginsToLoad', ['MeCms', 'MeCmsInstagram']);
+ConnectionManager::setConfig('test', ['url' => 'sqlite://127.0.0.1/' . TMP . 'debug_kit_test.sqlite']);
 
 Cache::setConfig([
     '_cake_core_' => [
@@ -79,31 +80,6 @@ Cache::setConfig([
         'prefix' => 'cake_core_',
         'serialize' => true,
     ],
-    '_cake_model_' => [
-        'engine' => 'File',
-        'prefix' => 'cake_model_',
-        'serialize' => true,
-    ],
-    'default' => [
-        'engine' => 'File',
-        'prefix' => 'default_',
-        'serialize' => true,
-    ],
 ]);
-
-// Ensure default test connection is defined
-ConnectionManager::setConfig('test', ['url' => 'sqlite://127.0.0.1/' . TMP . 'debug_kit_test.sqlite']);
-
-Configure::write('Assets.target', TMP . 'assets');
-Configure::write('DatabaseBackup.connection', 'test');
-Configure::write('DatabaseBackup.target', TMP . 'backups');
-Configure::write('Instagram.key', '00000000');
-Configure::write('Thumber.driver', 'gd');
-
-foreach (['bzip2', 'gzip', 'mysql', 'mysqldump', 'pg_dump', 'pg_restore', 'sqlite3'] as $binary) {
-    Configure::write('DatabaseBackup.binaries.' . $binary, null);
-}
-
-Configure::write('pluginsToLoad', ['MeCms', 'MeCmsInstagram']);
 
 $_SERVER['PHP_SELF'] = '/';
