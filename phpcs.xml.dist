@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset>
+<ruleset name="me-cms-instagram">
     <arg value="p"/>
     <file>.</file>
 
@@ -8,6 +8,4 @@
     <rule ref="PSR12.Properties.ConstantVisibility.NotFound">
         <severity>0</severity>
     </rule>
-
-    <exclude-pattern>/config/Migrations</exclude-pattern>
 </ruleset>

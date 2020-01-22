@@ -25,10 +25,7 @@ use MeCms\Controller\AppController;
 class InstagramController extends AppController
 {
     /**
-     * Called after the controller action is run, but before the view is
-     * rendered.
-     * You can use this method to perform logic or set view variables that
-     * are required on every request.
+     * Called after the controller action is run, but before the view is rendered
      * @param \Cake\Event\Event $event An Event instance
      * @return void
      * @uses \MeCmsInstagram\Utility\Instagram::user()

@@ -1,5 +1,5 @@
 # LANGUAGE translation of me-cms-instagram
-# Copyright 2015 Mirko Pagliai <mirko.pagliai@gmail.com>
+# Copyright Mirko Pagliai <mirko.pagliai@gmail.com>
 #
 msgid ""
 msgstr ""
