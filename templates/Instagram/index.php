@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -10,7 +11,7 @@
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
-$this->extend('MeCms./Common/index');
+$this->extend('MeCms./common/index');
 $this->assign('title', $title = __d('me_cms_instagram', 'Photos from {0}', 'Instagram'));
 
 $this->Asset->script('MeCmsInstagram.instagram', ['block' => 'script_bottom']);
@@ -55,18 +56,18 @@ foreach ($photos as $photo) {
 
 <div class="mb-4 text-center">
 <?php
-    if (empty($nextId)) {
-        echo $this->Html->button(
-            __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
-            sprintf('//instagram.com/%s', $user->username),
-            ['class' => 'btn-primary btn-lg', 'icon' => 'fab instagram', 'target' => '_blank']
-        );
-    } else {
-        echo $this->Html->button(__d('me_cms_instagram', 'Load more'), '#', [
-            'id' => 'load-more',
-            'class' => 'btn-primary btn-lg',
-            'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
-        ]);
-    }
+if (empty($nextId)) {
+    echo $this->Html->button(
+        __d('me_cms_instagram', 'Follow me on {0}', 'Instagram'),
+        sprintf('//instagram.com/%s', $user->username),
+        ['class' => 'btn-primary btn-lg', 'icon' => 'fab instagram', 'target' => '_blank']
+    );
+} else {
+    echo $this->Html->button(__d('me_cms_instagram', 'Load more'), '#', [
+        'id' => 'load-more',
+        'class' => 'btn-primary btn-lg',
+        'data-href' => $this->Url->build(['_name' => 'instagramPhotosId', $nextId]),
+    ]);
+}
 ?>
 </div>

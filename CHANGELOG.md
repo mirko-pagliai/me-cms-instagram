@@ -1,4 +1,9 @@
 # 1.x branch
+## 1.10 branch
+### 1.10.0
+* updated for `cakephp` 4 and `phpunit` 8;
+* fixed I18n translations.
+
 ## 1.9 branch
 ### 1.9.5
 * little fixes.

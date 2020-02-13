@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -33,7 +34,7 @@ class PhotosWidgetsCell extends Cell
      * @return void
      * @uses $Instagram
      */
-    public function initialize()
+    public function initialize(): void
     {
         $this->Instagram = new Instagram();
     }
@@ -45,7 +46,7 @@ class PhotosWidgetsCell extends Cell
      * @uses \MeCmsInstagram\Utility\Instagram::recent()
      * @uses $Instagram
      */
-    protected function getLatest($limit = 12)
+    protected function getLatest(int $limit = 12): array
     {
         return Cache::remember(sprintf('widget_latest_%s', $limit), function () use ($limit) {
             return array_value_first($this->Instagram->recent(null, $limit));
@@ -58,7 +59,7 @@ class PhotosWidgetsCell extends Cell
      * @return void
      * @uses getLatest()
      */
-    public function latest($limit = 1)
+    public function latest(int $limit = 1): void
     {
         //Returns on the same controller
         if ($this->request->isController('Instagram')) {
@@ -74,7 +75,7 @@ class PhotosWidgetsCell extends Cell
      * @return void
      * @uses getLatest()
      */
-    public function random($limit = 1)
+    public function random(int $limit = 1): void
     {
         //Returns on the same controller
         if ($this->request->isController('Instagram')) {

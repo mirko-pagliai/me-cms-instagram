@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -39,19 +40,31 @@ trait InstagramTrait
      * Internal method to get a `Client` instance
      * @return \Cake\Http\Client
      */
-    protected function getClient()
+    protected function getClient(): Client
     {
         return new Client();
     }
 
     /**
+<<<<<<< HEAD
+     * Internal method to get the key
+     * @return string
+     */
+    protected function getKey(): string
+    {
+        return $this->key ?: getConfigOrFail('Instagram.key');
+    }
+
+    /**
+=======
+>>>>>>> develop
      * Internal method to get a media response
      * @param string $mediaId Media ID
      * @return string The response body as string
      * @uses getClient()
      * @uses $key
      */
-    protected function getMediaResponse($mediaId)
+    protected function getMediaResponse(string $mediaId): string
     {
         $url = 'https://api.instagram.com/v1/media/' . $mediaId . '?access_token=' . $this->key;
 
@@ -66,7 +79,7 @@ trait InstagramTrait
      * @uses getClient()
      * @uses $key
      */
-    protected function getRecentResponse($requestId = null, $limit = 15)
+    protected function getRecentResponse(?string $requestId = null, int $limit = 15): string
     {
         $url = 'https://api.instagram.com/v1/users/self/media/recent/?count=' . $limit . '&access_token=' . $this->key;
 
@@ -84,7 +97,7 @@ trait InstagramTrait
      * @uses getClient()
      * @uses $key
      */
-    protected function getUserResponse()
+    protected function getUserResponse(): string
     {
         $url = 'https://api.instagram.com/v1/users/self/?access_token=' . $this->key;
 
@@ -99,10 +112,10 @@ trait InstagramTrait
      * @throws \Cake\Http\Exception\NotFoundException
      * @uses getMediaResponse()
      */
-    public function media($id)
+    public function media(string $id): Entity
     {
         $photo = json_decode($this->getMediaResponse($id));
-        $path = isset($photo->data->images->standard_resolution->url) ? $photo->data->images->standard_resolution->url : null;
+        $path = $photo->data->images->standard_resolution->url ?? null;
         is_true_or_fail($path, I18N_NOT_FOUND, NotFoundException::class);
         $filename = array_value_first(explode('?', basename($path), 2));
 
@@ -118,12 +131,12 @@ trait InstagramTrait
      * @uses getRecentResponse()
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    public function recent($requestId = null, $limit = 15)
+    public function recent(?string $requestId = null, int $limit = 15): array
     {
         $photos = json_decode($this->getRecentResponse($requestId, $limit));
-        is_true_or_fail(isset($photos->data), isset($photos->meta->error_message) ? $photos->meta->error_message : I18N_NOT_FOUND, NotFoundException::class);
+        is_true_or_fail(isset($photos->data), $photos->meta->error_message ?? I18N_NOT_FOUND, NotFoundException::class);
 
-        $nextId = isset($photos->pagination->next_max_id) ? $photos->pagination->next_max_id : null;
+        $nextId = $photos->pagination->next_max_id ?? null;
 
         $photos = collection($photos->data)
             ->take($limit)
@@ -134,7 +147,7 @@ trait InstagramTrait
                     'id' => $photo->id,
                     'link' => $photo->link,
                     'filename' => array_value_first(explode('?', basename($path), 2)),
-                    'description' => isset($photo->caption->text) ? $photo->caption->text : null,
+                    'description' => $photo->caption->text ?? null,
                 ]);
             })
             ->toList();
@@ -149,7 +162,7 @@ trait InstagramTrait
      * @throws \Cake\Http\Exception\NotFoundException
      * @uses getUserResponse()
      */
-    public function user()
+    public function user(): Entity
     {
         $user = json_decode($this->getUserResponse());
         is_true_or_fail(isset($user->data), I18N_NOT_FOUND, NotFoundException::class);

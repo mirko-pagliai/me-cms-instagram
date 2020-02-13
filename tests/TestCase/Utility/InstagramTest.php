@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -34,7 +35,7 @@ class InstagramTest extends TestCase
      * Called before every test method
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -45,17 +46,17 @@ class InstagramTest extends TestCase
      * Called after every test method
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 
-        Cache::clear(false, 'instagram');
+        Cache::clear('instagram');
     }
 
     /**
      * Internal method to get a mock instance of `InstagramComponent`
      */
-    protected function getInstagramComponentMock()
+    protected function getInstagramComponentMock(): object
     {
         $methods = [
             'getMediaResponse' => 'media.json',
@@ -92,17 +93,17 @@ class InstagramTest extends TestCase
      */
     public function testMedia()
     {
-        $result = $this->getInstagramComponentMock()->media(1);
+        $result = $this->getInstagramComponentMock()->media('1');
         $this->assertInstanceof(Entity::class, $result);
         $this->assertEquals([
             'id' => 1,
             'path' => 'https://github.com/mirko-pagliai/me-cms-instagram/blob/develop/tests/test_app/examples/1.png?ig_cache_key=cacheKeyStandard',
             'filename' => '1.png',
-        ], $this->getInstagramComponentMock()->media(1)->toArray());
+        ], $this->getInstagramComponentMock()->media('1')->toArray());
 
         //With no media data
         $this->expectException(NotFoundException::class);
-        $this->Instagram->media(1);
+        $this->Instagram->media('1');
     }
 
     /**
@@ -111,7 +112,7 @@ class InstagramTest extends TestCase
      */
     public function testRecent()
     {
-        list($photos, $nextId) = $this->getInstagramComponentMock()->recent();
+        [$photos, $nextId] = $this->getInstagramComponentMock()->recent();
 
         $this->assertEquals('111_222', $nextId);
         $this->assertEquals(12, count($photos));
@@ -132,7 +133,7 @@ class InstagramTest extends TestCase
 
         //With no recent data
         $this->expectException(NotFoundException::class);
-        $this->Instagram->recent(1);
+        $this->Instagram->recent('1');
     }
 
     /**

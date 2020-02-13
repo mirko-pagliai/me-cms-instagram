@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -32,7 +33,7 @@ class Sitemap extends SitemapBuilder
      * @return array
      * @uses \MeCms\Utility\SitemapBuilder::parse()
      */
-    public static function instagram()
+    public static function instagram(): array
     {
         //Adds Instagram index
         return [

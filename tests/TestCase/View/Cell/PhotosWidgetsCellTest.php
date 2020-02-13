@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -15,10 +16,10 @@
 namespace MeCmsInstagram\Test\TestCase\View\Cell;
 
 use Cake\Cache\Cache;
-use MeCmsInstagram\Utility\Instagram;
 use MeCms\TestSuite\CellTestCase;
 use MeCms\View\Helper\WidgetHelper;
 use MeCms\View\View\AppView as View;
+use MeCmsInstagram\Utility\Instagram;
 
 /**
  * PhotosWidgetsCellTest class
@@ -34,7 +35,7 @@ class PhotosWidgetsCellTest extends CellTestCase
      * Called before every test method
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $view = new View();
         $this->Widget = $this->getMockBuilder(WidgetHelper::class)
@@ -68,11 +69,11 @@ class PhotosWidgetsCellTest extends CellTestCase
      * Called after every test method
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 
-        Cache::clear(false, 'instagram');
+        Cache::clear('instagram');
     }
 
     /**

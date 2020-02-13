@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -27,7 +28,7 @@ class Instagram
      * Construct
      * @param string|null $key API access token
      */
-    public function __construct($key = null)
+    public function __construct(?string $key = null)
     {
         $this->key = $key ?: getConfigOrFail('Instagram.key');
     }
