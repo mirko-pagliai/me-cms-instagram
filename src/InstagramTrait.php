@@ -46,18 +46,6 @@ trait InstagramTrait
     }
 
     /**
-<<<<<<< HEAD
-     * Internal method to get the key
-     * @return string
-     */
-    protected function getKey(): string
-    {
-        return $this->key ?: getConfigOrFail('Instagram.key');
-    }
-
-    /**
-=======
->>>>>>> develop
      * Internal method to get a media response
      * @param string $mediaId Media ID
      * @return string The response body as string
