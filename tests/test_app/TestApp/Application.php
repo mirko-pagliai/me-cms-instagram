@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -16,10 +17,10 @@
 namespace App;
 
 use Cake\Http\BaseApplication;
+use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\RoutingMiddleware;
-use MeCmsInstagram\Plugin as MeCmsInstagram;
 use MeCms\Plugin as MeCms;
-use RecaptchaMailhide\Plugin as RecaptchaMailhide;
+use MeCmsInstagram\Plugin as MeCmsInstagram;
 use Thumber\Cake\Plugin as Thumber;
 
 /**
@@ -32,10 +33,10 @@ class Application extends BaseApplication
 {
     /**
      * Load all the application configuration and bootstrap logic
+     * @return void
      */
-    public function bootstrap()
+    public function bootstrap(): void
     {
-        $this->addPlugin(RecaptchaMailhide::class, ['routes' => false]);
         $this->addPlugin(Thumber::class, ['routes' => false]);
         $this->addPlugin(MeCms::class, ['bootstrap' => false, 'routes' => false]);
         $this->addPlugin(MeCmsInstagram::class, ['bootstrap' => false, 'routes' => false]);
@@ -46,10 +47,8 @@ class Application extends BaseApplication
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
      * @return \Cake\Http\MiddlewareQueue
      */
-    public function middleware($middlewareQueue)
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        $middlewareQueue->add(new RoutingMiddleware($this));
-
-        return $middlewareQueue;
+        return $middlewareQueue->add(new RoutingMiddleware($this));
     }
 }

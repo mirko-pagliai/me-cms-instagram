@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -10,7 +11,7 @@
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
-$this->extend('MeCms./Common/index');
+$this->extend('MeCms./common/index');
 $this->assign('title', $title = $photo->filename);
 
 if (getConfig('default.user_profile')) {

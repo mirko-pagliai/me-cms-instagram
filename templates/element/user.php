@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -25,13 +26,13 @@
 
             <p>
                 <span class="mr-4">
-                    <?= __d('me_cms_instagram', '{0} posts', $this->Html->strong($user->counts->media)) ?>
+                    <?= __d('me_cms_instagram', '{0} posts', $this->Html->strong((string)$user->counts->media)) ?>
                 </span>
                 <span class="mr-4">
-                    <?= __d('me_cms_instagram', '{0} followers', $this->Html->strong($user->counts->followed_by)) ?>
+                    <?= __d('me_cms_instagram', '{0} followers', $this->Html->strong((string)$user->counts->followed_by)) ?>
                 </span>
                 <span>
-                    <?= __d('me_cms_instagram', '{0} following', $this->Html->strong($user->counts->follows)) ?>
+                    <?= __d('me_cms_instagram', '{0} following', $this->Html->strong((string)$user->counts->follows)) ?>
                 </span>
             </p>
 

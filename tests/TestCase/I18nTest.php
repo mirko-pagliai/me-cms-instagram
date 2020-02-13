@@ -11,22 +11,25 @@ declare(strict_types=1);
  * @copyright   Copyright (c) Mirko Pagliai
  * @link        https://github.com/mirko-pagliai/me-cms-instagram
  * @license     https://opensource.org/licenses/mit-license.php MIT License
- * @since       1.9.0
  */
 
-namespace MeCmsInstagram\Command\Install;
+namespace MeCmsInstagram\Test\TestCase;
 
-use MeCms\Command\Install\CopyConfigCommand as BaseCopyConfigCommand;
+use Cake\I18n\I18n;
+use MeTools\TestSuite\TestCase;
 
 /**
- * Copies the configuration files
+ * I18nTest class
  */
-class CopyConfigCommand extends BaseCopyConfigCommand
+class I18nTest extends TestCase
 {
     /**
-     * Configuration files to be copied
+     * Tests I18n translations
+     * @test
      */
-    public const CONFIG_FILES = [
-        'MeCmsInstagram.me_cms_instagram',
-    ];
+    public function testI18nConstant()
+    {
+        $translator = I18n::getTranslator('me_cms_instagram', 'it');
+        $this->assertEquals('Carica altro', $translator->translate('Load more'));
+    }
 }

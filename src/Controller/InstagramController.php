@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -15,7 +16,7 @@
 namespace MeCmsInstagram\Controller;
 
 use Cake\Cache\Cache;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\Http\Exception\NotFoundException;
 use MeCms\Controller\AppController;
 
@@ -26,11 +27,13 @@ class InstagramController extends AppController
 {
     /**
      * Called after the controller action is run, but before the view is rendered
-     * @param \Cake\Event\Event $event An Event instance
+     * You can use this method to perform logic or set view variables that
+     * are required on every request.
+     * @param \Cake\Event\EventInterface $event An Event instance
      * @return void
      * @uses \MeCmsInstagram\Utility\Instagram::user()
      */
-    public function beforeRender(Event $event)
+    public function beforeRender(EventInterface $event): void
     {
         parent::beforeRender($event);
 
@@ -41,7 +44,7 @@ class InstagramController extends AppController
      * Initialization hook method
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
@@ -54,7 +57,7 @@ class InstagramController extends AppController
      * @return void
      * @uses \MeCmsInstagram\Utility\Instagram::recent()
      */
-    public function index($id = null)
+    public function index(?string $id = null): void
     {
         //Sets initial cache name
         $cache = sprintf('index_limit_%s', getConfigOrFail('default.photos'));
@@ -64,7 +67,7 @@ class InstagramController extends AppController
             $cache = sprintf('%s_id_%s', $cache, $id);
         }
 
-        list($photos, $nextId) = Cache::remember($cache, function () use ($id) {
+        [$photos, $nextId] = Cache::remember($cache, function () use ($id) {
             return $this->Instagram->recent($id, getConfigOrFail('default.photos'));
         }, 'instagram');
 
@@ -74,10 +77,10 @@ class InstagramController extends AppController
     /**
      * Views a photo
      * @param string $id Media ID
-     * @return \Cake\Network\Response|null|void
+     * @return \Cake\Http\Response|null|void
      * @uses \MeCmsInstagram\Utility\Instagram::media()
      */
-    public function view($id)
+    public function view(string $id)
     {
         //It tries to get the media (photo). If an exception is thrown, redirects to index
         try {

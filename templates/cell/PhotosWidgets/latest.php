@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * This file is part of me-cms-instagram.
  *
@@ -14,8 +15,8 @@ if (empty($photos)) {
     return;
 }
 
-$this->extend('MeCms./Common/widget');
-$this->assign('title', __dn('me_cms', 'Random photo', 'Random {0} photos', count($photos), count($photos)));
+$this->extend('MeCms./common/widget');
+$this->assign('title', __dn('me_cms', 'Latest photo', 'Latest {0} photos', count($photos), count($photos)));
 
 foreach ($photos as $photo) {
     echo $this->Html->link(

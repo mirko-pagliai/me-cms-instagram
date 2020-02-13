@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * Before using the plugin, you have to get the API access token:

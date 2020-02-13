@@ -9,25 +9,37 @@
             "email": "mirko.pagliai@gmail.com"
         }],
     "require": {
-        "php": ">=7.0",
-        "mirko-pagliai/me-cms": "^2.27.3"
+        "php": ">=7.2",
+        "ctlabvn/recaptcha": "dev-cake-4",
+        "dereuromark/cakephp-feed": "^2.0|2.0.0-beta",
+        "mirko-pagliai/me-cms": "^2.28"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "^3.0",
-        "mirko-pagliai/cakephp-assets": "^1.4.1",
-        "mirko-pagliai/php-thumber": "~1.0.0",
-        "mirko-pagliai/php-tools": "~1.2.0",
-        "phpunit/phpunit": "^5.7.14|^6.0"
+        "cakephp/cakephp-codesniffer": "^4.0",
+        "phpunit/phpunit": "^8.5"
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ctlabvn/recaptcha",
+                "version": "dev-cake-4",
+                "source": {
+                    "url": "https://github.com/ctlabvn/recaptcha.git",
+                    "type": "git",
+                    "reference": "cake-4"
+                }
+            }
         }
     ],
     "autoload": {
         "psr-4": {
-            "MeCmsInstagram\\": "src"
+            "MeCmsInstagram\\": "src",
+            "Recaptcha\\": "vendor/ctlabvn/recaptcha/src/"
         }
     },
     "autoload-dev": {

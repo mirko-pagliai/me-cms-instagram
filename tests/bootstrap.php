@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file is part of me-cms-instagram.
@@ -59,7 +60,7 @@ Configure::write('App', [
     'imageBaseUrl' => 'img/',
     'jsBaseUrl' => 'js/',
     'cssBaseUrl' => 'css/',
-    'paths' => ['templates' => [APP . 'Template' . DS]],
+    'paths' => ['templates' => [APP . 'templates' . DS]],
 ]);
 Configure::write('Session', ['defaults' => 'php']);
 Configure::write('Assets.target', TMP . 'assets');
@@ -82,7 +83,3 @@ Cache::setConfig([
 ]);
 
 $_SERVER['PHP_SELF'] = '/';
-
-if (function_exists('loadPHPUnitAliases')) {
-    loadPHPUnitAliases();
-}
